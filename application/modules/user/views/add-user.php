@@ -103,7 +103,7 @@
                                                         <div class="input-icon right">
 
                                                              <i class="fa"></i>
-
+                                                             
                                                              <input type="text" class="form-control " name="emp_no" value="<?php echo(isset($user_data->emp_no) && !empty($user_data->emp_no))?$user_data->emp_no:''?>" placeholder="Employee No." required>
 
                                                         </div>
@@ -132,7 +132,7 @@
 
                                                               { ?>
 
-                                                                <option value="<?php echo $key->role_id?>" <?php echo (isset($user_data->designation_id) && !empty($user_data->designation_id) && ($user_data->designation_id==$key->role_id))?'selected="selected"':'';?>><?php echo $key->role_name;?></option>
+                                                                <option value="<?php echo $key->role_id?>" <?php echo (isset($user_data->role_id) && !empty($user_data->role_id) && ($user_data->role_id==$key->role_id))?'selected="selected"':'';?>><?php echo $key->role_name;?></option>
 
                                                               <?php }                             
 
@@ -154,7 +154,7 @@
 
             											<div class="input-group date date1" data-date-end-date="0d" data-date-format="dd-MM-yyyy">
 
-            												<input type="text" name="joining_date" id="joining_date" class="form-control" readonly="" placeholder="Date of Joining" value="<?php echo(isset($create_project_data->joining_date) && !empty($create_project_data->joining_date))?$create_project_data->joining_date:''?>">		
+            												<input type="text" name="joining_date" id="joining_date" class="form-control" readonly="" placeholder="Date of Joining" value="<?php echo(isset($user_data->joining_date) && !empty($user_data->joining_date))?$user_data->joining_date:''?>">		
 
             												<span class="input-group-btn">
 
@@ -1299,7 +1299,7 @@ m_name
 
                                                                     <div class="form-group">
 
-                                                                        <input type="text" class="form-control invalidemperror" name="responsibilities" id="responsibilities0" placeholder="Main Responsibilities" required>
+                                                                        <input type="text" class="form-control invalidemperror" name="responsibilities[]" id="responsibilities0" placeholder="Main Responsibilities" required>
 
                                                                     </div>
 

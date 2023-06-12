@@ -825,13 +825,28 @@ $(document).ready(function(){
                 $('.common_save').prop('disabled',true);
                 var url = $(form).attr('action');
                 var serialize_data = $(form).serialize();
+
+                var form = document.getElementById('save_user');
+                var formData = new FormData(form);
+                formData.append('home_addr_proof', home_addr_proof.files[0]);
+                formData.append('native_addr_proof', native_addr_proof.files[0]);
+                formData.append('local_addr_proof', local_addr_proof.files[0]);
+                formData.append('perm_addr_proof', perm_addr_proof.files[0]);
+                formData.append('drive_lic_proof', drive_lic_proof.files[0]);
+                formData.append('passport_proof', passport_proof.files[0]);
+                formData.append('pan_proof', pan_proof.files[0]);
+                formData.append('id', id);
+                // for (var pair of formData.entries()) {
+                //     console.log(pair[0] + ': ' + pair[1]);
+                //   }
                 serialize_data = {id:id};
                 Metronic.startPageLoading({animate: true});
                 $(form).ajaxSubmit({
                     type:'POST',
                     url:completeURL(url), 
                     dataType:'json',
-                    data:serialize_data,
+                    contentType: false,
+                    data:formData,
                     success:function(data)
                     {  
                         Metronic.stopPageLoading(); 

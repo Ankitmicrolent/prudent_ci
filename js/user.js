@@ -1,4 +1,5 @@
-$(document).on('click','.date1',function(){      
+$(document).on('click','.date1',function(){   
+      
     $('.date1').datepicker({
         orientation: "right",
         autoclose: true

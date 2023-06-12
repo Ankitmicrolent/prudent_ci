@@ -132,6 +132,23 @@ class Common_model extends CI_Model {
 			return false;
 		}			
 	}
+	public function selectDetailsWhere($tblname,$where,$condition)
+	{
+		$this->db->where($where,$condition);
+		$query = $this->db->get($tblname);
+		if($query->num_rows()>= 1){	
+
+            foreach ($query->result() as $row)
+            {
+                $tbl_data[]=$row;
+            }
+			return $tbl_data;
+		}
+		else
+		{
+			return false;
+		}			
+	}
 	public function existbpcode($bp_code)
 	{
 		$this->db->where('bp_code',$bp_code);
@@ -176,7 +193,7 @@ class Common_model extends CI_Model {
     public function selectAllWhr($tblname,$where,$condition)
     {
         $this->db->where($where,$condition);
-        $this->db->where('display','Y');
+        $this->db->where('  ','Y');
         $query = $this->db->get($tblname);
         if($query->num_rows() > 0)
         {
@@ -222,6 +239,7 @@ class Common_model extends CI_Model {
             return false; 
         } 
     }
+
     public function alljoin2tbl($tbl1,$tbl2,$where)
     {
         $query=$this->db->query("SELECT * from $tbl1 tbl1 left join $tbl2 tbl2 on tbl1.$where=tbl2.$where where  tbl1.display='Y' AND tbl2.display='Y'");
