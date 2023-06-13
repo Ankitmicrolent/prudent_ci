@@ -15,6 +15,11 @@ $(document).on('click','.addFRow',function()
         var f_age = document.getElementById("f_age0").value;
         var f_education = document.getElementById("f_education0").value;
         var f_occup = document.getElementById("f_occup0").value;
+        console.log(f_name)
+        console.log(relation)
+        console.log(f_dob)
+        console.log(f_age)
+        console.log(f_occup)
         if(f_name == '' || f_dob == '' || f_age == '' || f_education == '' || f_occup == ''){
             $('.invalidferror').addClass('has-error');
         }else{

@@ -305,4 +305,11 @@ class Common_model extends CI_Model {
             return false; 
         } 
     }
+
+    public function deleteRow($table, $id){
+        $query=$this->db->query("DELETE from $table WHERE id =$id");
+        
+            return $query;
+        
+    }
 }

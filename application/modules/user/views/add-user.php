@@ -100,11 +100,18 @@
 
                                                         <label>Employee No. <span class="require" aria-required="true" style="color:#a94442">*</span></label>
 
+                                                        
+                                                        <input type="hidden" class="form-control" name="id"
+                                                             
+                                                             value="<?php echo(isset($user_data->user_id) && !empty($user_data->user_id))?$user_data->user_id:''?>">
+
                                                         <div class="input-icon right">
 
                                                              <i class="fa"></i>
                                                              
-                                                             <input type="text" class="form-control " name="emp_no" value="<?php echo(isset($user_data->emp_no) && !empty($user_data->emp_no))?$user_data->emp_no:''?>" placeholder="Employee No." required>
+                                                             <input type="text" class="form-control duplicate" name="emp_no"
+                                                             data-tbl="tbl_user" data-p_key="user_id" data-where="emp_no" rel="0" 
+                                                             value="<?php echo(isset($user_data->emp_no) && !empty($user_data->emp_no))?$user_data->emp_no:''?>" placeholder="Employee No." required>
 
                                                         </div>
 
@@ -154,7 +161,7 @@
 
             											<div class="input-group date date1" data-date-end-date="0d" data-date-format="dd-MM-yyyy">
 
-            												<input type="text" name="joining_date" id="joining_date" class="form-control" readonly="" placeholder="Date of Joining" value="<?php echo(isset($user_data->joining_date) && !empty($user_data->joining_date))?$user_data->joining_date:''?>">		
+            												<input type="text" name="joining_date" id="joining_date" class="form-control" readonly="" placeholder="Date of Joining" value="<?php echo(isset($user_data->joining_date) && !empty($user_data->joining_date))?date("d-F-Y", strtotime($user_data->joining_date)):''?>">		
 
             												<span class="input-group-btn">
 
@@ -236,7 +243,6 @@
                                                                  <i class="fa"></i>
 
                                                                  <input type="text" class="form-control " name="m_name" value="<?php echo(isset($user_data->m_name) && !empty($user_data->m_name))?$user_data->m_name:''?>" placeholder="Middle Name" required>
-m_name
                                                             </div>
 
                                                         </div>
@@ -309,7 +315,7 @@ m_name
 
                 											<div class="input-group date date1" data-date-end-date="0d" data-date-format="dd-MM-yyyy">
 
-                												<input type="text" name="dob" id="dob" class="form-control" readonly="" placeholder="Date of Birth" value="<?php echo(isset($create_project_data->dob) && !empty($create_project_data->dob))?$create_project_data->dob:''?>">		
+                												<input type="text" name="dob" id="dob" class="form-control" readonly="" placeholder="Date of Birth" value="<?php echo(isset($user_data->dob) && !empty($user_data->dob))?$user_data->dob:''?>">		
 
                 												<span class="input-group-btn">
 
@@ -335,11 +341,16 @@ m_name
 
                                                                 <option value="">--Select--</option>
 
-                                                                <option value="Married">Married</option>
+                                                                <option value="Married"  <?php echo (isset($user_data->marital_status) && !empty($user_data->marital_status) && ($user_data->marital_status=="Married"))?'selected="selected"':'';?>>Married</option>
 
-                                                                <option value="Unmarried">Unmarried</option>
+                                                                <option value="Unmarried"
+                                                                <?php echo (isset($user_data->marital_status) && !empty($user_data->marital_status) && ($user_data->marital_status=="Unmarried"))?'selected="selected"':'';?>  
+                                                                >Unmarried</option>
 
-                                                                <option value="Divorced">Divorced</option>
+                                                                <option value="Divorced"
+                                                                <?php echo (isset($user_data->marital_status) && !empty($user_data->marital_status) && ($user_data->marital_status=="Divorced"))?'selected="selected"':'';?>
+                                                                
+                                                                >Divorced</option>
 
                                                                 </select> 
 
@@ -363,7 +374,7 @@ m_name
 
                                                                 <i class="fa"></i>
 
-                                                                <textarea rows="2" type="text" class="form-control" name="home_addr" id="home_addr" placeholder="Local Home Address" required><?php echo(isset($create_project_data->home_addr) && !empty($create_project_data->home_addr))?$create_project_data->home_addr:''?></textarea>
+                                                                <textarea rows="2" type="text" class="form-control" name="home_addr" id="home_addr" placeholder="Local Home Address" required><?php echo(isset($user_data->home_addr) && !empty($user_data->home_addr))?$user_data->home_addr:''?></textarea>
 
                                                             </div>
 
@@ -381,7 +392,7 @@ m_name
 
                                                                 <i class="fa"></i>
 
-                                                                <textarea rows="2" type="text" class="form-control" name="native_addr" id="native_addr" placeholder="Native Place Address" required><?php echo(isset($create_project_data->native_addr) && !empty($create_project_data->native_addr))?$create_project_data->native_addr:''?></textarea>
+                                                                <textarea rows="2" type="text" class="form-control" name="native_addr" id="native_addr" placeholder="Native Place Address" required><?php echo(isset($user_data->native_addr) && !empty($user_data->native_addr))?$user_data->native_addr:''?></textarea>
 
                                                             </div>
 
@@ -400,6 +411,19 @@ m_name
                                                             <label class="">Local Home Address Proof <br> (Electricity bill, Rent Agreement, Aadhaar) <span class="require" aria-required="true" style="color:#a94442">*</span></label>
 
                                                             <input type="file" name="home_addr_proof" id="home_addr_proof" class="home_addr_proof" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" />
+                                                           
+
+                                                            
+                                                            <?php
+                                                                    if(isset($user_data->home_addr_proof) && !empty($user_data->home_addr_proof)){
+
+
+                                                                        echo '<a href="'.$user_data->home_addr_proof.'" download>
+                                                                           '.$user_data->home_addr_proof.'
+                                                                         </a>';
+                                                                        }
+                                                                         ?>
+                                                            </a>
 
                                                             <span id="home_addr_proof_error" style="font-size: 12px;color:#a94442;"></span>
 
@@ -414,6 +438,18 @@ m_name
                                                             <label class="">Native Place Address Proof <br> (Electricity bill, Rent Agreement, Aadhaar) <span class="require" aria-required="true" style="color:#a94442">*</span></label>
 
                                                             <input type="file" name="native_addr_proof" id="native_addr_proof" class="native_addr_proof" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" />
+                                                            
+
+                                                            
+                                                            <?php
+                                                                    if(isset($user_data->native_addr_proof) && !empty($user_data->native_addr_proof)){
+
+
+                                                                        echo '<a href="'.$user_data->native_addr_proof.'" download>
+                                                                           '.$user_data->native_addr_proof.'
+                                                                         </a>';
+                                                                        }
+                                                                         ?>
 
                                                             <span id="native_addr_proof_error" style="font-size: 12px;color:#a94442;"></span>
 
@@ -435,7 +471,7 @@ m_name
 
                                                                 <i class="fa"></i>
 
-                                                                <textarea rows="2" type="text" class="form-control" name="emergency_contact" id="emergency_contact" placeholder="Emergency Contact Details" required><?php echo(isset($create_project_data->emergency_contact) && !empty($create_project_data->emergency_contact))?$create_project_data->emergency_contact:''?></textarea>
+                                                                <textarea rows="2" type="text" class="form-control" name="emergency_contact" id="emergency_contact" placeholder="Emergency Contact Details" required><?php echo(isset($user_data->emergency_contact) && !empty($user_data->emergency_contact))?$user_data->emergency_contact:''?></textarea>
 
                                                             </div>
 
@@ -487,7 +523,7 @@ m_name
 
                                                                 <i class="fa"></i>
 
-                                                                <textarea rows="2" type="text" class="form-control" name="local_addr" id="local_addr" placeholder="2nd Local Address for correspondence" required><?php echo(isset($create_project_data->local_addr) && !empty($create_project_data->local_addr))?$create_project_data->local_addr:''?></textarea>
+                                                                <textarea rows="2" type="text" class="form-control" name="local_addr" id="local_addr" placeholder="2nd Local Address for correspondence" required><?php echo(isset($user_data->local_addr) && !empty($user_data->local_addr))?$user_data->local_addr:''?></textarea>
 
                                                             </div>
 
@@ -505,7 +541,7 @@ m_name
 
                                                                 <i class="fa"></i>
 
-                                                                <textarea rows="2" type="text" class="form-control" name="perm_addr" id="perm_addr" placeholder="Permanent Address" required><?php echo(isset($create_project_data->perm_addr) && !empty($create_project_data->perm_addr))?$create_project_data->perm_addr:''?></textarea>
+                                                                <textarea rows="2" type="text" class="form-control" name="perm_addr" id="perm_addr" placeholder="Permanent Address" required><?php echo(isset($user_data->perm_addr) && !empty($user_data->perm_addr))?$user_data->perm_addr:''?></textarea>
 
                                                             </div>
 
@@ -524,6 +560,18 @@ m_name
                                                             <label class="">2nd Local Address for correspondence Proof <br> (C/o address of relatives will) <span class="require" aria-required="true" style="color:#a94442">*</span></label>
 
                                                             <input type="file" name="local_addr_proof" id="local_addr_proof" class="local_addr_proof" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" />
+                                                         
+
+                                                            
+                                                            <?php
+                                                                    if(isset($user_data->local_addr_proof) && !empty($user_data->local_addr_proof)){
+
+
+                                                                        echo '<a href="'.$user_data->local_addr_proof.'" download>
+                                                                           '.$user_data->local_addr_proof.'
+                                                                         </a>';
+                                                                        }
+                                                                         ?>
 
                                                             <span id="local_addr_proof_error" style="font-size: 12px;color:#a94442;"></span>
 
@@ -538,6 +586,18 @@ m_name
                                                             <label class="">Permanent Address Proof <br> (Electricity bill, Rent Agreement, Aadhaar) <span class="require" aria-required="true" style="color:#a94442">*</span></label>
 
                                                             <input type="file" name="perm_addr_proof" id="perm_addr_proof" class="perm_addr_proof" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" />
+                                                           
+
+                                                            
+                                                            <?php
+                                                                    if(isset($user_data->perm_addr_proof) && !empty($user_data->perm_addr_proof)){
+
+
+                                                                        echo '<a href="'.$user_data->perm_addr_proof.'" download>
+                                                                           '.$user_data->perm_addr_proof.'
+                                                                         </a>';
+                                                                        }
+                                                                         ?>
 
                                                             <span id="perm_addr_proof_error" style="font-size: 12px;color:#a94442;"></span>
 
@@ -731,7 +791,7 @@ m_name
 
                 											<div class="input-group date date1" data-date-end-date="0d" data-date-format="dd-MM-yyyy">
 
-                												<input type="text" name="drive_lic_date" id="drive_lic_no" class="form-control" readonly="" placeholder="Validity Date" value="<?php echo(isset($create_project_data->drive_lic_no) && !empty($create_project_data->drive_lic_no))?$create_project_data->drive_lic_no:''?>">		
+                												<input type="text" name="drive_lic_date" id="drive_lic_no" class="form-control" readonly="" placeholder="Validity Date" value="<?php echo(isset($user_data->drive_lic_no) && !empty($user_data->drive_lic_no))?$user_data->drive_lic_no:''?>">		
 
                 												<span class="input-group-btn">
 
@@ -752,6 +812,21 @@ m_name
                                                             <label class="">Driving License Proof <span class="require" aria-required="true" style="color:#a94442">*</span></label>
 
                                                             <input type="file" name="drive_lic_proof" id="drive_lic_proof" class="drive_lic_proof" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" />
+
+
+                                                            
+
+
+                                                            
+                                                            <?php
+                                                                    if(isset($user_data->drive_lic_proof) && !empty($user_data->drive_lic_proof)){
+
+
+                                                                        echo '<a href="'.$user_data->drive_lic_proof.'" download>
+                                                                           '.$user_data->drive_lic_proof.'
+                                                                         </a>';
+                                                                        }
+                                                                         ?>
 
                                                             <span id="drive_lic_proof_error" style="font-size: 12px;color:#a94442;"></span>
 
@@ -789,7 +864,7 @@ m_name
 
                 											<div class="input-group date date1" data-date-end-date="0d" data-date-format="dd-MM-yyyy">
 
-                												<input type="text" name="passport_date" id="passport_date" class="form-control" readonly="" placeholder="Date of Issue" value="<?php echo(isset($create_project_data->passport_date) && !empty($create_project_data->passport_date))?$create_project_data->passport_date:''?>">		
+                												<input type="text" name="passport_date" id="passport_date" class="form-control" readonly="" placeholder="Date of Issue" value="<?php echo(isset($user_data->passport_date) && !empty($user_data->passport_date))?$user_data->passport_date:''?>">		
 
                 												<span class="input-group-btn">
 
@@ -829,7 +904,7 @@ m_name
 
                                                             <div class="input-group date date1" data-date-end-date="0d" data-date-format="dd-MM-yyyy">
 
-                												<input type="text" name="passport_expiry" id="passport_expiry" class="form-control" readonly="" placeholder="Expiry Date" value="<?php echo(isset($create_project_data->passport_expiry) && !empty($create_project_data->passport_expiry))?$create_project_data->passport_expiry:''?>">		
+                												<input type="text" name="passport_expiry" id="passport_expiry" class="form-control" readonly="" placeholder="Expiry Date" value="<?php echo(isset($user_data->passport_expiry) && !empty($user_data->passport_expiry))?$user_data->passport_expiry:''?>">		
 
                 												<span class="input-group-btn">
 
@@ -854,7 +929,16 @@ m_name
                                                             <label class="">Passport Proof <span class="require" aria-required="true" style="color:#a94442">*</span></label>
 
                                                             <input type="file" name="passport_proof" id="passport_proof" class="passport_proof" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" />
+                                                            <?php
+                                                                    if(isset($user_data->passport_proof) && !empty($user_data->passport_proof)){
 
+
+                                                                        echo '<a href="'.$user_data->passport_proof.'" download>
+                                                                           '.$user_data->passport_proof.'
+                                                                         </a>';
+                                                                        }
+                                                                         ?>
+                                                                    
                                                             <span id="passport_proof_error" style="font-size: 12px;color:#a94442;"></span>
 
                                                         </div>
@@ -887,6 +971,18 @@ m_name
 
                                                             <input type="file" name="pan_proof" id="pan_proof" class="pan_proof" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" />
 
+                                                            
+
+                                                            <?php
+                                                                    if(isset($user_data->pan_proof) && !empty($user_data->pan_proof)){
+
+
+                                                                        echo '<a href="'.$user_data->pan_proof.'" download>
+                                                                           '.$user_data->pan_proof.'
+                                                                         </a>';
+                                                                        }
+                                                                         ?>
+
                                                             <span id="pan_proof_error" style="font-size: 12px;color:#a94442;"></span>
 
                                                         </div>
@@ -907,7 +1003,7 @@ m_name
 
                                                                 <i class="fa"></i>
 
-                                                                <textarea rows="2" type="text" class="form-control" name="bank_details" id="bank_details" placeholder="Bank Account Details" required><?php echo(isset($create_project_data->bank_details) && !empty($create_project_data->bank_details))?$create_project_data->bank_details:''?></textarea>
+                                                                <textarea rows="2" type="text" class="form-control" name="bank_details" id="bank_details" placeholder="Bank Account Details" required><?php echo(isset($user_data->bank_details) && !empty($user_data->bank_details))?$user_data->bank_details:''?></textarea>
 
                                                             </div>
 
@@ -928,7 +1024,7 @@ m_name
                                             <div class="panel-heading">
 
                                                 <h4 class="panel-title">Part B – Family Background</h4>
-
+                                               
                                             </div>
 
                                              <div class="panel-body">
@@ -963,19 +1059,130 @@ m_name
 
                                                         <tbody>
 
+                                                        <?php
+                                                            
+                                                             if(isset($user_family) && !empty($user_family) && count($user_family)>= 2){
+                                                               
+                                                           
+                                                        for ($i=1; $i < count($user_family) ; $i++) { 
+
+                                                            
+                                                               $count = $i; 
+                                                         echo 
+                                                          '<tr>
+
+                                                            <td>
+
+                                                                <div class="form-group"> 
+
+                                                                    <select class="form-control" name="relation[]" id="relation'.$count.'" required style="font-size: 13px;" readonly>
+
+                                                                        <option value="">--Select--</option>
+
+                                                                        <option value="Father" '.($user_family[$i]->relation == "Father" ? "selected" : "").'>Father</option>
+
+                                                                        <option value="Mother"
+                                                                        '.($user_family[$i]->relation == "Mother" ? "selected" : "").'
+                                                                        >Mother</option>
+
+                                                                        <option value="Sister"
+                                                                        '.($user_family[$i]->relation == "Sister" ? "selected" : "").'
+                                                                        >Sister(s)</option>
+
+                                                                        <option value="Brother"
+                                                                        '.($user_family[$i]->relation == "Brother" ? "selected" : "").'
+                                                                        >Brother(s)</option>
+
+                                                                        <option value="Spouse"
+                                                                        '.($user_family[$i]->relation == "Spouse" ? "selected" : "").'
+                                                                        >Spouse</option>
+
+                                                                        <option value="Children"
+                                                                        '.($user_family[$i]->relation == "Children" ? "selected" : "").'
+                                                                        >Children</option>
+
+                                                                    </select> 
+
+                                                                </div>
+
+                                                            </td>
+
+                                                            <td>
+
+                                                                <input  type="text" class="form-control " name="f_name[]" readonly
+                                                                value="'.$user_family[$i]->f_name.'"  id="f_name'.$count.'" placeholder="Name"  style="font-size: 13px;" required>
+
+                                                            </td>
+
+
+
+                                                            <td>
+                                                          <div class="input-group date date1" data-date-end-date="0d" data-date-format="dd-mm-yyyy">
+                                                           <input type="text" name="f_dob[]" id="f_dob'.$count.'" value="'.$user_family[$i]->f_dob.'" class="form-control" readonly="" placeholder="DOB" readonly>
+                                                           <span class="input-group-btn">
+                                                           <button class="btn default" type="button">
+                                                           <span class="md-click-circle md-click-animate" style="height: 47px; width: 47px; top: -1.0625px; left: -9.5px;"></span>
+                                                           <i class="fa fa-calendar"></i></button></span></div>
+                                                            </td>
+
+                                                           
+
+                                                            <td>
+
+                                                                <input type="number" value="'.$user_family[$i]->f_age.'" class="form-control" readonly name="f_age[]" id="f_age'.$count.'" placeholder="Age" maxlength="3" min="1"  style="font-size: 13px;" required>
+
+                                                            </td>
+
+                                                            <td>
+
+                                                                <input type="text" class="form-control invalidferror"
+                                                                readonly
+                                                                value="'.$user_family[$i]->f_education.'" 
+                                                                 name="f_education[]" id="f_education'.$count.'" placeholder="Education"  style="font-size: 13px;" required>
+
+                                                            </td>
+
+                                                            <td>
+
+                                                                <input type="text" class="form-control" name="f_occup[]" 
+                                                                readonly
+                                                                value="'.$user_family[$i]->f_occup.'" 
+                                                                id="f_occup'.$count.'" placeholder="Occupation"  style="font-size: 13px;" required>
+
+                                                            </td>
+
+                                                            <td>
+                                                            <div class="addDeleteButton">
+                                                            <span class="tooltips deleteFRow" data-placement="top" data-original-title="Remove" style="cursor: pointer;"><i class="fa fa-trash-o"></i></span>
+                                                            </div>
+                                                            </td>
+
+                                                        </tr>';
+                                                           
+                                                        }
+                                                    }
+                                                    
+                                                        
+                                                        
+                                                        ?>
+
                                                             <tr>
 
                                                                 <td>
 
                                                                     <div class="form-group"> 
-
+                       
+                                                                          
                                                                         <select class="form-control invalidferror" name="relation[]" id="relation0" required style="font-size: 13px;">
 
                                                                             <option value="">--Select--</option>
 
                                                                             <option value="Father">Father</option>
 
-                                                                            <option value="Mother">Mother</option>
+                                                                            <option value="Mother"
+                                                                           
+                                                                           
+                                                                            >Mother</option>
 
                                                                             <option value="Sister">Sister(s)</option>
 
@@ -1001,7 +1208,8 @@ m_name
 
                                                                     <div class="input-group date date1" data-date-end-date="0d" data-date-format="dd-mm-yyyy">
 
-                        												<input type="text" name="f_dob[]" id="f_dob0" class="form-control invalidferror" readonly="" placeholder="DOB"  style="font-size: 13px;">		
+                        												<input type="text" name="f_dob[]" id="f_dob0" class="form-control invalidferror"
+                                                                         readonly="" placeholder="DOB"  style="font-size: 13px;">		
 
                         												<span class="input-group-btn">
 
@@ -1015,19 +1223,22 @@ m_name
 
                                                                 <td>
 
-                                                                    <input type="number" class="form-control invalidferror" name="f_age[]" id="f_age0" placeholder="Age" maxlength="3" min="1"  style="font-size: 13px;" required>
+                                                                    <input type="number" class="form-control invalidferror" name="f_age[]" 
+                                                                   id="f_age0" placeholder="Age" maxlength="3" min="1"  style="font-size: 13px;" required>
 
                                                                 </td>
 
                                                                 <td>
 
-                                                                    <input type="text" class="form-control invalidferror" name="f_education[]" id="f_education0" placeholder="Education"  style="font-size: 13px;" required>
+                                                                    <input type="text" class="form-control invalidferror"
+                                                                    name="f_education[]" id="f_education0" placeholder="Education"  style="font-size: 13px;" required>
 
                                                                 </td>
 
                                                                 <td>
 
-                                                                    <input type="text" class="form-control invalidferror" name="f_occup[]" id="f_occup0" placeholder="Occupation"  style="font-size: 13px;" required>
+                                                                    <input type="text" class="form-control invalidferror" name="f_occup[]"
+                                                                         id="f_occup0" placeholder="Occupation"  style="font-size: 13px;" required>
 
                                                                 </td>
 
@@ -1042,7 +1253,7 @@ m_name
                                                                 </td>
 
                                                             </tr>
-
+                                                         
                                                         </tbody>
 
                                                     </table>
@@ -1075,6 +1286,8 @@ m_name
 
                                                         <thead>
 
+
+
                                                             <tr>
 
                                                                 <th style="min-width: 150px;width:150px;">Name of School/College/<br>University <span class="require" aria-required="true" style="color:#a94442">*</span></th>
@@ -1094,6 +1307,90 @@ m_name
                                                         </thead>
 
                                                         <tbody>
+
+                                                             <?php
+                                                              if(isset($user_education) && !empty($user_education)){
+                                                                
+
+                                                             for ($i=0; $i < count($user_education) ; $i++) { 
+                                                                $count = $i +1;
+
+                                                               echo 
+                                                               '  <tr>
+
+                                                               <td>
+
+                                                                   <div class="form-group">
+
+                                                                       <input type="text" value="'.$user_education[$i]->college.'" class="form-control invalideduerror" name="college[]" id="college'.$count.'" placeholder="Name of School/College/University" readonly required>
+
+                                                                   </div>
+
+                                                               </td>
+
+
+
+                                                               <td>
+            <div class="input-group date date1" data-date-end-date="0d" data-date-format="dd-mm-yyyy">
+            <input type="text" name="passing_year[]" id="passing_year'.$count.'" value="'.$user_education[$i]->passing_year.'" class="form-control" readonly="" placeholder="Year of Passing">
+            <span class="input-group-btn">
+            <button class="btn default" type="button">
+            <span class="md-click-circle md-click-animate" style="height: 47px; width: 47px; top: -1.0625px; left: -9.5px;"></span>
+            <i class="fa fa-calendar"></i></button></span></div>
+            </td>
+
+                                                             
+                                                               <td>
+
+                                                                   <div class="form-group">
+
+                                                                       <input type="text" class="form-control invalideduerror" id="degree_diploma'.$count.'" value="'.$user_education[$i]->degree_diploma.'" name="degree_diploma[]" placeholder="Degree/Diploma"  readonly required>
+
+                                                                   </div>
+
+                                                               </td>
+
+                                                               <td>
+
+                                                                   <div class="form-group">
+
+                                                                       <input type="text" class="form-control invalideduerror" id="special_sub0" name="special_sub[]" 
+                                                                       readonly value="'.$user_education[$i]->special_sub.'" placeholder="Specialized Subject" required>
+
+                                                                   </div>
+
+                                                               </td>
+
+                                                               <td>
+
+                                                                   <div class="form-group">
+
+                                                                       <input type="text" class="form-control invalideduerror" id="percent_obtain0" name="percent_obtain[]" readonly value="'.$user_education[$i]->percent_obtain.'"   placeholder="Percentage Obtained" required>
+
+                                                                   </div>
+
+                                                               </td>
+
+
+                                                               <td>
+                                                              <div class="addDeleteButton">
+                                                              <span class="tooltips deleteduRow" data-placement="top" data-original-title="Remove" style="cursor: pointer;"><i class="fa fa-trash-o"></i></span>
+                                                              </div>
+                                                              </td>
+
+                                                           
+
+                                                           </tr>
+                                                               ';
+
+
+                                                               
+                                                             }
+                                                            }
+                                                             
+                                                             
+                                                             
+                                                             ?>
 
                                                             <tr>
 
@@ -1224,6 +1521,60 @@ m_name
                                                         </thead>
 
                                                         <tbody>
+
+                                                        <?php
+                                                              if(isset($user_emphistory) && !empty($user_emphistory)){
+                                                                
+
+                                                                for ($i=0; $i < count($user_emphistory) ; $i++) { 
+                                                                    $count = $i +1;
+
+                                                                    echo'
+                                                                    <tr><td>
+                                                                    
+                                                                    <div class="form-group">
+            <input type="text" class="form-control" name="position[]" id="position'.$count.'" value="'.$user_emphistory[$i]->position.'" placeholder="Position Held" required readonly>
+            </div>
+            </td>
+            <td>
+            <div class="input-group date date1" data-date-end-date="0d" data-date-format="dd-mm-yyyy">
+            <input type="text" name="from[]" id="from'.$count.'" value="'.$user_emphistory[$i]->from.'" class="form-control" readonly="" placeholder="From">
+            <span class="input-group-btn">
+            <button class="btn default" type="button">
+            <span class="md-click-circle md-click-animate" style="height: 47px; width: 47px; top: -1.0625px; left: -9.5px;"></span>
+            <i class="fa fa-calendar"></i></button></span></div>
+            </td>
+            <td>
+            <div class="input-group date date1" data-date-end-date="0d" data-date-format="dd-mm-yyyy">
+            <input type="text" name="to[]" id="to'.$count.'" value="'.$user_emphistory[$i]->to.'" class="form-control" readonly="" placeholder="To">
+            <span class="input-group-btn">
+            <button class="btn default" type="button">
+            <span class="md-click-circle md-click-animate" style="height: 47px; width: 47px; top: -1.0625px; left: -9.5px;"></span>
+            <i class="fa fa-calendar"></i></button></span></div>
+            </td>
+            <td>
+            <input type="text" class="form-control" name="employer_details[]" value="'.$user_emphistory[$i]->employer.'" id="employer_details'.$count.'" placeholder="Employer (Name, address and contact nos.)" required readonly>
+            </td>
+            <td>
+            <input type="text" class="form-control" name="responsibilities[]" id="responsibilities'.$count.'" value="'.$user_emphistory[$i]->responsibilities.'" placeholder="Main Responsibilities" required readonly>
+            </td>
+            <td>
+            <input type="text" class="form-control" name="cost_to_company[]" id="cost_to_company'.$count.'" value="'.$user_emphistory[$i]->ctc.'" placeholder="Cost to Company" required readonly>
+            </td>
+            <td>
+            <div class="addDeleteButton">
+            <span class="tooltips deletempRow" data-placement="top" data-original-title="Remove" style="cursor: pointer;"><i class="fa fa-trash-o"></i></span>
+            </div></td></tr>
+                                                                    
+                                                                    
+                                                                    ';
+                                                                }
+
+
+                                                              }
+
+                                                              ?>
+
 
                                                             <tr>
 
@@ -1395,7 +1746,9 @@ m_name
 
         </div>
 
-    </div> <?php $this->load->view('common/footer');?> <script src="<?php echo base_url();?>assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    </div>
+     <?php $this->load->view('common/footer');?>
+      <script src="<?php echo base_url();?>assets/global/plugins/jquery.min.js" type="text/javascript"></script>
 
     <script src="<?php echo base_url();?>assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
 
@@ -1456,6 +1809,8 @@ m_name
         });
 
     </script>
+
+
 
 </body>
 

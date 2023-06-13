@@ -635,6 +635,8 @@ $(document).ready(function(){
         });
     });
     $(document).on('click','.common_save',function(e){
+
+        console.log("i am here");
         var form = '#'+$(this).parents('form').attr('id');
         var error = $('.alert-danger', form);
         var success = $('.alert-success', form);
