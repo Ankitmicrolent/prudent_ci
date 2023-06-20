@@ -167,7 +167,7 @@
 
                                                             <a href="javascript:;" class="edit tooltips editRecord" rel="<?php echo (isset($key->user_id) && !empty($key->user_id)) ? $key->user_id : ''; ?>" title="Edit User" rev="edit_user"><i class="fa fa-edit" style="color:#3598dc; font-size:15px;"></i></a>&nbsp;
 
-                                                            <a href="javascript:;" class="delete tooltips deleteRecord" rel="<?php echo (isset($key->user_id) && !empty($key->user_id)) ? $key->user_id : ''; ?>" title="Delete User" rev="delete_user"><i class="fa fa-trash-o" style="color:#a94442; font-size: 15px;"></i></a>
+                                                            <!-- <a href="javascript:;" class="delete tooltips deleteRecord" rel="<?php echo (isset($key->user_id) && !empty($key->user_id)) ? $key->user_id : ''; ?>" title="Delete User" rev="delete_user"><i class="fa fa-trash-o" style="color:#a94442; font-size: 15px;"></i></a> -->
 
                                                         </td>
 

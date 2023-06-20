@@ -410,7 +410,7 @@
 
                                                             <label class="">Local Home Address Proof <br> (Electricity bill, Rent Agreement, Aadhaar) <span class="require" aria-required="true" style="color:#a94442">*</span></label>
 
-                                                            <input type="file" name="home_addr_proof" id="home_addr_proof" class="home_addr_proof" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" />
+                                                            <input type="file" name="home_addr_proof" id="home_addr_proof" class="home_addr_proof" <?php echo(isset($user_data->home_addr_proof) && !empty($user_data->home_addr_proof))?'':'required' ?> />
                                                            
 
                                                             
@@ -419,7 +419,7 @@
 
 
                                                                         echo '<a href="'.$user_data->home_addr_proof.'" download>
-                                                                           '.$user_data->home_addr_proof.'
+                                                                           Home Address
                                                                          </a>';
                                                                         }
                                                                          ?>
@@ -437,7 +437,7 @@
 
                                                             <label class="">Native Place Address Proof <br> (Electricity bill, Rent Agreement, Aadhaar) <span class="require" aria-required="true" style="color:#a94442">*</span></label>
 
-                                                            <input type="file" name="native_addr_proof" id="native_addr_proof" class="native_addr_proof" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" />
+                                                            <input type="file" name="native_addr_proof" id="native_addr_proof" class="native_addr_proof" <?php echo(isset($user_data->native_addr_proof) && !empty($user_data->native_addr_proof))?'':'required' ?> />
                                                             
 
                                                             
@@ -446,7 +446,7 @@
 
 
                                                                         echo '<a href="'.$user_data->native_addr_proof.'" download>
-                                                                           '.$user_data->native_addr_proof.'
+                                                                           Native address
                                                                          </a>';
                                                                         }
                                                                          ?>
@@ -559,7 +559,7 @@
 
                                                             <label class="">2nd Local Address for correspondence Proof <br> (C/o address of relatives will) <span class="require" aria-required="true" style="color:#a94442">*</span></label>
 
-                                                            <input type="file" name="local_addr_proof" id="local_addr_proof" class="local_addr_proof" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" />
+                                                            <input type="file" name="local_addr_proof" id="local_addr_proof" class="local_addr_proof" <?php echo(isset($user_data->local_addr_proof) && !empty($user_data->local_addr_proof))?'':'required' ?>/>
                                                          
 
                                                             
@@ -568,7 +568,7 @@
 
 
                                                                         echo '<a href="'.$user_data->local_addr_proof.'" download>
-                                                                           '.$user_data->local_addr_proof.'
+                                                                           Local address
                                                                          </a>';
                                                                         }
                                                                          ?>
@@ -585,7 +585,7 @@
 
                                                             <label class="">Permanent Address Proof <br> (Electricity bill, Rent Agreement, Aadhaar) <span class="require" aria-required="true" style="color:#a94442">*</span></label>
 
-                                                            <input type="file" name="perm_addr_proof" id="perm_addr_proof" class="perm_addr_proof" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" />
+                                                            <input type="file" name="perm_addr_proof" id="perm_addr_proof" class="perm_addr_proof" <?php echo(isset($user_data->perm_addr_proof) && !empty($user_data->perm_addr_proof))?'':'required' ?> />
                                                            
 
                                                             
@@ -594,7 +594,7 @@
 
 
                                                                         echo '<a href="'.$user_data->perm_addr_proof.'" download>
-                                                                           '.$user_data->perm_addr_proof.'
+                                                                          Permanent address
                                                                          </a>';
                                                                         }
                                                                          ?>
@@ -811,7 +811,7 @@
 
                                                             <label class="">Driving License Proof <span class="require" aria-required="true" style="color:#a94442">*</span></label>
 
-                                                            <input type="file" name="drive_lic_proof" id="drive_lic_proof" class="drive_lic_proof" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" />
+                                                            <input type="file" name="drive_lic_proof" id="drive_lic_proof" class="drive_lic_proof" <?php echo(isset($user_data->drive_lic_proof) && !empty($user_data->drive_lic_proof))?'':'required' ?> />
 
 
                                                             
@@ -823,7 +823,7 @@
 
 
                                                                         echo '<a href="'.$user_data->drive_lic_proof.'" download>
-                                                                           '.$user_data->drive_lic_proof.'
+                                                                              Driving license
                                                                          </a>';
                                                                         }
                                                                          ?>
@@ -928,13 +928,13 @@
 
                                                             <label class="">Passport Proof <span class="require" aria-required="true" style="color:#a94442">*</span></label>
 
-                                                            <input type="file" name="passport_proof" id="passport_proof" class="passport_proof" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" />
+                                                            <input type="file" name="passport_proof" id="passport_proof" class="passport_proof" <?php echo(isset($user_data->passport_proof) && !empty($user_data->passport_proof))?'':'required' ?> />
                                                             <?php
                                                                     if(isset($user_data->passport_proof) && !empty($user_data->passport_proof)){
 
 
                                                                         echo '<a href="'.$user_data->passport_proof.'" download>
-                                                                           '.$user_data->passport_proof.'
+                                                                            Passport proof
                                                                          </a>';
                                                                         }
                                                                          ?>
@@ -969,7 +969,7 @@
 
                                                             <label class="">Income-tax PAN Proof <span class="require" aria-required="true" style="color:#a94442">*</span></label>
 
-                                                            <input type="file" name="pan_proof" id="pan_proof" class="pan_proof" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" />
+                                                            <input type="file" name="pan_proof" id="pan_proof" class="pan_proof" <?php echo(isset($user_data->pan_proof) && !empty($user_data->pan_proof))?'':'required' ?> />
 
                                                             
 
@@ -978,7 +978,7 @@
 
 
                                                                         echo '<a href="'.$user_data->pan_proof.'" download>
-                                                                           '.$user_data->pan_proof.'
+                                                                           Pan proof
                                                                          </a>';
                                                                         }
                                                                          ?>
@@ -1061,10 +1061,10 @@
 
                                                         <?php
                                                             
-                                                             if(isset($user_family) && !empty($user_family) && count($user_family)>= 2){
+                                                             if(isset($user_family) && !empty($user_family)){
                                                                
                                                            
-                                                        for ($i=1; $i < count($user_family) ; $i++) { 
+                                                        for ($i=0; $i < count($user_family) ; $i++) { 
 
                                                             
                                                                $count = $i; 

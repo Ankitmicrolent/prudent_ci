@@ -15,19 +15,41 @@
     $(document).on("click",".emd_paid_status_div", function(){
         var value = $(this).val();
         if(value == 'Yes'){
-            var html = '<button type="button" class="btn btn-primary" title="click To Convert to Contract Deposit" rel="">Convert to Contract Deposit</button>';
+            var html = '<button type="button" id="emd_paid_status_id" class="btn btn-primary" title="click To Convert to Contract Deposit" rel="">Convert to Contract Deposit</button>';
                 $('#ccd_div').html(html);    
         }else{
-            $('#ccd_div').html('');    
+            $('#ccd_div').html(''); 
+            $('#emd_paid_status_id_value').val("N");
+
         }
     });
+
+    $(document).on("click","#emd_paid_status_id", function(){
+
+        $('#emd_paid_status_id_value').val("Y");
+        $(this).removeClass('btn btn-primary').addClass('btn btn-success').text('Converted Deposit');
+
+    });
+
+    $(document).on("click","#asd_paid_status_id", function(){
+
+        $('#asd_paid_status_id_value').val("Y");
+        $(this).removeClass('btn btn-primary').addClass('btn btn-success').text('Converted Deposit');
+
+    });
+
+
+
+
+
     $(document).on("click",".asd_paid_status_div", function(){
         var value = $(this).val();
         if(value == 'Yes'){
-            var html = '<button type="button" class="btn btn-primary" title="click To Convert to Contract Deposit" rel="">Convert to Contract Deposit</button>';
+            var html = '<button type="button" id="asd_paid_status_id" class="btn btn-primary" title="click To Convert to Contract Deposit" rel="">Convert to Contract Deposit</button>';
                 $('#asdccd_div').html(html);    
         }else{
-            $('#asdccd_div').html('');    
+            $('#asdccd_div').html(''); 
+            $('#asd_paid_status_id_value').val("N");   
         }
     });
     
@@ -684,9 +706,9 @@
                     +'<label class="">Payment Mode <span class="require" aria-required="true" style="color:#a94442">*</span></label>'
                     +'<select class="form-control select2me" name="emd_payment_mode" id="emd_payment_mode" required>'
                     +'<option value="">Select</option>'
-                    +'<option value="">Bank Transfer</option>'
-                    +'<option value="">Fixed Deposite</option>'
-                    +'<option value="">Demand Draft</option>'
+                    +'<option value="Bank Transfer">Bank Transfer</option>'
+                    +'<option value="Fixed Deposite">Fixed Deposite</option>'
+                    +'<option value="Demand Draft">Demand Draft</option>'
                     +'</select>'
                     +'</div>'
                     +'</div>'
@@ -728,11 +750,11 @@
                     +'<div class="col-md-3">'
                     +'<div class="form-group">'
                     +'<label class="">Payment Mode <span class="require" aria-required="true" style="color:#a94442">*</span></label>'
-                    +'<select class="form-control select2me" name="emd_payment_mode" id="emd_payment_mode" required>'
+                    +'<select class="form-control select2me" name="asd_payment_mode" id="asd_payment_mode" required>'
                     +'<option value="">Select</option>'
-                    +'<option value="">Bank Transfer</option>'
-                    +'<option value="">Fixed Deposite</option>'
-                    +'<option value="">Demand Draft</option>'
+                    +'<option value="Bank Transfer">Bank Transfer</option>'
+                    +'<option value="Fixed Deposite">Fixed Deposite</option>'
+                    +'<option value="Demand Draft">Demand Draft</option>'
                     +'</select>'
                     +'</div>'
                     +'</div>'
@@ -1005,6 +1027,7 @@
                 $('.common_save').prop('disabled',true);
                 var url = $(form).attr('action');
                 var serialize_data = $(form).serialize();
+                     
                 serialize_data = {id:id};
                 Metronic.startPageLoading({animate: true});
                 $(form).ajaxSubmit({

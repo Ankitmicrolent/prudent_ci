@@ -19,7 +19,7 @@ class Authentication
 	function login($username,$password,$roleId) 
 	{     
 		$CI =& get_instance();  	
-		
+
 		if(isset($roleId) && !empty($roleId) && ($roleId==2))
 		{
 			$condition = array('inst_code' => $username, 'password' => $password, 'status'=>'Active');
@@ -28,10 +28,13 @@ class Authentication
 		}
 		else
 		{
-			$CI->db->where('username',$username)->where('password',$password)->where('display','Y');
+			
+			$CI->db->where('username',$username)->where('password',$password)->where('display','Y')->where('user_status','Active');
 	    	$query = $CI->db->get_where("tbl_user");
 		} 
-	    
+
+		// var_dump($query->num_rows());
+	    // exit;
 		if($query->num_rows()!=1)
 		{   
 			return false;

@@ -1161,16 +1161,17 @@ class Admin_model extends CI_Model {
         }
     }
     
-    public function getBOQListRows($postData){
-	    $this->_get_boq_list_datatables_query($postData);
+    public function getBOQListRows($postData,$project_id){
+        
+	    $this->_get_boq_list_datatables_query($postData,$project_id);
         if($postData['length'] != -1){
             $this->db->limit($postData['length'], $postData['start']);
         }
         $query = $this->db->get();
         return $query->result();
     }
-    public function countBOQListFiltered($postData){
-        $this->_get_boq_list_datatables_query($postData);
+    public function countBOQListFiltered($postData,$projectId){
+        $this->_get_boq_list_datatables_query($postData,$projectId);
         $query = $this->db->get();
         return $query->num_rows();
     }
@@ -1179,9 +1180,14 @@ class Admin_model extends CI_Model {
 		$this->db->from('view_latest_boq_items');
 		return $this->db->count_all_results();
     }
-    private function _get_boq_list_datatables_query($postData){
+    private function _get_boq_list_datatables_query($postData,$project_id){
+        
+         
 	    $this->db->select('*');
 		$this->db->from('view_latest_boq_items');
+        if($project_id != null){
+            $this->db->where('project_id', $project_id);
+        }
 		$i = 0;
         // loop searchable columns 
 		if(isset($postData['search']['value'])){
@@ -1274,12 +1280,41 @@ class Admin_model extends CI_Model {
         }
     }
     public function bulk_insert_boq_items_data($data) {
+       
+
         $this->db->trans_start();
         for($i=0;$i<count($data);$i++) {  
 		    $boq_code = $data[$i]['boq_code'];
 		    $project_id = $data[$i]['project_id'];
 		    if(!empty($boq_code) && !empty($project_id)){
+
+                $check=$this->db->query("SELECT * FROM `tbl_boq_items` WHERE project_id='".$project_id."' AND boq_code='".$boq_code."' ORDER BY boq_items_id DESC LIMIT 0,1");
+                //   var_dump($check->num_rows() > 0);
+                //   exit;
+                if($check->num_rows() > 0){
+                       $existing_data = $check->row();
+                       
+
+                        $data[$i]['hsn_sac_code'] = $existing_data->hsn_sac_code;
+                        $data[$i]['item_description'] = $existing_data->item_description;
+                        $data[$i]['unit'] = $existing_data->unit;
+                        $data[$i]['scheduled_qty'] = $existing_data->scheduled_qty;
+                        $data[$i]['rate_basic'] = $existing_data->rate_basic;
+                        $data[$i]['created_on'] = $existing_data->created_on;
+                        $data[$i]['gst'] = $existing_data->gst;
+                        $data[$i]['non_schedule'] = $existing_data->non_schedule;
+                        $data[$i]['created_by'] = $existing_data->created_by;
+                  
+                    
+                  
     		    $this->db->insert('tbl_boq_items',$data[$i]);
+                    
+                }else{
+
+
+                    $this->db->insert('tbl_boq_items',$data[$i]);
+                }
+
         	}
         }
 		$query = $this->db->trans_complete(); 

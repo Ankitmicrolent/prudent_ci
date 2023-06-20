@@ -24,6 +24,8 @@ class Login extends Base_Controller {
         }
     }
      public function chk_login(){ 
+
+        
         $username=$this->input->post('username');
         $password=$this->input->post('password');
         $roleId = $this->input->post('roleId');
@@ -35,6 +37,8 @@ class Login extends Base_Controller {
             $error = 'Please enter your password.';
         }
         else{
+            // print_r($this->input->post());
+       
             $valid=$this->authentication->login($username,$password,$roleId);
             if (!$valid) $error = 'Wrong user/password, please try again.';
         }

@@ -318,14 +318,14 @@ class Upload_boq_items_controller extends Base_Controller
 		if(isset($user_id) && !empty($user_id)){
 		
 		$data = $row = $newarr = $datad = array();
-		$boq_code_d = '<input type="text" class="form-control invaliderror" id="boq_code" placeholder="BOQ Sr No" style="font-size: 12px;">';
-		$hsn_sac_code_d = '<input type="text" class="form-control invaliderror" id="hsn_sac_code" placeholder="HSN/SAC Code" style="font-size: 12px;">';
-		$item_description_d = '<input type="text" class="form-control invaliderror" id="item_description" placeholder="Item Description" style="font-size: 12px;">';
-		$unit_d = '<input type="text" class="form-control invaliderror" id="unit" placeholder="Unit" style="font-size: 12px;">';
-		$scheduled_qty_d = '<input type="number" min="1" class="form-control invaliderror" id="scheduled_qty" placeholder="Sche. Qty" style="font-size: 12px;">';
-		$design_qty_d = '<input type="number" min="1" class="form-control invaliderror" id="design_qty" placeholder="Des. Qty" style="font-size: 12px;">';
-		$rate_basic_d = '<input type="number" min="1" class="form-control invaliderror" id="rate_basic" placeholder="Rate Basic" style="font-size: 12px;">';
-		$gst_d = '<input type="number" min="0" class="form-control invaliderror" id="gst" placeholder="GST %" style="font-size: 12px;">';
+		$boq_code_d = '<input type="text" class="form-control invaliderror"  id="boq_code" placeholder="BOQ Sr No" style="font-size: 12px;">';
+		$hsn_sac_code_d = '<input type="text" class="form-control invaliderror"  id="hsn_sac_code" placeholder="HSN/SAC Code" style="font-size: 12px;">';
+		$item_description_d = '<input type="text" class="form-control invaliderror"  id="item_description" placeholder="Item Description" style="font-size: 12px;">';
+		$unit_d = '<input type="text" class="form-control invaliderror"  id="unit" placeholder="Unit" style="font-size: 12px;">';
+		$scheduled_qty_d = '<input type="number" min="1" class="form-control invaliderror"  id="scheduled_qty" placeholder="Sche. Qty" style="font-size: 12px;">';
+		$design_qty_d = '<input type="number" min="1" class="form-control invaliderror"  id="design_qty" placeholder="Des. Qty" style="font-size: 12px;">';
+		$rate_basic_d = '<input type="number" min="1" class="form-control invaliderror"  id="rate_basic" placeholder="Rate Basic" style="font-size: 12px;">';
+		$gst_d = '<input type="number" min="0" class="form-control invaliderror"  id="gst" placeholder="GST %" style="font-size: 12px;">';
 			
 		$non_schedule_d = '<div class="dflx">';
 		$non_schedule_d .='<input type="radio" name="non_schedule_r" id="non_schedule_yes" value="Y"><span style="padding: 1px 5px 0px 5px;">Y</span>';
@@ -1383,12 +1383,20 @@ class Upload_boq_items_controller extends Base_Controller
     }
     public function project_boq_item_list() 
 		{
+            $projectId = $_GET['project_id'];
+            if(isset($projectId) && !empty($projectId)){
+                $project_id =$projectId ;
+            }else{
+                $project_id = null;
+            }
+           
 		$user_id = $this->session->userData('user_id');
 		if(isset($user_id) && !empty($user_id)){
 		$data = $row = array();
-		$memData = $this->admin_model->getBOQListRows($_POST);
+        
+		$memData = $this->admin_model->getBOQListRows($_POST,$project_id);
 		$allCount = $this->admin_model->countBOQListAll();
-		$countFiltered = $this->admin_model->countBOQListFiltered($_POST);
+		$countFiltered = $this->admin_model->countBOQListFiltered($_POST,$projectId);
         $i = $_POST['start'];
 		foreach($memData as $member){
             $i++;
@@ -1842,12 +1850,15 @@ class Upload_boq_items_controller extends Base_Controller
                         $allDataInSheet = $objPHPExcel->getActiveSheet()->toArray(null, true, true, true);
                         $flag = true;
                         $i=0;
-        				$insertdata = array();
+        				$inserdata = array();
+                       
                         foreach ($allDataInSheet as $value) {
                             if($flag){
                                 $flag =false;
                                 continue;
                             }
+                                
+                            
                             if(isset($value['A']) && !empty($value['A'])) { $boq_code = $value['A']; }else { $boq_code = '0'; }
                 			if(isset($value['B']) && !empty($value['B'])) { $hsn_sac_code = $value['B']; }else { $hsn_sac_code = '0'; }
                 			if(isset($value['C']) && !empty($value['C'])) { $item_description = $value['C']; }else { $item_description = ''; }
@@ -1969,9 +1980,25 @@ class Upload_boq_items_controller extends Base_Controller
     }
     public function save_client_dc_details() 
     {
+        
         $save_arr = array();
         $project_id = $this->input->post('project_id');
         $dc_no = $this->input->post('dc_no');
+        $workorderon = $this->input->post('workorderon');
+        $dccdate = $this->input->post('dccdate');
+        $suppliers_ref = $this->input->post('suppliers_ref');
+        $registered_address = $this->input->post('registered_address');
+        $buyer_order_ref = $this->input->post('buyer_order_ref');
+        $dcc_dated = $this->input->post('dcc_dated');
+        $other_ref = $this->input->post('other_ref');
+        $consignee = $this->input->post('consignee');
+        $consignee_buyer = $this->input->post('consignee_buyer');
+        $dispatch_document_no = $this->input->post('dispatch_document_no');
+        $destination = $this->input->post('destination');
+        $site_address = $this->input->post('site_address');
+        $buyer_site_address = $this->input->post('buyer_site_address');
+        $dispatch_through = $this->input->post('dispatch_through');
+        $terms_of_delivery = $this->input->post('terms_of_delivery');
         if(isset($project_id) && !empty($project_id) && isset($dc_no) && !empty($dc_no)){
             $delivery_challan = $this->common_model->selectDetailsWhr('tbl_delivery_challan','dc_no',$dc_no);
             if(isset($delivery_challan) && empty($delivery_challan)){
@@ -2024,6 +2051,7 @@ class Upload_boq_items_controller extends Base_Controller
             $error = 'Y';
             $error_message = 'Please enter Received Qty!';
             }
+          
             if(isset($boq_code) && empty($boq_code)
             && isset($hsn_sac_code) && empty($hsn_sac_code)
             && isset($item_description) && empty($item_description)
@@ -2038,7 +2066,7 @@ class Upload_boq_items_controller extends Base_Controller
             }else{
                 if($error == 'N'){
                     if(isset($boq_code) && !empty($boq_code)){
-                        $main_arr = array('project_id'=>$project_id,'dc_no'=>$dc_no,'created_by'=>$user_id,'created_on'=>date('Y-m-d H:i:s'),
+                        $main_arr = array('project_id'=>$project_id,'dc_no'=>$dc_no,'created_by'=>$user_id,'created_on'=>date('Y-m-d H:i:s'),'workorderon' => $workorderon,'dccdate'=> $dccdate,'suppliers_ref'=> $suppliers_ref,'registered_address'=> $registered_address,'buyer_order_ref'=> $buyer_order_ref, 'dcc_dated' => $dcc_dated,'other_ref' => $other_ref, 'consignee' => $consignee,'consignee_buyer' => $consignee_buyer,'destination'=>$destination,'site_address'=> $site_address,'buyer_site_address' => $buyer_site_address, 'dispatch_through' => $dispatch_through,'terms_of_delivery' => $terms_of_delivery, 'dispatch_document_no'=> $dispatch_document_no, 
                         'modified_by'=>$user_id,'modified_on'=>date('Y-m-d H:i:s'),'display'=>'Y','status'=>'Under Approval');
                         $challan_id = $this->common_model->addData('tbl_delivery_challan',$main_arr);
                         if($challan_id){
@@ -2716,6 +2744,7 @@ class Upload_boq_items_controller extends Base_Controller
         $project_id = $this->input->post('project_id');
         if(isset($project_id) && !empty($project_id)){
             $steps = $this->admin_model->getTotalBoqTransactionCnt($project_id);
+            //    var_dump($steps);exit;
     		if(isset($steps) && $steps !='no'){
     		    $steps = $steps + 1;
     		}else{

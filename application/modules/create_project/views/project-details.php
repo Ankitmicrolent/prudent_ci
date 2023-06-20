@@ -307,7 +307,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-3">
+                                                            <div class="col-md-2">
                                                                 <div class="form-group">
                                                                     <label class="">EMD Amount</label>
                                                                     <div class="input-icon right"><i class="fa"></i>
@@ -315,11 +315,19 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-3">
+                                                            <div class="col-md-2">
                                                                 <div class="form-group">
                                                                     <label class="">EMD Paid</label>
                                                                     <div class="input-icon right"><i class="fa"></i>
                                                                     <p class="readonlytext form-control" readonly><?php echo(isset($create_project_data->emd_paid_status) && !empty($create_project_data->emd_paid_status) && $create_project_data->emd_paid_status == 'Y')?'Yes':'No'?></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-group">
+                                                                    <label class="">EMD Converted Deposite</label>
+                                                                    <div class="input-icon right"><i class="fa"></i>
+                                                                    <p class="readonlytext form-control" readonly><?php echo(isset($create_project_data->emd_converted_deposit) && !empty   ($create_project_data->emd_converted_deposit) && $create_project_data->emd_converted_deposit == 'Y')?'Yes':'No'?></p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -343,7 +351,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-3">
+                                                            <div class="col-md-2">
                                                                 <div class="form-group">
                                                                     <label class="">ASD Amount</label>
                                                                     <div class="input-icon right"><i class="fa"></i>
@@ -351,11 +359,19 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-3">
+                                                            <div class="col-md-2">
                                                                 <div class="form-group">
                                                                     <label class="">ASD Paid</label>
                                                                     <div class="input-icon right"><i class="fa"></i>
                                                                     <p class="readonlytext form-control" readonly><?php echo(isset($create_project_data->asd_paid_status) && !empty($create_project_data->asd_paid_status) && $create_project_data->asd_paid_status == 'Y')?'Yes':'No'?></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-group">
+                                                                    <label class="">ASD Converted Deposite</label>
+                                                                    <div class="input-icon right"><i class="fa"></i>
+                                                                    <p class="readonlytext form-control" readonly><?php echo(isset($create_project_data->asd_converted_deposit) && !empty   ($create_project_data->asd_converted_deposit) && $create_project_data->asd_converted_deposit == 'Y')?'Yes':'No'?></p>
                                                                     </div>
                                                                 </div>
                                                             </div>

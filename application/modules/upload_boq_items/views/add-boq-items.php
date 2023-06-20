@@ -169,9 +169,38 @@
         Metronic.init(); // init metronic core components
         Layout.init(); 
         ComponentsPickers.init();
-    });
+    
+  
+    var dataTable = $('#pboqlist').DataTable({
+	// Processing indicator
+		"paging": true,
+		 "iDisplayLength": 10,
+         "deferRender": true,
+         "responsive": true,
+        "processing": true,
+		"serverSide": true,
+        // Initial no order.
+        "order": [],
+		
+        // Load data from an Ajax source
+        "ajax": {
+            "url": "<?php echo base_url('project_boq_item_list'); ?>",
+            "type": "POST",
+            "data": {
+            "project_id": $('#project_id').val()
+        }
+        },
+		
+        //Set column definition initialisation properties
+        "columnDefs": [{ 
+            "targets": [0],
+            "orderable": false
+        }]
+    } );
+
     $(document).on('change', '#project_id', function() {
         var project_id = $(this).val();
+       
         if(project_id){
             $('#displayBoqItems').show();
             $('#boqitmdisplay').dataTable({
@@ -194,34 +223,22 @@
                         "targets": [0],
                         "orderable": false
                     }]
-            });    
+            });  
+
+
+            // dataTables.ajax.load();
+            // console.log(dataTable.ajax);
+            var url = "<?php echo base_url('project_boq_item_list') ?>";
+            url += "?project_id=" + project_id;
+           dataTable.ajax.url(url).load();
+           
+            
+            
         }else{
             
         }
     });
-    $('#pboqlist').dataTable({
-	// Processing indicator
-		"paging": true,
-		 "iDisplayLength": 10,
-         "deferRender": true,
-         "responsive": true,
-        "processing": true,
-		"serverSide": true,
-        // Initial no order.
-        "order": [],
-		
-        // Load data from an Ajax source
-        "ajax": {
-            "url": "<?php echo base_url('project_boq_item_list'); ?>",
-            "type": "POST"
-        },
-		
-        //Set column definition initialisation properties
-        "columnDefs": [{ 
-            "targets": [0],
-            "orderable": false
-        }]
-    } );
+});
     </script>
 </body>
 </html>

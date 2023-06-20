@@ -518,6 +518,18 @@ $(document).on('keyup', '#boq_code', function() {
     var boq_code = $(this).val();
     var project_id = $('#project_id').val();
     var url = 'get_boq_item_details';
+    if(boq_code == ''){
+        $('#hsn_sac_code').val(''); 
+        $('#item_description').val('');
+        $('#unit').val('');  
+        $('#scheduled_qty').val('');  
+        $('#design_qty').val('');
+        $('#gst').val(''); 
+        $('#rate_basic').val('');  
+        $('#non_schedule_yes').prop('checked', false);
+
+    }
+    console.log(url);
     $.ajax({
             type:'POST',
             url:completeURL(url), 
@@ -536,8 +548,9 @@ $(document).on('keyup', '#boq_code', function() {
                     $('#scheduled_qty').val(result.scheduled_qty);    
                     $('#scheduled_qty').prop('readonly', true);
                     $('#design_qty').val(result.design_qty);    
-                    $('#design_qty').prop('readonly', true);
+                   // $('#design_qty').prop('readonly', true);
                     $('#rate_basic').val(result.rate_basic);    
+                    $('#rate_basic').prop('readonly', true);    
                     $('#gst').val(result.gst);
                     $('#gst').prop('readonly', true);
                     if(result.non_schedule == 'Y'){
@@ -553,6 +566,7 @@ $(document).on('keyup', '#boq_code', function() {
                     $('#item_description').prop('readonly', false);
                     $('#unit').prop('readonly', false);
                     $('#scheduled_qty').prop('readonly', false);
+                    $('#rate_basic').prop('readonly', false);
                     $('#design_qty').prop('readonly', false);
                     $('#gst').prop('readonly', false);
                     $('#non_schedule_yes').prop('checked', false);
@@ -636,7 +650,7 @@ $(document).ready(function(){
     });
     $(document).on('click','.common_save',function(e){
 
-        console.log("i am here");
+        // console.log("i am here");
         var form = '#'+$(this).parents('form').attr('id');
         var error = $('.alert-danger', form);
         var success = $('.alert-success', form);
@@ -827,9 +841,9 @@ $(document).ready(function(){
                 $('.common_save').prop('disabled',true);
                 var url = $(form).attr('action');
                 var serialize_data = $(form).serialize();
-
-                var form = document.getElementById('save_user');
-                var formData = new FormData(form);
+                     
+                var forms = document.getElementById('save_user');
+                var formData = new FormData(forms);
                 formData.append('home_addr_proof', home_addr_proof.files[0]);
                 formData.append('native_addr_proof', native_addr_proof.files[0]);
                 formData.append('local_addr_proof', local_addr_proof.files[0]);
@@ -1650,6 +1664,7 @@ $(document).ready(function(){
         	$("input[name='boq_code[]']").each(function(){
         		boq_code_no.push($(this).val());
         	});
+            
         	if ($.inArray(boq_code, boq_code_no) != -1){
         	    $('#invaliderrorid').html('BOQ Sr No ('+boq_code+') Details Already Exist!');
                 $('#boq_code').val('');
@@ -1721,6 +1736,8 @@ $(document).ready(function(){
         } 
         Metronic.init();
     });
+
+
     $(document).on('click','.deleteParticularRow', function(){ 
         $(this).closest('tr').remove();   
         var k=0; 

@@ -21,7 +21,12 @@ class Create_project_controller extends Base_Controller
         if(isset($id) && !empty($id)){
         $id = base64_decode($id);
         }
+
+     
+        
         $create_project_data = $this->common_model->selectDetailsWhr('tbl_projects','project_id',$id);
+       
+        
         if(isset($create_project_data) && !empty($create_project_data)){
         $notification_data = $this->common_model->ProjNotReadNotification($id);
         $reminder_data = $this->common_model->ProjNotReadReminder($id);
@@ -522,7 +527,13 @@ class Create_project_controller extends Base_Controller
     }
     public function create_project() 
     {
-        $this->load->view('create-project');
+
+        // selectDetailsWhere($tblname,$where,$condition)
+
+        $data['business_user'] = $this->common_model->selectDetailsWhere("tbl_user",'role_id','7');
+        $data['project_user'] = $this->common_model->selectDetailsWhere("tbl_user",'role_id','6');
+              
+        $this->load->view('create-project', $data);
     }
     public function upload_document_file()
     {
@@ -601,6 +612,10 @@ class Create_project_controller extends Base_Controller
         $last_code = $this->common_model->last_custcode();
         if(isset($last_code) && !empty($last_code)) {$customer_code = $last_code + 1; } else {$customer_code='1'; }
         $customer_name = $this->input->post('customer_name');
+        $business_head = $this->input->post('business_head');
+        $manager_head = $this->input->post('manager_head');
+        $emd_converted_deposit = $this->input->post('emd_converted_deposit');
+        $asd_converted_deposit = $this->input->post('asd_converted_deposit');
         if(isset($customer_name) && !empty($customer_name)) {$customer_name = trim($customer_name); } else {$customer_name=''; }
         $bp_code =$this->input->post('bp_code');
         if(isset($bp_code) && !empty($bp_code)) {$bp_code=trim($bp_code); } else {$bp_code=''; }
@@ -641,6 +656,8 @@ class Create_project_controller extends Base_Controller
         if(isset($emd_paid) && !empty($emd_paid) && $emd_paid == 'Y') {$emd_paid = 'Y'; } else {$emd_paid= 'N'; }
         $emd_paid_num =$this->input->post('emd_paid_num');
         if(isset($emd_paid_num) && !empty($emd_paid_num)) {$emd_paid_num=trim($emd_paid_num); } else {$emd_paid_num='0'; }
+        $emd_payment_mode = $this->input->post('emd_payment_mode');
+        if(isset($emd_payment_mode) && !empty($emd_payment_mode)) {$emd_payment_mode=trim($emd_payment_mode); } else {$emd_payment_mode=''; }
         //upload_emd_paid_file
         $upload_emd_paid_file ='';
         $errormsg='';
@@ -713,6 +730,9 @@ class Create_project_controller extends Base_Controller
         if(isset($asd_paid_num) && !empty($asd_paid_num)) {$asd_paid_num=trim($asd_paid_num); } else {$asd_paid_num='0'; }
         $asd_paid_status = $this->input->post('asd_paid_status');
         if(isset($asd_paid_status) && !empty($asd_paid_status) && $asd_paid_status == 'Yes') {$asd_paid_status = 'Y'; } else {$asd_paid_status = 'N'; }
+
+        $asd_payment_mode = $this->input->post('asd_payment_mode');
+        if(isset($asd_payment_mode) && !empty($asd_payment_mode)){$asd_payment_mode =trim($asd_payment_mode); } else {$asd_payment_mode = ''; }
         if($asd_paid == 'Y'){
             if(empty($asd_paid_num)){
                 $error = 'Y';
@@ -726,6 +746,8 @@ class Create_project_controller extends Base_Controller
         if(isset($performance_guarantee_num) && !empty($performance_guarantee_num)) {$performance_guarantee_num=trim($performance_guarantee_num); } else {$performance_guarantee_num='0'; }
         $per_paid_status = $this->input->post('per_paid_status');
         if(isset($per_paid_status) && !empty($per_paid_status) && $per_paid_status == 'Yes') {$per_paid_status = 'Y'; } else {$per_paid_status = 'N'; }
+        $per_payment_mode = $this->input->post('per_payment_mode');
+        if(isset($per_payment_mode) && !empty($per_payment_mode)){$per_payment_mode =trim($per_payment_mode); } else {$per_payment_mode = ''; }
         if($performance_paid == 'Y'){
             if(empty($performance_guarantee_num)){
                 $error = 'Y';
@@ -1176,9 +1198,10 @@ class Create_project_controller extends Base_Controller
         'po_loi_no'=>$po_loi_no, 'po_loi_received_data'=>$po_loi_received_data,'registered_address'=>$registered_address,
         'client_po_addr'=>$client_po_addr, 'our_address_on_po'=>$our_address_on_po,'name_of_work'=>$name_of_work,
         'work_order_on'=>$work_order_on, 'site_address'=>$site_address, 'taxable_amount'=>$taxable_amount, 'gst_amount'=>$gst_amount,
-        'total_amount'=>$total_amount, 'emd_paid'=>$emd_paid, 'emd_paid_num'=>$emd_paid_num,'emd_paid_status'=>$emd_paid_status,
-        'asd_paid'=>$asd_paid, 'asd_paid_num'=>$asd_paid_num, 'asd_paid_status'=>$asd_paid_status, 'performance_paid'=>$performance_paid, 
-        'performance_guarantee_num'=>$performance_guarantee_num,'per_paid_status'=>$per_paid_status,'pbg_validity'=>$pbg_validity, 'security_deposite_num'=>$security_deposite_num,
+        'total_amount'=>$total_amount, 'emd_paid'=>$emd_paid, 'emd_paid_num'=>$emd_paid_num,'emd_paid_status'=>$emd_paid_status,'emd_payment_mode' => $emd_paid_status, 
+        'business_head' => $business_head,'manager_head' => $manager_head,
+        'asd_paid'=>$asd_paid, 'asd_paid_num'=>$asd_paid_num, 'asd_paid_status'=>$asd_paid_status,'asd_payment_mode' => $asd_payment_mode, 'performance_paid'=>$performance_paid, 
+        'performance_guarantee_num'=>$performance_guarantee_num,'per_paid_status'=>$per_paid_status,'per_payment_mode' => $per_payment_mode, 'pbg_validity'=>$pbg_validity, 'security_deposite_num'=>$security_deposite_num,
         'warranty_period'=>$warranty_period, 'billing_related'=>$billing_related, 'po_related'=>$po_related, 'execution_related'=>$execution_related,
         'engineer_in_charge'=>$engineer_in_charge,'completion_period'=>$completion_period, 'gst_no'=>$gst_no, 'price_inslusive_of_amc'=>$price_inslusive_of_amc,
         'amc_applicable_after'=>$amc_applicable_after, 'is_billing_inter_state'=>$is_billing_inter_state, 'billing_address'=>$billing_address,
@@ -1190,6 +1213,8 @@ class Create_project_controller extends Base_Controller
         'pf_required'=>$pf_required, 'pf_required_text'=>$pf_required_text, 'any_other_details'=>$any_other_details,
         'display'=>'Y', 'created_date'=>date('Y-m-d H:i:s'), 'created_by'=>$user_id,'upload_emd_paid_file'=>$upload_emd_paid_file,
         'upload_asd_paid_file'=>$upload_asd_paid_file,'final_performance_paid_file'=>$final_performance_paid_file,'draft_performance_paid_file'=>$draft_performance_paid_file,
+        'emd_converted_deposit' => $emd_converted_deposit,
+        'asd_converted_deposit' => $asd_converted_deposit,
         'projectcmpl_doc_file'=>$upload_projectcmpl_doc_file,'projectdesig_doc_file'=>$upload_projectdesig_doc_file,
         'projectcashflw_doc_file'=>$upload_projectcashflw_doc_file,'projectinvstsch_doc_file'=>$upload_projectinvstsch_doc_file,
         'sign_doc_file'=>$upload_sign_doc_file,'draft_doc_file'=>$upload_draft_doc_file,'penalty_clause_file'=>$penalty_clause_file,'power_of_attorney_file'=>$power_of_attorney_file);

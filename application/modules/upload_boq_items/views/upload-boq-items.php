@@ -165,8 +165,8 @@
         Layout.init(); 
         ComponentsPickers.init();
         //TableAdvanced.init();
-    });
-    $('#pboqlist').dataTable({
+    
+   var datatable = $('#pboqlist').DataTable({
 	// Processing indicator
 		"paging": true,
 		 "iDisplayLength": 10,
@@ -188,7 +188,20 @@
             "targets": [0],
             "orderable": false
         }]
-    } );
+    });
+
+    $(document).on('change', '#project_id', function() {
+        var project_id = $(this).val();
+        var url = "<?php echo base_url('project_boq_item_list') ?>";
+            url += "?project_id=" + project_id;
+            datatable.ajax.url(url).load();
+
+    });
+
+
+
+
+});
     </script>
 </body>
 </html>

@@ -109,7 +109,7 @@
             									</div>
             								    <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label class="">Supplier's Ref</label>
+                                                        <label class="">Supplier's Ref <span class="require" aria-required="true" style="color:#a94442">*</span></label>
                                                         <div class="input-icon right">
                                                             <i class="fa"></i>
                                                             <input type="text" class="form-control" name="suppliers_ref" id="suppliers_ref" value="" placeholder="Supplier's Ref" required="">
@@ -120,7 +120,7 @@
             								<div class="row">
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label class="">Address</label>
+                                                        <label class="">Address <span class="require" aria-required="true" style="color:#a94442">*</span></label>
                                                         <div class="input-icon right">
                                                             <i class="fa"></i>
                                                             <textarea rows="2" type="text" class="form-control" name="registered_address" id="registered_address" placeholder="Address" required></textarea>
@@ -129,18 +129,18 @@
                                                 </div>
             								    <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label class="">Buyer's Order Ref</label>
+                                                        <label class="">Buyer's Order Ref <span class="require" aria-required="true" style="color:#a94442">*</span></label>
                                                         <div class="input-icon right">
                                                             <i class="fa"></i>
-                                                            <input type="text" class="form-control" name="dc_no" id="dc_no" value="" placeholder="Buyer's Order Ref" required="">
+                                                            <input type="text" class="form-control" name="buyer_order_ref" id="buyer_order_ref" value="" placeholder="Buyer's Order Ref" required="">
                                                         </div>
                                                     </div>
                                                 </div>
             								    <div class="col-md-3">
             										<div class="form-group">
-            											<label class="">Dated</label>
+            											<label class="">Dated <span class="require" aria-required="true" style="color:#a94442">*</span></label>
             											<div class="input-group date date1" data-date-end-date="0d" data-date-format="dd-MM-yyyy">
-            												<input type="text" name="dccdate" id="dccdate" class="form-control" readonly="" placeholder="Dated">		
+            												<input type="text" name="dcc_dated" id="dcc_dated" class="form-control" readonly="" placeholder="Dated">		
             												<span class="input-group-btn">
             													<button class="btn default" type="button"><span class="md-click-circle md-click-animate" style="height: 47px; width: 47px; top: -1.0625px; left: -9.5px;"></span><i class="fa fa-calendar"></i></button>
             												</span>
@@ -149,10 +149,10 @@
             									</div>
             								    <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label class="">Other Reference/s'</label>
+                                                        <label class="">Other Reference/s' <span class="require" aria-required="true" style="color:#a94442">*</span></label>
                                                         <div class="input-icon right">
                                                             <i class="fa"></i>
-                                                            <input type="text" class="form-control" name="suppliers_ref" id="suppliers_ref" value="" placeholder="Other Reference/s'" required="">
+                                                            <input type="text" class="form-control" name="other_ref" id="other_ref" value="" placeholder="Other Reference/s'" required="">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -160,37 +160,37 @@
             								<div class="row">
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label class="">Consignee</label>
+                                                        <label class="">Consignee <span class="require" aria-required="true" style="color:#a94442">*</span></label>
                                                         <div class="input-icon right">
                                                             <i class="fa"></i>
-                                                            <input type="text" class="form-control" name="dc_no" id="dc_no" value="" placeholder="Consignee" required="">
+                                                            <input type="text" class="form-control" name="consignee" id="consignee" value="" placeholder="Consignee" required="">
                                                         </div>
                                                     </div>
                                                 </div>
             								    <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label class="">Buyer (Other than Consignee)</label>
+                                                        <label class="">Buyer (Other than Consignee) <span class="require" aria-required="true" style="color:#a94442">*</span></label>
                                                         <div class="input-icon right">
                                                             <i class="fa"></i>
-                                                            <input type="text" class="form-control" name="dc_no" id="dc_no" value="" placeholder="Buyer (Other than Consignee)" required="">
+                                                            <input type="text" class="form-control" name="consignee_buyer" id="consignee_buyer" value="" placeholder="Buyer (Other than Consignee)" required="">
                                                         </div>
                                                     </div>
                                                 </div>
             								    <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label class="">Dispatch Document No</label>
+                                                        <label class="">Dispatch Document No <span class="require" aria-required="true" style="color:#a94442">*</span></label>
                                                         <div class="input-icon right">
                                                             <i class="fa"></i>
-                                                            <input type="text" class="form-control" name="dc_no" id="dc_no" value="" placeholder="Dispatch Document No" required="">
+                                                            <input type="text" class="form-control" name="dispatch_document_no" id="dispatch_document_no" value="" placeholder="Dispatch Document No" required="">
                                                         </div>
                                                     </div>
                                                 </div>
             								    <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label class="">Destination</label>
+                                                        <label class="">Destination <span class="require" aria-required="true" style="color:#a94442">*</span></label>
                                                         <div class="input-icon right">
                                                             <i class="fa"></i>
-                                                            <input type="text" class="form-control" name="dc_no" id="dc_no" value="" placeholder="Destination" required="">
+                                                            <input type="text" class="form-control" name="destination" id="destination" value="" placeholder="Destination" required="">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -198,35 +198,37 @@
             								<div class="row">
                                                 <div class="col-md-3">
                                                     <div class="form-group">
+                                                    <label class="">Site Address <span class="require" aria-required="true" style="color:#a94442">*</span></label>
                                                         <div class="input-icon right">
                                                             <i class="fa"></i>
-                                                            <textarea rows="2" type="text" class="form-control" name="registered_address" id="registered_address" placeholder="Site Address" required></textarea>
+                                                            <textarea rows="2" type="text" class="form-control" name="site_address" id="site_address" placeholder="Site Address" required></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
             								    <div class="col-md-3">
                                                     <div class="form-group">
+                                                    <label class="">Buyer Site Address <span class="require" aria-required="true" style="color:#a94442">*</span></label>
                                                         <div class="input-icon right">
                                                             <i class="fa"></i>
-                                                            <textarea rows="2" type="text" class="form-control" name="registered_address" id="registered_address" placeholder="Buyer Site Address" required></textarea>
+                                                            <textarea rows="2" type="text" class="form-control" name="buyer_site_address" id="registered_address" placeholder="Buyer Site Address" required></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
             								    <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label class="">Dispatch Through</label>
+                                                        <label class="">Dispatch Through <span class="require" aria-required="true" style="color:#a94442">*</span></label>
                                                         <div class="input-icon right">
                                                             <i class="fa"></i>
-                                                            <input type="text" class="form-control" name="dc_no" id="dc_no" value="" placeholder="Dispatch Document No" required="">
+                                                            <input type="text" class="form-control" name="dispatch_through" id="dispatch_through" value="" placeholder="Dispatch Document No" required="">
                                                         </div>
                                                     </div>
                                                 </div>
             								    <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label class="">Terms of Delivery</label>
+                                                        <label class="">Terms of Delivery <span class="require" aria-required="true" style="color:#a94442">*</span></label>
                                                         <div class="input-icon right">
                                                             <i class="fa"></i>
-                                                            <textarea rows="2" type="text" class="form-control" name="registered_address" id="registered_address" placeholder="Terms of Delivery" required></textarea>
+                                                            <textarea rows="2" type="text" class="form-control" name="terms_of_delivery" id="terms_of_delivery" placeholder="Terms of Delivery" required></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -320,7 +322,39 @@
         Metronic.init(); // init metronic core components
         Layout.init(); 
         ComponentsPickers.init();
+
+        $(document).on('click','.date1',function(){   
+            
+      $('.date1').datepicker({
+          orientation: "right",
+          autoclose: true
+      });    
+  });
+
+        var datatable = $('#dcclist').dataTable({
+	// Processing indicator
+		"paging": true,
+		 "iDisplayLength": 10,
+         "deferRender": true,
+         "responsive": true,
+        "processing": true,
+		"serverSide": true,
+        // Initial no order.
+        "order": [],
+		
+        // Load data from an Ajax source
+        "ajax": {
+            "url": "<?php echo base_url('project_dcc_list'); ?>",
+            "type": "POST"
+        },
+		
+        //Set column definition initialisation properties
+        "columnDefs": [{ 
+            "targets": [0],
+            "orderable": false
+        }]
     });
+  
     $(document).on('change', '#project_id', function() {
         var project_id = $(this).val();
         if(project_id){
@@ -350,29 +384,9 @@
             
         }
     });
-    $('#dcclist').dataTable({
-	// Processing indicator
-		"paging": true,
-		 "iDisplayLength": 10,
-         "deferRender": true,
-         "responsive": true,
-        "processing": true,
-		"serverSide": true,
-        // Initial no order.
-        "order": [],
-		
-        // Load data from an Ajax source
-        "ajax": {
-            "url": "<?php echo base_url('project_dcc_list'); ?>",
-            "type": "POST"
-        },
-		
-        //Set column definition initialisation properties
-        "columnDefs": [{ 
-            "targets": [0],
-            "orderable": false
-        }]
-    } );
+   
+
+});
     </script>
 </body>
 </html>

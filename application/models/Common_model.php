@@ -193,7 +193,7 @@ class Common_model extends CI_Model {
     public function selectAllWhr($tblname,$where,$condition)
     {
         $this->db->where($where,$condition);
-        $this->db->where('  ','Y');
+        $this->db->where('display','Y');
         $query = $this->db->get($tblname);
         if($query->num_rows() > 0)
         {

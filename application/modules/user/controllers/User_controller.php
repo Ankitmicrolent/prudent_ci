@@ -53,11 +53,17 @@ class User_controller extends Base_Controller
 	public function save_user()
 
 	{
-       
-
-		  
+            //   echo"<pre>";
+            // print_r($this->input->post());
+		    //      exit;
+			$id = $this->input->post('id');
+			$userdatas = $this->user_model->edit_user_details($id);
              
 		   if (!empty($_FILES['home_addr_proof']) && $_FILES['home_addr_proof']['name'] !='') {
+			         if(file_exists($userdatas->home_addr_proof)){
+						unlink($userdatas->home_addr_proof);
+					 }
+
 			$home_ad_proof = explode(".",$_FILES['home_addr_proof']['name']);
 			$extension = end($home_ad_proof);
             $name = rand(100000000, 999999999) . '.' . $extension;
@@ -71,6 +77,10 @@ class User_controller extends Base_Controller
 		   }
 
 		   if(!empty($_FILES['native_addr_proof']) && $_FILES['native_addr_proof']['name'] !=''){
+
+			if(file_exists($userdatas->native_addr_proof)){
+				unlink($userdatas->native_addr_proof);
+			 }
 
 			$native_addr_proof = explode(".",$_FILES['native_addr_proof']['name']);
 
@@ -88,6 +98,10 @@ class User_controller extends Base_Controller
 
 		   if(!empty($_FILES['local_addr_proof']) && $_FILES['local_addr_proof']['name'] !=''){
 
+			if(file_exists($userdatas->local_addr_proof)){
+				unlink($userdatas->local_addr_proof);
+			 }
+
 			$local_addr_proof = explode(".",$_FILES['local_addr_proof']['name']);
 
 			$extension = end($local_addr_proof);
@@ -98,7 +112,9 @@ class User_controller extends Base_Controller
 
 		   }
 		   if(!empty($_FILES['perm_addr_proof']) && $_FILES['perm_addr_proof']['name'] !='' ){
-
+			if(file_exists($userdatas->perm_addr_proof)){
+				unlink($userdatas->perm_addr_proof);
+			 }
 			
 			$perm_addr_proof = explode(".",$_FILES['perm_addr_proof']['name']);
 
@@ -111,7 +127,9 @@ class User_controller extends Base_Controller
 		   }
 		
 		   if(!empty($_FILES['drive_lic_proof']) && $_FILES['drive_lic_proof']['name'] !=''){
-
+        if(file_exists($userdatas->drive_lic_proof)){
+	 unlink($userdatas->drive_lic_proof);
+      }
 			
 
 			$drive_lic_proof = explode(".",$_FILES['drive_lic_proof']['name']);
@@ -124,7 +142,9 @@ class User_controller extends Base_Controller
 
 		   }
 		   if(!empty($_FILES['passport_proof'])&& $_FILES['passport_proof']['name'] !='' ){
-
+			if(file_exists($userdatas->passport_proof)){
+				unlink($userdatas->passport_proof);
+			 }
 			
 			$passport_proof = explode(".",$_FILES['passport_proof']['name']);
 
@@ -138,7 +158,9 @@ class User_controller extends Base_Controller
 		   if(!empty($_FILES['pan_proof']) && $_FILES['pan_proof']['name'] !=''){
 
 			
-			
+			if(file_exists($userdatas->pan_proof)){
+				unlink($userdatas->pan_proof);
+			 }
 			
 			$pan_proof = explode(".",$_FILES['pan_proof']['name']);
 
@@ -158,7 +180,7 @@ class User_controller extends Base_Controller
 		$user_id = $this->session->userdata('user_id');
 		$emp_no = $this->input->post('emp_no');
 
-		$id = $this->input->post('id');
+		
 		
 		$fullname = $this->input->post('fullname');
 
@@ -173,6 +195,7 @@ class User_controller extends Base_Controller
 		$marital_status = $this->input->post('marital_status');
 
 		$home_addr = $this->input->post('home_addr');
+		$joining_date = $this->input->post('joining_date');
 		$address = $this->input->post('home_addr');
 		
 
@@ -256,6 +279,14 @@ class User_controller extends Base_Controller
 				$familys[$i][$key] = $values[$i];
 			}
 		}
+
+		$familys = array_map(function ($item) {
+			return array_filter($item, function ($value) {
+				return !empty($value);
+			});
+		}, $familys);
+		$familys = array_filter($familys);
+
 		$edus = array();
 		foreach ($edu_old as $key => $values) {
 			for ($i = 0; $i < count($values); $i++) {
@@ -265,6 +296,14 @@ class User_controller extends Base_Controller
 				$edus[$i][$key] = $values[$i];
 			}
 		}
+
+		$edus = array_map(function ($item) {
+			return array_filter($item, function ($value) {
+				return !empty($value);
+			});
+		}, $edus);
+        $edus = array_filter($edus);
+
 		$empdetail = array();
 		foreach ($employment_old as $key => $values) {
 			for ($i = 0; $i < count($values); $i++) {
@@ -275,13 +314,21 @@ class User_controller extends Base_Controller
 			}
 		}
 
+		$empdetail = array_map(function ($item) {
+			return array_filter($item, function ($value) {
+				return !empty($value);
+			});
+		}, $empdetail);
+		$empdetail = array_filter($empdetail);
+           
 
-
+		
 
 
 
 		$data = array(
 			'fullname' => $fullname, 'm_name' => $m_name, 's_name' => $s_name, 'blood_group' => $blood_group, 'marital_status' => $marital_status, 'dob' => $dob, 'home_addr' => $home_addr, 'native_addr' => $native_addr, 'emergency_contact' => $emergency_contact,
+			'joining_date' => $joining_date,
 			'address' => $address,
 			'emp_no' => $emp_no,
 			'lived_days' => $lived_days,
@@ -302,13 +349,13 @@ class User_controller extends Base_Controller
 			'passport_expiry' => $passport_expiry,
 			'pan_no' => $pan_no,
 			'bank_details' => $bank_details,
-			'home_addr_proof' => isset($home_ad_proof_file_path) && !empty($home_ad_proof_file_path)?$home_ad_proof_file_path:'',
-			'native_addr_proof' => isset($native_addr_proof_file_path) && !empty($native_addr_proof_file_path)?$native_addr_proof_file_path:'',
-			'local_addr_proof' => isset($local_addr_proof_file_path) && !empty($local_addr_proof_file_path)?$local_addr_proof_file_path:'',
-			'perm_addr_proof' => isset($perm_addr_proof_file_path) && !empty($perm_addr_proof_file_path)?$perm_addr_proof_file_path:'',
-			'drive_lic_proof' => isset($drive_lic_proof_file_path) && !empty($drive_lic_proof_file_path)?$drive_lic_proof_file_path:'',
-			'passport_proof' =>isset($passport_proof_file_path) && !empty($passport_proof_file_path)?$passport_proof_file_path:'',
-			'pan_proof' =>isset($pan_proof_file_path) && !empty($pan_proof_file_path)?$pan_proof_file_path:'',
+			'home_addr_proof' => isset($home_ad_proof_file_path) && !empty($home_ad_proof_file_path)?$home_ad_proof_file_path:$userdatas->home_addr_proof,
+			'native_addr_proof' => isset($native_addr_proof_file_path) && !empty($native_addr_proof_file_path)?$native_addr_proof_file_path:$userdatas->native_addr_proof,
+			'local_addr_proof' => isset($local_addr_proof_file_path) && !empty($local_addr_proof_file_path)?$local_addr_proof_file_path:$userdatas->local_addr_proof,
+			'perm_addr_proof' => isset($perm_addr_proof_file_path) && !empty($perm_addr_proof_file_path)?$perm_addr_proof_file_path:$userdatas->perm_addr_proof,
+			'drive_lic_proof' => isset($drive_lic_proof_file_path) && !empty($drive_lic_proof_file_path)?$drive_lic_proof_file_path:$userdatas->drive_lic_proof,
+			'passport_proof' =>isset($passport_proof_file_path) && !empty($passport_proof_file_path)?$passport_proof_file_path:$userdatas->passport_proof,
+			'pan_proof' =>isset($pan_proof_file_path) && !empty($pan_proof_file_path)?$pan_proof_file_path:$userdatas->pan_proof,
 
 			'email' => $email, 'mobile' => $mobile, 'address' => $address, 'role_id' => $role_id,
 			// 			'designation_id'=>$designation_id,
@@ -320,13 +367,15 @@ class User_controller extends Base_Controller
 
 		if (isset($id) && !empty($id)) {
 
+
 			$data['modified_by'] = $user_id;
 
 			$data['modified_on'] = date('Y-m-d H:i:s');
 
-			$result = $this->common_model->updateDetails('tbl_user', 'user_id', $id, $data);
+		
 
-			$data_user_education = $this->common_model->selectDetailsWhere('tbl_user_education', 'user_id',$id);
+
+		$data_user_education = $this->common_model->selectDetailsWhere('tbl_user_education', 'user_id',$id);
 		$data_user_emphistory = $this->common_model->selectDetailsWhere('tbl_user_emphistory', 'user_id',$id);
 		$data_user_family = $this->common_model->selectDetailsWhere('tbl_user_family','user_id',$id);
    
@@ -349,6 +398,9 @@ class User_controller extends Base_Controller
 	 
 				   }
 			   }
+
+
+			 
 			   if(is_array($data_user_family) && count($data_user_family) > 0){
 
 
@@ -359,6 +411,29 @@ class User_controller extends Base_Controller
 	 
 				   }
 			   }
+
+			  
+			   $result = $this->common_model->updateDetails('tbl_user', 'user_id', $id, $data);
+
+
+			   foreach ($empdetail as $empde) {
+
+
+		 $emp = array(
+
+			 "user_id" => $id,
+			 "position" => $empde['position'],
+			 "from" => $empde['from'],
+			 "to" => $empde['to'],
+			 "employer" => $empde['employer_details'],
+			 "responsibilities" => $empde['responsibilities'],
+			 "ctc" => $empde['cost_to_company'],
+
+
+		 );
+		 $emp_id = $this->common_model->addData('tbl_user_emphistory', $emp);
+	 
+	 }
 
 			foreach ($edus as $edu) {
 
@@ -376,13 +451,33 @@ class User_controller extends Base_Controller
 				$edu_id = $this->common_model->addData('tbl_user_education', $ed);
 			}
 
+
+			foreach ($familys as $family) {
+
+	 $fam = array(
+
+		 "user_id" => $id,
+		 "relation" => $family['relation'],
+		 "f_name" => $family['f_name'],
+		 "f_dob" => $family['f_dob'],
+		 "f_age" => $family['f_age'],
+		 "f_education" => $family['f_education'],
+		 "f_occup" => $family['f_occup'],
+
+	 );
+	 $fam_id = $this->common_model->addData('tbl_user_family', $fam);
+ 
+     }
+
 			if ($result) {
+				redirect('user-list');
 
 				$this->json->jsonReturn(array(
 
 					'valid' => TRUE,
 
-					'msg' => '<div class="alert modify alert-info"><strong>Welldone!</strong> User Details Updated Successfully.</div>'
+					'msg' => '<div class="alert modify alert-info"><strong>Welldone!</strong> User Details Updated Successfully.</div>',
+					'redirect' =>  base_url().'user-list'
 
 				));
 			} else {
@@ -395,6 +490,8 @@ class User_controller extends Base_Controller
 
 				));
 			}
+
+			
 		} else {
 			
 
