@@ -224,48 +224,171 @@ class Upload_boq_items_controller extends Base_Controller
     public function get_proforma_by_project() 
 		{
 		$project_id = $this->input->post('project_id');
+		$gst_type = $this->input->post('gst_type');
         $user_id = $this->session->userData('user_id');
-		if(isset($user_id) && !empty($user_id)){
-		
-		$data = $row = $newarr = $datad = array();
-		$boq_code_d = '<input type="text" class="form-control invaliderror" id="dc_boq_code" placeholder="BOQ Sr No" style="font-size: 12px;">';
-		$hsn_sac_code_d = '<input type="text" class="form-control invaliderror" id="hsn_sac_code" placeholder="HSN/SAC Code" style="font-size: 12px;">';
-		$item_description_d = '<input type="text" class="form-control invaliderror" id="item_description" placeholder="Item Description" style="font-size: 12px;">';
-		$unit_d = '<input type="text" class="form-control invaliderror" id="unit" placeholder="Unit" style="font-size: 12px;">';
-		$qty_d = '<input type="number" min="1" class="form-control invaliderror" id="qty" placeholder="Qty" style="font-size: 12px;">';
-		$rate_d = '<input type="number" min="1" class="form-control invaliderror" id="rate" placeholder="Rate" style="font-size: 12px;">';
-		$amount_d = '<input type="number" min="1" class="form-control invaliderror" id="amount" placeholder="Amount" style="font-size: 12px;" readonly>';
-		
-		$action_d = '';
-		$action_d .='<div class="addDeleteButton">';
-		$action_d .='<span class="tooltips addTaxInvcRow" data-placement="top" data-original-title="Add" style="cursor: pointer;"><i class="fa fa-plus" style="color:#000"></i></span>';
-		$action_d .='</div>';
-		
-		$datad[] = array(
-		    $boq_code_d,
-			$hsn_sac_code_d,
-			$item_description_d,
-			$unit_d,
-			$qty_d,
-			$rate_d,
-			$amount_d,
-			$action_d
-		);	
-		if(isset($data) && !empty($data)){
-        $newarr = array_merge($data,$datad);   
-        }else{
-        $newarr = $datad;   
-        }
-        $output = array(
-            "draw" => $_POST['draw'],
-            "recordsTotal" => $allCount,
-            "recordsFiltered" => $countFiltered,
-            "data" => $newarr,
-        );
-        echo json_encode($output);
-		}
+         
+        if($gst_type == 'igst'){
 
-    }
+            if(isset($user_id) && !empty($user_id)){
+		
+                $data = $row = $newarr = $datad = array();
+                $boq_code_d = '<input type="text" class="form-control invaliderror" id="dc_boq_code" placeholder="BOQ Sr No" style="font-size: 12px;">';
+                $hsn_sac_code_d = '<input type="text" class="form-control invaliderror" id="hsn_sac_code" placeholder="HSN/SAC Code" style="font-size: 12px;">';
+                $item_description_d = '<input type="text" class="form-control invaliderror" id="item_description" placeholder="Item Description" style="font-size: 12px;">';
+                $unit_d = '<input type="text" class="form-control invaliderror" id="unit" placeholder="Unit" style="font-size: 12px;">';
+                $qty_d = '<input type="number" min="1" class="form-control invaliderror" id="qty" placeholder="Qty" style="font-size: 12px;">';
+                $rate_d = '<input type="number" min="1" class="form-control invaliderror" id="rate" placeholder="Rate" style="font-size: 12px;">';
+                $taxable_a = '<input type="number" min="1" class="form-control invaliderror" id="taxable_amount" placeholder="Tax" style="font-size: 12px;" readonly>';
+                $gst = '<input type="number" min="1" class="form-control invaliderror" id="gst" placeholder="GST" style="font-size: 12px;">';
+                // $amount_d = '<input type="number" min="1" class="form-control invaliderror" id="amount" placeholder="Amount" style="font-size: 12px;">';
+                
+                $total_amount = '<input type="number" min="1" class="form-control invaliderror" id="total_amount" placeholder="TotalAmount" style="font-size: 12px;" readonly>';
+                
+                $action_d = '';
+                $action_d .='<div class="addDeleteButton">';
+                $action_d .='<span class="tooltips addTaxInvcRow" data-placement="top" data-original-title="Add" style="cursor: pointer;"><i class="fa fa-plus" style="color:#000"></i></span>';
+                $action_d .='</div>';
+                
+                $datad[] = array(
+                    $boq_code_d,
+                    $hsn_sac_code_d,
+                    $item_description_d,
+                    $unit_d,
+                    $qty_d,
+                    $rate_d,
+                    $taxable_a,
+                    $gst,
+                    // $amount_d,
+                   
+                    $total_amount,
+                    $action_d
+                );	
+                if(isset($data) && !empty($data)){
+                $newarr = array_merge($data,$datad);   
+                }else{
+                $newarr = $datad;   
+                }
+                $output = array(
+                    "draw" => $_POST['draw'],
+                    "recordsTotal" => $allCount,
+                    "recordsFiltered" => $countFiltered,
+                    "data" => $newarr,
+                );
+                echo json_encode($output);
+                }
+
+
+        }else{
+
+
+            $data = $row = $newarr = $datad = array();
+            $boq_code_d = '<input type="text" class="form-control invaliderror" id="dc_boq_code" placeholder="BOQ Sr No" style="font-size: 12px;">';
+            $hsn_sac_code_d = '<input type="text" class="form-control invaliderror" id="hsn_sac_code" placeholder="HSN/SAC Code" style="font-size: 12px;">';
+            $item_description_d = '<input type="text" class="form-control invaliderror" id="item_description" placeholder="Item Description" style="font-size: 12px;">';
+            $unit_d = '<input type="text" class="form-control invaliderror" id="unit" placeholder="Unit" style="font-size: 12px;">';
+            $qty_d = '<input type="number" min="1" class="form-control invaliderror" id="qty" placeholder="Qty" style="font-size: 12px;">';
+            $rate_d = '<input type="number" min="1" class="form-control invaliderror" id="rate" placeholder="Rate" style="font-size: 12px;">';
+            $taxable_a = '<input type="number" min="1" class="form-control invaliderror" id="taxable_amount" placeholder="Tax" style="font-size: 12px;" readonly>';
+            $sgst = '<input type="number" min="1" class="form-control invaliderror" id="sgst" placeholder="SGST" style="font-size: 12px;">';
+            $sgst_amount = '<input type="number" min="1" class="form-control invaliderror" id="sgst_amount" placeholder="Amount" style="font-size: 12px;">';
+            $cgst = '<input type="number" min="1" class="form-control invaliderror" id="sgst" placeholder="CGST" style="font-size: 12px;">';
+            $cgst_amount = '<input type="number" min="1" class="form-control invaliderror" id="sgst_amount" placeholder="Amount" style="font-size: 12px;">';
+            
+            // $total_amount = '<input type="number" min="1" class="form-control invaliderror" id="total_amount" placeholder="TotalAmount" style="font-size: 12px;" readonly>';
+            
+            $action_d = '';
+            $action_d .='<div class="addDeleteButton">';
+            $action_d .='<span class="tooltips addTaxInvcRow" data-placement="top" data-original-title="Add" style="cursor: pointer;"><i class="fa fa-plus" style="color:#000"></i></span>';
+            $action_d .='</div>';
+            
+            $datad[] = array(
+                $boq_code_d,
+                $hsn_sac_code_d,
+                $item_description_d,
+                $unit_d,
+                $qty_d,
+                $rate_d,
+                $taxable_a,
+                $sgst,
+                $sgst_amount,
+                $cgst,
+                $cgst_amount,
+                // $amount_d,
+               
+              //  $total_amount,
+                $action_d
+            );	
+            if(isset($data) && !empty($data)){
+            $newarr = array_merge($data,$datad);   
+            }else{
+            $newarr = $datad;   
+            }
+            $output = array(
+                "draw" => $_POST['draw'],
+                "recordsTotal" => $allCount,
+                "recordsFiltered" => $countFiltered,
+                "data" => $newarr,
+            );
+            echo json_encode($output);
+            }
+
+
+
+
+
+
+
+
+
+
+        }
+		// if(isset($user_id) && !empty($user_id)){
+		
+		// $data = $row = $newarr = $datad = array();
+		// $boq_code_d = '<input type="text" class="form-control invaliderror" id="dc_boq_code" placeholder="BOQ Sr No" style="font-size: 12px;">';
+		// $hsn_sac_code_d = '<input type="text" class="form-control invaliderror" id="hsn_sac_code" placeholder="HSN/SAC Code" style="font-size: 12px;">';
+		// $item_description_d = '<input type="text" class="form-control invaliderror" id="item_description" placeholder="Item Description" style="font-size: 12px;">';
+		// $unit_d = '<input type="text" class="form-control invaliderror" id="unit" placeholder="Unit" style="font-size: 12px;">';
+		// $qty_d = '<input type="number" min="1" class="form-control invaliderror" id="qty" placeholder="Qty" style="font-size: 12px;">';
+		// $rate_d = '<input type="number" min="1" class="form-control invaliderror" id="rate" placeholder="Rate" style="font-size: 12px;">';
+		// $gst = '<input type="number" min="1" class="form-control invaliderror" id="gst" placeholder="GST" style="font-size: 12px;">';
+		// $amount_d = '<input type="number" min="1" class="form-control invaliderror" id="amount" placeholder="Amount" style="font-size: 12px;">';
+        // $taxable_a = '<input type="number" min="1" class="form-control invaliderror" id="taxable_amount" placeholder="Tax" style="font-size: 12px;" readonly>';
+		// $total_amount = '<input type="number" min="1" class="form-control invaliderror" id="total_amount" placeholder="TotalAmount" style="font-size: 12px;" readonly>';
+		
+		// $action_d = '';
+		// $action_d .='<div class="addDeleteButton">';
+		// $action_d .='<span class="tooltips addTaxInvcRow" data-placement="top" data-original-title="Add" style="cursor: pointer;"><i class="fa fa-plus" style="color:#000"></i></span>';
+		// $action_d .='</div>';
+		
+		// $datad[] = array(
+		//     $boq_code_d,
+		// 	$hsn_sac_code_d,
+		// 	$item_description_d,
+		// 	$unit_d,
+		// 	$qty_d,
+		// 	$rate_d,
+        //     $gst,
+		// 	$amount_d,
+        //     $taxable_a,
+        //     $total_amount,
+		// 	$action_d
+		// );	
+		// if(isset($data) && !empty($data)){
+        // $newarr = array_merge($data,$datad);   
+        // }else{
+        // $newarr = $datad;   
+        // }
+        // $output = array(
+        //     "draw" => $_POST['draw'],
+        //     "recordsTotal" => $allCount,
+        //     "recordsFiltered" => $countFiltered,
+        //     "data" => $newarr,
+        // );
+        // echo json_encode($output);
+		// }
+
+    // }
     public function get_client_dc_by_project() 
 		{
 		$project_id = $this->input->post('project_id');
@@ -473,6 +596,7 @@ class Upload_boq_items_controller extends Base_Controller
 		&& isset($project_id) && !empty($project_id)
 		&& isset($boq_code) && !empty($boq_code)){
 		$member = $this->admin_model->get_dc_boq_item_details($project_id,$boq_code);
+        
 		if(isset($member) && !empty($member)){
 		    if(isset($member->challan_itemid) && !empty($member->challan_itemid)) { $res['challan_itemid'] = $member->challan_itemid; }else { $res['challan_itemid'] = '0'; }
 			if(isset($member->challan_id) && !empty($member->challan_id)) { $res['challan_id'] = $member->challan_id; }else { $res['challan_id'] = '0'; }
@@ -483,6 +607,8 @@ class Upload_boq_items_controller extends Base_Controller
 			if(isset($member->scheduled_qty) && !empty($member->scheduled_qty)) { $res['scheduled_qty'] = $member->scheduled_qty; }else { $res['scheduled_qty'] = ''; }
 			if(isset($member->design_qty) && !empty($member->design_qty)) { $res['design_qty'] = $member->design_qty; }else { $res['design_qty'] = '0'; }
 			if(isset($member->received_qty) && !empty($member->received_qty)) { $res['received_qty'] = $member->received_qty; }else { $res['received_qty'] = '0'; }
+			if(isset($member->rate_basic) && !empty($member->rate_basic)) { $res['rate'] = $member->rate_basic; }else { $res['rate_basic'] = '0'; }
+			if(isset($member->gst) && !empty($member->gst)) { $res['gst'] = $member->gst; }else { $res['gst'] = ''; }
 		 }
 		}
 		echo json_encode($res);
@@ -1125,7 +1251,7 @@ class Upload_boq_items_controller extends Base_Controller
 			$htmlp = '<a class="popup_save" href="javascript:void(0);" rev="view_proforma_invoice_items" rel="'.$proforma_id.'" data-title="(#'.$proforma_no.') Proforma Invoice Item List" data-status="allow" style="margin-top:10px;"><span class="md-click-circle md-click-animate" style="height: 97px; width: 97px; top: -38.5312px; left: 29.4896px;"></span> '.$proforma_no.'</a>';
 			
 			$html = '';
-			$html .= '<a href="javascript:;" class="edit tooltips" rel="'.$proforma_id.'" title="Edit Proforma Invoice" rev="edit_proforma_invoice" data-original-title="Edit Proforma Invoice"><i class="fa fa-edit" style="color:#3598dc; font-size:15px;"></i></a>';
+			$html .= '<a href="javascript:;" class="edit edit_performa tooltips" rel="'.$proforma_id.'" title="Edit Proforma Invoice" rev="edit_proforma_invoice" data-original-title="Edit Proforma Invoice"><i class="fa fa-edit" style="color:#3598dc; font-size:15px;"></i></a>';
 			$html .= '&nbsp;&nbsp;&nbsp;<a class="popup_save" href="javascript:void(0);" rev="convert_to_tax_invoice" rel="'.$proforma_id.'" title="(#'.$proforma_no.') Convert to Tax Invoice" data-status="allow"><img src="'.base_url().'uploads/images/tax_icon.jpg" width="20px" height="20px"></a>';
 			$html .= '&nbsp;&nbsp;&nbsp;<a class="popup_save" href="javascript:void(0);" rev="download_proforma_invoice" rel="'.$proforma_no.'" data-title="(#'.$proforma_no.') Download Proforma Invoice" data-status="allow"><i class="fa fa-download" style="color:#000; font-size:15px;"></i></a>';
 			$html .= '&nbsp;&nbsp;&nbsp;<a href="javascript:;" class="delete tooltips" rel="'.$proforma_id.'" title="Delete Proforma Invoice" rev="delete_proforma_invoice" data-original-title="Delete Proforma Invoice"><i class="fa fa-trash" style="color:#F3565D; font-size:15px;"></i></a>';
@@ -1150,6 +1276,25 @@ class Upload_boq_items_controller extends Base_Controller
 		}
 
     }
+       public function edit_proforma_invoice(){
+
+        $id = $this->input->post('id');
+
+       
+		$data['project_data'] = $this->common_model->fetchDataDesc('tbl_projects', 'project_id');
+       
+		$data['perfoma_data'] = $this->common_model->selectDetailsWhere('tbl_proforma_invc', 'proforma_id',$id);
+       
+		$data['proforma_invc_items'] = $this->common_model->selectDetailsWhere('tbl_proforma_invc_items', 'proforma_id',$id);
+        
+		
+		$this->load->view('create-proforma-invoice',$data);
+
+		
+		
+       }
+
+
     public function project_taxInvc_list() 
 		{
 		$user_id = $this->session->userData('user_id');
@@ -2974,7 +3119,8 @@ class Upload_boq_items_controller extends Base_Controller
     }
     public function create_proforma_invoice() 
     {
-        $this->load->view('create-proforma-invoice');
+        $data['project_data'] = $this->common_model->fetchDataDesc('tbl_projects', 'project_id');
+        $this->load->view('create-proforma-invoice',$data);
     }
     public function create_tax_invoice() 
     {

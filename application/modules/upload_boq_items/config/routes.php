@@ -73,6 +73,7 @@ $route['project_taxinvc_items'] ='upload_boq_items/upload_boq_items_controller/p
 $route['invoice-closure/(:any)'] ="upload_boq_items/upload_boq_items_controller/invoice_closure/$1";
 $route['payment-receipt/(:any)'] ="upload_boq_items/upload_boq_items_controller/payment_receipt/$1";
 $route['boq-exceptional-approval'] ='upload_boq_items/upload_boq_items_controller/boq_exceptional_approval';
+$route['edit_proforma_invoice'] ='upload_boq_items/upload_boq_items_controller/edit_proforma_invoice';
 
 
 

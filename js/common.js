@@ -484,21 +484,42 @@ $(document).on('click','.popup_save',function()
         }); 
 });
 $(document).on('keyup', '#dc_boq_code', function() {
+
+   
     $('#invaliderrorid').html('');
     var boq_code = $(this).val();
     var project_id = $('#project_id').val();
     var url = 'get_dc_boq_item_details';
+    if(boq_code == ''){
+        $('#hsn_sac_code').val(''); 
+        $('#item_description').val('');
+        $('#unit').val('');  
+        $('#scheduled_qty').val('');  
+        $('#design_qty').val('');
+        $('#gst').val(''); 
+        $('#taxable_amount').val(''); 
+        $('#rate_basic').val('');  
+        $('#qty').val('');  
+        $('#amount').val('');  
+        $('#rate').val('');  
+        $('#non_schedule_yes').prop('checked', false);
+        return
+    }
+
     $.ajax({
             type:'POST',
             url:completeURL(url), 
             dataType:'json',
             data:{project_id:project_id,boq_code:boq_code},
             success:function(result){
+                console.log(result);
                 if(result.boq_code !== '' && typeof result.boq_code !== "undefined"){
                     $('#dc_boq_code').val(result.boq_code);    
                     $('#hsn_sac_code').val(result.hsn_sac_code);    
                     $('#hsn_sac_code').prop('readonly', true);
                     $('#item_description').val(result.item_description);    
+                    $('#rate').val(result.rate);    
+                    $('#gst').val(result.gst);    
                     $('#item_description').prop('readonly', true);
                     $('#unit').val(result.unit);    
                     $('#unit').prop('readonly', true);
@@ -513,6 +534,8 @@ $(document).on('keyup', '#dc_boq_code', function() {
             }
     });
 });
+
+
 $(document).on('keyup', '#boq_code', function() {
     $('#invaliderrorid').html('');
     var boq_code = $(this).val();
@@ -916,6 +939,55 @@ $(document).ready(function(){
                 Layout.init();
                 Metronic.init(); // init metronic core components
                 Layout.init();
+            }
+        }); 
+    });
+    $(document).on('click','.edit_performa', function(){
+        var id = $(this).attr('rel');
+        var url = $(this).attr('rev');
+        $.ajax({
+            url : completeURL(url),
+            type : 'POST',
+            dataType : 'html',
+            data:{id:id},
+            success:function(data)
+            {    
+                console.log(data);      
+                $('html, body').animate({scrollTop:0});
+                // $('.portlet-body').html($(data).find('.portlet-body').html());
+                
+
+                // $('#proformaInvclist').dataTable({
+                //     // Processing indicator
+                //     "paging": true,
+                //     "iDisplayLength": 10,
+                //     "deferRender": true,
+                //     "responsive": true,
+                //     "processing": true,
+                //     "serverSide": true,
+                //     // Initial no order.
+                //     "order": [],
+        
+                //     // Load data from an Ajax source
+                //     "ajax": {
+                //         // "url": "<?php echo base_url('project_proformaInvc_list'); ?>",
+                //         "url": completeURL('project_proformaInvc_list'),
+                //         "type": "POST"
+                //     },
+        
+                //     //Set column definition initialisation properties
+                //     "columnDefs": [{
+                //         "targets": [0],
+                //         "orderable": false
+                //     }]
+                // });
+            },
+            complete:function(){
+                Layout.init();
+                Metronic.init(); // init metronic core components
+                Layout.init();
+
+               
             }
         }); 
     });
@@ -1770,6 +1842,27 @@ $(document).ready(function(){
             k++;
             $(this).find('input[type=radio]').val(k);
         });  
+        var total_amt = 0;
+        var gst_amt = 0;
+        var final_amt = 0;
+
+
+        $("input[name='amount[]']").each(function(){
+            total_amt = parseFloat($(this).val());
+        });
+        $('#subtotal').html(total_amt.toFixed(2));
+        if(total_amt > 0){
+            gst_amt = parseFloat(total_amt) * 0.09;   
+        }
+        $('.gst_amt').html(gst_amt.toFixed(2));
+        final_amt = parseFloat(gst_amt) + parseFloat(gst_amt) + parseFloat(total_amt);
+        $('#finaltotal').html(final_amt.toFixed(2));
+        
+
+
+
+
+
     });
     $(document).on('click','.deleteTaxInvcRow', function(){ 
         $(this).closest('tr').remove();   
@@ -1801,27 +1894,58 @@ $(document).ready(function(){
     {        
         var qty = document.getElementById("qty").value;
         var rate = document.getElementById("rate").value;
-        if(qty > 0 && rate > 0){
+        var gst = document.getElementById("gst").value;
+        if(qty > 0 && rate > 0 && gst >0){
             var amount = qty * rate;
+            var tax_amount = (gst / 100) * amount;
+            
+            $('#taxable_amount').val(tax_amount);
             $('#amount').val(amount);
+            $('#total_amount').val(amount + tax_amount);
         }else{
             $('#amount').val('0');
+            $('#taxable_amount').val('0');
+            $('#total_amount').val('0');
         }
     });
     $(document).on('keyup','#rate',function()
     {        
         var qty = document.getElementById("qty").value;
         var rate = document.getElementById("rate").value;
-        if(qty > 0 && rate > 0){
+        var gst = document.getElementById("gst").value;
+        if(qty > 0 && rate > 0 && gst >0){
             var amount = qty * rate;
+            var tax_amount = (gst / 100) * amount;
+            $('#taxable_amount').val(tax_amount);
             $('#amount').val(amount);
+            $('#taxable_amount').val(amount + tax_amount);
         }else{
             $('#amount').val('0');
+            $('#taxable_amount').val('0');
+            $('#total_amount').val('0');
+        }
+    });
+    $(document).on('keyup','#gst',function()
+    {        
+        var qty = document.getElementById("qty").value;
+        var rate = document.getElementById("rate").value;
+        var gst = document.getElementById("gst").value;
+        if(qty > 0 && rate > 0 && gst >0){
+            var amount = qty * rate;
+            var tax_amount = (gst / 100) * amount;
+            $('#taxable_amount').val(tax_amount);
+            $('#amount').val(amount);
+            $('#total_amount').val(amount + tax_amount);
+        }else{
+            $('#amount').val('0');
+            $('#taxable_amount').val('0');
+            $('#total_amount').val('0');
         }
     });
     
     $(document).on('click','.addTaxInvcRow',function()
     {        
+      
         var maintml = $(this);
         var boq_code = document.getElementById("dc_boq_code").value;
         var hsn_sac_code = document.getElementById("hsn_sac_code").value;
@@ -1829,16 +1953,24 @@ $(document).ready(function(){
         var unit = document.getElementById("unit").value;
         var qty = document.getElementById("qty").value;
         var rate = document.getElementById("rate").value;
+        var taxable_amount = document.getElementById("taxable_amount").value;
+        var gst = document.getElementById("gst").value;
+            console.log('taxable_amount');
         if(qty > 0 && rate > 0){
             var amount = qty * rate;
+            var tax_amount = (gst / 100) * amount;
+            var total_amount = amount + tax_amount;
         }else{
             var amount = 0;
+            var total_amount = 0;
         }
         if(boq_code == '' || hsn_sac_code == '' || item_description == '' || unit == '' || qty < 1 || rate < 1){
             $('.invaliderror').addClass('has-error-p');
         }else{
             var project_id = $('#project_id').val();
-            var url = 'get_proforma_boq_item_details';
+            // var url = 'get_proforma_boq_item_details';
+            var url = 'get_boq_item_details';
+           
             $.ajax({
                     type:'POST',
                     url:completeURL(url), 
@@ -1857,8 +1989,11 @@ $(document).ready(function(){
                                 $('#item_description').val('');
                                 $('#unit').val('');
                                 $('#qty').val('');
+                                $('#gst').val('');
+                                $('#taxable_amount').val('');
                                 $('#rate').val('');
                                 $('#amount').val('');
+                                $('#total_amount').val('');
                                 $('#hsn_sac_code').prop('readonly', false);
                                 $('#item_description').prop('readonly', false);
                                 $('#unit').prop('readonly', false);
@@ -1870,7 +2005,11 @@ $(document).ready(function(){
                             +'<td><input type="text" class="form-control" name="unit[]" value="'+unit+'" readonly style="font-size: 12px;"></td>'
                             +'<td><input type="text" class="form-control" name="qty[]" value="'+qty+'" readonly style="font-size: 12px;"></td>'
                             +'<td><input type="text" class="form-control" name="rate[]" value="'+rate+'" readonly style="font-size: 12px;"></td>'
+                            +'<td><input type="text" class="form-control" name="gst[]" value="'+gst+'" readonly style="font-size: 12px;"></td>'
                             +'<td><input type="text" class="form-control" name="amount[]" value="'+amount+'" readonly style="font-size: 12px;"></td>'
+                            +'<td><input type="text" class="form-control" name="taxable_amount[]" value="'+taxable_amount+'" readonly style="font-size: 12px;"></td>'
+                            +'<td>'
+                            +'<td><input type="text" class="form-control" name="total_amount[]" value="'+total_amount+'" readonly style="font-size: 12px;"></td>'
                             +'<td>'
                             +'<div class="addDeleteButton">'
                             +'<span class="tooltips deleteTaxInvcRow" data-placement="top" data-original-title="Remove" style="cursor: pointer;"><i class="fa fa-trash-o"></i></span>'  
@@ -1893,8 +2032,12 @@ $(document).ready(function(){
                             $('#unit').val('');
                             $('#qty').val('');
                             $('#rate').val('');
+                            $('#gst').val('');
+                            $('#taxable_amount').val('');
                             $('#amount').val('');
+                            $('#total_amount').val('');
                             $('#hsn_sac_code').prop('readonly', false);
+                            $('#taxable_amount').prop('readonly', false);
                             $('#item_description').prop('readonly', false);
                             $('#unit').prop('readonly', false);
                             var total_amt = 0;
@@ -1944,13 +2087,15 @@ $(document).ready(function(){
             $('.invaliderror').addClass('has-error-p');
         }else{
             var project_id = $('#project_id').val();
-            var url = 'get_wip_boq_item_details';
+            // var url = 'get_wip_boq_item_details';
+            var url = 'get_boq_item_details';
             $.ajax({
                     type:'POST',
                     url:completeURL(url), 
                     dataType:'json',
                     data:{project_id:project_id,boq_code:boq_code},
                     success:function(result){
+                        
                         if(result.boq_code !== '' && typeof result.boq_code !== "undefined"){
                             boq_code_no = [];
                         	$("input[name='boq_code[]']").each(function(){

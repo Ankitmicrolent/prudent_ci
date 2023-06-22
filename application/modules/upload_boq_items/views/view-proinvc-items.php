@@ -25,7 +25,7 @@
 </style>
 <script>
     var proforma_id = $('#proforma_id').val().trim(); 
-    $('#proinvcitemlist').dataTable({
+    $('#proinvcitemlist').DataTable({
 	    "bDestroy" : true,
 	    "paging": true,
 		"iDisplayLength": 10,
@@ -42,6 +42,10 @@
         "columnDefs": [{ 
             "targets": [0],
             "orderable": false
-        }]
+        }],
+       
+       
     });
+
+    
 </script>

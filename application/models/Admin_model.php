@@ -1381,7 +1381,7 @@ class Admin_model extends CI_Model {
     }
     public function get_dc_boq_item_details($project_id,$boq_code)
     {
-        $query=$this->db->query("SELECT tdc.* FROM `tbl_deliv_challan_items` tdc INNER JOIN tbl_boq_items tb ON tb.boq_code = tdc.boq_code 
+        $query=$this->db->query("SELECT tdc.*, tb.* FROM `tbl_deliv_challan_items` tdc INNER JOIN tbl_boq_items tb ON tb.boq_code = tdc.boq_code 
         WHERE tb.project_id='".$project_id."' AND tb.boq_code='".$boq_code."' ORDER BY tdc.challan_itemid DESC LIMIT 0,1");
         if($query->num_rows() > 0){
             return $query->row();

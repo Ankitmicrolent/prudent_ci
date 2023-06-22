@@ -66,6 +66,7 @@
                                     <form action="save_tax_invoice_details" enctype="multipart/form-data" id="save_tax_invoice_details"  method="post" class="horizontal-form">
                                         <input type="hidden" name="base_url" id="base_url" value="<?php echo base_url();?>">
                                         <div class="form-body">
+                                        <p id="invaliderrorgst" style="padding: 0 10px;font-size: 12px;color:#a94442;"></p>
                                             <div class="row">
                                                 <div class="col-md-5">
             										<div class="form-groupp">
@@ -74,7 +75,7 @@
             											<span id="projlaoding"></span>
             									    </div>
             									</div>
-            									<div class="col-md-4">
+            									<div class="col-md-2">
                                                     <div class="form-group">
                                                         <label class="">Tax Invoice No <span class="require" aria-required="true" style="color:#a94442">*</span></label>
                                                         <div class="input-icon right">
@@ -82,6 +83,23 @@
                                                             <input type="text" class="form-control" name="tax_invoice_no" id="tax_invoice_no" value="" placeholder="Tax Invoice No" required="">
                                                         </div>
                                                     </div>
+                                                </div>
+            									<div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label class="">Gst Type <span class="require" aria-required="true" style="color:#a94442;" >*</span></label>
+                                                        <div class="input-icon right">
+                                                            <!-- <i class="fa"></i>
+                                                            <input type="text" class="form-control" name="tax_invoice_no" id="tax_invoice_no" value="" placeholder="Tax Invoice No" required=""> -->
+                                                            <select class="form-control select2me" name="gst_type" style="padding-left:0px !important;" id="gst_type" required>
+
+                                                         <option value="">Select</option>
+                                                         <option value="igst">IGST</option>
+                                                         <option value="cgst_sgst">CGST/SGST</option>
+                                                        </select>
+                                                        </div>
+                                                    </div>
+                                                   
+                                                    
                                                 </div>
                                                 <div class="col-md-3">
             										<div class="form-group">
@@ -96,6 +114,8 @@
             									</div>
             									
             								</div>
+
+                                            <!-- //table for igst  -->
                                             <div id="displayTaxInvc" style="display:none;">
                                                 <table width="100%" id="taxinvcdisplay" class="table table-striped table-bordered table-hover">
                                                     <thead>
@@ -106,31 +126,105 @@
                                                             <th style="min-width: 80px;width:80px;font-size:13px;">Unit</th>
                                                             <th style="min-width: 50px;width:50px;font-size:13px;">Qty</th>
                                                             <th style="min-width: 50px;width:50px;font-size:13px;">Rate</th>
-                                                            <th style="min-width: 50px;width:50px;font-size:13px;">Amount</th>
+                                                            <th style="min-width: 50px;width:50px;font-size:13px;">Taxable Amount</th>
+                                                            <th style="min-width: 50px;width:50px;font-size:13px;">IGST%</th>
+                                                            <th style="min-width: 50px;width:50px;font-size:13px;">IGST Amt</th>
+                                                            <!-- <th style="min-width: 50px;width:50px;font-size:13px;">Total Amount</th> -->
                                                             <th style="min-width: 10px;width:10px;font-size:13px;">-</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody></tbody>
                                                     <tfoot>
-                                                        <tr>
+                                                        <!-- <tr>
                                                           <td rowspan="1" colspan="6" style="text-align: right;"><span style="font-weight:600;">Sub Total</span></td>
                                                           <td id="subtotal" style="text-align: right;font-weight:600;"></td>
-                                                          <td>-</td>
-                                                        </tr>
-                                                        <tr>
+                                                          <td></td> -->
+                                                          <!-- <td></td> -->
+                                                          <!-- <td>-</td> -->
+                                                         
+                                                        <!-- </tr> -->
+                                                        <!-- <tr>
                                                           <td rowspan="1" colspan="6" style="text-align: right;"><span style="font-weight:600;">CGST@9%</span></td>
                                                           <td class="gst_amt" style="text-align: right;font-weight:600;"></td>
-                                                          <td>-</td>
-                                                        </tr>
-                                                        <tr>
+                                                          <td></td> -->
+                                                          <!-- <td></td> -->
+                                                          <!-- <td>-</td> -->
+                                                         
+                                                        <!-- </tr> -->
+                                                        <!-- <tr>
                                                           <td rowspan="1" colspan="6" style="text-align: right;"><span style="font-weight:600;">SGST@9%</span></td>
                                                           <td class="gst_amt" style="text-align: right;font-weight:600;"></td>
-                                                          <td>-</td>
-                                                        </tr>
+                                                          <td></td> -->
+                                                          <!-- <td></td> -->
+                                                          <!-- <td>-</td> -->
+                                                         
+                                                        <!-- </tr> -->
                                                         <tr>
                                                           <td rowspan="1" colspan="6" style="text-align: right;"><span style="font-weight:600;">Total Amount of This Invoice</span></td>
                                                           <td id="finaltotal" style="text-align: right;font-weight:600;"></td>
+                                                          <td></td>
+                                                          <!-- <td></td> -->
                                                           <td>-</td>
+                                                         
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                                <p id="invaliderrorid" style="padding: 0 10px;font-size: 12px;color:#a94442;"></p>
+                                            </div>
+
+                                            <!-- //table for cgst and sgst -->
+                                            <div id="displayTaxInvccgst" style="display:none;">
+                                                <table width="100%" id="taxinvcdisplaysgst" class="table table-striped table-bordered table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="min-width: 50px;width:50px;font-size:13px;">BOQ Sr No</th>
+                                                            <th style="min-width: 50px;width:50px;font-size:13px;">HSN/SAC Code</th>
+                                                            <th style="min-width: 150px;width:150px;font-size:13px;">Item Description</th>
+                                                            <th style="min-width: 80px;width:80px;font-size:13px;">Unit</th>
+                                                            <th style="min-width: 50px;width:50px;font-size:13px;">Qty</th>
+                                                            <th style="min-width: 50px;width:50px;font-size:13px;">Rate</th>
+                                                            <th style="min-width: 50px;width:50px;font-size:13px;">Taxable Amount</th>
+                                                            <th style="min-width: 50px;width:50px;font-size:13px;">SGST%</th>
+                                                            <th style="min-width: 50px;width:50px;font-size:13px;">SGST Amt</th>
+                                                            <th style="min-width: 50px;width:50px;font-size:13px;">CGST%</th>
+                                                            <th style="min-width: 50px;width:50px;font-size:13px;">CGST Amt</th>
+                                                            <!-- <th style="min-width: 50px;width:50px;font-size:13px;">Total Amount</th> -->
+                                                            <th style="min-width: 10px;width:10px;font-size:13px;">-</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                    <tfoot>
+                                                        <!-- <tr> -->
+                                                          <!-- <td rowspan="1" colspan="6" style="text-align: right;"><span style="font-weight:600;">Sub Total</span></td>
+                                                          <td id="subtotal" style="text-align: right;font-weight:600;"></td>
+                                                          <td></td> -->
+                                                          <!-- <td></td> -->
+                                                          <!-- <td>-</td> -->
+                                                         
+                                                        <!-- </tr> -->
+                                                        <!-- <tr> -->
+                                                          <!-- <td rowspan="1" colspan="6" style="text-align: right;"><span style="font-weight:600;">CGST@9%</span></td>
+                                                          <td class="gst_amt" style="text-align: right;font-weight:600;"></td>
+                                                          <td></td> -->
+                                                          <!-- <td></td> -->
+                                                          <!-- <td>-</td> -->
+                                                         
+                                                        <!-- </tr> -->
+                                                        <!-- <tr>
+                                                          <td rowspan="1" colspan="6" style="text-align: right;"><span style="font-weight:600;">SGST@9%</span></td>
+                                                          <td class="gst_amt" style="text-align: right;font-weight:600;"></td>
+                                                          <td></td> -->
+                                                          <!-- <td></td> -->
+                                                          <!-- <td>-</td> -->
+                                                         
+                                                        <!-- </tr> -->
+                                                        <tr>
+                                                          <td rowspan="1" colspan="6" style="text-align: right;"><span style="font-weight:600;">Total Amount of This Invoice</span></td>
+                                                          <td id="finaltotal" style="text-align: right;font-weight:600;"></td>
+                                                          <td></td>
+                                                          <!-- <td></td> -->
+                                                          <td>-</td>
+                                                         
                                                         </tr>
                                                     </tfoot>
                                                 </table>
@@ -208,14 +302,36 @@
     <script src="<?php echo base_url(); ?>js/select2pagination.js?<?php echo date('Ymd H:i:s'); ?>"></script>
     <script>
     jQuery(document).ready(function() {
+
+
+        $(document).on('click', '.date1', function() {
+
+$('.date1').datepicker({
+    orientation: "right",
+    autoclose: true
+});
+});
+
         Metronic.init(); // init metronic core components
         Layout.init(); 
         ComponentsPickers.init();
     });
     $(document).on('change', '#project_id', function() {
+
+        var gst_type = $('#gst_type').val();
+      
+            if(gst_type == '' || gst_type == null){
+                $('#displayTaxInvc').hide();
+                $('#invaliderrorgst').html('Please Select Gst Type!');
+                return
+            }
         var project_id = $(this).val();
-        if(project_id){
+        if(gst_type == "igst"){
+
+            if(project_id){
+            $('#invaliderrorgst').html('');
             $('#displayTaxInvc').show();
+            $('#displayTaxInvccgst').hide();
             $('#taxinvcdisplay').dataTable({
             	    "bDestroy" : true,
             	    "bInfo" : false,
@@ -230,7 +346,7 @@
                     "ajax": {
                         "url": "<?php echo base_url('get_proforma_by_project'); ?>",
                         "type": "POST",
-                        "data":{project_id:project_id}
+                        "data":{project_id:project_id ,gst_type : gst_type }
                     },
                     "columnDefs": [{ 
                         "targets": [0],
@@ -239,7 +355,58 @@
             });    
         }else{
             
-        }
+        
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }else{
+
+
+
+
+
+       
+        if(project_id){
+            $('#invaliderrorgst').html('');
+            $('#displayTaxInvc').hide();
+            $('#displayTaxInvccgst').show();
+            $('#taxinvcdisplaysgst').dataTable({
+            	    "bDestroy" : true,
+            	    "bInfo" : false,
+            	    "ordering": false,
+            	    "searching":false,
+            	    "paging": false,
+            		"deferRender": true,
+                    "responsive": true,
+                    "processing": true,
+            		"serverSide": true,
+                    "order": [],
+                    "ajax": {
+                        "url": "<?php echo base_url('get_proforma_by_project'); ?>",
+                        "type": "POST",
+                        "data":{project_id:project_id ,gst_type : gst_type }
+                    },
+                    "columnDefs": [{ 
+                        "targets": [0],
+                        "orderable": false
+                    }]
+            });    
+        }else{
+            
+        
+    }
+}
     });
     $('#taxInvclist').dataTable({
 	// Processing indicator
