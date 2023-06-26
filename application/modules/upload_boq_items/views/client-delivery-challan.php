@@ -74,9 +74,34 @@
             											<span id="projlaoding"></span>
             									    </div>
             									</div>
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label class="">Billing Type <span class="require" aria-required="true" style="color:#a94442;">*</span></label>
+                                                        <div class="input-icon right">
+                                                           
+                                                            <select class="form-control select2me" name="gst_type" style="padding-left:0px !important;" id="gst_type" required>
+                                                                <option value="cgst_sgst">Intra-State</option>
+                                                                <option value="igst">Inter-State</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label class="">Challan Type <span class="require" aria-required="true" style="color:#a94442;">*</span></label>
+                                                        <div class="input-icon right">
+                                                           
+                                                            <select class="form-control select2me" name="c_type" style="padding-left:0px !important;" id="c_type" required>
+                                                                <option value="igst">Delivery Challan</option>
+                                                                <option value="cgst_sgst">Delivery Challan Cum Invoice</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
             								</div>
             								<hr>
-            								<div class="row"><div class="col-md-12"><h3 style="text-align:center;margin: 0 0 20px 0px;font-weight: 600;font-size: 20px;">DELIVERY CHALLAN</h3></div></div>
+            								<div class="row"><div class="col-md-12"><h3 id ="challan_name" style="text-align:center;margin: 0 0 20px 0px;font-weight: 600;font-size: 20px;">DELIVERY CHALLAN</h3></div></div>
             								<div class="row">
                                                 <div class="col-md-3">
                                                     <div class="form-group">
@@ -233,7 +258,7 @@
                                                     </div>
                                                 </div>
             								</div>
-            								<div id="displayClientDc" style="display:none;">
+            								<!-- <div id="displayClientDc" style="display:none;">
                                                 <table width="100%" id="clientdcdisplay" class="table table-striped table-bordered table-hover">
                                                     <thead>
                                                         <tr>
@@ -247,6 +272,176 @@
                                                             <th style="min-width: 10px;width:10px;font-size:13px;">-</th>
                                                         </tr>
                                                     </thead>
+                                                </table>
+                                                <p id="invaliderrorid" style="padding: 0 10px;font-size: 12px;color:#a94442;"></p>
+                                            </div> -->
+<!-- 
+                                            <div id="displayProformaInvc" style="display:none;">
+                                                <table width="100%" id="proformainvcdisplay" class="table table-striped table-bordered table-hover">
+                                                    <thead>
+                                                    <th style="min-width: 50px;width:50px;font-size:12px;">BOQ Sr No</th>
+                                                            <th style="min-width: 50px;width:105px;font-size:12px;">HSN/SAC Code</th>
+                                                            <th style="min-width: 150px;width:150px;font-size:12px;">Item Description</th>
+                                                            <th style="min-width: 30px; width: 50.2px; font-size:12px;">Unit</th>
+                                                            <th style="min-width: 50px;width:40px;font-size:12px;">Qty</th>
+                                                            <th style="min-width: 80px;width:80px;font-size:12px;">Rate</th>
+                                                            <th style="min-width: 50px;width:50px;font-size:12px;">Taxable Amount</th>
+                                                            <th style="min-width: 50px;width:50px;font-size:12px;">IGST%</th>
+                                                            <th style="min-width: 50px;width:50px;font-size:12px;">IGST Amt</th> -->
+                                                            <!-- <th style="min-width: 50px;width:50px;font-size:12px;">Total Amount</th> -->
+                                                            <th style="min-width: 10px;width:10px;font-size:12px;">-</th>
+                                                    <!-- </thead>
+                                                    <tbody></tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                          <td rowspan="1" colspan="6" style="text-align: right;"><span style="font-weight:600;">Sub Total</span></td>
+                                                          <td id="subtotali" style="text-align: right;font-weight:600;"></td>
+                                                          <td></td>  -->
+                                                        <!-- <td></td> -->
+                                                        <!-- <td>-</td>
+
+                                                         </tr>
+                                                        <tr>
+                                                          <td rowspan="1" colspan="6" style="text-align: right;"><span style="font-weight:600;">IGST</span></td>
+                                                          <td class="cgst_amt" style="text-align: right;font-weight:600;"></td>
+                                                          <td></td>
+                                                        <td></td> -->
+                                                        <!-- <td>-</td> -->
+
+                                                        <!-- </tr> -->
+                                                        <!-- <tr>
+                                                          <td rowspan="1" colspan="6" style="text-align: right;"><span style="font-weight:600;">SGST@9%</span></td>
+                                                          <td class="gst_amt" style="text-align: right;font-weight:600;"></td>
+                                                          <td></td> -->
+                                                        <!-- <td></td> -->
+                                                        <!-- <td>-</td> -->
+
+                                                        <!-- </tr> -->
+                                                        <!-- <tr>
+                                                            <td rowspan="1" colspan="6" style="text-align: right;"><span style="font-weight:600;">Total Amount of This Invoice</span></td>
+                                                            <td id="finaltotal" style="text-align: right;font-weight:600;"></td>
+                                                            <td></td> -->
+                                                            <!-- <td></td> -->
+                                                            <!-- <td>-</td> -->
+<!-- 
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                                <p id="invaliderrorid" style="padding: 0 10px;font-size: 12px;color:#a94442;"></p>
+                                            </div> -->
+
+                                            <div id="displayProformaInvc" style="display:none;">
+                                                <table width="100%" id="proformainvcdisplay" class="table table-striped table-bordered table-hover">
+                                                    <thead>
+                                                    <th style="min-width: 50px;width:50px;font-size:12px;">BOQ Sr No</th>
+                                                            <th style="min-width: 50px;width:105px;font-size:12px;">HSN/SAC Code</th>
+                                                            <th style="min-width: 150px;width:150px;font-size:12px;">Item Description</th>
+                                                            <th style="min-width: 30px; width: 50.2px; font-size:12px;">Unit</th>
+                                                            <th style="min-width: 50px;width:40px;font-size:12px;">Qty</th>
+                                                            <th style="min-width: 80px;width:80px;font-size:12px;">Rate</th>
+                                                            <th style="min-width: 50px;width:50px;font-size:12px;">Taxable Amount</th>
+                                                            <th style="min-width: 50px;width:50px;font-size:12px;">IGST%</th>
+                                                            <th style="min-width: 50px;width:50px;font-size:12px;">IGST Amt</th>
+                                                            <!-- <th style="min-width: 50px;width:50px;font-size:12px;">Total Amount</th> -->
+                                                            <th style="min-width: 10px;width:10px;font-size:12px;">-</th>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                          <td rowspan="1" colspan="6" style="text-align: right;"><span style="font-weight:600;">Sub Total</span></td>
+                                                          <td id="subtotali" style="text-align: right;font-weight:600;"></td>
+                                                          <td></td> 
+                                                        <!-- <td></td> -->
+                                                        <td>-</td>
+
+                                                         </tr>
+                                                        <tr>
+                                                          <td rowspan="1" colspan="6" style="text-align: right;"><span style="font-weight:600;">IGST</span></td>
+                                                          <td class="cgst_amt" style="text-align: right;font-weight:600;"></td>
+                                                          <td></td>
+                                                        <td></td>
+                                                        <!-- <td>-</td> -->
+
+                                                        </tr>
+                                                        <!-- <tr>
+                                                          <td rowspan="1" colspan="6" style="text-align: right;"><span style="font-weight:600;">SGST@9%</span></td>
+                                                          <td class="gst_amt" style="text-align: right;font-weight:600;"></td>
+                                                          <td></td> -->
+                                                        <!-- <td></td> -->
+                                                        <!-- <td>-</td> -->
+
+                                                        <!-- </tr> -->
+                                                        <tr>
+                                                            <td rowspan="1" colspan="6" style="text-align: right;"><span style="font-weight:600;">Total Amount of This Invoice</span></td>
+                                                            <td id="finaltotal" style="text-align: right;font-weight:600;"></td>
+                                                            <td></td>
+                                                            <!-- <td></td> -->
+                                                            <td>-</td>
+
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                                <p id="invaliderrorid" style="padding: 0 10px;font-size: 12px;color:#a94442;"></p>
+                                            </div>
+                                            <!-- //table for cgst and sgst -->
+                                            <div id="displayperfomaInvccgst" style="display:none;">
+                                                <table width="100%" id="taxperfomadisplaysgsts" class="table table-striped table-bordered table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="min-width: 50px;width:50px;font-size:12px;">BOQ Sr No</th>
+                                                            <th style="min-width: 50px;width:100px;font-size:12px;">HSN/SAC Code</th>
+                                                            <th style="min-width: 150px;width:150px;font-size:12px;">Item Description</th>
+                                                            <th style="min-width: 30px;width:40px;font-size:12px;">Unit</th>
+                                                            <th style="min-width: 50px;width:40px;font-size:12px;">Qty</th>
+                                                            <th style="min-width: 80px;width:80px;font-size:12px;">Rate</th>
+                                                            <th style="min-width: 50px;width:100px;font-size:12px;">Taxable Amount</th>
+                                                            <th style="min-width: 30px;width:40px;font-size:12px;">SGST%</th>
+                                                            <th style="min-width: 50px;width:50px;font-size:12px;">SGST Amt</th>
+                                                            <th style="min-width: 30px;width:40px;font-size:12px;">CGST%</th>
+                                                            <th style="min-width: 50px;width:50px;font-size:12px;">CGST Amt</th>
+                                                            <!-- <th style="min-width: 50px;width:50px;font-size:12px;">Total Amount</th> -->
+                                                            <th style="min-width: 10px;width:10px;font-size:12px;">-</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                        <td rowspan="1" colspan="6" style="text-align: right;"><span style="font-weight:600;">Sub Total</span></td>
+                                                          <td id="subtotal" style="text-align: right;font-weight:600;"></td>
+                                                          <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td>-</td>
+
+                                                        </tr> 
+                                                         <tr>
+                                                         <td rowspan="1" colspan="6" style="text-align: right;"><span style="font-weight:600;">CGST Amount</span></td>
+                                                          <td class="gst_amt" style="text-align: right;font-weight:600;"></td>
+                                                          <td></td> 
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td>-</td>
+
+                                                        </tr>
+                                                        <tr>
+                                                          <td rowspan="1" colspan="6" style="text-align: right;"><span style="font-weight:600;">SGST Amount</span></td>
+                                                          <td class="gst_amt" style="text-align: right;font-weight:600;"></td>
+                                                          <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td>-</td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td rowspan="1" colspan="6" style="text-align: right;"><span style="font-weight:600;">Total Amount of This Invoice</span></td>
+                                                            <td id="finaltotalaq" style="text-align: right;font-weight:600;"></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td>-</td>
+
+                                                        </tr>
+                                                    </tfoot>
                                                 </table>
                                                 <p id="invaliderrorid" style="padding: 0 10px;font-size: 12px;color:#a94442;"></p>
                                             </div>
@@ -325,14 +520,14 @@
 
         $(document).on('click','.date1',function(){   
             
-      $('.date1').datepicker({
+        $('.date1').datepicker({
           orientation: "right",
           autoclose: true
-      });    
-  });
+        });    
+      });
 
-        var datatable = $('#dcclist').dataTable({
-	// Processing indicator
+     var datatable = $('#dcclist').dataTable({
+	     // Processing indicator
 		"paging": true,
 		 "iDisplayLength": 10,
          "deferRender": true,
@@ -354,12 +549,29 @@
             "orderable": false
         }]
     });
+
   
     $(document).on('change', '#project_id', function() {
+
+        var gst_type = $('#gst_type').val();
+
+            if (gst_type == '' || gst_type == null) {
+            $('#displayTaxInvc').hide();
+            $('#invaliderrorgst').html('Please Select Gst Type!');
+            return
+            }
+
         var project_id = $(this).val();
-        if(project_id){
-            $('#displayClientDc').show();
-            $('#clientdcdisplay').dataTable({
+
+        if(gst_type == 'igst'){
+
+            if(project_id){
+
+                $('#invaliderrorgst').html('');
+                $('#displayProformaInvc').show();
+                $('#displayperfomaInvccgst').hide();
+            // $('#displayClientDc').show();
+            $('#proformainvcdisplay').dataTable({
             	    "bDestroy" : true,
             	    "bInfo" : false,
             	    "ordering": false,
@@ -373,20 +585,247 @@
                     "ajax": {
                         "url": "<?php echo base_url('get_client_dc_by_project'); ?>",
                         "type": "POST",
-                        "data":{project_id:project_id}
+                        "data":{project_id:project_id,
+                            gst_type: gst_type}
                     },
                     "columnDefs": [{ 
                         "targets": [0],
                         "orderable": false
-                    }]
+                    }],
+                    "initComplete": function () {
+                    var project_detail = this.api().ajax.json().project_detail; // Access the 'extraData' value
+                      console.log(project_detail);
+                   // Print the extraData in an input box
+                   $('#workorderon').val(project_detail.work_order_on);
+                
+                  }
+                   
             });    
-        }else{
+           }else{
             
         }
+
+
+
+        }
+        else{
+
+
+            if(project_id){
+            // $('#displayClientDc').show();
+            $('#invaliderrorgst').html('');
+                $('#displayProformaInvc').hide();
+                $('#displayperfomaInvccgst').show();
+
+              $('#taxperfomadisplaysgsts').dataTable({
+            	    "bDestroy" : true,
+            	    "bInfo" : false,
+            	    "ordering": false,
+            	    "searching":false,
+            	    "paging": false,
+            		"deferRender": true,
+                    "responsive": true,
+                    "processing": true,
+            		"serverSide": true,
+                    "order": [],
+                    "ajax": {
+                        "url": "<?php echo base_url('get_client_dc_by_project'); ?>",
+                        "type": "POST",
+                        "data":{project_id:project_id,
+                            gst_type: gst_type}
+                    },
+                   
+                    "columnDefs": [{ 
+                        "targets": [0],
+                        "orderable": false
+                    }],
+                    "initComplete": function () {
+                    var project_detail = this.api().ajax.json().project_detail; // Access the 'extraData' value
+                      console.log(project_detail);
+                      $('#workorderon').val(project_detail.work_order_on);
+                  }
+            }); 
+        }   
+      
+        else{
+
+
+
+
+            
+        }
+ }
+        // if(project_id){
+        //     $('#displayClientDc').show();
+        //     $('#clientdcdisplay').dataTable({
+        //     	    "bDestroy" : true,
+        //     	    "bInfo" : false,
+        //     	    "ordering": false,
+        //     	    "searching":false,
+        //     	    "paging": false,
+        //     		"deferRender": true,
+        //             "responsive": true,
+        //             "processing": true,
+        //     		"serverSide": true,
+        //             "order": [],
+        //             "ajax": {
+        //                 "url": "<?php echo base_url('get_client_dc_by_project'); ?>",
+        //                 "type": "POST",
+        //                 "data":{project_id:project_id,
+        //                     gst_type: gst_type}
+        //             },
+        //             "columnDefs": [{ 
+        //                 "targets": [0],
+        //                 "orderable": false
+        //             }]
+        //     });    
+        // }else{
+            
+        // }
     });
+    $(document).on('change', '#gst_type', function() {
+
+        var gst_type = $('#gst_type').val();
+
+            if (gst_type == '' || gst_type == null) {
+            $('#displayTaxInvc').hide();
+            $('#invaliderrorgst').html('Please Select Gst Type!');
+            return
+            }
+
+        var project_id = $('#project_id').val();
+
+        if(gst_type == 'igst'){
+
+            if(project_id){
+
+                $('#invaliderrorgst').html('');
+                $('#displayProformaInvc').show();
+                $('#displayperfomaInvccgst').hide();
+            // $('#displayClientDc').show();
+            $('#proformainvcdisplay').dataTable({
+            	    "bDestroy" : true,
+            	    "bInfo" : false,
+            	    "ordering": false,
+            	    "searching":false,
+            	    "paging": false,
+            		"deferRender": true,
+                    "responsive": true,
+                    "processing": true,
+            		"serverSide": true,
+                    "order": [],
+                    "ajax": {
+                        "url": "<?php echo base_url('get_client_dc_by_project'); ?>",
+                        "type": "POST",
+                        "data":{project_id:project_id,
+                            gst_type: gst_type}
+                    },
+                    "columnDefs": [{ 
+                        "targets": [0],
+                        "orderable": false
+                    }],
+                   
+                   
+            });    
+           }else{
+            
+        }
+
+
+
+        }
+        else{
+
+
+            if(project_id){
+            // $('#displayClientDc').show();
+            $('#invaliderrorgst').html('');
+                $('#displayProformaInvc').hide();
+                $('#displayperfomaInvccgst').show();
+
+              $('#taxperfomadisplaysgsts').dataTable({
+            	    "bDestroy" : true,
+            	    "bInfo" : false,
+            	    "ordering": false,
+            	    "searching":false,
+            	    "paging": false,
+            		"deferRender": true,
+                    "responsive": true,
+                    "processing": true,
+            		"serverSide": true,
+                    "order": [],
+                    "ajax": {
+                        "url": "<?php echo base_url('get_client_dc_by_project'); ?>",
+                        "type": "POST",
+                        "data":{project_id:project_id,
+                            gst_type: gst_type}
+                    },
+                   
+                    "columnDefs": [{ 
+                        "targets": [0],
+                        "orderable": false
+                    }],
+                   
+            }); 
+        }   
+      
+        else{
+
+
+
+
+            
+        }
+ }
+        // if(project_id){
+        //     $('#displayClientDc').show();
+        //     $('#clientdcdisplay').dataTable({
+        //     	    "bDestroy" : true,
+        //     	    "bInfo" : false,
+        //     	    "ordering": false,
+        //     	    "searching":false,
+        //     	    "paging": false,
+        //     		"deferRender": true,
+        //             "responsive": true,
+        //             "processing": true,
+        //     		"serverSide": true,
+        //             "order": [],
+        //             "ajax": {
+        //                 "url": "<?php echo base_url('get_client_dc_by_project'); ?>",
+        //                 "type": "POST",
+        //                 "data":{project_id:project_id,
+        //                     gst_type: gst_type}
+        //             },
+        //             "columnDefs": [{ 
+        //                 "targets": [0],
+        //                 "orderable": false
+        //             }]
+        //     });    
+        // }else{
+            
+        // }
+    });
+
+
+
+
    
 
 });
+
+$(document).on('change', '#c_type', function() {
+    $value = $('#c_type').val();
+    if($value == 'cgst_sgst'){
+
+        $('#challan_name').html('DELIVERY CHALLAN CUM INVOICE');
+
+    }else{
+
+        $('#challan_name').html('DELIVERY CHALLAN');
+    }
+
+});
+
     </script>
 </body>
 </html>

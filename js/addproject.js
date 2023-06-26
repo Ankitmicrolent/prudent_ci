@@ -305,6 +305,12 @@
             $("#nsuranceRequiredApp").on('click','.rmbtn',function(){
                 $(this).parent().parent().remove();
             });
+
+
+
+
+
+
         });
         if (jQuery().datepicker) {
             $('.date1').datepicker({
@@ -598,7 +604,56 @@
                     $('.ifepfrequiredYes').remove();
                 }
             });
-            
+
+
+
+
+// Ankit changes
+             var ccnt =1
+            $(document).on('click', '.add_consignee', function() {
+        	    var consignee_name = $("#consignee_name").val();
+                var delivery_address = $("#delivery_address").val();
+                var gst_types = $("#gst_types").val();
+                
+                if(consignee_name !=='' && typeof consignee_name != 'undefined' && 
+                delivery_address !=='' && typeof delivery_address != 'undefined' && 
+                gst_types !=='' && typeof gst_types != 'undefined'
+                ){
+                    $("#consignee_error").html('');
+                var html = '<div class="row consinee_detail">'
+        	    +'<div class="input-icon right col-lg-4">'
+        	    +'<i class="fa"></i> <i class="fa"></i>'
+        	    +'<i class="fa"></i><input type="text" class="form-control " name="consignee_name[]" id="consignee_name'+ccnt+'" value="'+consignee_name+'" placeholder="Consignee name" readonly>'
+                +'</div>'
+                +'<div class="col-lg-3">'
+                +'<div class="form-group">'
+                +'<div class="input-icon right">'
+                +'<i class="fa"></i>'
+                +'<input type="text" class="form-control " name="delivery_address[]" id="delivery_address'+ccnt+'" placeholder="Delivery Address" value="'+consignee_name+'" readonly>'
+                +'</div></div></div>'
+                +'<div class="col-lg-3">'
+                +'<div class="form-group">'
+                +'<div class="input-icon right">'
+                +'<i class="fa"></i>'
+                +'<input type="text" class="form-control " name="gst_types[]" id="gst_types'+ccnt+'" value="'+gst_types+'" placeholder="Gst type" readonly>'
+                +'</div></div></div>'
+                +'<div class="col-md-1">'
+                +'<div class="rmbtnss"><i class="fa fa-minus" aria-hidden="true" style="font-size:10px;"></i></div>'
+                +'</div></div>';
+        		$("#newlinesadd").append(html);
+        		$("#insurance_req_err").html('');
+                $("#consignee_name").val('');
+                $("#delivery_address").val('');
+                $("#gst_types").val('');
+        		ccnt++;
+                }else{
+                $("#consignee_error").html('Please enter insurance required details!');
+        		}
+        	});
+            $(document).on('click','.rmbtnss',function(){
+               
+                $(this).parent().parent().remove();
+            });
             
             $(document).on("click", '#del_same_as_bill_addr', function(event) { 
                 if ($("#del_same_as_bill_addr").is(":checked")) {

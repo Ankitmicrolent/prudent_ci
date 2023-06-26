@@ -489,6 +489,7 @@ $(document).on('keyup', '#dc_boq_code', function() {
     $('#invaliderrorid').html('');
     var boq_code = $(this).val();
     var project_id = $('#project_id').val();
+    var gst_type = $('#gst_type').val();
     var url = 'get_dc_boq_item_details';
     if(boq_code == ''){
         $('#hsn_sac_code').val(''); 
@@ -496,30 +497,55 @@ $(document).on('keyup', '#dc_boq_code', function() {
         $('#unit').val('');  
         $('#scheduled_qty').val('');  
         $('#design_qty').val('');
+        $('#sgst').val(''); 
         $('#gst').val(''); 
+        $('#cgst').val(''); 
+        $('#sgst_amount').val(''); 
+        $('#cgst_amount').val(''); 
         $('#taxable_amount').val(''); 
         $('#rate_basic').val('');  
         $('#qty').val('');  
         $('#amount').val('');  
         $('#rate').val('');  
+        $('#total_amount').val('');  
         $('#non_schedule_yes').prop('checked', false);
         return
     }
-
+       
     $.ajax({
             type:'POST',
             url:completeURL(url), 
             dataType:'json',
             data:{project_id:project_id,boq_code:boq_code},
             success:function(result){
-                console.log(result);
+                
+               
                 if(result.boq_code !== '' && typeof result.boq_code !== "undefined"){
-                    $('#dc_boq_code').val(result.boq_code);    
-                    $('#hsn_sac_code').val(result.hsn_sac_code);    
-                    $('#hsn_sac_code').prop('readonly', true);
-                    $('#item_description').val(result.item_description);    
-                    $('#rate').val(result.rate);    
-                    $('#gst').val(result.gst);    
+                    // $('#dc_boq_code').val(result.boq_code);    
+                    // $('#hsn_sac_code').val(result.hsn_sac_code);    
+                    // $('#hsn_sac_code').prop('readonly', true);
+                    // $('#item_description').val(result.item_description);    
+                    // $('#rate').val(result.rate);   
+                    if(gst_type == 'igst') {
+                        $('#gst').val(result.gst);  
+                        $('#dc_boq_code').val(result.boq_code);    
+                        $('#hsn_sac_code').val(result.hsn_sac_code);    
+                        $('#hsn_sac_code').prop('readonly', true);
+                        $('#item_description').val(result.item_description);    
+                        $('#rate').val(result.rate);     
+                                          
+                    }else{
+                        
+                        $('#dc_boq_code').val(result.boq_code);    
+                        $('#hsn_sac_code').val(result.hsn_sac_code);    
+                        $('#hsn_sac_code').prop('readonly', true);
+                        $('#item_description').val(result.item_description);    
+                        $('#rate').val(result.rate);   
+
+
+                        $('#sgst').val(result.gst/2);    
+                        $('#cgst').val(result.gst/2);    
+                    }
                     $('#item_description').prop('readonly', true);
                     $('#unit').val(result.unit);    
                     $('#unit').prop('readonly', true);
@@ -530,10 +556,227 @@ $(document).on('keyup', '#dc_boq_code', function() {
                     $('#item_description').prop('readonly', false);
                     $('#unit').prop('readonly', false);
                     $('#avl_qty').prop('readonly', false);
+
+
+                    $('#hsn_sac_code').val(''); 
+                    $('#item_description').val('');
+                    $('#unit').val('');  
+                    $('#scheduled_qty').val('');  
+                    $('#design_qty').val('');
+                    $('#sgst').val(''); 
+                    $('#gst').val(''); 
+                    $('#cgst').val(''); 
+                    $('#sgst_amount').val(''); 
+                    $('#cgst_amount').val(''); 
+                    $('#taxable_amount').val(''); 
+                    $('#rate_basic').val('');  
+                    $('#qty').val('');  
+                    $('#amount').val('');  
+                    $('#rate').val('');  
+                    $('#total_amount').val('');  
+                    $('#non_schedule_yes').prop('checked', false);
                 }        
             }
     });
 });
+$(document).on('keyup', '#idc_boq_code', function() {
+
+   
+    $('#invaliderrorid').html('');
+    var boq_code = $(this).val();
+    var project_id = $('#project_id').val();
+    var gst_type = $('#gst_type').val();
+    var url = 'get_dc_boq_item_details';
+    if(boq_code == ''){
+        $('#hsn_sac_code').val(''); 
+        $('#item_description').val('');
+        $('#unit').val('');  
+        $('#scheduled_qty').val('');  
+        $('#design_qty').val('');
+        $('#sgst').val(''); 
+        $('#gst').val(''); 
+        $('#cgst').val(''); 
+        $('#sgst_amount').val(''); 
+        $('#cgst_amount').val(''); 
+        $('#taxable_amount').val(''); 
+        $('#rate_basic').val('');  
+        $('#qty').val('');  
+        $('#amount').val('');  
+        $('#rate').val('');  
+        $('#total_amount').val('');  
+        $('#non_schedule_yes').prop('checked', false);
+        return
+    }
+       
+    $.ajax({
+            type:'POST',
+            url:completeURL(url), 
+            dataType:'json',
+            data:{project_id:project_id,boq_code:boq_code},
+            success:function(result){
+                
+               
+                if(result.boq_code !== '' && typeof result.boq_code !== "undefined"){
+                    // $('#dc_boq_code').val(result.boq_code);    
+                    // $('#hsn_sac_code').val(result.hsn_sac_code);    
+                    // $('#hsn_sac_code').prop('readonly', true);
+                    // $('#item_description').val(result.item_description);    
+                    // $('#rate').val(result.rate);   
+                    if(gst_type == 'igst') {
+                        $('#gst').val(result.gst);  
+                        $('#idc_boq_code').val(result.boq_code);    
+                        $('#hsn_sac_code').val(result.hsn_sac_code);    
+                        $('#hsn_sac_code').prop('readonly', true);
+                        $('#item_description').val(result.item_description);    
+                        $('#rate').val(result.rate);     
+                                          
+                    }else{
+                        
+                        $('#idc_boq_code').val(result.boq_code);    
+                        $('#hsn_sac_code').val(result.hsn_sac_code);    
+                        $('#hsn_sac_code').prop('readonly', true);
+                        $('#item_description').val(result.item_description);    
+                        $('#rate').val(result.rate);   
+
+
+                        $('#sgst').val(result.gst/2);    
+                        $('#cgst').val(result.gst/2);    
+                    }
+                    $('#item_description').prop('readonly', true);
+                    $('#unit').val(result.unit);    
+                    $('#unit').prop('readonly', true);
+                    $('#avl_qty').val('12');    
+                    $('#avl_qty').prop('readonly', true);
+                }else{    
+                    $('#hsn_sac_code').prop('readonly', false);
+                    $('#item_description').prop('readonly', false);
+                    $('#unit').prop('readonly', false);
+                    $('#avl_qty').prop('readonly', false);
+
+
+                    $('#hsn_sac_code').val(''); 
+                    $('#item_description').val('');
+                    $('#unit').val('');  
+                    $('#scheduled_qty').val('');  
+                    $('#design_qty').val('');
+                    $('#sgst').val(''); 
+                    $('#gst').val(''); 
+                    $('#cgst').val(''); 
+                    $('#sgst_amount').val(''); 
+                    $('#cgst_amount').val(''); 
+                    $('#taxable_amount').val(''); 
+                    $('#rate_basic').val('');  
+                    $('#qty').val('');  
+                    $('#amount').val('');  
+                    $('#rate').val('');  
+                    $('#total_amount').val('');  
+                    $('#non_schedule_yes').prop('checked', false);
+                }        
+            }
+    });
+});
+$(document).on('keyup', '#cdc_boq_code', function() {
+
+   
+    $('#invaliderrorid').html('');
+    var boq_code = $(this).val();
+    var project_id = $('#project_id').val();
+    var gst_type = $('#gst_type').val();
+    var url = 'get_dc_boq_item_details';
+    if(boq_code == ''){
+        $('#chsn_sac_code').val(''); 
+        $('#citem_description').val('');
+        $('#cunit').val('');  
+        $('#scheduled_qty').val('');  
+        $('#design_qty').val('');
+        $('#sgst').val(''); 
+        $('#gst').val(''); 
+        $('#cgst').val(''); 
+        $('#sgst_amount').val(''); 
+        $('#cgst_amount').val(''); 
+        $('#taxable_amount').val(''); 
+        $('#rate_basic').val('');  
+        $('#cqty').val('');  
+        $('#amount').val('');  
+        $('#crate').val('');  
+        $('#total_amount').val('');  
+        $('#non_schedule_yes').prop('checked', false);
+        return
+    }
+       
+    $.ajax({
+            type:'POST',
+            url:completeURL(url), 
+            dataType:'json',
+            data:{project_id:project_id,boq_code:boq_code},
+            success:function(result){
+                
+                       
+                if(result.boq_code !== '' && typeof result.boq_code !== "undefined"){
+                    // $('#dc_boq_code').val(result.boq_code);    
+                    // $('#hsn_sac_code').val(result.hsn_sac_code);    
+                    // $('#hsn_sac_code').prop('readonly', true);
+                    // $('#item_description').val(result.item_description);    
+                    // $('#rate').val(result.rate);   
+                    if(gst_type == 'igst') {
+                        $('#gst').val(result.gst);  
+                        $('#cdc_boq_code').val(result.boq_code);    
+                        $('#hsn_sac_code').val(result.hsn_sac_code);    
+                        $('#hsn_sac_code').prop('readonly', true);
+                        $('#item_description').val(result.item_description);    
+                        $('#rate').val(result.rate);     
+                        $('#qty').val(result.qty);     
+                                          
+                    }else{
+                            
+                        $('#cdc_boq_code').val(result.boq_code);    
+                        $('#chsn_sac_code').val(result.hsn_sac_code);    
+                        $('#chsn_sac_code').prop('readonly', true);
+                        $('#citem_description').val(result.item_description);    
+                        $('#crate').val(result.rate);
+                        $('#cqty').val(result.qty);
+                        $('#cunit').val(result.unit);    
+                        $('#cunit').prop('readonly', true);   
+
+
+                        $('#sgst').val(result.gst/2);    
+                        $('#cgst').val(result.gst/2);    
+                    }
+                    $('#citem_description').prop('readonly', true);
+                    $('#unit').val(result.unit);    
+                    $('#unit').prop('readonly', true);
+                    $('#avl_qty').val('12');    
+                    $('#avl_qty').prop('readonly', true);
+                }else{    
+                    $('#hsn_sac_code').prop('readonly', false);
+                    $('#item_description').prop('readonly', false);
+                    $('#unit').prop('readonly', false);
+                    $('#avl_qty').prop('readonly', false);
+
+
+                    $('#hsn_sac_code').val(''); 
+                    $('#item_description').val('');
+                    $('#unit').val('');  
+                    $('#scheduled_qty').val('');  
+                    $('#design_qty').val('');
+                    $('#sgst').val(''); 
+                    $('#gst').val(''); 
+                    $('#cgst').val(''); 
+                    $('#sgst_amount').val(''); 
+                    $('#cgst_amount').val(''); 
+                    $('#taxable_amount').val(''); 
+                    $('#rate_basic').val('');  
+                    $('#qty').val('');  
+                    $('#amount').val('');  
+                    $('#rate').val('');  
+                    $('#total_amount').val('');  
+                    $('#non_schedule_yes').prop('checked', false);
+                }        
+            }
+    });
+});
+
+
 
 
 $(document).on('keyup', '#boq_code', function() {
@@ -562,7 +805,8 @@ $(document).on('keyup', '#boq_code', function() {
                 if(result.boq_code !== '' && typeof result.boq_code !== "undefined"){
                     $('#boq_code').val(result.boq_code);    
                     //$('#boq_code').prop('readonly', true);
-                    $('#hsn_sac_code').val(result.hsn_sac_code);    
+
+                    $('#hsn_sac_code').val(result.hsn_sac_code);     
                     $('#hsn_sac_code').prop('readonly', true);
                     $('#item_description').val(result.item_description);    
                     $('#item_description').prop('readonly', true);
@@ -594,6 +838,14 @@ $(document).on('keyup', '#boq_code', function() {
                     $('#gst').prop('readonly', false);
                     $('#non_schedule_yes').prop('checked', false);
                     $('#non_schedule_no').prop('checked', true);
+                    $('#hsn_sac_code').val(''); 
+                    $('#item_description').val('');
+                    $('#unit').val('');  
+                    $('#scheduled_qty').val('');  
+                    $('#design_qty').val('');
+                    $('#gst').val(''); 
+                    $('#rate_basic').val('');  
+                    $('#non_schedule_yes').prop('checked', false);
                 }        
             }
     });
@@ -1842,6 +2094,7 @@ $(document).ready(function(){
             k++;
             $(this).find('input[type=radio]').val(k);
         });  
+
         var total_amt = 0;
         var gst_amt = 0;
         var final_amt = 0;
@@ -1864,14 +2117,162 @@ $(document).ready(function(){
 
 
     });
+
+
+
+
+
+    $(document).on('click','.deletePerfomaInvcRow', function(){ 
+        $(this).closest('tr').remove();  
+        var gst_type = $('#gst_type').val(); 
+        var k=0; 
+        $("tbody.addPerfomaInvcRow  tr").each(function() {
+            k++;
+            $(this).find('input[type=radio]').val(k);
+        });
+
+            if(gst_type == "cgst_sgst"){
+   
+
+                var total_amt = 0;
+                                var gst_amt = 0;
+                                var cgst_amt = 0;
+                                var final_amt = 0;
+                                $("input[name='ctaxable_amount[]']").each(function(){
+                                    total_amt += parseFloat($(this).val());
+                                });
+                                $('#subtotal').html(total_amt.toFixed(2));
+
+                                if(total_amt > 0){
+                                    $("input[name='sgst_amount[]']").each(function(){
+                                        gst_amt += parseFloat($(this).val());
+                                    });
+
+                                    $("input[name='cgst_amount[]']").each(function(){
+                                        cgst_amt += parseFloat($(this).val());
+                                    });
+                                    
+                                    gst_amt = parseFloat(gst_amt);   
+                                    cgst_amt = parseFloat(cgst_amt);   
+                                }
+
+                                $('.gst_amt').html(gst_amt.toFixed(2));
+                                final_amt = parseFloat(gst_amt) + parseFloat(cgst_amt) + parseFloat(total_amt) + parseFloat(final_amt);
+                                console.log(final_amt);
+                                $('#finaltotalaq').html(final_amt.toFixed(2));
+
+            }else{
+
+                var total_amt = 0;
+                                var gst_amt = 0;
+                                var final_amt = 0;
+                                $("input[name='itaxable_amount[]']").each(function(){
+                                    total_amt += parseFloat($(this).val());
+                                });
+                                $('#subtotali').html(total_amt.toFixed(2));
+                                if(total_amt > 0){
+
+                                    $("input[name='itotal_amount[]']").each(function(){
+                                        gst_amt += parseFloat($(this).val());
+                                    });
+
+                                    // gst_amt = parseFloat(total_amt) * 0.09;   
+                                }
+                                $('.cgst_amt').html(gst_amt.toFixed(2));
+                                final_amt = parseFloat(gst_amt) + parseFloat(total_amt);
+                                $('#finaltotal').html(final_amt.toFixed(2));
+
+
+
+
+
+
+
+            }
+
+    });
+
+
+
+
+
+
+
+
+
+
     $(document).on('click','.deleteTaxInvcRow', function(){ 
-        $(this).closest('tr').remove();   
+        $(this).closest('tr').remove();  
+        var gst_type = $('#gst_type').val(); 
         var k=0; 
         $("tbody.addTaxInvcRow  tr").each(function() {
             k++;
             $(this).find('input[type=radio]').val(k);
-        });  
+        });
+
+            if(gst_type == "cgst_sgst"){
+   
+
+                var total_amt = 0;
+                                var gst_amt = 0;
+                                var cgst_amt = 0;
+                                var final_amt = 0;
+                                $("input[name='ctaxable_amount[]']").each(function(){
+                                    total_amt += parseFloat($(this).val());
+                                });
+                                $('#subtotal').html(total_amt.toFixed(2));
+
+                                if(total_amt > 0){
+                                    $("input[name='sgst_amount[]']").each(function(){
+                                        gst_amt += parseFloat($(this).val());
+                                    });
+
+                                    $("input[name='cgst_amount[]']").each(function(){
+                                        cgst_amt += parseFloat($(this).val());
+                                    });
+                                    
+                                    gst_amt = parseFloat(gst_amt);   
+                                    cgst_amt = parseFloat(cgst_amt);   
+                                }
+
+                                $('.gst_amt').html(gst_amt.toFixed(2));
+                                final_amt = parseFloat(gst_amt) + parseFloat(cgst_amt) + parseFloat(total_amt) + parseFloat(final_amt);
+                                console.log(final_amt);
+                                $('#finaltotalaq').html(final_amt.toFixed(2));
+
+            }else{
+
+                var total_amt = 0;
+                                var gst_amt = 0;
+                                var final_amt = 0;
+                                $("input[name='itaxable_amount[]']").each(function(){
+                                    total_amt += parseFloat($(this).val());
+                                });
+                                $('#subtotali').html(total_amt.toFixed(2));
+                                if(total_amt > 0){
+
+                                    $("input[name='itotal_amount[]']").each(function(){
+                                        gst_amt += parseFloat($(this).val());
+                                    });
+
+                                    // gst_amt = parseFloat(total_amt) * 0.09;   
+                                }
+                                $('.cgst_amt').html(gst_amt.toFixed(2));
+                                final_amt = parseFloat(gst_amt) + parseFloat(total_amt);
+                                $('#finaltotal').html(final_amt.toFixed(2));
+
+
+
+
+
+
+
+            }
+
     });
+
+
+
     
     $(document).on('click','.deletedcpwipRow', function(){ 
         $(this).closest('tr').remove();   
@@ -1892,38 +2293,277 @@ $(document).ready(function(){
     });
     $(document).on('keyup','#qty',function()
     {        
+        var gst_type = $('#gst_type').val();
         var qty = document.getElementById("qty").value;
         var rate = document.getElementById("rate").value;
-        var gst = document.getElementById("gst").value;
-        if(qty > 0 && rate > 0 && gst >0){
+        if(gst_type != 'igst'){
+
+            var sgst = document.getElementById("sgst").value;
+            var cgst = document.getElementById("cgst").value;
+        }
+        if(gst_type == 'igst'){
+
+            var gst = document.getElementById("gst").value;
+        }
+        
+        if(qty > 0 && rate > 0 ){
             var amount = qty * rate;
-            var tax_amount = (gst / 100) * amount;
+            // var tax_amount = (gst / 100) * amount;
+            if(gst_type == 'igst'){
+                var igst_amount = (gst / 100) * amount;
+
+                $('#itotal_amount').val(igst_amount);
+               
+                $('#itaxable_amount').val(amount);
+
+
+            }
             
-            $('#taxable_amount').val(tax_amount);
-            $('#amount').val(amount);
-            $('#total_amount').val(amount + tax_amount);
+            $('#taxable_amount').val(amount);
+            // $('#amount').val(amount);
+            // $('#total_amount').val(amount + tax_amount);
         }else{
-            $('#amount').val('0');
+            // $('#amount').val('0');
             $('#taxable_amount').val('0');
             $('#total_amount').val('0');
+
+            if(gst_type == 'igst'){
+                $('#itaxable_amount').val('0');
+            $('#itotal_amount').val('0');
+
+            }
+        }
+
+    if(qty > 0 && rate > 0 && sgst > 0){
+        var taxable_amount = document.getElementById("taxable_amount").value;
+        var sgst_amount = (sgst / 100) * taxable_amount;
+        $('#sgst_amount').val(sgst_amount);
+   
+    }else{
+        // $('#taxable_amount').val('0');
+        // $('#sgst').val('0');
+        $('#sgst_amount').val('0');
+      //  $('#cgst').val('0');
+        $('#cgst_amount').val('0');
+
+    }
+
+    if(qty > 0 && rate > 0 && cgst > 0){
+        var taxable_amount = document.getElementById("taxable_amount").value;
+        var cgst_amount = (sgst / 100) * taxable_amount;
+        $('#cgst_amount').val(cgst_amount);
+
+    }else{
+        // $('#taxable_amount').val('0');
+        // $('#cgst').val('0');
+        $('#cgst_amount').val('0');
+        $('#sgst_amount').val('0');
+
+    }
+    });
+    $(document).on('keyup','#cqty',function()
+    {        
+        var gst_type = $('#gst_type').val();
+        var qty = document.getElementById("cqty").value;
+        var rate = document.getElementById("crate").value;
+        if(gst_type != 'igst'){
+
+            var sgst = document.getElementById("sgst").value;
+            var cgst = document.getElementById("cgst").value;
+        }
+        
+        if(qty > 0 && rate > 0 ){
+            var amount = qty * rate;
+            // var tax_amount = (gst / 100) * amount;
+            if(gst_type == 'igst'){
+                var igst_amount = (gst / 100) * amount;
+
+                $('#itotal_amount').val(igst_amount);
+               
+                $('#ctaxable_amount').val(amount);
+
+
+            }
+            
+            $('#ctaxable_amount').val(amount);
+            // $('#amount').val(amount);
+            // $('#total_amount').val(amount + tax_amount);
+        }else{
+            // $('#amount').val('0');
+            $('#taxable_amount').val('0');
+            $('#total_amount').val('0');
+
+            if(gst_type == 'igst'){
+                $('#itaxable_amount').val('0');
+            $('#itotal_amount').val('0');
+
+            }
+        }
+
+    if(qty > 0 && rate > 0 && sgst > 0){
+        var taxable_amount = document.getElementById("ctaxable_amount").value;
+        var sgst_amount = (sgst / 100) * taxable_amount;
+        $('#sgst_amount').val(sgst_amount);
+   
+    }else{
+      
+        $('#sgst_amount').val('0');
+     
+        $('#cgst_amount').val('0');
+
+    }
+
+    if(qty > 0 && rate > 0 && cgst > 0){
+        var taxable_amount = document.getElementById("ctaxable_amount").value;
+        var cgst_amount = (sgst / 100) * taxable_amount;
+        $('#cgst_amount').val(cgst_amount);
+
+    }else{
+       
+        $('#cgst_amount').val('0');
+        $('#sgst_amount').val('0');
+
+    }
+    });
+    $(document).on('keyup','#sgst',function()
+    {        
+        var taxable_amount = document.getElementById("taxable_amount").value;
+        var rate = document.getElementById("rate").value;
+        var qty = document.getElementById("qty").value;
+        var sgst = document.getElementById("sgst").value;
+        if(sgst > 28){
+            $('#sgst').val('28');
+            $('#cgst').val('28');
+        }
+        $('#cgst').val(sgst);
+       
+        if(qty > 0 && rate > 0  && sgst > 0 ){
+            // var amount = qty * rate;
+            var sgst_amount = (sgst / 100) * taxable_amount;
+            
+            $('#sgst_amount').val(sgst_amount);
+            $('#cgst_amount').val(sgst_amount);
+            // $('#amount').val(amount);
+            // $('#total_amount').val(amount + tax_amount);
+        }else{
+            // $('#amount').val('0');
+            $('#sgst_amount').val('0');
+            $('#cgst_amount').val('0');
+            // $('#total_amount').val('0');
+        }
+    });
+    $(document).on('keyup','#cgst',function()
+    {        
+        var taxable_amount = document.getElementById("taxable_amount").value;
+        var rate = document.getElementById("rate").value;
+        var qty = document.getElementById("qty").value;
+        var cgst = document.getElementById("cgst").value;
+        if(cgst > 28){
+            $('#cgst').val('28');
+            $('#sgst').val('28');
+        }
+
+        $('#sgst').val(cgst);
+        if(qty > 0 && rate > 0 && cgst > 0 ){
+            // var amount = qty * rate;
+            var cgst_amount = (cgst / 100) * taxable_amount;
+            
+            $('#cgst_amount').val(cgst_amount);
+            $('#sgst_amount').val(cgst_amount);
+            // $('#amount').val(amount);
+            // $('#total_amount').val(amount + tax_amount);
+        }else{
+            // $('#amount').val('0');
+            $('#cgst_amount').val('0');
+            $('#sgst_amount').val('0');
+            // $('#total_amount').val('0');
         }
     });
     $(document).on('keyup','#rate',function()
-    {        
+    {      
+        var gst_type = $('#gst_type').val();  
         var qty = document.getElementById("qty").value;
         var rate = document.getElementById("rate").value;
-        var gst = document.getElementById("gst").value;
-        if(qty > 0 && rate > 0 && gst >0){
-            var amount = qty * rate;
-            var tax_amount = (gst / 100) * amount;
-            $('#taxable_amount').val(tax_amount);
-            $('#amount').val(amount);
-            $('#taxable_amount').val(amount + tax_amount);
-        }else{
-            $('#amount').val('0');
-            $('#taxable_amount').val('0');
-            $('#total_amount').val('0');
+        if(gst_type != 'igst'){
+
+            var sgst = document.getElementById("sgst").value;
+            var cgst = document.getElementById("cgst").value;
+
+            if(qty > 0 && rate > 0 && sgst >0 &&  cgst >0){
+                var amount = qty * rate;
+                var sgst_amount = (sgst / 100) * amount;
+                var cgst_amount = (cgst / 100) * amount;
+                $('#taxable_amount').val(amount);
+                $('#sgst_amount').val(sgst_amount);
+                $('#cgst_amount').val(cgst_amount);
+                // $('#taxable_amount').val(amount + tax_amount);
+            }else{
+                // $('#amount').val('0');
+                $('#taxable_amount').val('0');
+                $('#sgst_amount').val('0');
+                $('#cgst_amount').val('0');
+                // $('#total_amount').val('0');
+            }
+
+
+
+
         }
+        if(gst_type == 'igst'){
+            var gst = document.getElementById("gst").value;
+            if(qty > 0 && rate > 0){
+                var amount = qty * rate;
+                var igst_amount = (gst / 100) * amount;
+
+                $('#itotal_amount').val(igst_amount);
+                $('#itaxable_amount').val(amount);
+               
+
+
+
+            }else{
+                $('#itotal_amount').val('0');
+                $('#itaxable_amount').val('0');
+
+            }
+
+        }
+
+        
+    });
+    $(document).on('keyup','#crate',function()
+    {      
+        var gst_type = $('#gst_type').val();  
+        var qty = document.getElementById("cqty").value;
+        var rate = document.getElementById("crate").value;
+          
+        if(gst_type != 'igst'){
+
+            var sgst = document.getElementById("sgst").value;
+            var cgst = document.getElementById("cgst").value;
+
+            if(qty > 0 && rate > 0 && sgst >0 &&  cgst >0){
+                var amount = qty * rate;
+                var sgst_amount = (sgst / 100) * amount;
+                var cgst_amount = (cgst / 100) * amount;
+                $('#ctaxable_amount').val(amount);
+                $('#sgst_amount').val(sgst_amount);
+                $('#cgst_amount').val(cgst_amount);
+                // $('#taxable_amount').val(amount + tax_amount);
+            }else{
+                // $('#amount').val('0');
+                $('#ctaxable_amount').val('0');
+                $('#sgst_amount').val('0');
+                $('#cgst_amount').val('0');
+                // $('#total_amount').val('0');
+            }
+
+
+
+
+        }
+        
+        
     });
     $(document).on('keyup','#gst',function()
     {        
@@ -1945,237 +2585,593 @@ $(document).ready(function(){
     
     $(document).on('click','.addTaxInvcRow',function()
     {        
-      
-        var maintml = $(this);
-        var boq_code = document.getElementById("dc_boq_code").value;
-        var hsn_sac_code = document.getElementById("hsn_sac_code").value;
-        var item_description = document.getElementById("item_description").value;
-        var unit = document.getElementById("unit").value;
-        var qty = document.getElementById("qty").value;
-        var rate = document.getElementById("rate").value;
-        var taxable_amount = document.getElementById("taxable_amount").value;
-        var gst = document.getElementById("gst").value;
-            console.log('taxable_amount');
-        if(qty > 0 && rate > 0){
-            var amount = qty * rate;
-            var tax_amount = (gst / 100) * amount;
-            var total_amount = amount + tax_amount;
+
+        var gst_type = $('#gst_type').val();
+       
+        console.log(gst_type == "cgst_sgst");
+
+        if(gst_type == "cgst_sgst"){
+
+            
+            var maintml = $(this);
+            var boq_code = document.getElementById("cdc_boq_code").value;
+            var hsn_sac_code = document.getElementById("chsn_sac_code").value;
+            var item_description = document.getElementById("citem_description").value;
+            var unit = document.getElementById("cunit").value;
+            var qty = document.getElementById("cqty").value;
+            var rate = document.getElementById("crate").value;
+            var taxable_amount = document.getElementById("ctaxable_amount").value;
+            var sgst = document.getElementById("sgst").value;
+            var sgst_amount = document.getElementById("sgst_amount").value;
+            var cgst = document.getElementById("cgst").value;
+            var cgst_amount = document.getElementById("cgst_amount").value;
+               
+            // if(qty > 0 && rate > 0){
+            //     var amount = qty * rate;
+            //     var tax_amount = (gst / 100) * amount;
+            //     var total_amount = amount + tax_amount;
+            // }else{
+            //     var amount = 0;
+            //     var total_amount = 0;
+            // }
+
+            if(boq_code == '' || hsn_sac_code == '' || item_description == '' || unit == '' || qty < 1 || rate < 1 || taxable_amount < 1){
+                $('.invaliderror').addClass('has-error-p');
+            }
+            else{
+                var project_id = $('#project_id').val();
+                // var url = 'get_proforma_boq_item_details';
+                var url = 'get_boq_item_details';
+               
+                $.ajax({
+                        type:'POST',
+                        url:completeURL(url), 
+                        dataType:'json',
+                        data:{project_id:project_id,boq_code:boq_code},
+                        success:function(result){
+                            if(result.boq_code !== '' && typeof result.boq_code !== "undefined"){
+                                boq_code_no = [];
+                                $("input[name='cboq_code[]']").each(function(){
+                                    boq_code_no.push($(this).val());
+                                });
+                                if ($.inArray(boq_code, boq_code_no) != -1){
+                                    $('#invaliderrorid').html('BOQ Sr No ('+boq_code+') Details Already Exist!');
+                                    $('#cdc_boq_code').val('');
+                                    $('#hsn_sac_code').val('');
+                                    $('#item_description').val('');
+                                    $('#unit').val('');
+                                    $('#qty').val('');
+                                    $('#gst').val('');
+                                    $('#taxable_amount').val('');
+                                    $('#rate').val('');
+                                    $('#taxable_amount').val('');
+                                    $('#sgst').val('');
+                                    $('#sgst_amount').val('');
+                                    $('#cgst_amount').val('');
+                                    $('#cgst').val('');
+                                    // $('#total_amount').val('');
+                                    $('#hsn_sac_code').prop('readonly', false);
+                                    $('#item_description').prop('readonly', false);
+                                    $('#unit').prop('readonly', false);
+                                }else{
+                                var html='<tr><td>'
+                                +'<input type="text" class="form-control" name="cboq_code[]" value="'+boq_code+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="chsn_sac_code[]" value="'+hsn_sac_code+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="citem_description[]" value="'+item_description+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="cunit[]" value="'+unit+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="cqty[]" value="'+qty+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="crate[]" value="'+rate+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="ctaxable_amount[]" value="'+taxable_amount+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="sgst[]" value="'+sgst+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="sgst_amount[]" value="'+sgst_amount+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="cgst[]" value="'+cgst+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="cgst_amount[]" value="'+cgst_amount+'" readonly style="font-size: 12px;"></td>'
+                                +'<td>'
+                                +'<div class="addDeleteButton">'
+                                +'<span class="tooltips deleteTaxInvcRow" data-placement="top" data-original-title="Remove" style="cursor: pointer;"><i class="fa fa-trash-o"></i></span>'  
+                                +'</div></td></tr>';
+                                $('.invaliderror').removeClass('has-error-p');
+                                $('#invaliderrorid').html('');
+                                var clonedRow = $(this).parents('tbody.addTaxInvcRow').find('tr:first').clone();
+                                clonedRow.find('input:not(.ftype)').val('');
+                                clonedRow.find('textarea').val('');
+                                clonedRow.find('select').val(''); 
+                                clonedRow.find('.select2-container').remove(); 
+                                clonedRow.find("select").select2();   
+                                clonedRow.find('.tooltip').css('display','none');  
+                                clonedRow.find('div.addDeleteButton').html('<span class="tooltips deleteParticularRow" data-placement="top" data-original-title="Remove" style="cursor: pointer;"><i class="fa fa-trash-o"></i></span>');
+                                clonedRow.find('.tooltips').tooltip({placement: 'top'});
+                                // $(maintml).parents('#taxinvcdisplay tbody').find("tr:last").before(html);
+                                $(maintml).parents('#taxinvcdisplaysgst tbody').find("tr:last").before(html);
+                                $('#cdc_boq_code').val('');
+                                $('#chsn_sac_code').val('');
+                                $('#citem_description').val('');
+                                $('#cunit').val('');
+                                $('#cqty').val('');
+                                $('#crate').val('');
+                                $('#cgst').val('');
+                                $('#sgst').val('');
+                                $('#ctaxable_amount').val('');
+                                $('#sgst_amount').val('');
+                                $('#cgst_amount').val('');
+                                $('#cgst_amount').val('');
+                                // $('#total_amount').val('');
+                                $('#chsn_sac_code').prop('readonly', false);
+                                
+                                // $('#taxable_amount').prop('readonly', false);
+                                $('#citem_description').prop('readonly', false);
+                                $('#cunit').prop('readonly', false);
+                                var total_amt = 0;
+                                var gst_amt = 0;
+                                var cgst_amt = 0;
+                                var final_amt = 0;
+                                $("input[name='ctaxable_amount[]']").each(function(){
+                                    total_amt += parseFloat($(this).val());
+                                });
+                                $('#subtotal').html(total_amt.toFixed(2));
+
+                                if(total_amt > 0){
+                                    $("input[name='sgst_amount[]']").each(function(){
+                                        gst_amt += parseFloat($(this).val());
+                                    });
+
+                                    $("input[name='cgst_amount[]']").each(function(){
+                                        cgst_amt += parseFloat($(this).val());
+                                    });
+                                    
+                                    gst_amt = parseFloat(gst_amt);   
+                                    cgst_amt = parseFloat(cgst_amt);   
+                                }
+
+                                $('.gst_amt').html(gst_amt.toFixed(2));
+                                final_amt = parseFloat(gst_amt) + parseFloat(cgst_amt) + parseFloat(total_amt) + parseFloat(final_amt);
+                                console.log(final_amt);
+                                $('#finaltotalaq').html(final_amt.toFixed(2));
+                                }
+                            }else{    
+                                $('#invaliderrorid').html('BOQ Sr No ('+boq_code+') Details Not Available!');
+                            }        
+                        }
+                });
+            }
+            if (jQuery().datepicker) {
+                $('.date-picker').datepicker({
+                    orientation: "right",
+                    autoclose: true,
+                });
+            } 
+            Metronic.init();
+
+  
         }else{
-            var amount = 0;
-            var total_amount = 0;
-        }
-        if(boq_code == '' || hsn_sac_code == '' || item_description == '' || unit == '' || qty < 1 || rate < 1){
-            $('.invaliderror').addClass('has-error-p');
-        }else{
-            var project_id = $('#project_id').val();
-            // var url = 'get_proforma_boq_item_details';
-            var url = 'get_boq_item_details';
            
-            $.ajax({
-                    type:'POST',
-                    url:completeURL(url), 
-                    dataType:'json',
-                    data:{project_id:project_id,boq_code:boq_code},
-                    success:function(result){
-                        if(result.boq_code !== '' && typeof result.boq_code !== "undefined"){
-                            boq_code_no = [];
-                        	$("input[name='boq_code[]']").each(function(){
-                        		boq_code_no.push($(this).val());
-                        	});
-                        	if ($.inArray(boq_code, boq_code_no) != -1){
-                        	    $('#invaliderrorid').html('BOQ Sr No ('+boq_code+') Details Already Exist!');
+            var maintml = $(this);
+            var boq_code = document.getElementById("idc_boq_code").value;
+            var hsn_sac_code = document.getElementById("hsn_sac_code").value;
+            var item_description = document.getElementById("item_description").value;
+            var unit = document.getElementById("unit").value;
+            var qty = document.getElementById("qty").value;
+            var rate = document.getElementById("rate").value;
+            var taxable_amount = document.getElementById("itaxable_amount").value;
+            var gst = document.getElementById("gst").value;
+            var total_amount = document.getElementById("itotal_amount").value;
+
+            if(boq_code == '' || hsn_sac_code == '' || item_description == '' || unit == '' || qty < 1 || rate < 1 || taxable_amount < 1){
+                $('.invaliderror').addClass('has-error-p');
+            } else{
+                var project_id = $('#project_id').val();
+                // var url = 'get_proforma_boq_item_details';
+                var url = 'get_boq_item_details';
+               
+                $.ajax({
+                        type:'POST',
+                        url:completeURL(url), 
+                        dataType:'json',
+                        data:{project_id:project_id,boq_code:boq_code},
+                        success:function(result){
+                            console.log(result);
+                            if(result.boq_code !== '' && typeof result.boq_code !== "undefined"){
+                                boq_code_no = [];
+                                $("input[name='iboq_code[]']").each(function(){
+                                    boq_code_no.push($(this).val());
+                                });
+                                console.log(boq_code_no);
+                                if ($.inArray(boq_code, boq_code_no) != -1){
+                                    $('#invaliderrorid').html('BOQ Sr No ('+boq_code+') Details Already Exist!');
+                                    $('#dc_boq_code').val('');
+                                    $('#hsn_sac_code').val('');
+                                    $('#item_description').val('');
+                                    $('#unit').val('');
+                                    $('#qty').val('');
+                                    $('#gst').val('');
+                                    $('#itaxable_amount').val('');
+                                    $('#rate').val('');
+                                    $('#taxable_amount').val('');
+                                    $('#sgst').val('');
+                                    $('#sgst_amount').val('');
+                                    $('#cgst_amount').val('');
+                                    $('#cgst').val('');
+                                    $('#itotal_amount').val('');
+                                    $('#hsn_sac_code').prop('readonly', false);
+                                    $('#item_description').prop('readonly', false);
+                                    $('#unit').prop('readonly', false);
+                                }else{
+                                var html='<tr><td>'
+                                +'<input type="text" class="form-control" name="iboq_code[]" value="'+boq_code+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="hsn_sac_code[]" value="'+hsn_sac_code+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="item_description[]" value="'+item_description+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="unit[]" value="'+unit+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="qty[]" value="'+qty+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="rate[]" value="'+rate+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="itaxable_amount[]" value="'+taxable_amount+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="gst[]" value="'+gst+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="itotal_amount[]" value="'+total_amount+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><div class="addDeleteButton">'
+                                +'<span class="tooltips deleteTaxInvcRow" data-placement="top" data-original-title="Remove" style="cursor: pointer;"><i class="fa fa-trash-o"></i></span>'  
+                                +'</td></div></td></tr>';
+                                $('.invaliderror').removeClass('has-error-p');
+                                $('#invaliderrorid').html('');
+                                var clonedRow = $(this).parents('tbody.addTaxInvcRow').find('tr:first').clone();
+                                clonedRow.find('input:not(.ftype)').val('');
+                                clonedRow.find('textarea').val('');
+                                clonedRow.find('select').val(''); 
+                                clonedRow.find('.select2-container').remove(); 
+                                clonedRow.find("select").select2();   
+                                clonedRow.find('.tooltip').css('display','none');  
+                                clonedRow.find('div.addDeleteButton').html('<span class="tooltips deleteParticularRow" data-placement="top" data-original-title="Remove" style="cursor: pointer;"><i class="fa fa-trash-o"></i></span>');
+                                clonedRow.find('.tooltips').tooltip({placement: 'top'});
+                                // $(maintml).parents('#taxinvcdisplay tbody').find("tr:last").before(html);
+                                $(maintml).parents('#taxinvcdisplay tbody').find("tr:last").before(html);
                                 $('#dc_boq_code').val('');
+                                $('#idc_boq_code').val('');
                                 $('#hsn_sac_code').val('');
                                 $('#item_description').val('');
                                 $('#unit').val('');
                                 $('#qty').val('');
-                                $('#gst').val('');
-                                $('#taxable_amount').val('');
                                 $('#rate').val('');
+                                // $('#cgst').val('');
+                                $('#gst').val('');
+                               // $('#sgst').val('');
+                                $('#itaxable_amount').val('');
+                                $('#sgst_amount').val('');
+                                $('#cgst_amount').val('');
                                 $('#amount').val('');
-                                $('#total_amount').val('');
+                                $('#itotal_amount').val('');
                                 $('#hsn_sac_code').prop('readonly', false);
+                                
+                                $('#itaxable_amount').prop('readonly', true);
                                 $('#item_description').prop('readonly', false);
                                 $('#unit').prop('readonly', false);
-                            }else{
-                            var html='<tr><td>'
-                            +'<input type="text" class="form-control" name="boq_code[]" value="'+boq_code+'" readonly style="font-size: 12px;"></td>'
-                            +'<td><input type="text" class="form-control" name="hsn_sac_code[]" value="'+hsn_sac_code+'" readonly style="font-size: 12px;"></td>'
-                            +'<td><input type="text" class="form-control" name="item_description[]" value="'+item_description+'" readonly style="font-size: 12px;"></td>'
-                            +'<td><input type="text" class="form-control" name="unit[]" value="'+unit+'" readonly style="font-size: 12px;"></td>'
-                            +'<td><input type="text" class="form-control" name="qty[]" value="'+qty+'" readonly style="font-size: 12px;"></td>'
-                            +'<td><input type="text" class="form-control" name="rate[]" value="'+rate+'" readonly style="font-size: 12px;"></td>'
-                            +'<td><input type="text" class="form-control" name="gst[]" value="'+gst+'" readonly style="font-size: 12px;"></td>'
-                            +'<td><input type="text" class="form-control" name="amount[]" value="'+amount+'" readonly style="font-size: 12px;"></td>'
-                            +'<td><input type="text" class="form-control" name="taxable_amount[]" value="'+taxable_amount+'" readonly style="font-size: 12px;"></td>'
-                            +'<td>'
-                            +'<td><input type="text" class="form-control" name="total_amount[]" value="'+total_amount+'" readonly style="font-size: 12px;"></td>'
-                            +'<td>'
-                            +'<div class="addDeleteButton">'
-                            +'<span class="tooltips deleteTaxInvcRow" data-placement="top" data-original-title="Remove" style="cursor: pointer;"><i class="fa fa-trash-o"></i></span>'  
-                            +'</div></td></tr>';
-                            $('.invaliderror').removeClass('has-error-p');
-                            $('#invaliderrorid').html('');
-                            var clonedRow = $(this).parents('tbody.addTaxInvcRow').find('tr:first').clone();
-                            clonedRow.find('input:not(.ftype)').val('');
-                            clonedRow.find('textarea').val('');
-                            clonedRow.find('select').val(''); 
-                            clonedRow.find('.select2-container').remove(); 
-                            clonedRow.find("select").select2();   
-                            clonedRow.find('.tooltip').css('display','none');  
-                            //clonedRow.find('div.addDeleteButton').html('<span class="tooltips deleteParticularRow" data-placement="top" data-original-title="Remove" style="cursor: pointer;"><i class="fa fa-trash-o"></i></span>');
-                            clonedRow.find('.tooltips').tooltip({placement: 'top'});
-                            $(maintml).parents('#taxinvcdisplay tbody').find("tr:last").before(html);
-                            $('#dc_boq_code').val('');
-                            $('#hsn_sac_code').val('');
-                            $('#item_description').val('');
-                            $('#unit').val('');
-                            $('#qty').val('');
-                            $('#rate').val('');
-                            $('#gst').val('');
-                            $('#taxable_amount').val('');
-                            $('#amount').val('');
-                            $('#total_amount').val('');
-                            $('#hsn_sac_code').prop('readonly', false);
-                            $('#taxable_amount').prop('readonly', false);
-                            $('#item_description').prop('readonly', false);
-                            $('#unit').prop('readonly', false);
-                            var total_amt = 0;
-                        	var gst_amt = 0;
-                        	var final_amt = 0;
-                        	$("input[name='amount[]']").each(function(){
-                        		total_amt += parseFloat($(this).val());
-                        	});
-                        	$('#subtotal').html(total_amt.toFixed(2));
-                            if(total_amt > 0){
-                                gst_amt = parseFloat(total_amt) * 0.09;   
-                            }
-                            $('.gst_amt').html(gst_amt.toFixed(2));
-                            final_amt = parseFloat(gst_amt) + parseFloat(gst_amt) + parseFloat(total_amt);
-                            $('#finaltotal').html(final_amt.toFixed(2));
-                            }
-                        }else{    
-                            $('#invaliderrorid').html('BOQ Sr No ('+boq_code+') Details Not Available!');
-                        }        
-                    }
-            });
+                                var total_amt = 0;
+                                var gst_amt = 0;
+                                var final_amt = 0;
+                                $("input[name='itaxable_amount[]']").each(function(){
+                                    total_amt += parseFloat($(this).val());
+                                });
+                                $('#subtotali').html(total_amt.toFixed(2));
+                                if(total_amt > 0){
+
+                                    $("input[name='itotal_amount[]']").each(function(){
+                                        gst_amt += parseFloat($(this).val());
+                                    });
+
+                                    // gst_amt = parseFloat(total_amt) * 0.09;   
+                                }
+                                $('.cgst_amt').html(gst_amt.toFixed(2));
+                                final_amt = parseFloat(gst_amt) + parseFloat(total_amt);
+                                $('#finaltotal').html(final_amt.toFixed(2));
+                                }
+                            }else{    
+                                $('#invaliderrorid').html('BOQ Sr No ('+boq_code+') Details Not Available!');
+                            }        
+                        }
+                });
+            }
+            if (jQuery().datepicker) {
+                $('.date-picker').datepicker({
+                    orientation: "right",
+                    autoclose: true,
+                });
+            } 
+            Metronic.init();  
         }
-        if (jQuery().datepicker) {
-            $('.date-picker').datepicker({
-                orientation: "right",
-                autoclose: true,
-            });
-        } 
-        Metronic.init();
     });
     
-    $(document).on('click','.addProformaInvcRow',function()
+    $(document).on('click','.addPerfomaInvcRow',function()
     {        
-        var maintml = $(this);
-        var boq_code = document.getElementById("dc_boq_code").value;
-        var hsn_sac_code = document.getElementById("hsn_sac_code").value;
-        var item_description = document.getElementById("item_description").value;
-        var unit = document.getElementById("unit").value;
-        var qty = document.getElementById("qty").value;
-        var rate = document.getElementById("rate").value;
-        if(qty > 0 && rate > 0){
-            var amount = qty * rate;
+
+        var gst_type = $('#gst_type').val();
+       
+        console.log(gst_type == "cgst_sgst");
+
+        if(gst_type == "cgst_sgst"){
+
+            
+            var maintml = $(this);
+            var boq_code = document.getElementById("cdc_boq_code").value;
+            var hsn_sac_code = document.getElementById("chsn_sac_code").value;
+            var item_description = document.getElementById("citem_description").value;
+            var unit = document.getElementById("cunit").value;
+            var qty = document.getElementById("cqty").value;
+            var rate = document.getElementById("crate").value;
+            var taxable_amount = document.getElementById("ctaxable_amount").value;
+            var sgst = document.getElementById("sgst").value;
+            var sgst_amount = document.getElementById("sgst_amount").value;
+            var cgst = document.getElementById("cgst").value;
+            var cgst_amount = document.getElementById("cgst_amount").value;
+               
+            // if(qty > 0 && rate > 0){
+            //     var amount = qty * rate;
+            //     var tax_amount = (gst / 100) * amount;
+            //     var total_amount = amount + tax_amount;
+            // }else{
+            //     var amount = 0;
+            //     var total_amount = 0;
+            // }
+
+            if(boq_code == '' || hsn_sac_code == '' || item_description == '' || unit == '' || qty < 1 || rate < 1 || taxable_amount < 1){
+                $('.invaliderror').addClass('has-error-p');
+            }
+            else{
+                var project_id = $('#project_id').val();
+                // var url = 'get_proforma_boq_item_details';
+                var url = 'get_boq_item_details';
+               
+                $.ajax({
+                        type:'POST',
+                        url:completeURL(url), 
+                        dataType:'json',
+                        data:{project_id:project_id,boq_code:boq_code},
+                        success:function(result){
+                            if(result.boq_code !== '' && typeof result.boq_code !== "undefined"){
+                                boq_code_no = [];
+                                $("input[name='cboq_code[]']").each(function(){
+                                    boq_code_no.push($(this).val());
+                                });
+                                if ($.inArray(boq_code, boq_code_no) != -1){
+                                    $('#invaliderrorid').html('BOQ Sr No ('+boq_code+') Details Already Exist!');
+                                    $('#cdc_boq_code').val('');
+                                    $('#hsn_sac_code').val('');
+                                    $('#item_description').val('');
+                                    $('#unit').val('');
+                                    $('#qty').val('');
+                                    $('#gst').val('');
+                                    $('#taxable_amount').val('');
+                                    $('#rate').val('');
+                                    $('#taxable_amount').val('');
+                                    $('#sgst').val('');
+                                    $('#sgst_amount').val('');
+                                    $('#cgst_amount').val('');
+                                    $('#cgst').val('');
+                                    // $('#total_amount').val('');
+                                    $('#hsn_sac_code').prop('readonly', false);
+                                    $('#item_description').prop('readonly', false);
+                                    $('#unit').prop('readonly', false);
+                                }else{
+                                var html='<tr><td>'
+                                +'<input type="text" class="form-control" name="cboq_code[]" value="'+boq_code+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="chsn_sac_code[]" value="'+hsn_sac_code+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="citem_description[]" value="'+item_description+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="cunit[]" value="'+unit+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="cqty[]" value="'+qty+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="crate[]" value="'+rate+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="ctaxable_amount[]" value="'+taxable_amount+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="sgst[]" value="'+sgst+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="sgst_amount[]" value="'+sgst_amount+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="cgst[]" value="'+cgst+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="cgst_amount[]" value="'+cgst_amount+'" readonly style="font-size: 12px;"></td>'
+                                +'<td>'
+                                +'<div class="addDeleteButton">'
+                                +'<span class="tooltips deletePerfomaInvcRow" data-placement="top" data-original-title="Remove" style="cursor: pointer;"><i class="fa fa-trash-o"></i></span>'  
+                                +'</div></td></tr>';
+                                $('.invaliderror').removeClass('has-error-p');
+                                $('#invaliderrorid').html('');
+                                var clonedRow = $(this).parents('tbody.addTaxInvcRow').find('tr:first').clone();
+                                clonedRow.find('input:not(.ftype)').val('');
+                                clonedRow.find('textarea').val('');
+                                clonedRow.find('select').val(''); 
+                                clonedRow.find('.select2-container').remove(); 
+                                clonedRow.find("select").select2();   
+                                clonedRow.find('.tooltip').css('display','none');  
+                                clonedRow.find('div.addDeleteButton').html('<span class="tooltips deleteParticularRow" data-placement="top" data-original-title="Remove" style="cursor: pointer;"><i class="fa fa-trash-o"></i></span>');
+                                clonedRow.find('.tooltips').tooltip({placement: 'top'});
+                                // $(maintml).parents('#taxinvcdisplay tbody').find("tr:last").before(html);
+                                $(maintml).parents('#taxperfomadisplaysgsts tbody').find("tr:last").before(html);
+                                $('#cdc_boq_code').val('');
+                                $('#chsn_sac_code').val('');
+                                $('#citem_description').val('');
+                                $('#cunit').val('');
+                                $('#cqty').val('');
+                                $('#crate').val('');
+                                $('#cgst').val('');
+                                $('#sgst').val('');
+                                $('#ctaxable_amount').val('');
+                                $('#sgst_amount').val('');
+                                $('#cgst_amount').val('');
+                                $('#cgst_amount').val('');
+                                // $('#total_amount').val('');
+                                $('#chsn_sac_code').prop('readonly', false);
+                                
+                                // $('#taxable_amount').prop('readonly', false);
+                                $('#citem_description').prop('readonly', false);
+                                $('#cunit').prop('readonly', false);
+                                var total_amt = 0;
+                                var gst_amt = 0;
+                                var cgst_amt = 0;
+                                var final_amt = 0;
+                                $("input[name='ctaxable_amount[]']").each(function(){
+                                    total_amt += parseFloat($(this).val());
+                                });
+                                $('#subtotal').html(total_amt.toFixed(2));
+
+                                if(total_amt > 0){
+                                    $("input[name='sgst_amount[]']").each(function(){
+                                        gst_amt += parseFloat($(this).val());
+                                    });
+
+                                    $("input[name='cgst_amount[]']").each(function(){
+                                        cgst_amt += parseFloat($(this).val());
+                                    });
+                                    
+                                    gst_amt = parseFloat(gst_amt);   
+                                    cgst_amt = parseFloat(cgst_amt);   
+                                }
+
+                                $('.gst_amt').html(gst_amt.toFixed(2));
+                                final_amt = parseFloat(gst_amt) + parseFloat(cgst_amt) + parseFloat(total_amt) + parseFloat(final_amt);
+                                console.log(final_amt);
+                                $('#finaltotalaq').html(final_amt.toFixed(2));
+                                }
+                            }else{    
+                                $('#invaliderrorid').html('BOQ Sr No ('+boq_code+') Details Not Available!');
+                            }        
+                        }
+                });
+            }
+            if (jQuery().datepicker) {
+                $('.date-picker').datepicker({
+                    orientation: "right",
+                    autoclose: true,
+                });
+            } 
+            Metronic.init();
+
+  
         }else{
-            var amount = 0;
-        }
-        if(boq_code == '' || hsn_sac_code == '' || item_description == '' || unit == '' || qty < 1 || rate < 1){
-            $('.invaliderror').addClass('has-error-p');
-        }else{
-            var project_id = $('#project_id').val();
-            // var url = 'get_wip_boq_item_details';
-            var url = 'get_boq_item_details';
-            $.ajax({
-                    type:'POST',
-                    url:completeURL(url), 
-                    dataType:'json',
-                    data:{project_id:project_id,boq_code:boq_code},
-                    success:function(result){
-                        
-                        if(result.boq_code !== '' && typeof result.boq_code !== "undefined"){
-                            boq_code_no = [];
-                        	$("input[name='boq_code[]']").each(function(){
-                        		boq_code_no.push($(this).val());
-                        	});
-                        	if ($.inArray(boq_code, boq_code_no) != -1){
-                        	    $('#invaliderrorid').html('BOQ Sr No ('+boq_code+') Details Already Exist!');
+           
+            var maintml = $(this);
+            var boq_code = document.getElementById("idc_boq_code").value;
+            var hsn_sac_code = document.getElementById("hsn_sac_code").value;
+            var item_description = document.getElementById("item_description").value;
+            var unit = document.getElementById("unit").value;
+            var qty = document.getElementById("qty").value;
+            var rate = document.getElementById("rate").value;
+            var taxable_amount = document.getElementById("itaxable_amount").value;
+            var gst = document.getElementById("gst").value;
+            var total_amount = document.getElementById("itotal_amount").value;
+
+            if(boq_code == '' || hsn_sac_code == '' || item_description == '' || unit == '' || qty < 1 || rate < 1 || taxable_amount < 1){
+                $('.invaliderror').addClass('has-error-p');
+            } else{
+                var project_id = $('#project_id').val();
+                // var url = 'get_proforma_boq_item_details';
+                var url = 'get_boq_item_details';
+               
+                $.ajax({
+                        type:'POST',
+                        url:completeURL(url), 
+                        dataType:'json',
+                        data:{project_id:project_id,boq_code:boq_code},
+                        success:function(result){
+                            console.log(result);
+                            if(result.boq_code !== '' && typeof result.boq_code !== "undefined"){
+                                boq_code_no = [];
+                                $("input[name='iboq_code[]']").each(function(){
+                                    boq_code_no.push($(this).val());
+                                });
+                                console.log(boq_code_no);
+                                if ($.inArray(boq_code, boq_code_no) != -1){
+                                    $('#invaliderrorid').html('BOQ Sr No ('+boq_code+') Details Already Exist!');
+                                    $('#dc_boq_code').val('');
+                                    $('#hsn_sac_code').val('');
+                                    $('#item_description').val('');
+                                    $('#unit').val('');
+                                    $('#qty').val('');
+                                    $('#gst').val('');
+                                    $('#itaxable_amount').val('');
+                                    $('#rate').val('');
+                                    $('#taxable_amount').val('');
+                                    $('#sgst').val('');
+                                    $('#sgst_amount').val('');
+                                    $('#cgst_amount').val('');
+                                    $('#cgst').val('');
+                                    $('#itotal_amount').val('');
+                                    $('#hsn_sac_code').prop('readonly', false);
+                                    $('#item_description').prop('readonly', false);
+                                    $('#unit').prop('readonly', false);
+                                }else{
+                                var html='<tr><td>'
+                                +'<input type="text" class="form-control" name="iboq_code[]" value="'+boq_code+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="hsn_sac_code[]" value="'+hsn_sac_code+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="item_description[]" value="'+item_description+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="unit[]" value="'+unit+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="qty[]" value="'+qty+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="rate[]" value="'+rate+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="itaxable_amount[]" value="'+taxable_amount+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="gst[]" value="'+gst+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><input type="text" class="form-control" name="itotal_amount[]" value="'+total_amount+'" readonly style="font-size: 12px;"></td>'
+                                +'<td><div class="addDeleteButton">'
+                                +'<span class="tooltips deletePerfomaInvcRow" data-placement="top" data-original-title="Remove" style="cursor: pointer;"><i class="fa fa-trash-o"></i></span>'  
+                                +'</td></div></td></tr>';
+                                $('.invaliderror').removeClass('has-error-p');
+                                $('#invaliderrorid').html('');
+                                var clonedRow = $(this).parents('tbody.addTaxInvcRow').find('tr:first').clone();
+                                clonedRow.find('input:not(.ftype)').val('');
+                                clonedRow.find('textarea').val('');
+                                clonedRow.find('select').val(''); 
+                                clonedRow.find('.select2-container').remove(); 
+                                clonedRow.find("select").select2();   
+                                clonedRow.find('.tooltip').css('display','none');  
+                                clonedRow.find('div.addDeleteButton').html('<span class="tooltips deleteParticularRow" data-placement="top" data-original-title="Remove" style="cursor: pointer;"><i class="fa fa-trash-o"></i></span>');
+                                clonedRow.find('.tooltips').tooltip({placement: 'top'});
+                                // $(maintml).parents('#taxinvcdisplay tbody').find("tr:last").before(html);
+                                $(maintml).parents('#proformainvcdisplay tbody').find("tr:last").before(html);
                                 $('#dc_boq_code').val('');
+                                $('#idc_boq_code').val('');
                                 $('#hsn_sac_code').val('');
                                 $('#item_description').val('');
                                 $('#unit').val('');
                                 $('#qty').val('');
                                 $('#rate').val('');
+                                // $('#cgst').val('');
+                                $('#gst').val('');
+                               // $('#sgst').val('');
+                                $('#itaxable_amount').val('');
+                                $('#sgst_amount').val('');
+                                $('#cgst_amount').val('');
                                 $('#amount').val('');
+                                $('#itotal_amount').val('');
                                 $('#hsn_sac_code').prop('readonly', false);
+                                
+                                $('#itaxable_amount').prop('readonly', true);
                                 $('#item_description').prop('readonly', false);
                                 $('#unit').prop('readonly', false);
-                            }else{
-                            var html='<tr><td>'
-                            +'<input type="text" class="form-control" name="boq_code[]" value="'+boq_code+'" readonly style="font-size: 12px;"></td>'
-                            +'<td><input type="text" class="form-control" name="hsn_sac_code[]" value="'+hsn_sac_code+'" readonly style="font-size: 12px;"></td>'
-                            +'<td><input type="text" class="form-control" name="item_description[]" value="'+item_description+'" readonly style="font-size: 12px;"></td>'
-                            +'<td><input type="text" class="form-control" name="unit[]" value="'+unit+'" readonly style="font-size: 12px;"></td>'
-                            +'<td><input type="text" class="form-control" name="qty[]" value="'+qty+'" readonly style="font-size: 12px;"></td>'
-                            +'<td><input type="text" class="form-control" name="rate[]" value="'+rate+'" readonly style="font-size: 12px;"></td>'
-                            +'<td><input type="text" class="form-control" name="amount[]" value="'+amount+'" readonly style="font-size: 12px;"></td>'
-                            +'<td>'
-                            +'<div class="addDeleteButton">'
-                            +'<span class="tooltips deleteProformaInvcRow" data-placement="top" data-original-title="Remove" style="cursor: pointer;"><i class="fa fa-trash-o"></i></span>'  
-                            +'</div></td></tr>';
-                            $('.invaliderror').removeClass('has-error-p');
-                            $('#invaliderrorid').html('');
-                            var clonedRow = $(this).parents('tbody.addProformaInvcRow').find('tr:first').clone();
-                            clonedRow.find('input:not(.ftype)').val('');
-                            clonedRow.find('textarea').val('');
-                            clonedRow.find('select').val(''); 
-                            clonedRow.find('.select2-container').remove(); 
-                            clonedRow.find("select").select2();   
-                            clonedRow.find('.tooltip').css('display','none');  
-                            //clonedRow.find('div.addDeleteButton').html('<span class="tooltips deleteParticularRow" data-placement="top" data-original-title="Remove" style="cursor: pointer;"><i class="fa fa-trash-o"></i></span>');
-                            clonedRow.find('.tooltips').tooltip({placement: 'top'});
-                            $(maintml).parents('#proformainvcdisplay tbody').find("tr:last").before(html);
-                            $('#dc_boq_code').val('');
-                            $('#hsn_sac_code').val('');
-                            $('#item_description').val('');
-                            $('#unit').val('');
-                            $('#qty').val('');
-                            $('#rate').val('');
-                            $('#amount').val('');
-                            $('#hsn_sac_code').prop('readonly', false);
-                            $('#item_description').prop('readonly', false);
-                            $('#unit').prop('readonly', false);
-                            var total_amt = 0;
-                        	var gst_amt = 0;
-                        	var final_amt = 0;
-                        	$("input[name='amount[]']").each(function(){
-                        		total_amt += parseFloat($(this).val());
-                        	});
-                        	$('#subtotal').html(total_amt.toFixed(2));
-                            if(total_amt > 0){
-                                gst_amt = parseFloat(total_amt) * 0.09;   
-                            }
-                            $('.gst_amt').html(gst_amt.toFixed(2));
-                            final_amt = parseFloat(gst_amt) + parseFloat(gst_amt) + parseFloat(total_amt);
-                            $('#finaltotal').html(final_amt.toFixed(2));
-                            }
-                        }else{    
-                            $('#invaliderrorid').html('BOQ Sr No ('+boq_code+') Details Not Available!');
-                        }        
-                    }
-            });
+                                var total_amt = 0;
+                                var gst_amt = 0;
+                                var final_amt = 0;
+                                $("input[name='itaxable_amount[]']").each(function(){
+                                    total_amt += parseFloat($(this).val());
+                                });
+                                $('#subtotali').html(total_amt.toFixed(2));
+                                if(total_amt > 0){
+
+                                    $("input[name='itotal_amount[]']").each(function(){
+                                        gst_amt += parseFloat($(this).val());
+                                    });
+
+                                    // gst_amt = parseFloat(total_amt) * 0.09;   
+                                }
+                                $('.cgst_amt').html(gst_amt.toFixed(2));
+                                final_amt = parseFloat(gst_amt) + parseFloat(total_amt);
+                                $('#finaltotal').html(final_amt.toFixed(2));
+                                }
+                            }else{    
+                                $('#invaliderrorid').html('BOQ Sr No ('+boq_code+') Details Not Available!');
+                            }        
+                        }
+                });
+            }
+            if (jQuery().datepicker) {
+                $('.date-picker').datepicker({
+                    orientation: "right",
+                    autoclose: true,
+                });
+            } 
+            Metronic.init();  
         }
-        if (jQuery().datepicker) {
-            $('.date-picker').datepicker({
-                orientation: "right",
-                autoclose: true,
-            });
-        } 
-        Metronic.init();
     });
+
+
     $(document).on('click','.addDCIWIPRow',function()
     {        
         var maintml = $(this);

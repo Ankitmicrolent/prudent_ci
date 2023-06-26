@@ -13,6 +13,41 @@
                  <th style="min-width: 50px;width:50px;font-size:13px;">Amount</th>
             </tr>
         </thead>
+        <tbody></tbody>
+         <tfoot><tr>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <!-- <td></td> -->
+         <td>Total Amount</td>
+         <td id="total_amount"></td>
+         <td></td>
+         </tr>
+         <tfoot><tr>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <!-- <td></td> -->
+         <td>Sub Total</td>
+         <td id="sub_total"></td>
+         <td></td>
+         </tr>
+         <tfoot><tr>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <!-- <td></td> -->
+         <td>Gst Amount</td>
+         <td id="gst_amount"></td>
+         <td></td>
+         </tr>
+        </tfoot>
     </table>
 </div>
 <style>
@@ -42,6 +77,15 @@
         "columnDefs": [{ 
             "targets": [0],
             "orderable": false
-        }]
+        }],
+        "initComplete": function () {
+                    var data = this.api().ajax.json(); // Access the 'extraData' value
+                      console.log(data);
+                      $('#sub_total').html(data.sub_total);
+                      $('#gst_amount').html(data.gst_amount);
+                      $('#total_amount').html(data.total_amount);
+                   // Print the extraData in an input box
+                 //  $('#workorderon').val(extraData);
+                  }
     });
 </script>

@@ -60,10 +60,12 @@ $route['project_proformaInvc_list'] ='upload_boq_items/upload_boq_items_controll
 $route['view_proforma_invoice_items'] ='upload_boq_items/upload_boq_items_controller/view_proforma_invoice_items';
 $route['project_proinvc_items'] ='upload_boq_items/upload_boq_items_controller/project_proinvc_items';
 $route['convert_to_tax_invoice'] ='upload_boq_items/upload_boq_items_controller/convert_to_tax_invoice';
+$route['convert_tax_invoice_details'] ='upload_boq_items/upload_boq_items_controller/convert_tax_invoice_details';
 
 $route['create-tax-invoice'] ='upload_boq_items/upload_boq_items_controller/create_tax_invoice';
 $route['get_proforma_boq_item_details'] ='upload_boq_items/upload_boq_items_controller/get_proforma_boq_item_details';
 $route['get_proforma_by_project'] ='upload_boq_items/upload_boq_items_controller/get_proforma_by_project';
+$route['get_proforma_by_projects'] ='upload_boq_items/upload_boq_items_controller/get_proforma_by_projects';
 $route['save_tax_invoice_details'] ='upload_boq_items/upload_boq_items_controller/save_tax_invoice_details';
 $route['project_taxInvc_list'] ='upload_boq_items/upload_boq_items_controller/project_taxInvc_list';
 $route['download_tax_invoice'] ='upload_boq_items/upload_boq_items_controller/download_tax_invoice';

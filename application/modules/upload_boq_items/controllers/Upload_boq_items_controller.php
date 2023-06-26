@@ -232,17 +232,17 @@ class Upload_boq_items_controller extends Base_Controller
             if(isset($user_id) && !empty($user_id)){
 		
                 $data = $row = $newarr = $datad = array();
-                $boq_code_d = '<input type="text" class="form-control invaliderror" id="dc_boq_code" placeholder="BOQ Sr No" style="font-size: 12px;">';
+                $boq_code_d = '<input type="text" class="form-control invaliderror" id="idc_boq_code" placeholder="BOQ Sr No" style="font-size: 12px;">';
                 $hsn_sac_code_d = '<input type="text" class="form-control invaliderror" id="hsn_sac_code" placeholder="HSN/SAC Code" style="font-size: 12px;">';
                 $item_description_d = '<input type="text" class="form-control invaliderror" id="item_description" placeholder="Item Description" style="font-size: 12px;">';
                 $unit_d = '<input type="text" class="form-control invaliderror" id="unit" placeholder="Unit" style="font-size: 12px;">';
                 $qty_d = '<input type="number" min="1" class="form-control invaliderror" id="qty" placeholder="Qty" style="font-size: 12px;">';
                 $rate_d = '<input type="number" min="1" class="form-control invaliderror" id="rate" placeholder="Rate" style="font-size: 12px;">';
-                $taxable_a = '<input type="number" min="1" class="form-control invaliderror" id="taxable_amount" placeholder="Tax" style="font-size: 12px;" readonly>';
-                $gst = '<input type="number" min="1" class="form-control invaliderror" id="gst" placeholder="GST" style="font-size: 12px;">';
+                $taxable_a = '<input type="number" min="1" class="form-control invaliderror" id="itaxable_amount" placeholder="Tax" style="font-size: 12px;" readonly>';
+                $gst = '<input type="number" min="1" readonly class="form-control invaliderror" id="gst" placeholder="GST" style="font-size: 12px;">';
                 // $amount_d = '<input type="number" min="1" class="form-control invaliderror" id="amount" placeholder="Amount" style="font-size: 12px;">';
                 
-                $total_amount = '<input type="number" min="1" class="form-control invaliderror" id="total_amount" placeholder="TotalAmount" style="font-size: 12px;" readonly>';
+                $total_amount = '<input type="number" min="1" class="form-control invaliderror" id="itotal_amount" placeholder="TotalAmount" style="font-size: 12px;" readonly>';
                 
                 $action_d = '';
                 $action_d .='<div class="addDeleteButton">';
@@ -282,17 +282,17 @@ class Upload_boq_items_controller extends Base_Controller
 
 
             $data = $row = $newarr = $datad = array();
-            $boq_code_d = '<input type="text" class="form-control invaliderror" id="dc_boq_code" placeholder="BOQ Sr No" style="font-size: 12px;">';
-            $hsn_sac_code_d = '<input type="text" class="form-control invaliderror" id="hsn_sac_code" placeholder="HSN/SAC Code" style="font-size: 12px;">';
-            $item_description_d = '<input type="text" class="form-control invaliderror" id="item_description" placeholder="Item Description" style="font-size: 12px;">';
-            $unit_d = '<input type="text" class="form-control invaliderror" id="unit" placeholder="Unit" style="font-size: 12px;">';
-            $qty_d = '<input type="number" min="1" class="form-control invaliderror" id="qty" placeholder="Qty" style="font-size: 12px;">';
-            $rate_d = '<input type="number" min="1" class="form-control invaliderror" id="rate" placeholder="Rate" style="font-size: 12px;">';
-            $taxable_a = '<input type="number" min="1" class="form-control invaliderror" id="taxable_amount" placeholder="Tax" style="font-size: 12px;" readonly>';
-            $sgst = '<input type="number" min="1" class="form-control invaliderror" id="sgst" placeholder="SGST" style="font-size: 12px;">';
-            $sgst_amount = '<input type="number" min="1" class="form-control invaliderror" id="sgst_amount" placeholder="Amount" style="font-size: 12px;">';
-            $cgst = '<input type="number" min="1" class="form-control invaliderror" id="sgst" placeholder="CGST" style="font-size: 12px;">';
-            $cgst_amount = '<input type="number" min="1" class="form-control invaliderror" id="sgst_amount" placeholder="Amount" style="font-size: 12px;">';
+            $boq_code_d = '<input type="text" class="form-control invaliderror" id="cdc_boq_code" placeholder="BOQ Sr No" style="font-size: 12px;">';
+            $hsn_sac_code_d = '<input type="text" class="form-control invaliderror" id="chsn_sac_code" placeholder="HSN/SAC Code" style="font-size: 12px;">';
+            $item_description_d = '<input type="text" class="form-control invaliderror" id="citem_description" placeholder="Item Description" style="font-size: 12px;">';
+            $unit_d = '<input type="text" class="form-control invaliderror" id="cunit" placeholder="Unit" style="font-size: 12px;">';
+            $qty_d = '<input type="number" min="1" class="form-control invaliderror" id="cqty" placeholder="Qty" style="font-size: 12px;">';
+            $rate_d = '<input type="number" min="1" class="form-control invaliderror" id="crate" placeholder="Rate" style="font-size: 12px;">';
+            $taxable_a = '<input type="number" min="1" class="form-control invaliderror" id="ctaxable_amount" placeholder="Tax" style="font-size: 12px;" readonly>';
+            $sgst = '<input type="number" readonly min="1" class="form-control invaliderror" id="sgst" placeholder="SGST" style="font-size: 12px;">';
+            $sgst_amount = '<input type="number" min="1" readonly class="form-control invaliderror" id="sgst_amount" placeholder="Amount" style="font-size: 12px;">';
+            $cgst = '<input type="number" min="1" readonly class="form-control invaliderror" id="cgst" placeholder="CGST" style="font-size: 12px;">';
+            $cgst_amount = '<input type="number" min="1" readonly class="form-control invaliderror" id="cgst_amount" placeholder="Amount" style="font-size: 12px;">';
             
             // $total_amount = '<input type="number" min="1" class="form-control invaliderror" id="total_amount" placeholder="TotalAmount" style="font-size: 12px;" readonly>';
             
@@ -331,17 +331,120 @@ class Upload_boq_items_controller extends Base_Controller
             );
             echo json_encode($output);
             }
-
-
-
-
-
-
-
-
-
-
         }
+    public function get_proforma_by_projects() 
+		{
+		$project_id = $this->input->post('project_id');
+		$gst_type = $this->input->post('gst_type');
+        $user_id = $this->session->userData('user_id');
+         
+        if($gst_type == 'igst'){
+
+            if(isset($user_id) && !empty($user_id)){
+		
+                $data = $row = $newarr = $datad = array();
+                $boq_code_d = '<input type="text" class="form-control invaliderror" id="idc_boq_code" placeholder="BOQ Sr No" style="font-size: 12px;">';
+                $hsn_sac_code_d = '<input type="text" class="form-control invaliderror" id="hsn_sac_code" placeholder="HSN/SAC Code" style="font-size: 12px;">';
+                $item_description_d = '<input type="text" class="form-control invaliderror" id="item_description" placeholder="Item Description" style="font-size: 12px;">';
+                $unit_d = '<input type="text" class="form-control invaliderror" id="unit" placeholder="Unit" style="font-size: 12px;">';
+                $qty_d = '<input type="number" min="1" class="form-control invaliderror" id="qty" placeholder="Qty" style="font-size: 12px;">';
+                $rate_d = '<input type="number" min="1" class="form-control invaliderror" id="rate" placeholder="Rate" style="font-size: 12px;">';
+                $taxable_a = '<input type="number" min="1" class="form-control invaliderror" id="itaxable_amount" placeholder="Tax" style="font-size: 12px;" readonly>';
+                $gst = '<input type="number" min="1" readonly class="form-control invaliderror" id="gst" placeholder="GST" style="font-size: 12px;">';
+                // $amount_d = '<input type="number" min="1" class="form-control invaliderror" id="amount" placeholder="Amount" style="font-size: 12px;">';
+                
+                $total_amount = '<input type="number" min="1" class="form-control invaliderror" id="itotal_amount" placeholder="TotalAmount" style="font-size: 12px;" readonly>';
+                
+                $action_d = '';
+                $action_d .='<div class="addDeleteButton">';
+                $action_d .='<span class="tooltips addPerfomaInvcRow" data-placement="top" data-original-title="Add" style="cursor: pointer;"><i class="fa fa-plus" style="color:#000"></i></span>';
+                $action_d .='</div>';
+                
+                $datad[] = array(
+                    $boq_code_d,
+                    $hsn_sac_code_d,
+                    $item_description_d,
+                    $unit_d,
+                    $qty_d,
+                    $rate_d,
+                    $taxable_a,
+                    $gst,
+                    // $amount_d,
+                   
+                    $total_amount,
+                    $action_d
+                );	
+                if(isset($data) && !empty($data)){
+                $newarr = array_merge($data,$datad);   
+                }else{
+                $newarr = $datad;   
+                }
+                $output = array(
+                    "draw" => $_POST['draw'],
+                    "recordsTotal" => $allCount,
+                    "recordsFiltered" => $countFiltered,
+                    "data" => $newarr,
+                );
+                echo json_encode($output);
+                }
+
+
+        }else{
+
+
+            $data = $row = $newarr = $datad = array();
+            $boq_code_d = '<input type="text" class="form-control invaliderror" id="cdc_boq_code" placeholder="BOQ Sr No" style="font-size: 12px;">';
+            $hsn_sac_code_d = '<input type="text" class="form-control invaliderror" id="chsn_sac_code" placeholder="HSN/SAC Code" style="font-size: 12px;">';
+            $item_description_d = '<input type="text" class="form-control invaliderror" id="citem_description" placeholder="Item Description" style="font-size: 12px;">';
+            $unit_d = '<input type="text" class="form-control invaliderror" id="cunit" placeholder="Unit" style="font-size: 12px;">';
+            $qty_d = '<input type="number" min="1" class="form-control invaliderror" id="cqty" placeholder="Qty" style="font-size: 12px;">';
+            $rate_d = '<input type="number" min="1" class="form-control invaliderror" id="crate" placeholder="Rate" style="font-size: 12px;">';
+            $taxable_a = '<input type="number" min="1" class="form-control invaliderror" id="ctaxable_amount" placeholder="Tax" style="font-size: 12px;" readonly>';
+            $sgst = '<input type="number" readonly min="1" class="form-control invaliderror" id="sgst" placeholder="SGST" style="font-size: 12px;">';
+            $sgst_amount = '<input type="number" min="1" readonly class="form-control invaliderror" id="sgst_amount" placeholder="Amount" style="font-size: 12px;">';
+            $cgst = '<input type="number" min="1" readonly class="form-control invaliderror" id="cgst" placeholder="CGST" style="font-size: 12px;">';
+            $cgst_amount = '<input type="number" min="1" readonly class="form-control invaliderror" id="cgst_amount" placeholder="Amount" style="font-size: 12px;">';
+            
+            // $total_amount = '<input type="number" min="1" class="form-control invaliderror" id="total_amount" placeholder="TotalAmount" style="font-size: 12px;" readonly>';
+            
+            $action_d = '';
+            $action_d .='<div class="addDeleteButton">';
+            $action_d .='<span class="tooltips addPerfomaInvcRow" data-placement="top" data-original-title="Add" style="cursor: pointer;"><i class="fa fa-plus" style="color:#000"></i></span>';
+            $action_d .='</div>';
+            
+            $datad[] = array(
+                $boq_code_d,
+                $hsn_sac_code_d,
+                $item_description_d,
+                $unit_d,
+                $qty_d,
+                $rate_d,
+                $taxable_a,
+                $sgst,
+                $sgst_amount,
+                $cgst,
+                $cgst_amount,
+                // $amount_d,
+               
+              //  $total_amount,
+                $action_d
+            );	
+            if(isset($data) && !empty($data)){
+            $newarr = array_merge($data,$datad);   
+            }else{
+            $newarr = $datad;   
+            }
+            $output = array(
+                "draw" => $_POST['draw'],
+                "recordsTotal" => $allCount,
+                "recordsFiltered" => $countFiltered,
+                "data" => $newarr,
+            );
+            echo json_encode($output);
+            }
+        }
+
+
 		// if(isset($user_id) && !empty($user_id)){
 		
 		// $data = $row = $newarr = $datad = array();
@@ -389,49 +492,174 @@ class Upload_boq_items_controller extends Base_Controller
 		// }
 
     // }
+
+
     public function get_client_dc_by_project() 
 		{
 		$project_id = $this->input->post('project_id');
+        $gst_type = $this->input->post('gst_type');
         $user_id = $this->session->userData('user_id');
-		if(isset($user_id) && !empty($user_id)){
+        $project_detail = $this->admin_model->get_project_item_details($project_id);
+         if($gst_type == 'igst'){
+
+
+            $data = $row = $newarr = $datad = array();
+            $boq_code_d = '<input type="text" class="form-control invaliderror" id="idc_boq_code" placeholder="BOQ Sr No" style="font-size: 12px;">';
+            $hsn_sac_code_d = '<input type="text" class="form-control invaliderror" id="hsn_sac_code" placeholder="HSN/SAC Code" style="font-size: 12px;">';
+            $item_description_d = '<input type="text" class="form-control invaliderror" id="item_description" placeholder="Item Description" style="font-size: 12px;">';
+            $unit_d = '<input type="text" class="form-control invaliderror" id="unit" placeholder="Unit" style="font-size: 12px;">';
+            $qty_d = '<input type="number" min="1" class="form-control invaliderror" id="qty" placeholder="Qty" style="font-size: 12px;">';
+            $rate_d = '<input type="number" min="1" class="form-control invaliderror" id="rate" placeholder="Rate" style="font-size: 12px;">';
+            $taxable_a = '<input type="number" min="1" class="form-control invaliderror" id="itaxable_amount" placeholder="Tax" style="font-size: 12px;" readonly>';
+            $gst = '<input type="number" min="1" readonly class="form-control invaliderror" id="gst" placeholder="GST" style="font-size: 12px;">';
+            // $amount_d = '<input type="number" min="1" class="form-control invaliderror" id="amount" placeholder="Amount" style="font-size: 12px;">';
+            
+            $total_amount = '<input type="number" min="1" class="form-control invaliderror" id="itotal_amount" placeholder="TotalAmount" style="font-size: 12px;" readonly>';
+            
+            $action_d = '';
+            $action_d .='<div class="addDeleteButton">';
+            $action_d .='<span class="tooltips addPerfomaInvcRow" data-placement="top" data-original-title="Add" style="cursor: pointer;"><i class="fa fa-plus" style="color:#000"></i></span>';
+            $action_d .='</div>';
+            
+            $datad[] = array(
+                $boq_code_d,
+                $hsn_sac_code_d,
+                $item_description_d,
+                $unit_d,
+                $qty_d,
+                $rate_d,
+                $taxable_a,
+                $gst,
+                // $amount_d,
+               
+                $total_amount,
+                $action_d
+            );	
+            if(isset($data) && !empty($data)){
+            $newarr = array_merge($data,$datad);   
+            }else{
+            $newarr = $datad;   
+            }
+            $output = array(
+                "draw" => $_POST['draw'],
+                "recordsTotal" => $allCount,
+                "recordsFiltered" => $countFiltered,
+                "data" => $newarr,
+                "project_detail" => $project_detail,
+            );
+            echo json_encode($output);
+            }else{
+
+
+                $data = $row = $newarr = $datad = array();
+                $boq_code_d = '<input type="text" class="form-control invaliderror" id="cdc_boq_code" placeholder="BOQ Sr No" style="font-size: 12px;">';
+                $hsn_sac_code_d = '<input type="text" class="form-control invaliderror" id="chsn_sac_code" placeholder="HSN/SAC Code" style="font-size: 12px;">';
+                $item_description_d = '<input type="text" class="form-control invaliderror" id="citem_description" placeholder="Item Description" style="font-size: 12px;">';
+                $unit_d = '<input type="text" class="form-control invaliderror" id="cunit" placeholder="Unit" style="font-size: 12px;">';
+                $qty_d = '<input type="number" min="1" class="form-control invaliderror" id="cqty" placeholder="Qty" style="font-size: 12px;">';
+                $rate_d = '<input type="number" min="1" class="form-control invaliderror" id="crate" placeholder="Rate" style="font-size: 12px;">';
+                $taxable_a = '<input type="number" min="1" class="form-control invaliderror" id="ctaxable_amount" placeholder="Tax" style="font-size: 12px;" readonly>';
+                $sgst = '<input type="number" readonly min="1" class="form-control invaliderror" id="sgst" placeholder="SGST" style="font-size: 12px;">';
+                $sgst_amount = '<input type="number" min="1" readonly class="form-control invaliderror" id="sgst_amount" placeholder="Amount" style="font-size: 12px;">';
+                $cgst = '<input type="number" min="1" readonly class="form-control invaliderror" id="cgst" placeholder="CGST" style="font-size: 12px;">';
+                $cgst_amount = '<input type="number" min="1" readonly class="form-control invaliderror" id="cgst_amount" placeholder="Amount" style="font-size: 12px;">';
+                
+                // $total_amount = '<input type="number" min="1" class="form-control invaliderror" id="total_amount" placeholder="TotalAmount" style="font-size: 12px;" readonly>';
+                
+                $action_d = '';
+                $action_d .='<div class="addDeleteButton">';
+                $action_d .='<span class="tooltips addPerfomaInvcRow" data-placement="top" data-original-title="Add" style="cursor: pointer;"><i class="fa fa-plus" style="color:#000"></i></span>';
+                $action_d .='</div>';
+                
+                $datad[] = array(
+                    $boq_code_d,
+                    $hsn_sac_code_d,
+                    $item_description_d,
+                    $unit_d,
+                    $qty_d,
+                    $rate_d,
+                    $taxable_a,
+                    $sgst,
+                    $sgst_amount,
+                    $cgst,
+                    $cgst_amount,
+                    // $amount_d,
+                   
+                  //  $total_amount,
+                    $action_d
+                );	
+                if(isset($data) && !empty($data)){
+                $newarr = array_merge($data,$datad);   
+                }else{
+                $newarr = $datad;   
+                }
+                $output = array(
+                    "draw" => $_POST['draw'],
+                    "recordsTotal" => $allCount,
+                    "recordsFiltered" => $countFiltered,
+                    "data" => $newarr,
+                    "project_detail" => $project_detail,
+                );
+                echo json_encode($output);
+                }
+
+
+
+            // }
+
+
+
+
+
+
+
+
+
+
+
+
+         
+
+
+		// if(isset($user_id) && !empty($user_id)){
 		
-		$data = $row = $newarr = $datad = array();
-		$boq_code_d = '<input type="text" class="form-control invaliderror" id="boq_code" placeholder="BOQ Sr No" style="font-size: 12px;">';
-		$hsn_sac_code_d = '<input type="text" class="form-control invaliderror" id="hsn_sac_code" placeholder="HSN/SAC Code" style="font-size: 12px;">';
-		$item_description_d = '<input type="text" class="form-control invaliderror" id="item_description" placeholder="Item Description" style="font-size: 12px;">';
-		$unit_d = '<input type="text" class="form-control invaliderror" id="unit" placeholder="Unit" style="font-size: 12px;">';
-		$scheduled_qty_d = '<input type="number" min="1" class="form-control invaliderror" id="scheduled_qty" placeholder="Sche. Qty" style="font-size: 12px;">';
-		$design_qty_d = '<input type="number" min="1" class="form-control invaliderror" id="design_qty" placeholder="Des. Qty" style="font-size: 12px;">';
-		$rece_qty_d = '<input type="number" min="1" class="form-control invaliderror" id="receive_qty" placeholder="Received Qty" style="font-size: 12px;">';
+		// $data = $row = $newarr = $datad = array();
+		// $boq_code_d = '<input type="text" class="form-control invaliderror" id="boq_code" placeholder="BOQ Sr No" style="font-size: 12px;">';
+		// $hsn_sac_code_d = '<input type="text" class="form-control invaliderror" id="hsn_sac_code" placeholder="HSN/SAC Code" style="font-size: 12px;">';
+		// $item_description_d = '<input type="text" class="form-control invaliderror" id="item_description" placeholder="Item Description" style="font-size: 12px;">';
+		// $unit_d = '<input type="text" class="form-control invaliderror" id="unit" placeholder="Unit" style="font-size: 12px;">';
+		// $scheduled_qty_d = '<input type="number" min="1" class="form-control invaliderror" id="scheduled_qty" placeholder="Sche. Qty" style="font-size: 12px;">';
+		// $design_qty_d = '<input type="number" min="1" class="form-control invaliderror" id="design_qty" placeholder="Des. Qty" style="font-size: 12px;">';
+		// $rece_qty_d = '<input type="number" min="1" class="form-control invaliderror" id="receive_qty" placeholder="Received Qty" style="font-size: 12px;">';
 		
-		$action_d = '';
-		$action_d .='<div class="addDeleteButton">';
-		$action_d .='<span class="tooltips addDCCRow" data-placement="top" data-original-title="Add" style="cursor: pointer;"><i class="fa fa-plus" style="color:#000"></i></span>';
-		$action_d .='</div>';
+		// $action_d = '';
+		// $action_d .='<div class="addDeleteButton">';
+		// $action_d .='<span class="tooltips addDCCRow" data-placement="top" data-original-title="Add" style="cursor: pointer;"><i class="fa fa-plus" style="color:#000"></i></span>';
+		// $action_d .='</div>';
 		
-		$datad[] = array(
-		    $boq_code_d,
-			$hsn_sac_code_d,
-			$item_description_d,
-			$unit_d,
-			$scheduled_qty_d,
-			$design_qty_d,
-			$rece_qty_d,
-			$action_d
-		);	
-		if(isset($data) && !empty($data)){
-        $newarr = array_merge($data,$datad);   
-        }else{
-        $newarr = $datad;   
-        }
-        $output = array(
-            "draw" => $_POST['draw'],
-            "recordsTotal" => $allCount,
-            "recordsFiltered" => $countFiltered,
-            "data" => $newarr,
-        );
-        echo json_encode($output);
-		}
+		// $datad[] = array(
+		//     $boq_code_d,
+		// 	$hsn_sac_code_d,
+		// 	$item_description_d,
+		// 	$unit_d,
+		// 	$scheduled_qty_d,
+		// 	$design_qty_d,
+		// 	$rece_qty_d,
+		// 	$action_d
+		// );	
+		// if(isset($data) && !empty($data)){
+        // $newarr = array_merge($data,$datad);   
+        // }else{
+        // $newarr = $datad;   
+        // }
+        // $output = array(
+        //     "draw" => $_POST['draw'],
+        //     "recordsTotal" => $allCount,
+        //     "recordsFiltered" => $countFiltered,
+        //     "data" => $newarr,
+        // );
+        // echo json_encode($output);
+		// }
 
     }
     public function get_boq_item_by_project() 
@@ -545,6 +773,8 @@ class Upload_boq_items_controller extends Base_Controller
 		&& isset($project_id) && !empty($project_id)
 		&& isset($boq_code) && !empty($boq_code)){
 		$member = $this->admin_model->get_boq_item_details($project_id,$boq_code);
+		$project_detail = $this->admin_model->get_project_item_details($project_id);
+        
 		if(isset($member) && !empty($member)){
 		    if(isset($member->boq_items_id) && !empty($member->boq_items_id)) { $res['boq_items_id'] = $member->boq_items_id; }else { $res['boq_items_id'] = '0'; }
 			if(isset($member->project_id) && !empty($member->project_id)) { $res['project_id'] = $member->project_id; }else { $res['project_id'] = '0'; }
@@ -596,7 +826,7 @@ class Upload_boq_items_controller extends Base_Controller
 		&& isset($project_id) && !empty($project_id)
 		&& isset($boq_code) && !empty($boq_code)){
 		$member = $this->admin_model->get_dc_boq_item_details($project_id,$boq_code);
-        
+                  
 		if(isset($member) && !empty($member)){
 		    if(isset($member->challan_itemid) && !empty($member->challan_itemid)) { $res['challan_itemid'] = $member->challan_itemid; }else { $res['challan_itemid'] = '0'; }
 			if(isset($member->challan_id) && !empty($member->challan_id)) { $res['challan_id'] = $member->challan_id; }else { $res['challan_id'] = '0'; }
@@ -609,6 +839,7 @@ class Upload_boq_items_controller extends Base_Controller
 			if(isset($member->received_qty) && !empty($member->received_qty)) { $res['received_qty'] = $member->received_qty; }else { $res['received_qty'] = '0'; }
 			if(isset($member->rate_basic) && !empty($member->rate_basic)) { $res['rate'] = $member->rate_basic; }else { $res['rate_basic'] = '0'; }
 			if(isset($member->gst) && !empty($member->gst)) { $res['gst'] = $member->gst; }else { $res['gst'] = ''; }
+			if(isset($member->rate_basic) && !empty($member->rate_basic)) { $res['rate'] = $member->rate_basic; }else { $res['rate'] = ''; }
 		 }
 		}
 		echo json_encode($res);
@@ -678,8 +909,25 @@ class Upload_boq_items_controller extends Base_Controller
 		$allCount = $this->admin_model->countTaxInvcItemListAll($tax_invc_id);
 		$countFiltered = $this->admin_model->countTaxInvcItemListFiltered($_POST,$tax_invc_id);
         $i = $_POST['start'];
+        $sub_total = 0;
+        $total_amount = 0 ;
+        $$gst_amount = 0 ;
 		foreach($memData as $member){
             $i++;
+
+            if($member->gst_type == 'intra-state'){
+                $total_amount += $member->taxable_amount + $member->sgst_amount + $member->cgst_amount;
+                $gst_amount += $member->sgst_amount + $member->cgst_amount;
+                $sub_total += $member->taxable_amount;
+                $gst_type = "CGST_SGST";
+                
+            }else{
+                $total_amount += $member->taxable_amount + $member->gst_amount;
+                $gst_amount += $member->gst_amount;
+                $gst_type = "IGST";
+                $sub_total += $member->taxable_amount;
+  
+            }
             if(isset($member->tax_invc_id) && !empty($member->tax_invc_id)) { $tax_invc_id = $member->tax_invc_id; }else { $tax_invc_id = '-'; }
 			if(isset($member->boq_code) && !empty($member->boq_code)) { $boq_code = $member->boq_code; }else { $boq_code = '-'; }
 			if(isset($member->hsn_sac_code) && !empty($member->hsn_sac_code)) { $hsn_sac_code = $member->hsn_sac_code; }else { $hsn_sac_code = '-'; }
@@ -705,6 +953,10 @@ class Upload_boq_items_controller extends Base_Controller
             "recordsTotal" => $allCount,
             "recordsFiltered" => $countFiltered,
             "data" => $data,
+            "total_amount" => number_format($total_amount, 2),
+            "gst_amount" => number_format($gst_amount, 2),
+            "gst_type" =>   $gst_type,
+            "sub_total" =>   number_format($sub_total, 2)
         );
         echo json_encode($output);
 		}
@@ -725,8 +977,24 @@ class Upload_boq_items_controller extends Base_Controller
 		$allCount = $this->admin_model->countProInvcItemListAll($proforma_id);
 		$countFiltered = $this->admin_model->countProInvcItemListFiltered($_POST,$proforma_id);
         $i = $_POST['start'];
+        $sub_total = 0;
+        $total_amount = 0 ;
+        $$gst_amount = 0 ;
 		foreach($memData as $member){
             $i++;
+            if($member->gst_type == 'intra-state'){
+                $total_amount += $member->taxable_amount + $member->sgst_amount + $member->cgst_amount;
+                $gst_amount += $member->sgst_amount + $member->cgst_amount;
+                $sub_total += $member->taxable_amount;
+                $gst_type = "CGST_SGST";
+                
+            }else{
+                $total_amount += $member->taxable_amount + $member->gst_amount;
+                $gst_amount += $member->gst_amount;
+                $gst_type = "IGST";
+                $sub_total += $member->taxable_amount;
+  
+            }
             if(isset($member->proforma_id) && !empty($member->proforma_id)) { $proforma_id = $member->proforma_id; }else { $proforma_id = '-'; }
 			if(isset($member->boq_code) && !empty($member->boq_code)) { $boq_code = $member->boq_code; }else { $boq_code = '-'; }
 			if(isset($member->hsn_sac_code) && !empty($member->hsn_sac_code)) { $hsn_sac_code = $member->hsn_sac_code; }else { $hsn_sac_code = '-'; }
@@ -752,6 +1020,10 @@ class Upload_boq_items_controller extends Base_Controller
             "recordsTotal" => $allCount,
             "recordsFiltered" => $countFiltered,
             "data" => $data,
+            "total_amount" => number_format($total_amount, 2),
+            "gst_amount" => number_format($gst_amount, 2),
+            "gst_type" =>   $gst_type,
+            "sub_total" =>   number_format($sub_total, 2)
         );
         echo json_encode($output);
 		}
@@ -1247,6 +1519,9 @@ class Upload_boq_items_controller extends Base_Controller
 			if(isset($member->customer_name) && !empty($member->customer_name)) { $customer_name = $member->customer_name; }else { $customer_name = '-'; }
 			if(isset($member->status) && !empty($member->status) && $member->status !='Under Approval') { $status = $member->status; }else { $status = 'Under Approval'; }
 			if(isset($member->created_on) && !empty($member->created_on)) { $created_on = $member->created_on; }else { $created_on = '-'; }
+            
+			if(isset($member->Converted) && !empty($member->Converted)) { $Converted = ($member->Converted == 'Y') ? 'Yes' : 'No'; }else { $Converted = '-'; }
+            
 			$htmlp = '';
 			$htmlp = '<a class="popup_save" href="javascript:void(0);" rev="view_proforma_invoice_items" rel="'.$proforma_id.'" data-title="(#'.$proforma_no.') Proforma Invoice Item List" data-status="allow" style="margin-top:10px;"><span class="md-click-circle md-click-animate" style="height: 97px; width: 97px; top: -38.5312px; left: 29.4896px;"></span> '.$proforma_no.'</a>';
 			
@@ -1262,6 +1537,7 @@ class Upload_boq_items_controller extends Base_Controller
 			$bp_code,
 			$customer_name,
 			$status,
+            $Converted,
 			$created_on,
 			$html
 			);
@@ -1427,8 +1703,97 @@ class Upload_boq_items_controller extends Base_Controller
     {   
       $proforma_id = $this->input->post('id');
 	  $data['proforma_id'] = $proforma_id;
-      $view = $this->load->view('convert-tax-invoice',$data,TRUE);
-      $this->json->jsonReturn(array('view'=>$view));
+      $performa_invc = $this->common_model->selectDetailsWhr('tbl_proforma_invc','proforma_id',$proforma_id);
+      if(isset($performa_invc) &&  $performa_invc->Converted == 'Y'){
+        $this->json->jsonReturn(array(
+            'valid'=>TRUE,
+            'msg'=>'<div class="alert modify alert-info">Already Converted!</div>',
+            'redirect' => base_url().'create-proforma-invoice'
+        )); 
+
+
+      }else{
+
+
+          $view = $this->load->view('convert-tax-invoice',$data,TRUE);
+          $this->json->jsonReturn(array('view'=>$view));
+
+      }
+    }
+    public function convert_tax_invoice_details()   
+    {   
+        $user_id = $this->session->userdata('user_id');
+        $proforma_id = $this->input->post('id');
+        $date = $this->input->post('tax_invc_date');
+        $tax_invc_no = $this->input->post('tax_invc_no');
+        $performa_invc = $this->common_model->selectDetailsWhr('tbl_proforma_invc','proforma_id',$proforma_id);
+        $performa_invc_item = $this->common_model->selectDetailsWhr('tbl_proforma_invc_items','proforma_id',$proforma_id);
+       
+         if(isset($performa_invc) &&  $performa_invc->Converted == 'N'){
+            $result = $this->common_model->updateDetails('tbl_proforma_invc', 'proforma_id', $proforma_id, ['Converted' => 'Y']);
+            if($result){
+
+                $performa_invc_item = $this->common_model->selectAllWhr('tbl_proforma_invc_items','proforma_id',$proforma_id);
+                    
+                $main_arr  = array('project_id' => $performa_invc->project_id,
+                'tax_invc_no' => $tax_invc_no,
+                'created_by' => $user_id,
+                'modified_by' => $user_id,
+                'created_on' => date('Y-m-d H:i:s'),
+                'modified_on' => date('Y-m-d H:i:s'),
+                'modified_on' => date('Y-m-d H:i:s'),
+                );
+                $tax_invc_id = $this->common_model->addData('tbl_tax_invc',$main_arr);
+                
+                foreach ($performa_invc_item as  $value) {
+                   
+                    $invoice_item = array(
+                     'tax_invc_id' => $tax_invc_id,
+                    'boq_code' => $value->boq_code,
+                     'hsn_sac_code' => $value->hsn_sac_code,
+                     'item_description' => $value ->item_description,
+                     'unit' => $value ->unit,
+                     'qty' => $value->qty,
+                     'rate' => $value-> rate,
+                     'taxable_amount'=>$value->taxable_amount ,
+                     'gst_type' => $value->gst_type,
+                     'gst' => $value->gst,
+                     'sgst' => $value->sgst,
+                     'cgst' => $value->cgst,
+                     'sgst_amount' => $value->sgst_amount ,
+                     'cgst_amount' => $value-> cgst_amount,
+                     'gst_amount' => $value->gst_amount,
+                     'created_on' => date('Y-m-d H:i:s'),
+                     'modified_by' => $user_id,
+                     'modified_on' =>date('Y-m-d H:i:s') ,
+       
+                    );
+                     $this->common_model->addData('tbl_tax_invc_items',$invoice_item);
+                }
+       
+                $this->json->jsonReturn(array(
+                   'valid'=>TRUE,
+                   'msg'=>'<div class="alert modify alert-info">Tax Invoice Details Saved Successfully!</div>',
+                   'redirect' => base_url().'create-proforma-invoice'
+               ));
+
+
+
+
+            }
+        
+
+
+         }else{
+
+            $this->json->jsonReturn(array(
+                'valid'=>TRUE,
+                'msg'=>'<div class="alert modify alert-info">Already Converted!</div>',
+                'redirect' => base_url().'create-proforma-invoice'
+            )); 
+
+         }
+   
     }
     
     public function view_dcc_items()   
@@ -2400,58 +2765,106 @@ class Upload_boq_items_controller extends Base_Controller
         $save_arr = array();
         $project_id = $this->input->post('project_id');
         $tax_invc_no = $this->input->post('tax_invoice_no');
+        $gst_type = $this->input->post('gst_type');
+        $created_on = $this->input->post('invoice_date');
+        //   echo "<pre>";
+        // print_r($this->input->post());
+        // exit;
         if(isset($project_id) && !empty($project_id) && isset($tax_invc_no) && !empty($tax_invc_no)){
             $tax_invc = $this->common_model->selectDetailsWhr('tbl_tax_invc','tax_invc_no',$tax_invc_no);
             if(isset($tax_invc) && empty($tax_invc)){
-            $error = 'N';
-            $error_message = '';
-            $user_id = $this->session->userdata('user_id');
-            if(isset($user_id) && empty($user_id)){
-            $error = 'Y';
-            $error_message = 'Please loggedin!';
-            }
-            $boq_code = $this->input->post('boq_code');
-            if(isset($boq_code) && !empty($boq_code)) {$boq_code = $boq_code; } else {$boq_code=''; }
-            if(isset($boq_code) && empty($boq_code)){
-            $error = 'Y';
-            $error_message = 'Please enter BOQ Sr No!';
-            }
-            $hsn_sac_code = $this->input->post('hsn_sac_code');
-            if(isset($hsn_sac_code) && !empty($hsn_sac_code)) {$hsn_sac_code = $hsn_sac_code; } else {$hsn_sac_code=''; }
-            if(isset($hsn_sac_code) && empty($hsn_sac_code)){
-            $error = 'Y';
-            $error_message = 'Please enter HSN/SAC Code!';
-            }
-            $item_description = $this->input->post('item_description');
-            if(isset($item_description) && !empty($item_description)) {$item_description = $item_description; } else {$item_description=''; }
-            if(isset($item_description) && empty($item_description)){
-            $error = 'Y';
-            $error_message = 'Please enter Item Description!';
-            }
-            $unit = $this->input->post('unit');
-            if(isset($unit) && !empty($unit)) {$unit = $unit; } else {$unit=''; }
-            if(isset($unit) && empty($unit)){
-            $error = 'Y';
-            $error_message = 'Please enter Unit!';
-            }
-            $qty = $this->input->post('qty');
-            if(isset($qty) && !empty($qty)) {$qty = $qty; } else {$qty=''; }
-            if(isset($qty) && empty($qty)){
-            $error = 'Y';
-            $error_message = 'Please enter Qty!';
-            }
-            $rate = $this->input->post('rate');
-            if(isset($rate) && !empty($rate)) {$rate = $rate; } else {$rate=''; }
-            if(isset($rate) && empty($rate)){
-            $error = 'Y';
-            $error_message = 'Please enter Rate!';
-            }
-            if(isset($boq_code) && empty($boq_code)
+                 if($gst_type == 'cgst_sgst'){
+
+                    $error = 'N';
+                    $error_message = '';
+                    $user_id = $this->session->userdata('user_id');
+                    if(isset($user_id) && empty($user_id)){
+                    $error = 'Y';
+                    $error_message = 'Please loggedin!';
+                    }
+                    $boq_code = $this->input->post('cboq_code');
+                     if(isset($boq_code) && !empty($boq_code)) {$boq_code = $boq_code; } else {$boq_code=''; }
+                     if(isset($boq_code) && empty($boq_code)){
+                      $error = 'Y';
+                      $error_message = 'Please enter BOQ Sr No!';
+                    }
+                    $hsn_sac_code = $this->input->post('chsn_sac_code');
+                    if(isset($hsn_sac_code) && !empty($hsn_sac_code)) {$hsn_sac_code = $hsn_sac_code; } else {$hsn_sac_code=''; }
+                    if(isset($hsn_sac_code) && empty($hsn_sac_code)){
+                    $error = 'Y';
+                    $error_message = 'Please enter HSN/SAC Code!';
+                    }
+                    $item_description = $this->input->post('citem_description');
+                    if(isset($item_description) && !empty($item_description)) {$item_description = $item_description; } else {$item_description=''; }
+                    if(isset($item_description) && empty($item_description)){
+                    $error = 'Y';
+                    $error_message = 'Please enter Item Description!';
+                    }
+                    $unit = $this->input->post('cunit');
+                    if(isset($unit) && !empty($unit)) {$unit = $unit; } else {$unit=''; }
+                    if(isset($unit) && empty($unit)){
+                    $error = 'Y';
+                    $error_message = 'Please enter Unit!';
+                    }
+                    $qty = $this->input->post('cqty');
+                    if(isset($qty) && !empty($qty)) {$qty = $qty; } else {$qty=''; }
+                    if(isset($qty) && empty($qty)){
+                    $error = 'Y';
+                    $error_message = 'Please enter Qty!';
+                    }
+                    $rate = $this->input->post('crate');
+                    if(isset($rate) && !empty($rate)) {$rate = $rate; } else {$rate=''; }
+                    if(isset($rate) && empty($rate)){
+                    $error = 'Y';
+                    $error_message = 'Please enter Rate!';
+                    }
+                    $taxable_amount = $this->input->post('ctaxable_amount');
+                    if(isset($taxable_amount) && !empty($taxable_amount)) {$taxable_amount = $taxable_amount; } else {$taxable_amount=''; }
+                    if(isset($taxable_amount) && empty($taxable_amount)){
+                    $error = 'Y';
+                    $error_message = 'Please enter taxable amount!';
+                    }
+
+                    $sgst = $this->input->post('sgst');
+                    if(isset($sgst) && !empty($sgst)) {$sgst = $sgst; } else {$sgst=''; }
+                    if(isset($sgst) && empty($sgst)){
+                    $error = 'Y';
+                    $error_message = 'Please enter sgst!';
+                    }
+                    $cgst = $this->input->post('cgst');
+                    if(isset($cgst) && !empty($cgst)) {$cgst = $cgst; } else {$cgst=''; }
+                    if(isset($cgst) && empty($cgst)){
+                    $error = 'Y';
+                    $error_message = 'Please enter cgst!';
+                    }
+
+                    $cgst_amount = $this->input->post('cgst_amount');
+                    if(isset($cgst_amount) && !empty($cgst_amount)) {$cgst_amount = $cgst_amount; } else {$cgst_amount=''; }
+                    if(isset($cgst_amount) && empty($cgst_amount)){
+                    $error = 'Y';
+                    $error_message = 'Please enter cgst amount!';
+                    }
+                    $sgst_amount = $this->input->post('sgst_amount');
+                    if(isset($sgst_amount) && !empty($sgst_amount)) {$sgst_amount = $sgst_amount; } else {$sgst_amount=''; }
+                    if(isset($sgst_amount) && empty($sgst_amount)){
+                    $error = 'Y';
+                    $error_message = 'Please enter sgst amount!';
+                    }
+                   
+
+                    if(isset($boq_code) && empty($boq_code)
             && isset($hsn_sac_code) && empty($hsn_sac_code)
             && isset($item_description) && empty($item_description)
             && isset($unit) && empty($unit)
             && isset($qty) && empty($qty)
-            && isset($rate) && empty($rate)){
+            && isset($rate) && empty($rate)
+            && isset($taxable_amount) && empty($taxable_amount)
+            && isset($sgst) && empty($sgst)
+            && isset($cgst) && empty($cgst)
+            && isset($cgst_amount) && empty($cgst_amount)
+            && isset($sgst_amount) && empty($sgst_amount)
+            )
+            {
                 $this->json->jsonReturn(array(
                     'valid'=>FALSE,
                     'msg'=>'<div class="alert modify alert-danger">Please Enter Tax Invoice Details!!</div>'
@@ -2459,7 +2872,7 @@ class Upload_boq_items_controller extends Base_Controller
             }else{
                 if($error == 'N'){
                     if(isset($boq_code) && !empty($boq_code)){
-                        $main_arr = array('project_id'=>$project_id,'tax_invc_no'=>$tax_invc_no,'created_by'=>$user_id,'created_on'=>date('Y-m-d H:i:s'),
+                        $main_arr = array('project_id'=>$project_id,'tax_invc_no'=>$tax_invc_no,'created_by'=>$user_id,'created_on'=>$created_on,
                         'modified_by'=>$user_id,'modified_on'=>date('Y-m-d H:i:s'),'display'=>'Y','status'=>'Under Approval');
                         $tax_invc_id = $this->common_model->addData('tbl_tax_invc',$main_arr);
                         if($tax_invc_id){
@@ -2470,15 +2883,31 @@ class Upload_boq_items_controller extends Base_Controller
                                 if(isset($unit[$i]) && !empty($unit[$i])) {$unit_s = $unit[$i]; } else {$unit_s=''; }            
                                 if(isset($qty[$i]) && !empty($qty[$i])) {$qty_s = $qty[$i]; } else {$qty_s=0; }            
                                 if(isset($rate[$i]) && !empty($rate[$i])) {$rate_s = $rate[$i]; } else {$rate_s=0; }            
+                                if(isset($taxable_amount[$i]) && !empty($taxable_amount[$i])) {$taxable_amount_s = $taxable_amount[$i]; } else {$taxable_amount_s=0; }            
+                                if(isset($sgst[$i]) && !empty($sgst[$i])) {$sgst_s = $sgst[$i]; } else {$sgst_s=0; }            
+                                if(isset($cgst[$i]) && !empty($cgst[$i])) {$cgst_s = $cgst[$i]; } else {$cgst_s=0; }            
+                                if(isset($cgst_amount[$i]) && !empty($cgst_amount[$i])) {$cgst_amount_s = $cgst_amount[$i]; } else {$cgst_amount_s=0; }            
+                                if(isset($sgst_amount[$i]) && !empty($sgst_amount[$i])) {$sgst_amount_s = $sgst_amount[$i]; } else {$sgst_amount_s=0; }            
+                                if(isset($gst_type) && !empty($gst_type)) {$gst_type_s = 'intra-state'; } else {$gst_type_s= ''; }            
                                 
                                 if(isset($boq_code_s) && !empty($boq_code_s)
                                 && isset($hsn_sac_code_s) && !empty($hsn_sac_code_s)
                                 && isset($item_description_s) && !empty($item_description_s)
                                 && isset($unit_s) && !empty($unit_s)
                                 && isset($qty_s) && !empty($qty_s)
-                                && isset($rate_s) && !empty($rate_s)){
+                                && isset($rate_s) && !empty($rate_s)
+                                && isset($taxable_amount_s) && !empty($taxable_amount_s)
+                                && isset($cgst_s) && !empty($cgst_s)
+                                && isset($sgst_s) && !empty($sgst_s)
+                                && isset($cgst_amount_s) && !empty($cgst_amount_s)
+                                && isset($gst_type_s) && !empty($gst_type_s)
+                                && isset($sgst_amount_s) && !empty($sgst_amount_s)
+
+                                ){
                                     $save_arr[] = array('tax_invc_id'=>$tax_invc_id,'boq_code'=>$boq_code_s,'hsn_sac_code'=>$hsn_sac_code_s,'item_description'=>$item_description_s,
-                                    'unit'=>$unit_s,'qty'=>$qty_s,'rate'=>$rate_s,
+                                    'unit'=>$unit_s,'qty'=>$qty_s,'rate'=>$rate_s,'taxable_amount' =>$taxable_amount_s,'gst_type' => $gst_type_s,
+                                    'sgst' => $sgst_s,'cgst' => $cgst_s,
+                                    'sgst_amount' => $sgst_amount_s,'cgst_amount' => $cgst_amount_s,
                                     'created_by'=>$user_id,'created_on'=>date('Y-m-d H:i:s'),'modified_by'=>$user_id,'modified_on'=>date('Y-m-d H:i:s'));    
                                 }
                             }
@@ -2504,6 +2933,160 @@ class Upload_boq_items_controller extends Base_Controller
                     ));
                 }
             }
+
+
+    
+
+                 }
+                 
+                 
+                 else{
+
+
+                    $error = 'N';
+                    $error_message = '';
+                    $user_id = $this->session->userdata('user_id');
+                    if(isset($user_id) && empty($user_id)){
+                    $error = 'Y';
+                    $error_message = 'Please loggedin!';
+                    }
+                    $boq_code = $this->input->post('iboq_code');
+                    if(isset($boq_code) && !empty($boq_code)) {$boq_code = $boq_code; } else {$boq_code=''; }
+                    if(isset($boq_code) && empty($boq_code)){
+                    $error = 'Y';
+                    $error_message = 'Please enter BOQ Sr No!';
+                    }
+                    $hsn_sac_code = $this->input->post('hsn_sac_code');
+                    if(isset($hsn_sac_code) && !empty($hsn_sac_code)) {$hsn_sac_code = $hsn_sac_code; } else {$hsn_sac_code=''; }
+                    if(isset($hsn_sac_code) && empty($hsn_sac_code)){
+                    $error = 'Y';
+                    $error_message = 'Please enter HSN/SAC Code!';
+                    }
+                    $item_description = $this->input->post('item_description');
+                    if(isset($item_description) && !empty($item_description)) {$item_description = $item_description; } else {$item_description=''; }
+                    if(isset($item_description) && empty($item_description)){
+                    $error = 'Y';
+                    $error_message = 'Please enter Item Description!';
+                    }
+                    $unit = $this->input->post('unit');
+                    if(isset($unit) && !empty($unit)) {$unit = $unit; } else {$unit=''; }
+                    if(isset($unit) && empty($unit)){
+                    $error = 'Y';
+                    $error_message = 'Please enter Unit!';
+                    }
+                    $qty = $this->input->post('qty');
+                    if(isset($qty) && !empty($qty)) {$qty = $qty; } else {$qty=''; }
+                    if(isset($qty) && empty($qty)){
+                    $error = 'Y';
+                    $error_message = 'Please enter Qty!';
+                    }
+                    $rate = $this->input->post('rate');
+                    if(isset($rate) && !empty($rate)) {$rate = $rate; } else {$rate=''; }
+                    if(isset($rate) && empty($rate)){
+                    $error = 'Y';
+                    $error_message = 'Please enter Rate!';
+                    }
+                    $taxable_amount = $this->input->post('itaxable_amount');
+                    if(isset($taxable_amount) && !empty($taxable_amount)) {$taxable_amount = $taxable_amount; } else {$taxable_amount=''; }
+                    if(isset($taxable_amount) && empty($taxable_amount)){
+                    $error = 'Y';
+                    $error_message = 'Please enter taxable amount!';
+                    }
+
+                    $gst = $this->input->post('gst');
+                    if(isset($gst) && !empty($gst)) {$gst = $gst; } else {$gst=''; }
+                    if(isset($gst) && empty($gst)){
+                    $error = 'Y';
+                    $error_message = 'Please enter gst!';
+                    }
+                    $gst_amount = $this->input->post('itotal_amount');
+                    if(isset($gst_amount) && !empty($gst_amount)) {$gst_amount = $gst_amount; } else {$gst_amount=''; }
+                    if(isset($gst_amount) && empty($gst_amount)){
+                    $error = 'Y';
+                    $error_message = 'Please enter gst amount!';
+                    }
+
+                    if(isset($boq_code) && empty($boq_code)
+                    && isset($hsn_sac_code) && empty($hsn_sac_code)
+                    && isset($item_description) && empty($item_description)
+                    && isset($unit) && empty($unit)
+                    && isset($qty) && empty($qty)
+                    && isset($rate) && empty($rate)
+                    && isset($taxable_amount) && empty($taxable_amount)
+                    && isset($gst) && empty($gst)
+                    && isset($gst_amount) && empty($gst_amount)
+                    ){
+                        $this->json->jsonReturn(array(
+                            'valid'=>FALSE,
+                            'msg'=>'<div class="alert modify alert-danger">Please Enter Tax Invoice Details!!</div>'
+                        ));    
+                    }else{
+                        if($error == 'N'){
+                            if(isset($boq_code) && !empty($boq_code)){
+                                $main_arr = array('project_id'=>$project_id,'tax_invc_no'=>$tax_invc_no,'created_by'=>$user_id,'created_on'=>date('Y-m-d H:i:s'),
+                                'modified_by'=>$user_id,'modified_on'=>date('Y-m-d H:i:s'),'display'=>'Y','status'=>'Under Approval');
+                                $tax_invc_id = $this->common_model->addData('tbl_tax_invc',$main_arr);
+                                if($tax_invc_id){
+                                    for($i=0;$i<count($boq_code);$i++){
+                                        if(isset($boq_code[$i]) && !empty($boq_code[$i])) {$boq_code_s = $boq_code[$i]; } else {$boq_code_s=''; }
+                                        if(isset($hsn_sac_code[$i]) && !empty($hsn_sac_code[$i])) {$hsn_sac_code_s = $hsn_sac_code[$i]; } else {$hsn_sac_code_s=''; }
+                                        if(isset($item_description[$i]) && !empty($item_description[$i])) {$item_description_s = $item_description[$i]; } else {$item_description_s=''; }            
+                                        if(isset($unit[$i]) && !empty($unit[$i])) {$unit_s = $unit[$i]; } else {$unit_s=''; }            
+                                        if(isset($qty[$i]) && !empty($qty[$i])) {$qty_s = $qty[$i]; } else {$qty_s=0; }            
+                                        if(isset($rate[$i]) && !empty($rate[$i])) {$rate_s = $rate[$i]; } else {$rate_s=0; }            
+                                        if(isset($taxable_amount[$i]) && !empty($taxable_amount[$i])) {$taxable_amount_s = $taxable_amount[$i]; } else {$taxable_amount_s=0; }            
+                                        if(isset($gst[$i]) && !empty($gst[$i])) {$gst_s = $gst[$i]; } else {$gst_s=0; }            
+                                        if(isset($gst_amount[$i]) && !empty($gst_amount[$i])) {$gst_amount_s = $gst_amount[$i]; } else {$gst_amount_s=0; }     
+                                        if(isset($gst_type) && !empty($gst_type)) {$gst_type_s = 'inter-state'; } else {$gst_type_s= ''; }         
+                                        
+                                        if(isset($boq_code_s) && !empty($boq_code_s)
+                                        && isset($hsn_sac_code_s) && !empty($hsn_sac_code_s)
+                                        && isset($item_description_s) && !empty($item_description_s)
+                                        && isset($unit_s) && !empty($unit_s)
+                                        && isset($qty_s) && !empty($qty_s)
+                                        && isset($rate_s) && !empty($rate_s)
+                                        && isset($taxable_amount_s) && !empty($taxable_amount_s)
+                                        && isset($gst_s) && !empty($gst_s)
+                                        && isset($gst_type_s) && !empty($gst_type_s)
+                                        && isset($gst_amount_s) && !empty($gst_amount_s)
+                                        ){
+                                            $save_arr[] = array('tax_invc_id'=>$tax_invc_id,'boq_code'=>$boq_code_s,'hsn_sac_code'=>$hsn_sac_code_s,'item_description'=>$item_description_s,
+                                            'unit'=>$unit_s,'qty'=>$qty_s,'rate'=>$rate_s
+                                            ,'gst'=>$gst_s,'taxable_amount'=>$taxable_amount_s,
+                                            'gst_amount' => $gst_amount_s,'gst_type'=>$gst_type_s,
+                                            'created_by'=>$user_id,'created_on'=>date('Y-m-d H:i:s'),'modified_by'=>$user_id,'modified_on'=>date('Y-m-d H:i:s'));    
+                                        }
+                                    }
+                                }
+                            }
+                            if(isset($save_arr) && !empty($save_arr)){
+                                $this->common_model->SaveMultiData('tbl_tax_invc_items',$save_arr);
+                                $this->json->jsonReturn(array(
+                                    'valid'=>TRUE,
+                                    'msg'=>'<div class="alert modify alert-info">Tax Invoice Details Saved Successfully!</div>',
+                                    'redirect' => base_url().'create-tax-invoice'
+                                ));    
+                            }else{
+                                $this->json->jsonReturn(array(
+                                    'valid'=>FALSE,
+                                    'msg'=>'<div class="alert modify alert-danger">Please Enter Valid Tax Invoice!!</div>'
+                                ));    
+                            }
+                        }else{
+                            $this->json->jsonReturn(array(
+                                'valid'=>FALSE,
+                                'msg'=>'<div class="alert modify alert-danger">'.$error_message.'</div>'
+                            ));
+                        }
+                    }
+
+                 }
+
+
+           
+          // here
+           
+
         }else{
             $this->json->jsonReturn(array(
                 'valid'=>FALSE,
@@ -2522,58 +3105,104 @@ class Upload_boq_items_controller extends Base_Controller
         $save_arr = array();
         $project_id = $this->input->post('project_id');
         $proforma_no = $this->input->post('proforma_invoice_no');
+        $gst_type = $this->input->post('gst_type');
         if(isset($project_id) && !empty($project_id) && isset($proforma_no) && !empty($proforma_no)){
             $proforma_invc = $this->common_model->selectDetailsWhr('tbl_proforma_invc','proforma_no',$proforma_no);
             if(isset($proforma_invc) && empty($proforma_invc)){
-            $error = 'N';
-            $error_message = '';
-            $user_id = $this->session->userdata('user_id');
-            if(isset($user_id) && empty($user_id)){
-            $error = 'Y';
-            $error_message = 'Please loggedin!';
-            }
-            $boq_code = $this->input->post('boq_code');
-            if(isset($boq_code) && !empty($boq_code)) {$boq_code = $boq_code; } else {$boq_code=''; }
-            if(isset($boq_code) && empty($boq_code)){
-            $error = 'Y';
-            $error_message = 'Please enter BOQ Sr No!';
-            }
-            $hsn_sac_code = $this->input->post('hsn_sac_code');
-            if(isset($hsn_sac_code) && !empty($hsn_sac_code)) {$hsn_sac_code = $hsn_sac_code; } else {$hsn_sac_code=''; }
-            if(isset($hsn_sac_code) && empty($hsn_sac_code)){
-            $error = 'Y';
-            $error_message = 'Please enter HSN/SAC Code!';
-            }
-            $item_description = $this->input->post('item_description');
-            if(isset($item_description) && !empty($item_description)) {$item_description = $item_description; } else {$item_description=''; }
-            if(isset($item_description) && empty($item_description)){
-            $error = 'Y';
-            $error_message = 'Please enter Item Description!';
-            }
-            $unit = $this->input->post('unit');
-            if(isset($unit) && !empty($unit)) {$unit = $unit; } else {$unit=''; }
-            if(isset($unit) && empty($unit)){
-            $error = 'Y';
-            $error_message = 'Please enter Unit!';
-            }
-            $qty = $this->input->post('qty');
-            if(isset($qty) && !empty($qty)) {$qty = $qty; } else {$qty=''; }
-            if(isset($qty) && empty($qty)){
-            $error = 'Y';
-            $error_message = 'Please enter Qty!';
-            }
-            $rate = $this->input->post('rate');
-            if(isset($rate) && !empty($rate)) {$rate = $rate; } else {$rate=''; }
-            if(isset($rate) && empty($rate)){
-            $error = 'Y';
-            $error_message = 'Please enter Rate!';
-            }
-            if(isset($boq_code) && empty($boq_code)
+
+
+                if($gst_type == 'cgst_sgst'){
+
+                    $error = 'N';
+                    $error_message = '';
+                    $user_id = $this->session->userdata('user_id');
+                    if(isset($user_id) && empty($user_id)){
+                    $error = 'Y';
+                    $error_message = 'Please loggedin!';
+                    }
+                    $boq_code = $this->input->post('cboq_code');
+                     if(isset($boq_code) && !empty($boq_code)) {$boq_code = $boq_code; } else {$boq_code=''; }
+                     if(isset($boq_code) && empty($boq_code)){
+                      $error = 'Y';
+                      $error_message = 'Please enter BOQ Sr No!';
+                    }
+                    $hsn_sac_code = $this->input->post('chsn_sac_code');
+                    if(isset($hsn_sac_code) && !empty($hsn_sac_code)) {$hsn_sac_code = $hsn_sac_code; } else {$hsn_sac_code=''; }
+                    if(isset($hsn_sac_code) && empty($hsn_sac_code)){
+                    $error = 'Y';
+                    $error_message = 'Please enter HSN/SAC Code!';
+                    }
+                    $item_description = $this->input->post('citem_description');
+                    if(isset($item_description) && !empty($item_description)) {$item_description = $item_description; } else {$item_description=''; }
+                    if(isset($item_description) && empty($item_description)){
+                    $error = 'Y';
+                    $error_message = 'Please enter Item Description!';
+                    }
+                    $unit = $this->input->post('cunit');
+                    if(isset($unit) && !empty($unit)) {$unit = $unit; } else {$unit=''; }
+                    if(isset($unit) && empty($unit)){
+                    $error = 'Y';
+                    $error_message = 'Please enter Unit!';
+                    }
+                    $qty = $this->input->post('cqty');
+                    if(isset($qty) && !empty($qty)) {$qty = $qty; } else {$qty=''; }
+                    if(isset($qty) && empty($qty)){
+                    $error = 'Y';
+                    $error_message = 'Please enter Qty!';
+                    }
+                    $rate = $this->input->post('crate');
+                    if(isset($rate) && !empty($rate)) {$rate = $rate; } else {$rate=''; }
+                    if(isset($rate) && empty($rate)){
+                    $error = 'Y';
+                    $error_message = 'Please enter Rate!';
+                    }
+                    $taxable_amount = $this->input->post('ctaxable_amount');
+                    if(isset($taxable_amount) && !empty($taxable_amount)) {$taxable_amount = $taxable_amount; } else {$taxable_amount=''; }
+                    if(isset($taxable_amount) && empty($taxable_amount)){
+                    $error = 'Y';
+                    $error_message = 'Please enter taxable amount!';
+                    }
+
+                    $sgst = $this->input->post('sgst');
+                    if(isset($sgst) && !empty($sgst)) {$sgst = $sgst; } else {$sgst=''; }
+                    if(isset($sgst) && empty($sgst)){
+                    $error = 'Y';
+                    $error_message = 'Please enter sgst!';
+                    }
+                    $cgst = $this->input->post('cgst');
+                    if(isset($cgst) && !empty($cgst)) {$cgst = $cgst; } else {$cgst=''; }
+                    if(isset($cgst) && empty($cgst)){
+                    $error = 'Y';
+                    $error_message = 'Please enter cgst!';
+                    }
+
+                    $cgst_amount = $this->input->post('cgst_amount');
+                    if(isset($cgst_amount) && !empty($cgst_amount)) {$cgst_amount = $cgst_amount; } else {$cgst_amount=''; }
+                    if(isset($cgst_amount) && empty($cgst_amount)){
+                    $error = 'Y';
+                    $error_message = 'Please enter cgst amount!';
+                    }
+                    $sgst_amount = $this->input->post('sgst_amount');
+                    if(isset($sgst_amount) && !empty($sgst_amount)) {$sgst_amount = $sgst_amount; } else {$sgst_amount=''; }
+                    if(isset($sgst_amount) && empty($sgst_amount)){
+                    $error = 'Y';
+                    $error_message = 'Please enter sgst amount!';
+                    }
+                   
+
+                    if(isset($boq_code) && empty($boq_code)
             && isset($hsn_sac_code) && empty($hsn_sac_code)
             && isset($item_description) && empty($item_description)
             && isset($unit) && empty($unit)
             && isset($qty) && empty($qty)
-            && isset($rate) && empty($rate)){
+            && isset($rate) && empty($rate)
+            && isset($taxable_amount) && empty($taxable_amount)
+            && isset($sgst) && empty($sgst)
+            && isset($cgst) && empty($cgst)
+            && isset($cgst_amount) && empty($cgst_amount)
+            && isset($sgst_amount) && empty($sgst_amount)
+            )
+            {
                 $this->json->jsonReturn(array(
                     'valid'=>FALSE,
                     'msg'=>'<div class="alert modify alert-danger">Please Enter Proforma Invoice Details!!</div>'
@@ -2583,8 +3212,8 @@ class Upload_boq_items_controller extends Base_Controller
                     if(isset($boq_code) && !empty($boq_code)){
                         $main_arr = array('project_id'=>$project_id,'proforma_no'=>$proforma_no,'created_by'=>$user_id,'created_on'=>date('Y-m-d H:i:s'),
                         'modified_by'=>$user_id,'modified_on'=>date('Y-m-d H:i:s'),'display'=>'Y','status'=>'Under Approval');
-                        $proforma_id = $this->common_model->addData('tbl_proforma_invc',$main_arr);
-                        if($proforma_id){
+                        $tax_invc_id = $this->common_model->addData('tbl_proforma_invc',$main_arr);
+                        if($tax_invc_id){
                             for($i=0;$i<count($boq_code);$i++){
                                 if(isset($boq_code[$i]) && !empty($boq_code[$i])) {$boq_code_s = $boq_code[$i]; } else {$boq_code_s=''; }
                                 if(isset($hsn_sac_code[$i]) && !empty($hsn_sac_code[$i])) {$hsn_sac_code_s = $hsn_sac_code[$i]; } else {$hsn_sac_code_s=''; }
@@ -2592,15 +3221,31 @@ class Upload_boq_items_controller extends Base_Controller
                                 if(isset($unit[$i]) && !empty($unit[$i])) {$unit_s = $unit[$i]; } else {$unit_s=''; }            
                                 if(isset($qty[$i]) && !empty($qty[$i])) {$qty_s = $qty[$i]; } else {$qty_s=0; }            
                                 if(isset($rate[$i]) && !empty($rate[$i])) {$rate_s = $rate[$i]; } else {$rate_s=0; }            
+                                if(isset($taxable_amount[$i]) && !empty($taxable_amount[$i])) {$taxable_amount_s = $taxable_amount[$i]; } else {$taxable_amount_s=0; }            
+                                if(isset($sgst[$i]) && !empty($sgst[$i])) {$sgst_s = $sgst[$i]; } else {$sgst_s=0; }            
+                                if(isset($cgst[$i]) && !empty($cgst[$i])) {$cgst_s = $cgst[$i]; } else {$cgst_s=0; }            
+                                if(isset($cgst_amount[$i]) && !empty($cgst_amount[$i])) {$cgst_amount_s = $cgst_amount[$i]; } else {$cgst_amount_s=0; }            
+                                if(isset($sgst_amount[$i]) && !empty($sgst_amount[$i])) {$sgst_amount_s = $sgst_amount[$i]; } else {$sgst_amount_s=0; }            
+                                if(isset($gst_type) && !empty($gst_type)) {$gst_type_s = 'intra-state'; } else {$gst_type_s= ''; }            
                                 
                                 if(isset($boq_code_s) && !empty($boq_code_s)
                                 && isset($hsn_sac_code_s) && !empty($hsn_sac_code_s)
                                 && isset($item_description_s) && !empty($item_description_s)
                                 && isset($unit_s) && !empty($unit_s)
                                 && isset($qty_s) && !empty($qty_s)
-                                && isset($rate_s) && !empty($rate_s)){
-                                    $save_arr[] = array('proforma_id'=>$proforma_id,'boq_code'=>$boq_code_s,'hsn_sac_code'=>$hsn_sac_code_s,'item_description'=>$item_description_s,
-                                    'unit'=>$unit_s,'qty'=>$qty_s,'rate'=>$rate_s,
+                                && isset($rate_s) && !empty($rate_s)
+                                && isset($taxable_amount_s) && !empty($taxable_amount_s)
+                                && isset($cgst_s) && !empty($cgst_s)
+                                && isset($sgst_s) && !empty($sgst_s)
+                                && isset($cgst_amount_s) && !empty($cgst_amount_s)
+                                && isset($gst_type_s) && !empty($gst_type_s)
+                                && isset($sgst_amount_s) && !empty($sgst_amount_s)
+
+                                ){
+                                    $save_arr[] = array('proforma_id'=>$tax_invc_id,'boq_code'=>$boq_code_s,'hsn_sac_code'=>$hsn_sac_code_s,'item_description'=>$item_description_s,
+                                    'unit'=>$unit_s,'qty'=>$qty_s,'rate'=>$rate_s,'taxable_amount' =>$taxable_amount_s,'gst_type' => $gst_type_s,
+                                    'sgst' => $sgst_s,'cgst' => $cgst_s,
+                                    'sgst_amount' => $sgst_amount_s,'cgst_amount' => $cgst_amount_s,
                                     'created_by'=>$user_id,'created_on'=>date('Y-m-d H:i:s'),'modified_by'=>$user_id,'modified_on'=>date('Y-m-d H:i:s'));    
                                 }
                             }
@@ -2610,13 +3255,13 @@ class Upload_boq_items_controller extends Base_Controller
                         $this->common_model->SaveMultiData('tbl_proforma_invc_items',$save_arr);
                         $this->json->jsonReturn(array(
                             'valid'=>TRUE,
-                            'msg'=>'<div class="alert modify alert-info">Proforma Invoice Details Saved Successfully!</div>',
-                            'redirect' => base_url().'create-proforma-invoice'
+                            'msg'=>'<div class="alert modify alert-info">Perfoma Invoice Details Saved Successfully!</div>',
+                            'redirect' => base_url().'create-tax-invoice'
                         ));    
                     }else{
                         $this->json->jsonReturn(array(
                             'valid'=>FALSE,
-                            'msg'=>'<div class="alert modify alert-danger">Please Enter Valid Proforma Invoice!!</div>'
+                            'msg'=>'<div class="alert modify alert-danger">Please Enter Valid Perfoma Invoice!!</div>'
                         ));    
                     }
                 }else{
@@ -2626,6 +3271,264 @@ class Upload_boq_items_controller extends Base_Controller
                     ));
                 }
             }
+
+
+    
+
+                 }
+                 
+                 
+                 else{
+
+
+                    $error = 'N';
+                    $error_message = '';
+                    $user_id = $this->session->userdata('user_id');
+                    if(isset($user_id) && empty($user_id)){
+                    $error = 'Y';
+                    $error_message = 'Please loggedin!';
+                    }
+                    $boq_code = $this->input->post('iboq_code');
+                    if(isset($boq_code) && !empty($boq_code)) {$boq_code = $boq_code; } else {$boq_code=''; }
+                    if(isset($boq_code) && empty($boq_code)){
+                    $error = 'Y';
+                    $error_message = 'Please enter BOQ Sr No!';
+                    }
+                    $hsn_sac_code = $this->input->post('hsn_sac_code');
+                    if(isset($hsn_sac_code) && !empty($hsn_sac_code)) {$hsn_sac_code = $hsn_sac_code; } else {$hsn_sac_code=''; }
+                    if(isset($hsn_sac_code) && empty($hsn_sac_code)){
+                    $error = 'Y';
+                    $error_message = 'Please enter HSN/SAC Code!';
+                    }
+                    $item_description = $this->input->post('item_description');
+                    if(isset($item_description) && !empty($item_description)) {$item_description = $item_description; } else {$item_description=''; }
+                    if(isset($item_description) && empty($item_description)){
+                    $error = 'Y';
+                    $error_message = 'Please enter Item Description!';
+                    }
+                    $unit = $this->input->post('unit');
+                    if(isset($unit) && !empty($unit)) {$unit = $unit; } else {$unit=''; }
+                    if(isset($unit) && empty($unit)){
+                    $error = 'Y';
+                    $error_message = 'Please enter Unit!';
+                    }
+                    $qty = $this->input->post('qty');
+                    if(isset($qty) && !empty($qty)) {$qty = $qty; } else {$qty=''; }
+                    if(isset($qty) && empty($qty)){
+                    $error = 'Y';
+                    $error_message = 'Please enter Qty!';
+                    }
+                    $rate = $this->input->post('rate');
+                    if(isset($rate) && !empty($rate)) {$rate = $rate; } else {$rate=''; }
+                    if(isset($rate) && empty($rate)){
+                    $error = 'Y';
+                    $error_message = 'Please enter Rate!';
+                    }
+                    $taxable_amount = $this->input->post('itaxable_amount');
+                    if(isset($taxable_amount) && !empty($taxable_amount)) {$taxable_amount = $taxable_amount; } else {$taxable_amount=''; }
+                    if(isset($taxable_amount) && empty($taxable_amount)){
+                    $error = 'Y';
+                    $error_message = 'Please enter taxable amount!';
+                    }
+
+                    $gst = $this->input->post('gst');
+                    if(isset($gst) && !empty($gst)) {$gst = $gst; } else {$gst=''; }
+                    if(isset($gst) && empty($gst)){
+                    $error = 'Y';
+                    $error_message = 'Please enter gst!';
+                    }
+                    $gst_amount = $this->input->post('itotal_amount');
+                    if(isset($gst_amount) && !empty($gst_amount)) {$gst_amount = $gst_amount; } else {$gst_amount=''; }
+                    if(isset($gst_amount) && empty($gst_amount)){
+                    $error = 'Y';
+                    $error_message = 'Please enter gst amount!';
+                    }
+
+                    if(isset($boq_code) && empty($boq_code)
+                    && isset($hsn_sac_code) && empty($hsn_sac_code)
+                    && isset($item_description) && empty($item_description)
+                    && isset($unit) && empty($unit)
+                    && isset($qty) && empty($qty)
+                    && isset($rate) && empty($rate)
+                    && isset($taxable_amount) && empty($taxable_amount)
+                    && isset($gst) && empty($gst)
+                    && isset($gst_amount) && empty($gst_amount)
+                    ){
+                        $this->json->jsonReturn(array(
+                            'valid'=>FALSE,
+                            'msg'=>'<div class="alert modify alert-danger">Please Enter Tax Invoice Details!!</div>'
+                        ));    
+                    }else{
+                        if($error == 'N'){
+                            if(isset($boq_code) && !empty($boq_code)){
+                                $main_arr = array('project_id'=>$project_id,'proforma_no'=>$proforma_no,'created_by'=>$user_id,'created_on'=>date('Y-m-d H:i:s'),
+                                'modified_by'=>$user_id,'modified_on'=>date('Y-m-d H:i:s'),'display'=>'Y','status'=>'Under Approval');
+                                $tax_invc_id = $this->common_model->addData('tbl_proforma_invc',$main_arr);
+                                if($tax_invc_id){
+                                    for($i=0;$i<count($boq_code);$i++){
+                                        if(isset($boq_code[$i]) && !empty($boq_code[$i])) {$boq_code_s = $boq_code[$i]; } else {$boq_code_s=''; }
+                                        if(isset($hsn_sac_code[$i]) && !empty($hsn_sac_code[$i])) {$hsn_sac_code_s = $hsn_sac_code[$i]; } else {$hsn_sac_code_s=''; }
+                                        if(isset($item_description[$i]) && !empty($item_description[$i])) {$item_description_s = $item_description[$i]; } else {$item_description_s=''; }            
+                                        if(isset($unit[$i]) && !empty($unit[$i])) {$unit_s = $unit[$i]; } else {$unit_s=''; }            
+                                        if(isset($qty[$i]) && !empty($qty[$i])) {$qty_s = $qty[$i]; } else {$qty_s=0; }            
+                                        if(isset($rate[$i]) && !empty($rate[$i])) {$rate_s = $rate[$i]; } else {$rate_s=0; }            
+                                        if(isset($taxable_amount[$i]) && !empty($taxable_amount[$i])) {$taxable_amount_s = $taxable_amount[$i]; } else {$taxable_amount_s=0; }            
+                                        if(isset($gst[$i]) && !empty($gst[$i])) {$gst_s = $gst[$i]; } else {$gst_s=0; }            
+                                        if(isset($gst_amount[$i]) && !empty($gst_amount[$i])) {$gst_amount_s = $gst_amount[$i]; } else {$gst_amount_s=0; }     
+                                        if(isset($gst_type) && !empty($gst_type)) {$gst_type_s = 'inter-state'; } else {$gst_type_s= ''; }         
+                                        
+                                        if(isset($boq_code_s) && !empty($boq_code_s)
+                                        && isset($hsn_sac_code_s) && !empty($hsn_sac_code_s)
+                                        && isset($item_description_s) && !empty($item_description_s)
+                                        && isset($unit_s) && !empty($unit_s)
+                                        && isset($qty_s) && !empty($qty_s)
+                                        && isset($rate_s) && !empty($rate_s)
+                                        && isset($taxable_amount_s) && !empty($taxable_amount_s)
+                                        && isset($gst_s) && !empty($gst_s)
+                                        && isset($gst_type_s) && !empty($gst_type_s)
+                                        && isset($gst_amount_s) && !empty($gst_amount_s)
+                                        ){
+                                            $save_arr[] = array('proforma_id'=>$tax_invc_id,'boq_code'=>$boq_code_s,'hsn_sac_code'=>$hsn_sac_code_s,'item_description'=>$item_description_s,
+                                            'unit'=>$unit_s,'qty'=>$qty_s,'rate'=>$rate_s
+                                            ,'gst'=>$gst_s,'taxable_amount'=>$taxable_amount_s,
+                                            'gst_amount' => $gst_amount_s,'gst_type'=>$gst_type_s,
+                                            'created_by'=>$user_id,'created_on'=>date('Y-m-d H:i:s'),'modified_by'=>$user_id,'modified_on'=>date('Y-m-d H:i:s'));    
+                                        }
+                                    }
+                                }
+                            }
+                            if(isset($save_arr) && !empty($save_arr)){
+                                $this->common_model->SaveMultiData('tbl_proforma_invc_items',$save_arr);
+                                $this->json->jsonReturn(array(
+                                    'valid'=>TRUE,
+                                    'msg'=>'<div class="alert modify alert-info">Perfoma Invoice Details Saved Successfully!</div>',
+                                    'redirect' => base_url().'create-proforma-invoice'
+                                ));    
+                            }else{
+                                $this->json->jsonReturn(array(
+                                    'valid'=>FALSE,
+                                    'msg'=>'<div class="alert modify alert-danger">Please Enter Valid Proforma Invoice!!</div>'
+                                ));    
+                            }
+                        }else{
+                            $this->json->jsonReturn(array(
+                                'valid'=>FALSE,
+                                'msg'=>'<div class="alert modify alert-danger">'.$error_message.'</div>'
+                            ));
+                        }
+                    }
+
+                 }
+
+
+
+            // $error = 'N';
+            // $error_message = '';
+            // $user_id = $this->session->userdata('user_id');
+            // if(isset($user_id) && empty($user_id)){
+            // $error = 'Y';
+            // $error_message = 'Please loggedin!';
+            // }
+            // $boq_code = $this->input->post('boq_code');
+            // if(isset($boq_code) && !empty($boq_code)) {$boq_code = $boq_code; } else {$boq_code=''; }
+            // if(isset($boq_code) && empty($boq_code)){
+            // $error = 'Y';
+            // $error_message = 'Please enter BOQ Sr No!';
+            // }
+            // $hsn_sac_code = $this->input->post('hsn_sac_code');
+            // if(isset($hsn_sac_code) && !empty($hsn_sac_code)) {$hsn_sac_code = $hsn_sac_code; } else {$hsn_sac_code=''; }
+            // if(isset($hsn_sac_code) && empty($hsn_sac_code)){
+            // $error = 'Y';
+            // $error_message = 'Please enter HSN/SAC Code!';
+            // }
+            // $item_description = $this->input->post('item_description');
+            // if(isset($item_description) && !empty($item_description)) {$item_description = $item_description; } else {$item_description=''; }
+            // if(isset($item_description) && empty($item_description)){
+            // $error = 'Y';
+            // $error_message = 'Please enter Item Description!';
+            // }
+            // $unit = $this->input->post('unit');
+            // if(isset($unit) && !empty($unit)) {$unit = $unit; } else {$unit=''; }
+            // if(isset($unit) && empty($unit)){
+            // $error = 'Y';
+            // $error_message = 'Please enter Unit!';
+            // }
+            // $qty = $this->input->post('qty');
+            // if(isset($qty) && !empty($qty)) {$qty = $qty; } else {$qty=''; }
+            // if(isset($qty) && empty($qty)){
+            // $error = 'Y';
+            // $error_message = 'Please enter Qty!';
+            // }
+            // $rate = $this->input->post('rate');
+            // if(isset($rate) && !empty($rate)) {$rate = $rate; } else {$rate=''; }
+            // if(isset($rate) && empty($rate)){
+            // $error = 'Y';
+            // $error_message = 'Please enter Rate!';
+            // }
+            // if(isset($boq_code) && empty($boq_code)
+            // && isset($hsn_sac_code) && empty($hsn_sac_code)
+            // && isset($item_description) && empty($item_description)
+            // && isset($unit) && empty($unit)
+            // && isset($qty) && empty($qty)
+            // && isset($rate) && empty($rate)){
+            //     $this->json->jsonReturn(array(
+            //         'valid'=>FALSE,
+            //         'msg'=>'<div class="alert modify alert-danger">Please Enter Proforma Invoice Details!!</div>'
+            //     ));    
+            // }else{
+            //     if($error == 'N'){
+            //         if(isset($boq_code) && !empty($boq_code)){
+            //             $main_arr = array('project_id'=>$project_id,'proforma_no'=>$proforma_no,'created_by'=>$user_id,'created_on'=>date('Y-m-d H:i:s'),
+            //             'modified_by'=>$user_id,'modified_on'=>date('Y-m-d H:i:s'),'display'=>'Y','status'=>'Under Approval');
+            //             $proforma_id = $this->common_model->addData('tbl_proforma_invc',$main_arr);
+            //             if($proforma_id){
+            //                 for($i=0;$i<count($boq_code);$i++){
+            //                     if(isset($boq_code[$i]) && !empty($boq_code[$i])) {$boq_code_s = $boq_code[$i]; } else {$boq_code_s=''; }
+            //                     if(isset($hsn_sac_code[$i]) && !empty($hsn_sac_code[$i])) {$hsn_sac_code_s = $hsn_sac_code[$i]; } else {$hsn_sac_code_s=''; }
+            //                     if(isset($item_description[$i]) && !empty($item_description[$i])) {$item_description_s = $item_description[$i]; } else {$item_description_s=''; }            
+            //                     if(isset($unit[$i]) && !empty($unit[$i])) {$unit_s = $unit[$i]; } else {$unit_s=''; }            
+            //                     if(isset($qty[$i]) && !empty($qty[$i])) {$qty_s = $qty[$i]; } else {$qty_s=0; }            
+            //                     if(isset($rate[$i]) && !empty($rate[$i])) {$rate_s = $rate[$i]; } else {$rate_s=0; }            
+                                
+            //                     if(isset($boq_code_s) && !empty($boq_code_s)
+            //                     && isset($hsn_sac_code_s) && !empty($hsn_sac_code_s)
+            //                     && isset($item_description_s) && !empty($item_description_s)
+            //                     && isset($unit_s) && !empty($unit_s)
+            //                     && isset($qty_s) && !empty($qty_s)
+            //                     && isset($rate_s) && !empty($rate_s)){
+            //                         $save_arr[] = array('proforma_id'=>$proforma_id,'boq_code'=>$boq_code_s,'hsn_sac_code'=>$hsn_sac_code_s,'item_description'=>$item_description_s,
+            //                         'unit'=>$unit_s,'qty'=>$qty_s,'rate'=>$rate_s,
+            //                         'created_by'=>$user_id,'created_on'=>date('Y-m-d H:i:s'),'modified_by'=>$user_id,'modified_on'=>date('Y-m-d H:i:s'));    
+            //                     }
+            //                 }
+            //             }
+            //         }
+            //         if(isset($save_arr) && !empty($save_arr)){
+            //             $this->common_model->SaveMultiData('tbl_proforma_invc_items',$save_arr);
+            //             $this->json->jsonReturn(array(
+            //                 'valid'=>TRUE,
+            //                 'msg'=>'<div class="alert modify alert-info">Proforma Invoice Details Saved Successfully!</div>',
+            //                 'redirect' => base_url().'create-proforma-invoice'
+            //             ));    
+            //         }else{
+            //             $this->json->jsonReturn(array(
+            //                 'valid'=>FALSE,
+            //                 'msg'=>'<div class="alert modify alert-danger">Please Enter Valid Proforma Invoice!!</div>'
+            //             ));    
+            //         }
+            //     }else{
+            //         $this->json->jsonReturn(array(
+            //             'valid'=>FALSE,
+            //             'msg'=>'<div class="alert modify alert-danger">'.$error_message.'</div>'
+            //         ));
+            //     }
+            // }
+
+
+
+         // here
+
+
         }else{
             $this->json->jsonReturn(array(
                 'valid'=>FALSE,

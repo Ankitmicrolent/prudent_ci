@@ -391,14 +391,43 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row ifpros">
-                                                    <div class="col-md-6">
+                                                <div class="row">
+                                                    <p id="consignee_error" style="color: #a94442;"></p>
+                                                    <div class="col-md-9">
                                                         <div class="form-group deladdrsdiv">
-                                                            <label class="">Delivery Address <span class="require" aria-required="true" style="color:#a94442">*</span></label>
-                                                            <div class="input-icon right">
+                                                            <label class="">Consignee Detail<span class="require" aria-required="true" style="color:#a94442">*</span></label>
+                                                            <div class="row consineees_details">
+                                                            <div class="input-icon right col-lg-4">
                                                                 <i class="fa"></i>
-                                                                <textarea rows="2" type="text" class="form-control" name="delivery_address" id="delivery_address" placeholder="Delivery Address"></textarea>
+                                                                <div class="input-icon right">
+                                                                <i class="fa"></i>
+                                                                <label class="">Consignee name<span class="require" aria-required="true" style="color:#a94442">*</span></label>
+                                                                <input type="text" class="form-control " id="consignee_name" value="" placeholder="Consignee name" required>
                                                             </div>
+                                                            </div>
+                                                            <div class="input-icon right col-lg-3">
+                                                                <i class="fa"></i>
+                                                                <label class="">Delivery Address <span class="require" aria-required="true" style="color:#a94442">*</span></label>
+                                                                <textarea rows="2" type="text" class="form-control"  id="delivery_address" placeholder="Delivery Address"></textarea>
+                                                            </div>
+                                                            <div class="input-icon right col-lg-3">
+                                                                <i class="fa"></i>
+                                                                <div class="input-icon right">
+                                                                <i class="fa"></i>
+                                                                <label class="">Gst Number<span class="require" aria-required="true" style="color:#a94442">*</span></label>
+                                                                <input type="text" class="form-control "  id="gst_types" value="" placeholder="Gst Number" required>
+                                                            </div>
+                                                            </div>
+                                                            <div class="input-icon right col-lg-2">
+                                                            <div class="add_consignee"><i class="fa fa-plus" aria-hidden="true"  style="font-size:10px;"></i></div>
+                                                            </div>
+                                                            
+
+
+
+                                                            </div>
+                                                            <div id="newlinesadd"></div>
+                                                            
                                                             <div class="dflx" id="sameasaddr">
                                                                 <input type="checkbox" name="del_same_as_site_addr" id="del_same_as_site_addr" value="Y">
                                                                 <label class="" style="padding:0 5px;font-size: 12px;">Same as Site Address</label><span id="deladdrserror" style="font-size: 11px;color: #a94442;"></span>

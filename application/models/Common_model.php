@@ -124,7 +124,7 @@ class Common_model extends CI_Model {
 	{
 		$this->db->where($where,$condition);
 		$query = $this->db->get($tblname);
-		if($query->num_rows()== 1){	
+		if($query->num_rows()>= 1){	
 			return $query->row();
 		}
 		else

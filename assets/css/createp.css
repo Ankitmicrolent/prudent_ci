@@ -49,6 +49,17 @@
             cursor: pointer;
             margin: 5px auto;
         }
+        .rmbtnss{
+            padding: 2px 6px;
+            background: #a94442;
+            color: #fff;
+            border-radius: 50%;
+            width: 20px;
+            font-size: 7px;
+            height: 20px;
+            cursor: pointer;
+            margin: 5px auto;
+        }
         .rmsatbtn{
             padding: 2px 6px;
             background: #a94442;
@@ -117,6 +128,17 @@
             margin: 6px auto;
         }
         .adsamplebtn{
+            padding: 2px 6px;
+            background: #26a69a;
+            color: #fff;
+            border-radius: 50%;
+            width: 20px;
+            font-size: 7px;
+            height: 20px;
+            cursor: pointer;
+            margin: 6px auto;
+        }
+        .add_consignee{
             padding: 2px 6px;
             background: #26a69a;
             color: #fff;

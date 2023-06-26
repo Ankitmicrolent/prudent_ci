@@ -600,7 +600,9 @@ class Admin_model extends CI_Model {
 		$this->db->from('view_proforma_invc');
 		if(!empty($project_id)){
 		$this->db->where('project_id',$project_id);
+		
 		}
+       
 		$i = 0;
         // loop searchable columns 
 		if(isset($postData['search']['value'])){
@@ -1379,10 +1381,23 @@ class Admin_model extends CI_Model {
             return 0;
         }
     }
+    public function get_project_item_details($project_id)
+    {
+        // $query=$this->db->query("SELECT * FROM `tbl_projects` WHERE project_id='".$project_id."");
+        $query = $this->db->query("SELECT * FROM `tbl_projects` WHERE project_id='".$project_id."'");
+
+        if($query->num_rows() > 0){
+            return $query->row();
+        }else{
+            return 0;
+        }
+    }
     public function get_dc_boq_item_details($project_id,$boq_code)
     {
-        $query=$this->db->query("SELECT tdc.*, tb.* FROM `tbl_deliv_challan_items` tdc INNER JOIN tbl_boq_items tb ON tb.boq_code = tdc.boq_code 
-        WHERE tb.project_id='".$project_id."' AND tb.boq_code='".$boq_code."' ORDER BY tdc.challan_itemid DESC LIMIT 0,1");
+        $query=$this->db->query("SELECT * FROM `tbl_boq_items` 
+        WHERE project_id='".$project_id."' AND boq_code='".$boq_code."' ORDER BY boq_items_id DESC LIMIT 0,1");
+        // $query=$this->db->query("SELECT tdc.*, tb.* FROM `tbl_deliv_challan_items` tdc INNER JOIN tbl_boq_items tb ON tb.boq_code = tdc.boq_code 
+        // WHERE tb.project_id='".$project_id."' AND tb.boq_code='".$boq_code."' ORDER BY tdc.challan_itemid DESC LIMIT 0,1");
         if($query->num_rows() > 0){
             return $query->row();
         }else{
