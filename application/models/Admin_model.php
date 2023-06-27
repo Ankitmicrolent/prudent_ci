@@ -1404,6 +1404,18 @@ class Admin_model extends CI_Model {
             return 0;
         }
     }
+    public function get_consinee_details($consignee_id)
+    {
+        $query=$this->db->query("SELECT * FROM `tbl_deliv_challan_consignee` 
+        WHERE id='".$consignee_id."' ORDER BY id DESC LIMIT 0,1");
+        // $query=$this->db->query("SELECT tdc.*, tb.* FROM `tbl_deliv_challan_items` tdc INNER JOIN tbl_boq_items tb ON tb.boq_code = tdc.boq_code 
+        // WHERE tb.project_id='".$project_id."' AND tb.boq_code='".$boq_code."' ORDER BY tdc.challan_itemid DESC LIMIT 0,1");
+        if($query->num_rows() > 0){
+            return $query->row();
+        }else{
+            return 0;
+        }
+    }
     
     public function get_wip_boq_item_details($project_id,$boq_code)
     {

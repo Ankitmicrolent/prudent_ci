@@ -602,6 +602,8 @@ class Create_project_controller extends Base_Controller
     }
     public function save_create_project() 
     {
+        // echo "<pre>";
+        // print_r($this->input->post());
         $error = 'N';
         $error_message = '';
         $user_id = $this->session->userdata('user_id');
@@ -842,29 +844,33 @@ class Create_project_controller extends Base_Controller
         
         $is_billing_inter_state =$this->input->post('is_billing_inter_state');
         if(isset($is_billing_inter_state) && !empty($is_billing_inter_state) && $is_billing_inter_state == 'Yes') {$is_billing_inter_state = 'Y'; } else {$is_billing_inter_state='N'; }
-        $bill_same_as_reg_addr =$this->input->post('bill_same_as_reg_addr');
-        if(isset($bill_same_as_reg_addr) && !empty($bill_same_as_reg_addr)) {
-            if(isset($registered_address) && !empty($registered_address)) {$billing_address=trim($registered_address); } else {$billing_address=''; }
-        }else{
-            $billing_address = $this->input->post('billing_address');
-            if(isset($billing_address) && !empty($billing_address)) {$billing_address=trim($billing_address); } else {$billing_address=''; }
-        }
-        if($is_billing_inter_state == 'Y'){
-            if(empty($billing_address)){
-                $error = 'Y';
-                $error_message = 'Please enter billing address value!';
-            }    
-        }
-        $del_same_as_bill_addr =$this->input->post('del_same_as_bill_addr');
-        $del_same_as_site_addr =$this->input->post('del_same_as_site_addr');
-        if(isset($del_same_as_bill_addr) && !empty($del_same_as_bill_addr) && $del_same_as_bill_addr == 'Y') {
-            if(isset($billing_address) && !empty($billing_address)) {$delivery_address = trim($billing_address); } else {$delivery_address=''; }
-        }elseif(isset($del_same_as_site_addr) && !empty($del_same_as_site_addr) && $del_same_as_site_addr == 'Y') {
-            if(isset($site_address) && !empty($site_address)) {$delivery_address = trim($site_address); } else {$delivery_address=''; }
-        }else{
-            $delivery_address = $this->input->post('delivery_address');
-            if(isset($delivery_address) && !empty($delivery_address)) {$delivery_address = trim($delivery_address); } else {$delivery_address=''; }
-        }
+        // $bill_same_as_reg_addr =$this->input->post('bill_same_as_reg_addr');
+        // if(isset($bill_same_as_reg_addr) && !empty($bill_same_as_reg_addr)) {
+        //     if(isset($registered_address) && !empty($registered_address)) {$billing_address=trim($registered_address); } else {$billing_address=''; }
+        // }else{
+        //     $billing_address = $this->input->post('billing_address');
+        //     if(isset($billing_address) && !empty($billing_address)) {$billing_address=trim($billing_address); } else {$billing_address=''; }
+        // }
+        // if($is_billing_inter_state == 'Y'){
+        //     if(empty($billing_address)){
+        //         $error = 'Y';
+        //         $error_message = 'Please enter billing address value!';
+        //     }    
+        // }
+        $consignee_name = $this->input->post('consignee_name');
+        $con_sdelivery_address = $this->input->post('delivery_address');
+        $con_gst_number = $this->input->post('gst_types');
+        // $del_same_as_bill_addr =$this->input->post('del_same_as_bill_addr');
+        // $del_same_as_site_addr =$this->input->post('del_same_as_site_addr');
+        // if(isset($del_same_as_bill_addr) && !empty($del_same_as_bill_addr) && $del_same_as_bill_addr == 'Y') {
+        //     if(isset($billing_address) && !empty($billing_address)) {$delivery_address = trim($billing_address); } else {$delivery_address=''; }
+        // }elseif(isset($del_same_as_site_addr) && !empty($del_same_as_site_addr) && $del_same_as_site_addr == 'Y') {
+        //     if(isset($site_address) && !empty($site_address)) {$delivery_address = trim($site_address); } else {$delivery_address=''; }
+        // }else{
+        //     $delivery_address = $this->input->post('delivery_address');
+        //     if(isset($delivery_address) && !empty($delivery_address)) {$delivery_address = trim($delivery_address); } else {$delivery_address=''; }
+        // }
+        
         $insurance_req =$this->input->post('insurance_req');
         if(isset($insurance_req) && !empty($insurance_req) && $insurance_req == 'Yes') {$insurance_req='Y'; } else {$insurance_req='N'; }
         $insurance_remark =$this->input->post('insurance_remark');
@@ -1204,8 +1210,10 @@ class Create_project_controller extends Base_Controller
         'performance_guarantee_num'=>$performance_guarantee_num,'per_paid_status'=>$per_paid_status,'per_payment_mode' => $per_payment_mode, 'pbg_validity'=>$pbg_validity, 'security_deposite_num'=>$security_deposite_num,
         'warranty_period'=>$warranty_period, 'billing_related'=>$billing_related, 'po_related'=>$po_related, 'execution_related'=>$execution_related,
         'engineer_in_charge'=>$engineer_in_charge,'completion_period'=>$completion_period, 'gst_no'=>$gst_no, 'price_inslusive_of_amc'=>$price_inslusive_of_amc,
-        'amc_applicable_after'=>$amc_applicable_after, 'is_billing_inter_state'=>$is_billing_inter_state, 'billing_address'=>$billing_address,
-        'delivery_address'=>$delivery_address, 'insurance_req'=>$insurance_req, 'agreement_prepared'=>$agreement_prepared, 'penalty_clause'=>$penalty_clause,
+        'amc_applicable_after'=>$amc_applicable_after, 'is_billing_inter_state'=>$is_billing_inter_state, 
+        // 'billing_address'=>$billing_address,
+        // 'delivery_address'=>$delivery_address,
+         'insurance_req'=>$insurance_req, 'agreement_prepared'=>$agreement_prepared, 'penalty_clause'=>$penalty_clause,
         'power_of_attorney'=>$power_of_attorney, 'sample'=>$sample,'prototype'=>$prototype,'inspection'=>$inspection,'fat'=>$fat,'sat'=>$sat,'payment_terms'=>$payment_terms,
         'bill_split_supply'=>$bill_split_supply,'bill_installation'=>$bill_installation, 'testing_commissioning'=>$testing_commissioning, 'bill_handover'=>$bill_handover,
         'invoice_submitted'=>$invoice_submitted, 'invoice_submitted_text'=>$invoice_submitted_text, 'invoice_submitted_address'=>$invoice_submitted_address,
@@ -1219,6 +1227,7 @@ class Create_project_controller extends Base_Controller
         'projectcashflw_doc_file'=>$upload_projectcashflw_doc_file,'projectinvstsch_doc_file'=>$upload_projectinvstsch_doc_file,
         'sign_doc_file'=>$upload_sign_doc_file,'draft_doc_file'=>$upload_draft_doc_file,'penalty_clause_file'=>$penalty_clause_file,'power_of_attorney_file'=>$power_of_attorney_file);
         if($error == 'N'){
+            
             $project_id = $this->common_model->addData('tbl_projects',$data);
             if(isset($project_id) && !empty($project_id)){
                 if($insurance_req == 'Y'){
@@ -1249,6 +1258,21 @@ class Create_project_controller extends Base_Controller
                     if(isset($save_insurance_data) && !empty($save_insurance_data)){
                         $this->common_model->SaveMultiData('tbl_insurance_data',$save_insurance_data);
                     }
+                }
+                
+                if($consignee_name && $con_sdelivery_address && $con_gst_number){
+                     $save_consignee_data = array();
+                     for ($i = 0; $i < count($consignee_name); $i++) { 
+
+                        $save_consignee_data[] = array('project_id'=>$project_id,'consignee_name'=>$consignee_name[$i],
+                        'delivery_address'=>$con_sdelivery_address[$i],'gst_number'=>$con_gst_number[$i]);  
+ 
+                     }
+
+                     if(isset($save_consignee_data) && !empty($save_consignee_data)){
+                        $this->common_model->SaveMultiData('tbl_deliv_challan_consignee',$save_consignee_data);
+                    }
+
                 }
                 if($sample == 'Y'){
                     $save_sample_data = array();

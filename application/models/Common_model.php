@@ -208,6 +208,24 @@ class Common_model extends CI_Model {
             return false;
         }       
     }
+    public function selectAllconsineeWhr($tblname,$where,$condition)
+    {
+        $this->db->where($where,$condition);
+       
+        $query = $this->db->get($tblname);
+        if($query->num_rows() > 0)
+        {
+            foreach ($query->result() as $row)
+            {
+                $tbl_data[]=$row;
+            }
+            return $tbl_data;
+        }
+        else
+        {
+            return false;
+        }       
+    }
     public function fetchDataDESClimit($table_name, $dsc_by_col_name, $limit)
     {       
         $this->db->select('*')->from($table_name)->where('display', 'Y')->order_by($dsc_by_col_name, "DESC")->limit($limit);

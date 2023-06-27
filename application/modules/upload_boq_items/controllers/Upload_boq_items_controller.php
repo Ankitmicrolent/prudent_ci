@@ -500,6 +500,7 @@ class Upload_boq_items_controller extends Base_Controller
         $gst_type = $this->input->post('gst_type');
         $user_id = $this->session->userData('user_id');
         $project_detail = $this->admin_model->get_project_item_details($project_id);
+        $consinee_item = $this->common_model->selectAllconsineeWhr('tbl_deliv_challan_consignee','project_id',$project_id);
          if($gst_type == 'igst'){
 
 
@@ -546,6 +547,7 @@ class Upload_boq_items_controller extends Base_Controller
                 "recordsFiltered" => $countFiltered,
                 "data" => $newarr,
                 "project_detail" => $project_detail,
+                "consinee_item" => $consinee_item,
             );
             echo json_encode($output);
             }else{
@@ -599,6 +601,7 @@ class Upload_boq_items_controller extends Base_Controller
                     "recordsFiltered" => $countFiltered,
                     "data" => $newarr,
                     "project_detail" => $project_detail,
+                    "consinee_item" => $consinee_item,
                 );
                 echo json_encode($output);
                 }
@@ -763,6 +766,26 @@ class Upload_boq_items_controller extends Base_Controller
 		}
 
     }
+
+ public function get_consignee_detail(){
+
+    $c_id = $this->input->post('consignee_id');
+$res = array();
+    $detail = $this->admin_model->get_consinee_details($c_id);
+    if($detail){
+        $res['gst_number'] = $detail->gst_number;
+        $res['delivery_address'] = $detail->delivery_address;
+
+        echo json_encode($res);
+
+    }
+
+
+
+
+
+ }
+
     public function get_boq_item_details() 
 		{
 		$res = array();
@@ -2494,6 +2517,9 @@ class Upload_boq_items_controller extends Base_Controller
         $save_arr = array();
         $project_id = $this->input->post('project_id');
         $dc_no = $this->input->post('dc_no');
+        $c_type = $this->input->post('c_type');
+        $gst_number = $this->input->post('gst_number');
+        $gst_type = $this->input->post('gst_type');
         $workorderon = $this->input->post('workorderon');
         $dccdate = $this->input->post('dccdate');
         $suppliers_ref = $this->input->post('suppliers_ref');
@@ -2512,92 +2538,145 @@ class Upload_boq_items_controller extends Base_Controller
         if(isset($project_id) && !empty($project_id) && isset($dc_no) && !empty($dc_no)){
             $delivery_challan = $this->common_model->selectDetailsWhr('tbl_delivery_challan','dc_no',$dc_no);
             if(isset($delivery_challan) && empty($delivery_challan)){
-            $error = 'N';
-            $error_message = '';
-            $user_id = $this->session->userdata('user_id');
-            if(isset($user_id) && empty($user_id)){
-            $error = 'Y';
-            $error_message = 'Please loggedin!';
-            }
-            $boq_code = $this->input->post('boq_code');
-            if(isset($boq_code) && !empty($boq_code)) {$boq_code = $boq_code; } else {$boq_code=''; }
-            if(isset($boq_code) && empty($boq_code)){
-            $error = 'Y';
-            $error_message = 'Please enter BOQ Sr No!';
-            }
-            $hsn_sac_code = $this->input->post('hsn_sac_code');
-            if(isset($hsn_sac_code) && !empty($hsn_sac_code)) {$hsn_sac_code = $hsn_sac_code; } else {$hsn_sac_code=''; }
-            if(isset($hsn_sac_code) && empty($hsn_sac_code)){
-            $error = 'Y';
-            $error_message = 'Please enter HSN/SAC Code!';
-            }
-            $item_description = $this->input->post('item_description');
-            if(isset($item_description) && !empty($item_description)) {$item_description = $item_description; } else {$item_description=''; }
-            if(isset($item_description) && empty($item_description)){
-            $error = 'Y';
-            $error_message = 'Please enter Item Description!';
-            }
-            $unit = $this->input->post('unit');
-            if(isset($unit) && !empty($unit)) {$unit = $unit; } else {$unit=''; }
-            if(isset($unit) && empty($unit)){
-            $error = 'Y';
-            $error_message = 'Please enter Unit!';
-            }
-            $scheduled_qty = $this->input->post('scheduled_qty');
-            if(isset($scheduled_qty) && !empty($scheduled_qty)) {$scheduled_qty = $scheduled_qty; } else {$scheduled_qty=''; }
-            if(isset($scheduled_qty) && empty($scheduled_qty)){
-            $error = 'Y';
-            $error_message = 'Please enter Scheduled Qty!';
-            }
-            $design_qty = $this->input->post('design_qty');
-            if(isset($design_qty) && !empty($design_qty)) {$design_qty = $design_qty; } else {$design_qty=''; }
-            if(isset($design_qty) && empty($design_qty)){
-            $error = 'Y';
-            $error_message = 'Please enter Design Qty!';
-            }
-            $receive_qty = $this->input->post('receive_qty');
-            if(isset($receive_qty) && !empty($receive_qty)) {$receive_qty = $receive_qty; } else {$receive_qty=''; }
-            if(isset($receive_qty) && empty($receive_qty)){
-            $error = 'Y';
-            $error_message = 'Please enter Received Qty!';
-            }
-          
-            if(isset($boq_code) && empty($boq_code)
-            && isset($hsn_sac_code) && empty($hsn_sac_code)
-            && isset($item_description) && empty($item_description)
-            && isset($unit) && empty($unit)
-            && isset($scheduled_qty) && empty($scheduled_qty)
-            && isset($design_qty) && empty($design_qty)
-            && isset($receive_qty) && empty($receive_qty)){
-                $this->json->jsonReturn(array(
-                    'valid'=>FALSE,
-                    'msg'=>'<div class="alert modify alert-danger">Please Enter  delivery challan Details!!</div>'
-                ));    
-            }else{
-                if($error == 'N'){
-                    if(isset($boq_code) && !empty($boq_code)){
-                        $main_arr = array('project_id'=>$project_id,'dc_no'=>$dc_no,'created_by'=>$user_id,'created_on'=>date('Y-m-d H:i:s'),'workorderon' => $workorderon,'dccdate'=> $dccdate,'suppliers_ref'=> $suppliers_ref,'registered_address'=> $registered_address,'buyer_order_ref'=> $buyer_order_ref, 'dcc_dated' => $dcc_dated,'other_ref' => $other_ref, 'consignee' => $consignee,'consignee_buyer' => $consignee_buyer,'destination'=>$destination,'site_address'=> $site_address,'buyer_site_address' => $buyer_site_address, 'dispatch_through' => $dispatch_through,'terms_of_delivery' => $terms_of_delivery, 'dispatch_document_no'=> $dispatch_document_no, 
-                        'modified_by'=>$user_id,'modified_on'=>date('Y-m-d H:i:s'),'display'=>'Y','status'=>'Under Approval');
-                        $challan_id = $this->common_model->addData('tbl_delivery_challan',$main_arr);
+
+
+
+                if($gst_type == 'cgst_sgst'){
+
+                    $error = 'N';
+                    $error_message = '';
+                    $user_id = $this->session->userdata('user_id');
+                    if(isset($user_id) && empty($user_id)){
+                    $error = 'Y';
+                    $error_message = 'Please loggedin!';
+                    }
+                    $boq_code = $this->input->post('cboq_code');
+                     if(isset($boq_code) && !empty($boq_code)) {$boq_code = $boq_code; } else {$boq_code=''; }
+                     if(isset($boq_code) && empty($boq_code)){
+                      $error = 'Y';
+                      $error_message = 'Please enter BOQ Sr No!';
+                    }
+                    $hsn_sac_code = $this->input->post('chsn_sac_code');
+                    if(isset($hsn_sac_code) && !empty($hsn_sac_code)) {$hsn_sac_code = $hsn_sac_code; } else {$hsn_sac_code=''; }
+                    if(isset($hsn_sac_code) && empty($hsn_sac_code)){
+                    $error = 'Y';
+                    $error_message = 'Please enter HSN/SAC Code!';
+                    }
+                    $item_description = $this->input->post('citem_description');
+                    if(isset($item_description) && !empty($item_description)) {$item_description = $item_description; } else {$item_description=''; }
+                    if(isset($item_description) && empty($item_description)){
+                    $error = 'Y';
+                    $error_message = 'Please enter Item Description!';
+                    }
+                    $unit = $this->input->post('cunit');
+                    if(isset($unit) && !empty($unit)) {$unit = $unit; } else {$unit=''; }
+                    if(isset($unit) && empty($unit)){
+                    $error = 'Y';
+                    $error_message = 'Please enter Unit!';
+                    }
+                    $qty = $this->input->post('cqty');
+                    if(isset($qty) && !empty($qty)) {$qty = $qty; } else {$qty=''; }
+                    if(isset($qty) && empty($qty)){
+                    $error = 'Y';
+                    $error_message = 'Please enter Qty!';
+                    }
+                    $rate = $this->input->post('crate');
+                    if(isset($rate) && !empty($rate)) {$rate = $rate; } else {$rate=''; }
+                    if(isset($rate) && empty($rate)){
+                    $error = 'Y';
+                    $error_message = 'Please enter Rate!';
+                    }
+                    $taxable_amount = $this->input->post('ctaxable_amount');
+                    if(isset($taxable_amount) && !empty($taxable_amount)) {$taxable_amount = $taxable_amount; } else {$taxable_amount=''; }
+                    if(isset($taxable_amount) && empty($taxable_amount)){
+                    $error = 'Y';
+                    $error_message = 'Please enter taxable amount!';
+                    }
+
+                    $sgst = $this->input->post('sgst');
+                    if(isset($sgst) && !empty($sgst)) {$sgst = $sgst; } else {$sgst=''; }
+                    if(isset($sgst) && empty($sgst)){
+                    $error = 'Y';
+                    $error_message = 'Please enter sgst!';
+                    }
+                    $cgst = $this->input->post('cgst');
+                    if(isset($cgst) && !empty($cgst)) {$cgst = $cgst; } else {$cgst=''; }
+                    if(isset($cgst) && empty($cgst)){
+                    $error = 'Y';
+                    $error_message = 'Please enter cgst!';
+                    }
+
+                    $cgst_amount = $this->input->post('cgst_amount');
+                    if(isset($cgst_amount) && !empty($cgst_amount)) {$cgst_amount = $cgst_amount; } else {$cgst_amount=''; }
+                    if(isset($cgst_amount) && empty($cgst_amount)){
+                    $error = 'Y';
+                    $error_message = 'Please enter cgst amount!';
+                    }
+                    $sgst_amount = $this->input->post('sgst_amount');
+                    if(isset($sgst_amount) && !empty($sgst_amount)) {$sgst_amount = $sgst_amount; } else {$sgst_amount=''; }
+                    if(isset($sgst_amount) && empty($sgst_amount)){
+                    $error = 'Y';
+                    $error_message = 'Please enter sgst amount!';
+                    }
+                   
+
+                    if(isset($boq_code) && empty($boq_code)
+                  && isset($hsn_sac_code) && empty($hsn_sac_code)
+                  && isset($item_description) && empty($item_description)
+                  && isset($unit) && empty($unit)
+                  && isset($qty) && empty($qty)
+                  && isset($rate) && empty($rate)
+                  && isset($taxable_amount) && empty($taxable_amount)
+                  && isset($sgst) && empty($sgst)
+                  && isset($cgst) && empty($cgst)
+                  && isset($cgst_amount) && empty($cgst_amount)
+                  && isset($sgst_amount) && empty($sgst_amount)
+                  )
+                  {
+                      $this->json->jsonReturn(array(
+                          'valid'=>FALSE,
+                          'msg'=>'<div class="alert modify alert-danger">Please Enter Delivery Challan Details!!</div>'
+                      ));    
+                  }else{
+                      if($error == 'N'){
+                          if(isset($boq_code) && !empty($boq_code)){
+                            $main_arr = array('project_id'=>$project_id,'dc_no'=>$dc_no,'created_by'=>$user_id,'created_on'=>date('Y-m-d H:i:s'),'workorderon' => $workorderon,'dccdate'=> $dccdate,'c_type' => $c_type,'gst_number' => $gst_number,
+                            'suppliers_ref'=> $suppliers_ref,'registered_address'=> $registered_address,'buyer_order_ref'=> $buyer_order_ref, 'dcc_dated' => $dcc_dated,'other_ref' => $other_ref, 'consignee' => $consignee,'consignee_buyer' => $consignee_buyer,'destination'=>$destination,'site_address'=> $site_address,'buyer_site_address' => $buyer_site_address, 'dispatch_through' => $dispatch_through,'terms_of_delivery' => $terms_of_delivery, 'dispatch_document_no'=> $dispatch_document_no, 
+                            'modified_by'=>$user_id,'modified_on'=>date('Y-m-d H:i:s'),'display'=>'Y','status'=>'Under Approval');
+                            $challan_id = $this->common_model->addData('tbl_delivery_challan',$main_arr);
                         if($challan_id){
                             for($i=0;$i<count($boq_code);$i++){
                                 if(isset($boq_code[$i]) && !empty($boq_code[$i])) {$boq_code_s = $boq_code[$i]; } else {$boq_code_s=''; }
                                 if(isset($hsn_sac_code[$i]) && !empty($hsn_sac_code[$i])) {$hsn_sac_code_s = $hsn_sac_code[$i]; } else {$hsn_sac_code_s=''; }
                                 if(isset($item_description[$i]) && !empty($item_description[$i])) {$item_description_s = $item_description[$i]; } else {$item_description_s=''; }            
                                 if(isset($unit[$i]) && !empty($unit[$i])) {$unit_s = $unit[$i]; } else {$unit_s=''; }            
-                                if(isset($scheduled_qty[$i]) && !empty($scheduled_qty[$i])) {$scheduled_qty_s = $scheduled_qty[$i]; } else {$scheduled_qty_s=''; }            
-                                if(isset($design_qty[$i]) && !empty($design_qty[$i])) {$design_qty_s = $design_qty[$i]; } else {$design_qty_s=''; }            
-                                if(isset($receive_qty[$i]) && !empty($receive_qty[$i])) {$receive_qty_s = $receive_qty[$i]; } else {$receive_qty_s=''; }            
+                                if(isset($qty[$i]) && !empty($qty[$i])) {$qty_s = $qty[$i]; } else {$qty_s=0; }            
+                                if(isset($rate[$i]) && !empty($rate[$i])) {$rate_s = $rate[$i]; } else {$rate_s=0; }            
+                                if(isset($taxable_amount[$i]) && !empty($taxable_amount[$i])) {$taxable_amount_s = $taxable_amount[$i]; } else {$taxable_amount_s=0; }            
+                                if(isset($sgst[$i]) && !empty($sgst[$i])) {$sgst_s = $sgst[$i]; } else {$sgst_s=0; }            
+                                if(isset($cgst[$i]) && !empty($cgst[$i])) {$cgst_s = $cgst[$i]; } else {$cgst_s=0; }            
+                                if(isset($cgst_amount[$i]) && !empty($cgst_amount[$i])) {$cgst_amount_s = $cgst_amount[$i]; } else {$cgst_amount_s=0; }            
+                                if(isset($sgst_amount[$i]) && !empty($sgst_amount[$i])) {$sgst_amount_s = $sgst_amount[$i]; } else {$sgst_amount_s=0; }            
+                                if(isset($gst_type) && !empty($gst_type)) {$gst_type_s = 'intra-state'; } else {$gst_type_s= ''; }            
                                 
                                 if(isset($boq_code_s) && !empty($boq_code_s)
                                 && isset($hsn_sac_code_s) && !empty($hsn_sac_code_s)
                                 && isset($item_description_s) && !empty($item_description_s)
                                 && isset($unit_s) && !empty($unit_s)
-                                && isset($scheduled_qty_s) && !empty($scheduled_qty_s)
-                                && isset($design_qty_s) && !empty($design_qty_s)
-                                && isset($receive_qty_s) && !empty($receive_qty_s)){
+                                && isset($qty_s) && !empty($qty_s)
+                                && isset($rate_s) && !empty($rate_s)
+                                && isset($taxable_amount_s) && !empty($taxable_amount_s)
+                                && isset($cgst_s) && !empty($cgst_s)
+                                && isset($sgst_s) && !empty($sgst_s)
+                                && isset($cgst_amount_s) && !empty($cgst_amount_s)
+                                && isset($gst_type_s) && !empty($gst_type_s)
+                                && isset($sgst_amount_s) && !empty($sgst_amount_s)
+
+                                ){
                                     $save_arr[] = array('challan_id'=>$challan_id,'boq_code'=>$boq_code_s,'hsn_sac_code'=>$hsn_sac_code_s,'item_description'=>$item_description_s,
-                                    'unit'=>$unit_s,'scheduled_qty'=>$scheduled_qty_s,'design_qty'=>$design_qty_s,'received_qty'=>$receive_qty_s,
+                                    'unit'=>$unit_s,'qty'=>$qty_s,'rate'=>$rate_s,'taxable_amount' =>$taxable_amount_s,'gst_type' => $gst_type_s,
+                                    'sgst' => $sgst_s,'cgst' => $cgst_s,
+                                    'sgst_amount' => $sgst_amount_s,'cgst_amount' => $cgst_amount_s,
                                     'created_by'=>$user_id,'created_on'=>date('Y-m-d H:i:s'),'modified_by'=>$user_id,'modified_on'=>date('Y-m-d H:i:s'));    
                                 }
                             }
@@ -2607,22 +2686,289 @@ class Upload_boq_items_controller extends Base_Controller
                         $this->common_model->SaveMultiData('tbl_deliv_challan_items',$save_arr);
                         $this->json->jsonReturn(array(
                             'valid'=>TRUE,
-                            'msg'=>'<div class="alert modify alert-info">Client Delivery Challan Details Saved Successfully!</div>',
+                            'msg'=>'<div class="alert modify alert-info">Delivery Challan Details Saved Successfully!</div>',
                             'redirect' => base_url().'client-delivery-challan'
                         ));    
                     }else{
                         $this->json->jsonReturn(array(
                             'valid'=>FALSE,
-                            'msg'=>'<div class="alert modify alert-danger">Please Enter Valid client delivery challan Details!!</div>'
+                            'msg'=>'<div class="alert modify alert-danger">Please Enter Valid Delivery Challan Details!!</div>'
                         ));    
                     }
-                }else{
-                    $this->json->jsonReturn(array(
-                        'valid'=>FALSE,
-                        'msg'=>'<div class="alert modify alert-danger">'.$error_message.'</div>'
-                    ));
-                }
-            }
+                    }else{
+                        $this->json->jsonReturn(array(
+                            'valid'=>FALSE,
+                            'msg'=>'<div class="alert modify alert-danger">'.$error_message.'</div>'
+                        ));
+                      }
+                    }
+
+
+    
+
+                 }
+
+
+                 else{
+
+
+                    $error = 'N';
+                    $error_message = '';
+                    $user_id = $this->session->userdata('user_id');
+                    if(isset($user_id) && empty($user_id)){
+                    $error = 'Y';
+                    $error_message = 'Please loggedin!';
+                    }
+                    $boq_code = $this->input->post('iboq_code');
+                    if(isset($boq_code) && !empty($boq_code)) {$boq_code = $boq_code; } else {$boq_code=''; }
+                    if(isset($boq_code) && empty($boq_code)){
+                    $error = 'Y';
+                    $error_message = 'Please enter BOQ Sr No!';
+                    }
+                    $hsn_sac_code = $this->input->post('hsn_sac_code');
+                    if(isset($hsn_sac_code) && !empty($hsn_sac_code)) {$hsn_sac_code = $hsn_sac_code; } else {$hsn_sac_code=''; }
+                    if(isset($hsn_sac_code) && empty($hsn_sac_code)){
+                    $error = 'Y';
+                    $error_message = 'Please enter HSN/SAC Code!';
+                    }
+                    $item_description = $this->input->post('item_description');
+                    if(isset($item_description) && !empty($item_description)) {$item_description = $item_description; } else {$item_description=''; }
+                    if(isset($item_description) && empty($item_description)){
+                    $error = 'Y';
+                    $error_message = 'Please enter Item Description!';
+                    }
+                    $unit = $this->input->post('unit');
+                    if(isset($unit) && !empty($unit)) {$unit = $unit; } else {$unit=''; }
+                    if(isset($unit) && empty($unit)){
+                    $error = 'Y';
+                    $error_message = 'Please enter Unit!';
+                    }
+                    $qty = $this->input->post('qty');
+                    if(isset($qty) && !empty($qty)) {$qty = $qty; } else {$qty=''; }
+                    if(isset($qty) && empty($qty)){
+                    $error = 'Y';
+                    $error_message = 'Please enter Qty!';
+                    }
+                    $rate = $this->input->post('rate');
+                    if(isset($rate) && !empty($rate)) {$rate = $rate; } else {$rate=''; }
+                    if(isset($rate) && empty($rate)){
+                    $error = 'Y';
+                    $error_message = 'Please enter Rate!';
+                    }
+                    $taxable_amount = $this->input->post('itaxable_amount');
+                    if(isset($taxable_amount) && !empty($taxable_amount)) {$taxable_amount = $taxable_amount; } else {$taxable_amount=''; }
+                    if(isset($taxable_amount) && empty($taxable_amount)){
+                    $error = 'Y';
+                    $error_message = 'Please enter taxable amount!';
+                    }
+
+                    $gst = $this->input->post('gst');
+                    if(isset($gst) && !empty($gst)) {$gst = $gst; } else {$gst=''; }
+                    if(isset($gst) && empty($gst)){
+                    $error = 'Y';
+                    $error_message = 'Please enter gst!';
+                    }
+                    $gst_amount = $this->input->post('itotal_amount');
+                    if(isset($gst_amount) && !empty($gst_amount)) {$gst_amount = $gst_amount; } else {$gst_amount=''; }
+                    if(isset($gst_amount) && empty($gst_amount)){
+                    $error = 'Y';
+                    $error_message = 'Please enter gst amount!';
+                    }
+
+                    if(isset($boq_code) && empty($boq_code)
+                    && isset($hsn_sac_code) && empty($hsn_sac_code)
+                    && isset($item_description) && empty($item_description)
+                    && isset($unit) && empty($unit)
+                    && isset($qty) && empty($qty)
+                    && isset($rate) && empty($rate)
+                    && isset($taxable_amount) && empty($taxable_amount)
+                    && isset($gst) && empty($gst)
+                    && isset($gst_amount) && empty($gst_amount)
+                    ){
+                        $this->json->jsonReturn(array(
+                            'valid'=>FALSE,
+                            'msg'=>'<div class="alert modify alert-danger">Please Enter Delivery Challan Details!!</div>'
+                        ));    
+                    }else{
+                        if($error == 'N'){
+                            if(isset($boq_code) && !empty($boq_code)){
+                                $main_arr = array('project_id'=>$project_id,'dc_no'=>$dc_no,'created_by'=>$user_id,'created_on'=>date('Y-m-d H:i:s'),'workorderon' => $workorderon,'dccdate'=> $dccdate,'suppliers_ref'=> $suppliers_ref,'registered_address'=> $registered_address,'c_type' => $c_type,'buyer_order_ref'=> $buyer_order_ref, 'dcc_dated' => $dcc_dated,'other_ref' => $other_ref, 'consignee' => $consignee,'consignee_buyer' => $consignee_buyer,'destination'=>$destination,'site_address'=> $site_address,'buyer_site_address' => $buyer_site_address, 'dispatch_through' => $dispatch_through,'terms_of_delivery' => $terms_of_delivery, 'dispatch_document_no'=> $dispatch_document_no, 
+                                'modified_by'=>$user_id,'modified_on'=>date('Y-m-d H:i:s'),'display'=>'Y','status'=>'Under Approval');
+                                $challan_id = $this->common_model->addData('tbl_delivery_challan',$main_arr);
+                                if($challan_id){
+                                    for($i=0;$i<count($boq_code);$i++){
+                                        if(isset($boq_code[$i]) && !empty($boq_code[$i])) {$boq_code_s = $boq_code[$i]; } else {$boq_code_s=''; }
+                                        if(isset($hsn_sac_code[$i]) && !empty($hsn_sac_code[$i])) {$hsn_sac_code_s = $hsn_sac_code[$i]; } else {$hsn_sac_code_s=''; }
+                                        if(isset($item_description[$i]) && !empty($item_description[$i])) {$item_description_s = $item_description[$i]; } else {$item_description_s=''; }            
+                                        if(isset($unit[$i]) && !empty($unit[$i])) {$unit_s = $unit[$i]; } else {$unit_s=''; }            
+                                        if(isset($qty[$i]) && !empty($qty[$i])) {$qty_s = $qty[$i]; } else {$qty_s=0; }            
+                                        if(isset($rate[$i]) && !empty($rate[$i])) {$rate_s = $rate[$i]; } else {$rate_s=0; }            
+                                        if(isset($taxable_amount[$i]) && !empty($taxable_amount[$i])) {$taxable_amount_s = $taxable_amount[$i]; } else {$taxable_amount_s=0; }            
+                                        if(isset($gst[$i]) && !empty($gst[$i])) {$gst_s = $gst[$i]; } else {$gst_s=0; }            
+                                        if(isset($gst_amount[$i]) && !empty($gst_amount[$i])) {$gst_amount_s = $gst_amount[$i]; } else {$gst_amount_s=0; }     
+                                        if(isset($gst_type) && !empty($gst_type)) {$gst_type_s = 'inter-state'; } else {$gst_type_s= ''; }         
+                                        
+                                        if(isset($boq_code_s) && !empty($boq_code_s)
+                                        && isset($hsn_sac_code_s) && !empty($hsn_sac_code_s)
+                                        && isset($item_description_s) && !empty($item_description_s)
+                                        && isset($unit_s) && !empty($unit_s)
+                                        && isset($qty_s) && !empty($qty_s)
+                                        && isset($rate_s) && !empty($rate_s)
+                                        && isset($taxable_amount_s) && !empty($taxable_amount_s)
+                                        && isset($gst_s) && !empty($gst_s)
+                                        && isset($gst_type_s) && !empty($gst_type_s)
+                                        && isset($gst_amount_s) && !empty($gst_amount_s)
+                                        ){
+                                            $save_arr[] = array('challan_id'=>$challan_id,'boq_code'=>$boq_code_s,'hsn_sac_code'=>$hsn_sac_code_s,'item_description'=>$item_description_s,
+                                            'unit'=>$unit_s,'qty'=>$qty_s,'rate'=>$rate_s
+                                            ,'gst'=>$gst_s,'taxable_amount'=>$taxable_amount_s,
+                                            'gst_amount' => $gst_amount_s,'gst_type'=>$gst_type_s,
+                                            'created_by'=>$user_id,'created_on'=>date('Y-m-d H:i:s'),'modified_by'=>$user_id,'modified_on'=>date('Y-m-d H:i:s'));    
+                                        }
+                                    }
+                                }
+                            }
+                            if(isset($save_arr) && !empty($save_arr)){
+                                $this->common_model->SaveMultiData('tbl_proforma_invc_items',$save_arr);
+                                $this->json->jsonReturn(array(
+                                    'valid'=>TRUE,
+                                    'msg'=>'<div class="alert modify alert-info">Delivery Details Saved Successfully!</div>',
+                                    'redirect' => base_url().'client-delivery-challan'
+                                ));    
+                            }else{
+                                $this->json->jsonReturn(array(
+                                    'valid'=>FALSE,
+                                    'msg'=>'<div class="alert modify alert-danger">Please Enter Valid Delivery Challan Detail!!</div>'
+                                ));    
+                            }
+                        }else{
+                            $this->json->jsonReturn(array(
+                                'valid'=>FALSE,
+                                'msg'=>'<div class="alert modify alert-danger">'.$error_message.'</div>'
+                            ));
+                        }
+                    }
+
+                 }
+
+
+
+
+            // $error = 'N';
+            // $error_message = '';
+            // $user_id = $this->session->userdata('user_id');
+            // if(isset($user_id) && empty($user_id)){
+            // $error = 'Y';
+            // $error_message = 'Please loggedin!';
+            // }
+            // $boq_code = $this->input->post('boq_code');
+            // if(isset($boq_code) && !empty($boq_code)) {$boq_code = $boq_code; } else {$boq_code=''; }
+            // if(isset($boq_code) && empty($boq_code)){
+            // $error = 'Y';
+            // $error_message = 'Please enter BOQ Sr No!';
+            // }
+            // $hsn_sac_code = $this->input->post('hsn_sac_code');
+            // if(isset($hsn_sac_code) && !empty($hsn_sac_code)) {$hsn_sac_code = $hsn_sac_code; } else {$hsn_sac_code=''; }
+            // if(isset($hsn_sac_code) && empty($hsn_sac_code)){
+            // $error = 'Y';
+            // $error_message = 'Please enter HSN/SAC Code!';
+            // }
+            // $item_description = $this->input->post('item_description');
+            // if(isset($item_description) && !empty($item_description)) {$item_description = $item_description; } else {$item_description=''; }
+            // if(isset($item_description) && empty($item_description)){
+            // $error = 'Y';
+            // $error_message = 'Please enter Item Description!';
+            // }
+            // $unit = $this->input->post('unit');
+            // if(isset($unit) && !empty($unit)) {$unit = $unit; } else {$unit=''; }
+            // if(isset($unit) && empty($unit)){
+            // $error = 'Y';
+            // $error_message = 'Please enter Unit!';
+            // }
+            // $scheduled_qty = $this->input->post('scheduled_qty');
+            // if(isset($scheduled_qty) && !empty($scheduled_qty)) {$scheduled_qty = $scheduled_qty; } else {$scheduled_qty=''; }
+            // if(isset($scheduled_qty) && empty($scheduled_qty)){
+            // $error = 'Y';
+            // $error_message = 'Please enter Scheduled Qty!';
+            // }
+            // $design_qty = $this->input->post('design_qty');
+            // if(isset($design_qty) && !empty($design_qty)) {$design_qty = $design_qty; } else {$design_qty=''; }
+            // if(isset($design_qty) && empty($design_qty)){
+            // $error = 'Y';
+            // $error_message = 'Please enter Design Qty!';
+            // }
+            // $receive_qty = $this->input->post('receive_qty');
+            // if(isset($receive_qty) && !empty($receive_qty)) {$receive_qty = $receive_qty; } else {$receive_qty=''; }
+            // if(isset($receive_qty) && empty($receive_qty)){
+            // $error = 'Y';
+            // $error_message = 'Please enter Received Qty!';
+            // }
+          
+            // if(isset($boq_code) && empty($boq_code)
+            // && isset($hsn_sac_code) && empty($hsn_sac_code)
+            // && isset($item_description) && empty($item_description)
+            // && isset($unit) && empty($unit)
+            // && isset($scheduled_qty) && empty($scheduled_qty)
+            // && isset($design_qty) && empty($design_qty)
+            // && isset($receive_qty) && empty($receive_qty)){
+            //     $this->json->jsonReturn(array(
+            //         'valid'=>FALSE,
+            //         'msg'=>'<div class="alert modify alert-danger">Please Enter  delivery challan Details!!</div>'
+            //     ));    
+            // }else{
+            //     if($error == 'N'){
+            //         if(isset($boq_code) && !empty($boq_code)){
+            //             $main_arr = array('project_id'=>$project_id,'dc_no'=>$dc_no,'created_by'=>$user_id,'created_on'=>date('Y-m-d H:i:s'),'workorderon' => $workorderon,'dccdate'=> $dccdate,'suppliers_ref'=> $suppliers_ref,'registered_address'=> $registered_address,'buyer_order_ref'=> $buyer_order_ref, 'dcc_dated' => $dcc_dated,'other_ref' => $other_ref, 'consignee' => $consignee,'consignee_buyer' => $consignee_buyer,'destination'=>$destination,'site_address'=> $site_address,'buyer_site_address' => $buyer_site_address, 'dispatch_through' => $dispatch_through,'terms_of_delivery' => $terms_of_delivery, 'dispatch_document_no'=> $dispatch_document_no, 
+            //             'modified_by'=>$user_id,'modified_on'=>date('Y-m-d H:i:s'),'display'=>'Y','status'=>'Under Approval');
+            //             $challan_id = $this->common_model->addData('tbl_delivery_challan',$main_arr);
+            //             if($challan_id){
+            //                 for($i=0;$i<count($boq_code);$i++){
+            //                     if(isset($boq_code[$i]) && !empty($boq_code[$i])) {$boq_code_s = $boq_code[$i]; } else {$boq_code_s=''; }
+            //                     if(isset($hsn_sac_code[$i]) && !empty($hsn_sac_code[$i])) {$hsn_sac_code_s = $hsn_sac_code[$i]; } else {$hsn_sac_code_s=''; }
+            //                     if(isset($item_description[$i]) && !empty($item_description[$i])) {$item_description_s = $item_description[$i]; } else {$item_description_s=''; }            
+            //                     if(isset($unit[$i]) && !empty($unit[$i])) {$unit_s = $unit[$i]; } else {$unit_s=''; }            
+            //                     if(isset($scheduled_qty[$i]) && !empty($scheduled_qty[$i])) {$scheduled_qty_s = $scheduled_qty[$i]; } else {$scheduled_qty_s=''; }            
+            //                     if(isset($design_qty[$i]) && !empty($design_qty[$i])) {$design_qty_s = $design_qty[$i]; } else {$design_qty_s=''; }            
+            //                     if(isset($receive_qty[$i]) && !empty($receive_qty[$i])) {$receive_qty_s = $receive_qty[$i]; } else {$receive_qty_s=''; }            
+                                
+            //                     if(isset($boq_code_s) && !empty($boq_code_s)
+            //                     && isset($hsn_sac_code_s) && !empty($hsn_sac_code_s)
+            //                     && isset($item_description_s) && !empty($item_description_s)
+            //                     && isset($unit_s) && !empty($unit_s)
+            //                     && isset($scheduled_qty_s) && !empty($scheduled_qty_s)
+            //                     && isset($design_qty_s) && !empty($design_qty_s)
+            //                     && isset($receive_qty_s) && !empty($receive_qty_s)){
+            //                         $save_arr[] = array('challan_id'=>$challan_id,'boq_code'=>$boq_code_s,'hsn_sac_code'=>$hsn_sac_code_s,'item_description'=>$item_description_s,
+            //                         'unit'=>$unit_s,'scheduled_qty'=>$scheduled_qty_s,'design_qty'=>$design_qty_s,'received_qty'=>$receive_qty_s,
+            //                         'created_by'=>$user_id,'created_on'=>date('Y-m-d H:i:s'),'modified_by'=>$user_id,'modified_on'=>date('Y-m-d H:i:s'));    
+            //                     }
+            //                 }
+            //             }
+            //         }
+            //         if(isset($save_arr) && !empty($save_arr)){
+            //             $this->common_model->SaveMultiData('tbl_deliv_challan_items',$save_arr);
+            //             $this->json->jsonReturn(array(
+            //                 'valid'=>TRUE,
+            //                 'msg'=>'<div class="alert modify alert-info">Client Delivery Challan Details Saved Successfully!</div>',
+            //                 'redirect' => base_url().'client-delivery-challan'
+            //             ));    
+            //         }else{
+            //             $this->json->jsonReturn(array(
+            //                 'valid'=>FALSE,
+            //                 'msg'=>'<div class="alert modify alert-danger">Please Enter Valid client delivery challan Details!!</div>'
+            //             ));    
+            //         }
+            //     }else{
+            //         $this->json->jsonReturn(array(
+            //             'valid'=>FALSE,
+            //             'msg'=>'<div class="alert modify alert-danger">'.$error_message.'</div>'
+            //         ));
+            //     }
+            // }
+
+
+
+
         }else{
             $this->json->jsonReturn(array(
                 'valid'=>FALSE,
@@ -3191,25 +3537,25 @@ class Upload_boq_items_controller extends Base_Controller
                    
 
                     if(isset($boq_code) && empty($boq_code)
-            && isset($hsn_sac_code) && empty($hsn_sac_code)
-            && isset($item_description) && empty($item_description)
-            && isset($unit) && empty($unit)
-            && isset($qty) && empty($qty)
-            && isset($rate) && empty($rate)
-            && isset($taxable_amount) && empty($taxable_amount)
-            && isset($sgst) && empty($sgst)
-            && isset($cgst) && empty($cgst)
-            && isset($cgst_amount) && empty($cgst_amount)
-            && isset($sgst_amount) && empty($sgst_amount)
-            )
-            {
-                $this->json->jsonReturn(array(
-                    'valid'=>FALSE,
-                    'msg'=>'<div class="alert modify alert-danger">Please Enter Proforma Invoice Details!!</div>'
-                ));    
-            }else{
-                if($error == 'N'){
-                    if(isset($boq_code) && !empty($boq_code)){
+                  && isset($hsn_sac_code) && empty($hsn_sac_code)
+                  && isset($item_description) && empty($item_description)
+                  && isset($unit) && empty($unit)
+                  && isset($qty) && empty($qty)
+                  && isset($rate) && empty($rate)
+                  && isset($taxable_amount) && empty($taxable_amount)
+                  && isset($sgst) && empty($sgst)
+                  && isset($cgst) && empty($cgst)
+                  && isset($cgst_amount) && empty($cgst_amount)
+                  && isset($sgst_amount) && empty($sgst_amount)
+                  )
+                  {
+                      $this->json->jsonReturn(array(
+                          'valid'=>FALSE,
+                          'msg'=>'<div class="alert modify alert-danger">Please Enter Proforma Invoice Details!!</div>'
+                      ));    
+                  }else{
+                      if($error == 'N'){
+                          if(isset($boq_code) && !empty($boq_code)){
                         $main_arr = array('project_id'=>$project_id,'proforma_no'=>$proforma_no,'created_by'=>$user_id,'created_on'=>date('Y-m-d H:i:s'),
                         'modified_by'=>$user_id,'modified_on'=>date('Y-m-d H:i:s'),'display'=>'Y','status'=>'Under Approval');
                         $tax_invc_id = $this->common_model->addData('tbl_proforma_invc',$main_arr);
@@ -3264,18 +3610,21 @@ class Upload_boq_items_controller extends Base_Controller
                             'msg'=>'<div class="alert modify alert-danger">Please Enter Valid Perfoma Invoice!!</div>'
                         ));    
                     }
-                }else{
-                    $this->json->jsonReturn(array(
-                        'valid'=>FALSE,
-                        'msg'=>'<div class="alert modify alert-danger">'.$error_message.'</div>'
-                    ));
-                }
-            }
+                    }else{
+                        $this->json->jsonReturn(array(
+                            'valid'=>FALSE,
+                            'msg'=>'<div class="alert modify alert-danger">'.$error_message.'</div>'
+                        ));
+                      }
+                    }
 
 
     
 
                  }
+
+
+
                  
                  
                  else{

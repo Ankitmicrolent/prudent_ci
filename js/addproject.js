@@ -647,7 +647,7 @@
                 $("#gst_types").val('');
         		ccnt++;
                 }else{
-                $("#consignee_error").html('Please enter insurance required details!');
+                $("#consignee_error").html('Please enter consignee required details!');
         		}
         	});
             $(document).on('click','.rmbtnss',function(){

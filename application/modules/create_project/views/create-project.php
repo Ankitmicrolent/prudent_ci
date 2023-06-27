@@ -402,7 +402,7 @@
                                                                 <div class="input-icon right">
                                                                 <i class="fa"></i>
                                                                 <label class="">Consignee name<span class="require" aria-required="true" style="color:#a94442">*</span></label>
-                                                                <input type="text" class="form-control " id="consignee_name" value="" placeholder="Consignee name" required>
+                                                                <input type="text" class="form-control " id="consignee_name" value="" placeholder="Consignee name">
                                                             </div>
                                                             </div>
                                                             <div class="input-icon right col-lg-3">
@@ -415,7 +415,7 @@
                                                                 <div class="input-icon right">
                                                                 <i class="fa"></i>
                                                                 <label class="">Gst Number<span class="require" aria-required="true" style="color:#a94442">*</span></label>
-                                                                <input type="text" class="form-control "  id="gst_types" value="" placeholder="Gst Number" required>
+                                                                <input type="text" class="form-control "  id="gst_types" value="" placeholder="Gst Number">
                                                             </div>
                                                             </div>
                                                             <div class="input-icon right col-lg-2">
@@ -428,10 +428,10 @@
                                                             </div>
                                                             <div id="newlinesadd"></div>
                                                             
-                                                            <div class="dflx" id="sameasaddr">
+                                                            <!-- <div class="dflx" id="sameasaddr">
                                                                 <input type="checkbox" name="del_same_as_site_addr" id="del_same_as_site_addr" value="Y">
                                                                 <label class="" style="padding:0 5px;font-size: 12px;">Same as Site Address</label><span id="deladdrserror" style="font-size: 11px;color: #a94442;"></span>
-                                                            </div>
+                                                            </div> -->
                                                         </div>
                                                     </div>
                                                 </div>

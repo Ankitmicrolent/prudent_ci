@@ -108,7 +108,7 @@
                                                         <label class="">Work Order On</label>
                                                         <div class="input-icon right">
                                                             <i class="fa"></i>
-                                                            <input type="text" class="form-control" name="workorderon" id="workorderon" placeholder="Work Order On" required="">
+                                                            <input type="text" class="form-control" name="workorderon" id="workorderon" placeholder="Work Order On" readonly required="">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -148,7 +148,7 @@
                                                         <label class="">Address <span class="require" aria-required="true" style="color:#a94442">*</span></label>
                                                         <div class="input-icon right">
                                                             <i class="fa"></i>
-                                                            <textarea rows="2" type="text" class="form-control" name="registered_address" id="registered_address" placeholder="Address" required></textarea>
+                                                            <textarea rows="2" type="text" class="form-control" name="registered_address" id="registered_address" placeholder="Address" readonly required></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -157,7 +157,7 @@
                                                         <label class="">Buyer's Order Ref <span class="require" aria-required="true" style="color:#a94442">*</span></label>
                                                         <div class="input-icon right">
                                                             <i class="fa"></i>
-                                                            <input type="text" class="form-control" name="buyer_order_ref" id="buyer_order_ref" value="" placeholder="Buyer's Order Ref" required="">
+                                                            <input type="text" class="form-control" name="buyer_order_ref" id="buyer_order_ref" value="" readonly  placeholder="Buyer's Order Ref" required="">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -188,7 +188,20 @@
                                                         <label class="">Consignee <span class="require" aria-required="true" style="color:#a94442">*</span></label>
                                                         <div class="input-icon right">
                                                             <i class="fa"></i>
-                                                            <input type="text" class="form-control" name="consignee" id="consignee" value="" placeholder="Consignee" required="">
+                                                            <!-- <input type="text" class="form-control" name="consignee" id="consignee" value="" placeholder="Consignee" required=""> -->
+                                                            <select class="form-control select2me" name="consignee" style="padding-left:0px !important;" id="consignee" required>
+                                                                <!-- <option value="cgst_sgst">Intra-State</option>
+                                                                <option value="igst">Inter-State</option> -->
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label class="">Gst Number<span class="require" aria-required="true" style="color:#a94442">*</span></label>
+                                                        <div class="input-icon right">
+                                                            <i class="fa"></i>
+                                                            <input type="text" class="form-control" name="gst_number" id="gst_number" value="" placeholder="Destination" readonly  required="">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -201,7 +214,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-            								    <div class="col-md-3">
+            								    <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label class="">Dispatch Document No <span class="require" aria-required="true" style="color:#a94442">*</span></label>
                                                         <div class="input-icon right">
@@ -210,7 +223,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-            								    <div class="col-md-3">
+            								    <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label class="">Destination <span class="require" aria-required="true" style="color:#a94442">*</span></label>
                                                         <div class="input-icon right">
@@ -219,6 +232,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+            								   
             								</div>
             								<div class="row">
                                                 <div class="col-md-3">
@@ -226,16 +240,16 @@
                                                     <label class="">Site Address <span class="require" aria-required="true" style="color:#a94442">*</span></label>
                                                         <div class="input-icon right">
                                                             <i class="fa"></i>
-                                                            <textarea rows="2" type="text" class="form-control" name="site_address" id="site_address" placeholder="Site Address" required></textarea>
+                                                            <textarea rows="2" type="text" readonly  class="form-control" name="site_address" id="site_address" placeholder="Site Address" required></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
             								    <div class="col-md-3">
                                                     <div class="form-group">
-                                                    <label class="">Buyer Site Address <span class="require" aria-required="true" style="color:#a94442">*</span></label>
+                                                    <label class="">Buyer Site Address <span class="require" readonly  aria-required="true" style="color:#a94442">*</span></label>
                                                         <div class="input-icon right">
                                                             <i class="fa"></i>
-                                                            <textarea rows="2" type="text" class="form-control" name="buyer_site_address" id="registered_address" placeholder="Buyer Site Address" required></textarea>
+                                                            <textarea rows="2" type="text" class="form-control" name="buyer_site_address" id="buyer_registered_address" placeholder="Buyer Site Address" required></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -550,6 +564,32 @@
         }]
     });
 
+
+
+    $(document).on('change', '#consignee', function() {
+          
+        var consignee = $('#consignee').val();
+        if(consignee){
+
+           
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url('get_consignee_detail'); ?>",
+                data: {
+                    consignee_id : consignee
+                },
+               
+                success: function (response) {
+                  
+                       var res = JSON.parse(response);
+                    $('#gst_number').val(res.gst_number);
+                    $('#site_address').val(res.delivery_address); 
+                }
+            });
+        }
+
+    });
+
   
     $(document).on('change', '#project_id', function() {
 
@@ -594,9 +634,28 @@
                     }],
                     "initComplete": function () {
                     var project_detail = this.api().ajax.json().project_detail; // Access the 'extraData' value
-                      console.log(project_detail);
+                    var data = this.api().ajax.json(); // Access the 'extraData' value
+                      console.log(data);
+                      var select = document.getElementById("consignee");
+                      $('#consignee').val('');
+                                  select.remove(0);    
+                      if(data.consinee_item){
+
+                        items = data.consinee_item;
+                        for (var i = 0; i < items.length; i++) {
+                         var option = document.createElement("option");
+                         option.text = items[i].consignee_name;
+                         option.value = items[i].id;
+                         select.appendChild(option);
+                       }
+                      }
                    // Print the extraData in an input box
                    $('#workorderon').val(project_detail.work_order_on);
+                      $('#registered_address').val(project_detail.client_po_addr);
+                      $('#dcc_dated').val(project_detail.po_loi_received_data);
+                      $('#buyer_order_ref').val(project_detail.customer_name);
+                     
+                      $('#buyer_registered_address').val(project_detail.site_address);
                 
                   }
                    
@@ -641,8 +700,30 @@
                     }],
                     "initComplete": function () {
                     var project_detail = this.api().ajax.json().project_detail; // Access the 'extraData' value
-                      console.log(project_detail);
+                    var data = this.api().ajax.json(); // Access the 'extraData' value
+                      console.log(data);
+
+                      var select = document.getElementById("consignee");
+                      $('#consignee').val('');
+                                  select.remove(0);    
+                      if(data.consinee_item){
+
+                        items = data.consinee_item;
+                        for (var i = 0; i < items.length; i++) {
+                         var option = document.createElement("option");
+                         option.text = items[i].consignee_name;
+                         option.value = items[i].id;
+                         select.appendChild(option);
+                       }
+                      }
+  
+                       
                       $('#workorderon').val(project_detail.work_order_on);
+                      $('#registered_address').val(project_detail.client_po_addr);
+                      $('#dcc_dated').val(project_detail.po_loi_received_data);
+                      $('#buyer_order_ref').val(project_detail.customer_name);
+                      
+                      $('#buyer_registered_address').val(project_detail.site_address);
                   }
             }); 
         }   
