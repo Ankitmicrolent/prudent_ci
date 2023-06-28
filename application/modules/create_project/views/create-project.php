@@ -72,7 +72,7 @@
 
                                                                     foreach ($business_user as $key) { ?>
 
-                                                                        <option value="<?php echo $key->user_id ?>"><?php echo $key->username; ?></option>
+                                                                        <option value="<?php echo $key->user_id ?>"><?php echo $key->fullname.' '.$key->m_name.' '.$key->s_name; ?></option>
 
                                                                 <?php }
                                                                 } ?>
@@ -98,7 +98,7 @@
 
                                                                     foreach ($project_user as $key) { ?>
 
-                                                                        <option value="<?php echo $key->user_id ?>"><?php echo $key->username; ?></option>
+                                                                        <option value="<?php echo $key->user_id ?>"><?php echo $key->fullname.' '.$key->m_name.' '.$key->s_name; ?></option>
 
                                                                 <?php }
                                                                 } ?>
@@ -391,6 +391,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="ifpros"></div>
                                                 <div class="row">
                                                     <p id="consignee_error" style="color: #a94442;"></p>
                                                     <div class="col-md-9">

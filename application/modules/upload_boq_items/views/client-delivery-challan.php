@@ -67,27 +67,8 @@
                                         <input type="hidden" name="base_url" id="base_url" value="<?php echo base_url();?>">
                                         <div class="form-body">
                                             <div class="row">
-                                                <div class="col-md-5">
-            										<div class="form-groupp">
-            											<label class="control-label">Select Project <span class="required" aria-required="true" style="color:#a94442">*</span></label>
-            											<input type="text" class="form-control allprojects" id="project_id" name="project_id" placeholder="Select Project Code" required>
-            											<span id="projlaoding"></span>
-            									    </div>
-            									</div>
 
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label class="">Billing Type <span class="require" aria-required="true" style="color:#a94442;">*</span></label>
-                                                        <div class="input-icon right">
-                                                           
-                                                            <select class="form-control select2me" name="gst_type" style="padding-left:0px !important;" id="gst_type" required>
-                                                                <option value="cgst_sgst">Intra-State</option>
-                                                                <option value="igst">Inter-State</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
+                                            <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label class="">Challan Type <span class="require" aria-required="true" style="color:#a94442;">*</span></label>
                                                         <div class="input-icon right">
@@ -99,6 +80,27 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-5">
+            										<div class="form-groupp">
+            											<label class="control-label">Select Project <span class="required" aria-required="true" style="color:#a94442">*</span></label>
+            											<input type="text" class="form-control allprojects" id="project_id" name="project_id" placeholder="Select Project Code" required>
+            											<span id="projlaoding"></span>
+            									    </div>
+            									</div>
+
+                                                <div class="col-md-3"  id="bill_type_div" style="display: none;">
+                                                    <div class="form-group">
+                                                        <label class="">Billing Type <span class="require" aria-required="true" style="color:#a94442;">*</span></label>
+                                                        <div class="input-icon right">
+                                                           
+                                                            <select class="form-control select2me" name="gst_type" style="padding-left:0px !important;" id="gst_type" required>
+                                                                <option value="cgst_sgst">Intra-State</option>
+                                                                <option value="igst">Inter-State</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                               
             								</div>
             								<hr>
             								<div class="row"><div class="col-md-12"><h3 id ="challan_name" style="text-align:center;margin: 0 0 20px 0px;font-weight: 600;font-size: 20px;">DELIVERY CHALLAN</h3></div></div>
@@ -125,7 +127,7 @@
             										<div class="form-group">
             											<label class="">Date <span class="required" aria-required="true" style="color:#a94442">*</span></label>
             											<div class="input-group date date1" data-date-end-date="0d" data-date-format="dd-MM-yyyy">
-            												<input type="text" name="dccdate" id="dccdate" class="form-control" readonly="" placeholder="Date">		
+            												<input type="text" name="dccdate" id="dccdate" class="form-control" readonly="" value='<?php echo date('Y-m-d');?>' placeholder="Date">		
             												<span class="input-group-btn">
             													<button class="btn default" type="button"><span class="md-click-circle md-click-animate" style="height: 47px; width: 47px; top: -1.0625px; left: -9.5px;"></span><i class="fa fa-calendar"></i></button>
             												</span>
@@ -528,6 +530,7 @@
     <script src="<?php echo base_url(); ?>js/select2pagination.js?<?php echo date('Ymd H:i:s'); ?>"></script>
     <script>
     jQuery(document).ready(function() {
+       
         Metronic.init(); // init metronic core components
         Layout.init(); 
         ComponentsPickers.init();
@@ -564,7 +567,7 @@
         }]
     });
 
-
+    
 
     $(document).on('change', '#consignee', function() {
           
@@ -611,7 +614,7 @@
                 $('#displayProformaInvc').show();
                 $('#displayperfomaInvccgst').hide();
             // $('#displayClientDc').show();
-            $('#proformainvcdisplay').dataTable({
+           tabl = $('#proformainvcdisplay').dataTable({
             	    "bDestroy" : true,
             	    "bInfo" : false,
             	    "ordering": false,
@@ -676,7 +679,7 @@
                 $('#displayProformaInvc').hide();
                 $('#displayperfomaInvccgst').show();
 
-              $('#taxperfomadisplaysgsts').dataTable({
+               var tab2 =   $('#taxperfomadisplaysgsts').dataTable({
             	    "bDestroy" : true,
             	    "bInfo" : false,
             	    "ordering": false,
@@ -784,7 +787,7 @@
                 $('#displayProformaInvc').show();
                 $('#displayperfomaInvccgst').hide();
             // $('#displayClientDc').show();
-            $('#proformainvcdisplay').dataTable({
+          var tabl =  $('#proformainvcdisplay').dataTable({
             	    "bDestroy" : true,
             	    "bInfo" : false,
             	    "ordering": false,
@@ -824,7 +827,7 @@
                 $('#displayProformaInvc').hide();
                 $('#displayperfomaInvccgst').show();
 
-              $('#taxperfomadisplaysgsts').dataTable({
+          var tab2 =    $('#taxperfomadisplaysgsts').dataTable({
             	    "bDestroy" : true,
             	    "bInfo" : false,
             	    "ordering": false,
@@ -897,11 +900,14 @@
 $(document).on('change', '#c_type', function() {
     $value = $('#c_type').val();
     if($value == 'cgst_sgst'){
-
+         $('#bill_type_div').show();
         $('#challan_name').html('DELIVERY CHALLAN CUM INVOICE');
+     
+             
+        
 
     }else{
-
+        $('#bill_type_div').hide();
         $('#challan_name').html('DELIVERY CHALLAN');
     }
 

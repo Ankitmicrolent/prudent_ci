@@ -35,6 +35,7 @@ class Create_project_controller extends Base_Controller
         $prototype_data = $this->common_model->selectAllWhr('tbl_prototype','project_id',$id);
         $inspection_data = $this->common_model->selectAllWhr('tbl_inspection','project_id',$id);
         $fat_data = $this->common_model->selectAllWhr('tbl_fat','project_id',$id);
+        $consignee_data = $this->common_model->selectAllconsineeWhr('tbl_deliv_challan_consignee','project_id',$id);
         $sat_data = $this->common_model->selectAllWhr('tbl_sat','project_id',$id);
         $data['notification_data'] = $notification_data;
         $data['reminder_data'] = $reminder_data;
@@ -44,6 +45,7 @@ class Create_project_controller extends Base_Controller
         $data['prototype_data'] = $prototype_data;
         $data['inspection_data'] = $inspection_data;
         $data['fat_data'] = $fat_data;
+        $data['consignee_data'] = $consignee_data;
         $data['sat_data'] = $sat_data;
         $data['project_id'] = $id;
         $this->load->view('project-details',$data);
@@ -1248,6 +1250,7 @@ class Create_project_controller extends Base_Controller
                             'encrypt_name' => TRUE,        
                             'overwrite' => FALSE,
                             'allowed_types' => 'doc|pdf|txt|png|PNG|jpg|JPG|jpeg|JPEG' );
+                             $this->imageupload->image_upload($set_upload_options);
                             $this->upload->initialize($set_upload_options);
                             $this->upload->do_upload('insurance_required_doc');
                             $insdate = date('Y-m-d',strtotime($insurance_up_to_date[$i]));

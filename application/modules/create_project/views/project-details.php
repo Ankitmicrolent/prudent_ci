@@ -651,7 +651,7 @@
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Draft Agreement Document</label><br>
-                                                                    <a href="<?php echo base_url(); ?>uploads/document_upload/<?php echo $create_project_data->draft_doc_file; ?>" download>Download Draft Agreement Document</a>
+                                                                    <a href="<?php echo base_url(); ?>uploads/agreement_prepared/<?php echo $create_project_data->draft_doc_file; ?>" download>Download Draft Agreement Document</a>
                                                                 </div>
                                                             </div>
                                                             <?php } } ?>
@@ -660,7 +660,7 @@
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Signed Agreement Document</label><br>
-                                                                    <a href="<?php echo base_url(); ?>uploads/document_upload/<?php echo $create_project_data->sign_doc_file; ?>" download>Download Signed Agreement Document</a>
+                                                                    <a href="<?php echo base_url(); ?>uploads/agreement_prepared/<?php echo $create_project_data->sign_doc_file; ?>" download>Download Signed Agreement Document</a>
                                                                 </div>
                                                             </div>
                                                             <?php } } ?>
@@ -840,6 +840,12 @@
                                                             <?php } ?>
                                                         </div>
                                                 </div>
+
+
+
+
+
+
                                                 <?php if(isset($create_project_data->payment_terms) && !empty($create_project_data->payment_terms) && $create_project_data->payment_terms == 'S&I'){ ?>
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
@@ -896,7 +902,70 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <?php } ?>  
+                                                <?php } ?> 
+
+                                                
+                                                
+
+
+
+
+
+                                                <?php if(isset($consignee_data) && !empty($consignee_data)){ ?>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">Consignee Details</h4>
+                                                    </div>
+                                                    <div class="panel-body">
+
+                                                    <?php
+                                                    foreach ($consignee_data as $key) 
+
+                                                    { ?>
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <div class="form-group">
+                                                                    <label class="">Consignee Name</label>
+                                                                    <div class="input-icon right">
+                                                                        <i class="fa"></i>
+                                                                        <p class="readonlytext form-control" readonly><?php echo(isset($key->consignee_name) && !empty($key->consignee_name))?$key->consignee_name:''?></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-group">
+                                                                    <label class="">Delivery Address</label>
+                                                                    <div class="input-icon right">
+                                                                        <i class="fa"></i>
+                                                                        <p class="readonlytext form-control" readonly><?php echo(isset($key->delivery_address) && !empty($key->delivery_address))?$key->delivery_address:''?></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-group">
+                                                                    <label class="">Gst Number</label>
+                                                                    <div class="input-icon right">
+                                                                        <i class="fa"></i>
+                                                                        <p class="readonlytext form-control" readonly><?php echo(isset($key->gst_number) && !empty($key->gst_number))?$key->gst_number:''?></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <?php                              
+
+                                                            } ?> 
+                                                    </div>
+                                                </div>
+                                                <?php } ?> 
+
+
+
+
+
+
+
+
+
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
                                                         <h4 class="panel-title"> Additional Details </h4>
@@ -1004,25 +1073,25 @@
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Project Completion Schedule</label><br>
-                                                                    <a href="<?php echo base_url(); ?>uploads/emd_paid_document/<?php echo(isset($create_project_data->projectcmpl_doc_file) && !empty($create_project_data->projectcmpl_doc_file))?$create_project_data->projectcmpl_doc_file:'-'?>" download>Download Project Completion Schedule</a>
+                                                                    <a href="<?php echo base_url(); ?>uploads/document_upload/<?php echo(isset($create_project_data->projectcmpl_doc_file) && !empty($create_project_data->projectcmpl_doc_file))?$create_project_data->projectcmpl_doc_file:'-'?>" download>Download Project Completion Schedule</a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Project Design Report</label><br>
-                                                                    <a href="<?php echo base_url(); ?>uploads/emd_paid_document/<?php echo(isset($create_project_data->projectdesig_doc_file) && !empty($create_project_data->projectdesig_doc_file))?$create_project_data->projectdesig_doc_file:'-'?>" download>Download Project Design Report</a>
+                                                                    <a href="<?php echo base_url(); ?>uploads/document_upload/<?php echo(isset($create_project_data->projectdesig_doc_file) && !empty($create_project_data->projectdesig_doc_file))?$create_project_data->projectdesig_doc_file:'-'?>" download>Download Project Design Report</a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Project Cash Flow</label><br>
-                                                                    <a href="<?php echo base_url(); ?>uploads/emd_paid_document/<?php echo(isset($create_project_data->projectcashflw_doc_file) && !empty($create_project_data->projectcashflw_doc_file))?$create_project_data->projectcashflw_doc_file:'-'?>" download>Download Project Cash Flow</a>
+                                                                    <a href="<?php echo base_url(); ?>uploads/document_upload/<?php echo(isset($create_project_data->projectcashflw_doc_file) && !empty($create_project_data->projectcashflw_doc_file))?$create_project_data->projectcashflw_doc_file:'-'?>" download>Download Project Cash Flow</a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Project Investment Schedule</label><br>
-                                                                    <a href="<?php echo base_url(); ?>uploads/emd_paid_document/<?php echo(isset($create_project_data->projectinvstsch_doc_file) && !empty($create_project_data->projectinvstsch_doc_file))?$create_project_data->projectinvstsch_doc_file:'-'?>" download>Download Project Investment Schedule</a>
+                                                                    <a href="<?php echo base_url(); ?>uploads/document_upload/<?php echo(isset($create_project_data->projectinvstsch_doc_file) && !empty($create_project_data->projectinvstsch_doc_file))?$create_project_data->projectinvstsch_doc_file:'-'?>" download>Download Project Investment Schedule</a>
                                                                 </div>
                                                             </div>
                                                         </div>

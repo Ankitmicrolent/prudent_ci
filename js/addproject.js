@@ -52,6 +52,48 @@
             $('#asd_paid_status_id_value').val("N");   
         }
     });
+
+    //keyup gst
+
+    $(document).on('keyup','#taxable_amount',function()
+    {        
+        var taxable_amount = document.getElementById("taxable_amount").value;
+        var rate = document.getElementById("gst_rate").value;
+        if(taxable_amount > 0 && rate > 0){
+              var gst_amount =  ((rate/100)*taxable_amount).toFixed(2);
+              var total_amount =  (parseFloat(taxable_amount) +  parseFloat(gst_amount)).toFixed(2);
+              console.log(taxable_amount)
+              console.log(total_amount)
+              $('#gst_amount').val(gst_amount);
+              $('#total_amount').val(total_amount);
+        }else{
+            $('#gst_amount').val('');
+            $('#total_amount').val('');
+
+        }
+       
+    });
+    $(document).on('change','#gst_rate',function()
+    {        
+        var taxable_amount = document.getElementById("taxable_amount").value;
+        var rate = document.getElementById("gst_rate").value;
+        if(taxable_amount > 0 && rate > 0){
+              var gst_amount =  ((rate/100)*taxable_amount).toFixed(2);
+              var total_amount =  (parseFloat(taxable_amount) +  parseFloat(gst_amount)).toFixed(2);
+              $('#gst_amount').val(gst_amount);
+              $('#total_amount').val(total_amount);
+        }else{
+            $('#gst_amount').val('');
+            $('#total_amount').val('');
+
+        }
+       
+    });
+
+
+
+
+
     
     $(document).ready(function(){
             $("#inspection").click(function () {
@@ -629,7 +671,7 @@
                 +'<div class="form-group">'
                 +'<div class="input-icon right">'
                 +'<i class="fa"></i>'
-                +'<input type="text" class="form-control " name="delivery_address[]" id="delivery_address'+ccnt+'" placeholder="Delivery Address" value="'+consignee_name+'" readonly>'
+                +'<input type="text" class="form-control " name="delivery_address[]" id="delivery_address'+ccnt+'" placeholder="Delivery Address" value="'+delivery_address+'" readonly>'
                 +'</div></div></div>'
                 +'<div class="col-lg-3">'
                 +'<div class="form-group">'

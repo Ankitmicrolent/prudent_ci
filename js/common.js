@@ -755,6 +755,11 @@ $(document).on('keyup', '#cdc_boq_code', function() {
 
 
                     $('#hsn_sac_code').val(''); 
+                    // $('#cdc_boq_code').val(''); 
+                    $('#citem_description').val(''); 
+                    $('#crate').val(''); 
+                    $('#cunit').val(''); 
+                    $('#chsn_sac_code').val(''); 
                     $('#item_description').val('');
                     $('#unit').val('');  
                     $('#scheduled_qty').val('');  
@@ -2940,6 +2945,11 @@ $(document).ready(function(){
                                     $('#rate').val('');
                                     $('#taxable_amount').val('');
                                     $('#sgst').val('');
+                                    $('#cunit').val('');
+                                    $('#crate').val('');
+                                    $('#citem_description').val('');
+                                    $('#chsn_sac_code').val('');
+                                    $('#cqty').val('');
                                     $('#sgst_amount').val('');
                                     $('#cgst_amount').val('');
                                     $('#cgst').val('');
