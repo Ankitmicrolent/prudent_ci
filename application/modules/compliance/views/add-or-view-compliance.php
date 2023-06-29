@@ -41,7 +41,7 @@
                                             <div class="row" style="display:flex;">
                                                 <div class="col-md-4" style="margin: auto;text-align:center;">
                                                         <div class="form-group">
-                                                            <select class="form-control select2me" name="gst_rate" id="gst_rate" required>
+                                                            <select class="form-control select2me" name="month" id="month" required>
                                                                 <option value="">--Select Month--</option>
                                                                 <option value="January">January</option>
                                                                 <option value="February">February</option>
@@ -64,7 +64,7 @@
                 										<div class="form-group">
                 											<label class="">GSTR-1A Confirmation Date <span class="required" aria-required="true" style="color:#a94442">*</span></label>
                 											<div class="input-group date date1" data-date-end-date="0d" data-date-format="dd-MM-yyyy">
-                												<input type="text" name="confirmation_date" id="confirmation_date" class="form-control" readonly="" placeholder="GSTR-1A Confirmation Date" >		
+                												<input type="text" name="gstr_1a_confirmation_date" id="gstr_1a_confirmation_date" class="form-control" readonly="" placeholder="GSTR-1A Confirmation Date" required >		
                 												<span class="input-group-btn">
                 													<button class="btn default" type="button"><span class="md-click-circle md-click-animate" style="height: 47px; width: 47px; top: -1.0625px; left: -9.5px;"></span><i class="fa fa-calendar"></i></button>
                 												</span>
@@ -74,7 +74,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Upload Document <span class="require" aria-required="true" style="color:#a94442">*</span></label><br>
-                                                            <input type="file" name="upload_gtds_doc" id="upload_gtds_doc" class="upload_gtds_doc" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf">
+                                                            <input type="file" name="upload_gtds_doc" id="upload_gtds_doc" required class="upload_gtds_doc" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf">
                                                             <span id="upload_gtds_doc_error" style="font-size: 12px;color:#a94442;"></span>
                                                         </div>
                                                     </div>
@@ -82,7 +82,7 @@
                 										<div class="form-group">
                 											<label class="">Professional Tax (PT) Confirmation Date <span class="required" aria-required="true" style="color:#a94442">*</span></label>
                 											<div class="input-group date date1" data-date-end-date="0d" data-date-format="dd-MM-yyyy">
-                												<input type="text" name="confirmation_date" id="confirmation_date" class="form-control" readonly="" placeholder="Professional Tax (PT) Confirmation Date" >		
+                												<input type="text" name="proof_tax_confirmation_date" id="proof_tax_confirmation_date" class="form-control" required readonly="" placeholder="Professional Tax (PT) Confirmation Date" >		
                 												<span class="input-group-btn">
                 													<button class="btn default" type="button"><span class="md-click-circle md-click-animate" style="height: 47px; width: 47px; top: -1.0625px; left: -9.5px;"></span><i class="fa fa-calendar"></i></button>
                 												</span>
@@ -92,7 +92,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Upload Document <span class="require" aria-required="true" style="color:#a94442">*</span></label><br>
-                                                            <input type="file" name="upload_gtds_doc" id="upload_gtds_doc" class="upload_gtds_doc" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf">
+                                                            <input type="file" name="proof_tax_doc" id="proof_tax_doc" class="upload_gtds_doc" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" required>
                                                             <span id="upload_gtds_doc_error" style="font-size: 12px;color:#a94442;"></span>
                                                         </div>
                                                     </div>
@@ -102,7 +102,7 @@
                 										<div class="form-group">
                 											<label class="">GSTR-3B Confirmation Date <span class="required" aria-required="true" style="color:#a94442">*</span></label>
                 											<div class="input-group date date1" data-date-end-date="0d" data-date-format="dd-MM-yyyy">
-                												<input type="text" name="confirmation_date" id="confirmation_date" class="form-control" readonly="" placeholder="GSTR-1A Confirmation Date" >		
+                												<input type="text" name="gstr_3b_confirmation_date" id="gstr_3b_confirmation_date" class="form-control" readonly="" placeholder="GSTR-1A Confirmation Date" required >		
                 												<span class="input-group-btn">
                 													<button class="btn default" type="button"><span class="md-click-circle md-click-animate" style="height: 47px; width: 47px; top: -1.0625px; left: -9.5px;"></span><i class="fa fa-calendar"></i></button>
                 												</span>
@@ -112,7 +112,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Upload Document <span class="require" aria-required="true" style="color:#a94442">*</span></label><br>
-                                                            <input type="file" name="upload_gtds_doc" id="upload_gtds_doc" class="upload_gtds_doc" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf">
+                                                            <input type="file" name="gstr_3b_doc" id="gstr_3b_doc" class="upload_gtds_doc" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" required>
                                                             <span id="upload_gtds_doc_error" style="font-size: 12px;color:#a94442;"></span>
                                                         </div>
                                                     </div>
@@ -120,7 +120,7 @@
                 										<div class="form-group">
                 											<label class="">Provident Fund (PF) Confirmation Date <span class="required" aria-required="true" style="color:#a94442">*</span></label>
                 											<div class="input-group date date1" data-date-end-date="0d" data-date-format="dd-MM-yyyy">
-                												<input type="text" name="confirmation_date" id="confirmation_date" class="form-control" readonly="" placeholder="Provident Fund (PF) Confirmation Date" >		
+                												<input type="text" name="pro_fund_confirmation_date" id="pro_fund_confirmation_date" class="form-control" readonly="" required placeholder="Provident Fund (PF) Confirmation Date" >		
                 												<span class="input-group-btn">
                 													<button class="btn default" type="button"><span class="md-click-circle md-click-animate" style="height: 47px; width: 47px; top: -1.0625px; left: -9.5px;"></span><i class="fa fa-calendar"></i></button>
                 												</span>
@@ -130,7 +130,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Upload Document <span class="require" aria-required="true" style="color:#a94442">*</span></label><br>
-                                                            <input type="file" name="upload_gtds_doc" id="upload_gtds_doc" class="upload_gtds_doc" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf">
+                                                            <input type="file" name="pro_fund_doc" id="pro_fund_doc" class="upload_gtds_doc" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" required>
                                                             <span id="upload_gtds_doc_error" style="font-size: 12px;color:#a94442;"></span>
                                                         </div>
                                                     </div>
@@ -141,7 +141,7 @@
                 										<div class="form-group">
                 											<label class="">TDS Confirmation Date <span class="required" aria-required="true" style="color:#a94442">*</span></label>
                 											<div class="input-group date date1" data-date-end-date="0d" data-date-format="dd-MM-yyyy">
-                												<input type="text" name="confirmation_date" id="confirmation_date" class="form-control" readonly="" placeholder="TDS Confirmation Date" >		
+                												<input type="text" name="tds_confirmation_date" id="tds_confirmation_date" class="form-control" readonly="" placeholder="TDS Confirmation Date" required>		
                 												<span class="input-group-btn">
                 													<button class="btn default" type="button"><span class="md-click-circle md-click-animate" style="height: 47px; width: 47px; top: -1.0625px; left: -9.5px;"></span><i class="fa fa-calendar"></i></button>
                 												</span>
@@ -151,7 +151,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Upload Document <span class="require" aria-required="true" style="color:#a94442">*</span></label><br>
-                                                            <input type="file" name="upload_gtds_doc" id="upload_gtds_doc" class="upload_gtds_doc" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf">
+                                                            <input type="file" name="tds_doc" id="tds_doc" class="upload_gtds_doc" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" required>
                                                             <span id="upload_gtds_doc_error" style="font-size: 12px;color:#a94442;"></span>
                                                         </div>
                                                     </div>
@@ -159,7 +159,7 @@
                 										<div class="form-group">
                 											<label class="">ESIC Confirmation Date <span class="required" aria-required="true" style="color:#a94442">*</span></label>
                 											<div class="input-group date date1" data-date-end-date="0d" data-date-format="dd-MM-yyyy">
-                												<input type="text" name="confirmation_date" id="confirmation_date" class="form-control" readonly="" placeholder="ESIC Confirmation Date" >		
+                												<input type="text" name="esic_confirmation_date" id="esic_confirmation_date" class="form-control" readonly="" placeholder="ESIC Confirmation Date" required>		
                 												<span class="input-group-btn">
                 													<button class="btn default" type="button"><span class="md-click-circle md-click-animate" style="height: 47px; width: 47px; top: -1.0625px; left: -9.5px;"></span><i class="fa fa-calendar"></i></button>
                 												</span>
@@ -169,7 +169,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Upload Document <span class="require" aria-required="true" style="color:#a94442">*</span></label><br>
-                                                            <input type="file" name="upload_gtds_doc" id="upload_gtds_doc" class="upload_gtds_doc" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf">
+                                                            <input type="file" name="esic_doc" id="esic_doc" class="upload_gtds_doc" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" required>
                                                             <span id="upload_gtds_doc_error" style="font-size: 12px;color:#a94442;"></span>
                                                         </div>
                                                     </div>

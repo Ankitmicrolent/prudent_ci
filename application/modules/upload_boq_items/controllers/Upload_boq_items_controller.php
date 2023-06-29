@@ -96,7 +96,7 @@ class Upload_boq_items_controller extends Base_Controller
 		if(isset($user_id) && !empty($user_id)){
 		
 		$data = $row = $newarr = $datad = array();
-		$boq_code_d = '<input type="text" class="form-control invaliderror" id="dc_boq_code" placeholder="BOQ Sr No" style="font-size: 12px;">';
+		$boq_code_d = '<input type="text" class="form-control invaliderror" id="pwdc_boq_code" placeholder="BOQ Sr No" style="font-size: 12px;">';
 		$hsn_sac_code_d = '<input type="text" class="form-control invaliderror" id="hsn_sac_code" placeholder="HSN/SAC Code" style="font-size: 12px;">';
 		$item_description_d = '<input type="text" class="form-control invaliderror" id="item_description" placeholder="Item Description" style="font-size: 12px;">';
 		$unit_d = '<input type="text" class="form-control invaliderror" id="unit" placeholder="Unit" style="font-size: 12px;">';
@@ -139,7 +139,7 @@ class Upload_boq_items_controller extends Base_Controller
 		if(isset($user_id) && !empty($user_id)){
 		
 		$data = $row = $newarr = $datad = array();
-		$boq_code_d = '<input type="text" class="form-control invaliderror" id="dc_boq_code" placeholder="BOQ Sr No" style="font-size: 12px;">';
+		$boq_code_d = '<input type="text" class="form-control invaliderror" id="wdc_boq_code" placeholder="BOQ Sr No" style="font-size: 12px;">';
 		$hsn_sac_code_d = '<input type="text" class="form-control invaliderror" id="hsn_sac_code" placeholder="HSN/SAC Code" style="font-size: 12px;">';
 		$item_description_d = '<input type="text" class="form-control invaliderror" id="item_description" placeholder="Item Description" style="font-size: 12px;">';
 		$unit_d = '<input type="text" class="form-control invaliderror" id="unit" placeholder="Unit" style="font-size: 12px;">';

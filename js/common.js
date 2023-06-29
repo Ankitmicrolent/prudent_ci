@@ -579,6 +579,160 @@ $(document).on('keyup', '#dc_boq_code', function() {
             }
     });
 });
+$(document).on('keyup', '#wdc_boq_code', function() {
+
+   
+    $('#invaliderrorid').html('');
+    var boq_code = $(this).val();
+    var project_id = $('#project_id').val();
+    var gst_type = $('#gst_type').val();
+    var url = 'get_dc_boq_item_details';
+    if(boq_code == ''){
+        $('#hsn_sac_code').val(''); 
+        $('#item_description').val('');
+        $('#unit').val('');  
+        $('#scheduled_qty').val('');  
+        $('#avl_qty').val('');  
+        $('#installed_qty').val('');  
+        // $('#design_qty').val('');
+        // $('#sgst').val(''); 
+        // $('#gst').val(''); 
+        // $('#cgst').val(''); 
+        // $('#sgst_amount').val(''); 
+        // $('#cgst_amount').val(''); 
+        // $('#taxable_amount').val(''); 
+        // $('#rate_basic').val('');  
+        // $('#qty').val('');  
+        // $('#amount').val('');  
+        // $('#rate').val('');  
+        // $('#total_amount').val('');  
+        $('#non_schedule_yes').prop('checked', false);
+        return
+    }
+       
+    $.ajax({
+            type:'POST',
+            url:completeURL(url), 
+            dataType:'json',
+            data:{project_id:project_id,boq_code:boq_code},
+            success:function(result){
+                
+               console.log(result);
+                if(result.boq_code !== '' && typeof result.boq_code !== "undefined"){
+                    // $('#dc_boq_code').val(result.boq_code);    
+                    // $('#hsn_sac_code').val(result.hsn_sac_code);    
+                    // $('#hsn_sac_code').prop('readonly', true);
+                    // $('#item_description').val(result.item_description);    
+                    // $('#rate').val(result.rate);   
+                    
+                        
+                        $('#wdc_boq_code').val(result.boq_code);    
+                        $('#hsn_sac_code').val(result.hsn_sac_code);    
+                        $('#hsn_sac_code').prop('readonly', true);
+                        $('#item_description').val(result.item_description);    
+                        // $('#rate').val(result.rate);   
+
+
+                        // $('#sgst').val(result.gst/2);    
+                        // $('#cgst').val(result.gst/2);    
+                    
+                    $('#item_description').prop('readonly', true);
+                    $('#unit').val(result.unit);    
+                    $('#unit').prop('readonly', true);
+                    $('#avl_qty').val(result.design_qty);    
+                    $('#avl_qty').prop('readonly', true);
+
+                }else{    
+                    $('#hsn_sac_code').prop('readonly', false);
+                    $('#item_description').prop('readonly', false);
+                    $('#unit').prop('readonly', false);
+                    $('#avl_qty').prop('readonly', false);
+
+
+                    $('#hsn_sac_code').val(''); 
+                    $('#wdc_boq_code').val('');
+                    $('#item_description').val('');
+                    $('#unit').val('');  
+                    $('#scheduled_qty').val('');  
+                    $('#design_qty').val('');
+                    $('#sgst').val(''); 
+                    $('#gst').val(''); 
+                    $('#cgst').val(''); 
+                    $('#sgst_amount').val(''); 
+                    $('#cgst_amount').val(''); 
+                    $('#taxable_amount').val(''); 
+                    $('#rate_basic').val('');  
+                    $('#avl_qty').val('');  
+                    $('#rate_basic').val('');  
+                    $('#qty').val('');  
+                    $('#amount').val('');  
+                    $('#installed_qty').val('');  
+                    $('#rate').val('');  
+                    $('#total_amount').val('');  
+                    $('#non_schedule_yes').prop('checked', false);
+                }        
+            }
+    });
+});
+$(document).on('keyup', '#pwdc_boq_code', function() {
+
+   
+    $('#invaliderrorid').html('');
+    var boq_code = $(this).val();
+    var project_id = $('#project_id').val();
+    var gst_type = $('#gst_type').val();
+    var url = 'get_dc_boq_item_details';
+    if(boq_code == ''){
+        $('#hsn_sac_code').val(''); 
+        $('#item_description').val('');
+        $('#unit').val('');  
+        $('#scheduled_qty').val('');  
+        $('#avl_qty').val('');  
+        $('#installed_qty').val('');  
+        $('#non_schedule_yes').prop('checked', false);
+        return
+    }
+       
+    $.ajax({
+            type:'POST',
+            url:completeURL(url), 
+            dataType:'json',
+            data:{project_id:project_id,boq_code:boq_code},
+            success:function(result){
+                
+               console.log(result);
+                if(result.boq_code !== '' && typeof result.boq_code !== "undefined"){
+
+                        $('#pwdc_boq_code').val(result.boq_code);    
+                        $('#hsn_sac_code').val(result.hsn_sac_code);    
+                        $('#hsn_sac_code').prop('readonly', true);
+                        $('#item_description').val(result.item_description);    
+
+                    $('#item_description').prop('readonly', true);
+                    $('#unit').val(result.unit);    
+                    $('#unit').prop('readonly', true);
+                    $('#avl_qty').val(result.design_qty);    
+                    $('#avl_qty').prop('readonly', true);
+
+                }else{    
+                    $('#hsn_sac_code').prop('readonly', false);
+                    $('#item_description').prop('readonly', false);
+                    $('#unit').prop('readonly', false);
+                    $('#avl_qty').prop('readonly', false);
+
+
+                    $('#hsn_sac_code').val(''); 
+                    $('#pwdc_boq_code').val('');
+                    $('#item_description').val('');
+                    $('#unit').val('');  
+                    $('#scheduled_qty').val('');  
+                    $('#prov_qty').val('');  
+                    $('#installed_qty').val('');    
+                    $('#non_schedule_yes').prop('checked', false);
+                }        
+            }
+    });
+});
 $(document).on('keyup', '#idc_boq_code', function() {
 
    
@@ -3185,7 +3339,7 @@ $(document).ready(function(){
     $(document).on('click','.addDCIWIPRow',function()
     {        
         var maintml = $(this);
-        var boq_code = document.getElementById("dc_boq_code").value;
+        var boq_code = document.getElementById("wdc_boq_code").value;
         var hsn_sac_code = document.getElementById("hsn_sac_code").value;
         var item_description = document.getElementById("item_description").value;
         var unit = document.getElementById("unit").value;
@@ -3195,7 +3349,8 @@ $(document).ready(function(){
             $('.invaliderror').addClass('has-error-p');
         }else{
             var project_id = $('#project_id').val();
-            var url = 'get_dcip_boq_item_details';
+            // var url = 'get_dcip_boq_item_details';
+            var url = 'get_boq_item_details';
             $.ajax({
                     type:'POST',
                     url:completeURL(url), 
@@ -3209,7 +3364,7 @@ $(document).ready(function(){
                         	});
                         	if ($.inArray(boq_code, boq_code_no) != -1){
                         	    $('#invaliderrorid').html('BOQ Sr No ('+boq_code+') Details Already Exist!');
-                                $('#dc_boq_code').val('');
+                                $('#wdc_boq_code').val('');
                                 $('#hsn_sac_code').val('');
                                 $('#item_description').val('');
                                 $('#unit').val('');
@@ -3242,7 +3397,7 @@ $(document).ready(function(){
                             //clonedRow.find('div.addDeleteButton').html('<span class="tooltips deleteParticularRow" data-placement="top" data-original-title="Remove" style="cursor: pointer;"><i class="fa fa-trash-o"></i></span>');
                             clonedRow.find('.tooltips').tooltip({placement: 'top'});
                             $(maintml).parents('#clientdciwipitemdisplay tbody').find("tr:last").before(html);
-                            $('#dc_boq_code').val('');
+                            $('#wdc_boq_code').val('');
                             $('#hsn_sac_code').val('');
                             $('#item_description').val('');
                             $('#unit').val('');
@@ -3270,7 +3425,7 @@ $(document).ready(function(){
     $(document).on('click','.addDCPWIPRow',function()
     {        
         var maintml = $(this);
-        var boq_code = document.getElementById("dc_boq_code").value;
+        var boq_code = document.getElementById("pwdc_boq_code").value;
         var hsn_sac_code = document.getElementById("hsn_sac_code").value;
         var item_description = document.getElementById("item_description").value;
         var unit = document.getElementById("unit").value;
@@ -3280,7 +3435,8 @@ $(document).ready(function(){
             $('.invaliderror').addClass('has-error-p');
         }else{
             var project_id = $('#project_id').val();
-            var url = 'get_dcip_boq_item_details';
+            // var url = 'get_dcip_boq_item_details';
+            var url = 'get_boq_item_details';
             $.ajax({
                     type:'POST',
                     url:completeURL(url), 
@@ -3294,7 +3450,7 @@ $(document).ready(function(){
                         	});
                         	if ($.inArray(boq_code, boq_code_no) != -1){
                         	    $('#invaliderrorid').html('BOQ Sr No ('+boq_code+') Details Already Exist!');
-                                $('#dc_boq_code').val('');
+                                $('#pwdc_boq_code').val('');
                                 $('#hsn_sac_code').val('');
                                 $('#item_description').val('');
                                 $('#unit').val('');
@@ -3327,7 +3483,7 @@ $(document).ready(function(){
                             //clonedRow.find('div.addDeleteButton').html('<span class="tooltips deleteParticularRow" data-placement="top" data-original-title="Remove" style="cursor: pointer;"><i class="fa fa-trash-o"></i></span>');
                             clonedRow.find('.tooltips').tooltip({placement: 'top'});
                             $(maintml).parents('#clientdcpwipitemdisplay tbody').find("tr:last").before(html);
-                            $('#dc_boq_code').val('');
+                            $('#pwdc_boq_code').val('');
                             $('#hsn_sac_code').val('');
                             $('#item_description').val('');
                             $('#unit').val('');

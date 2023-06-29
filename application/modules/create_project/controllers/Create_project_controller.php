@@ -1250,12 +1250,14 @@ class Create_project_controller extends Base_Controller
                             'encrypt_name' => TRUE,        
                             'overwrite' => FALSE,
                             'allowed_types' => 'doc|pdf|txt|png|PNG|jpg|JPG|jpeg|JPEG' );
-                             $this->imageupload->image_upload($set_upload_options);
+                            //  $this->imageupload->image_upload($set_upload_options);
+                            //  $this->upload->data();   
                             $this->upload->initialize($set_upload_options);
                             $this->upload->do_upload('insurance_required_doc');
+                            $uploadedFileName = $this->upload->data('file_name');
                             $insdate = date('Y-m-d',strtotime($insurance_up_to_date[$i]));
                             $save_insurance_data[] = array('project_id'=>$project_id,'remark'=>$insurance_remark[$i],
-                            'insdate'=>$insdate,'amount'=>$amount_of_risk_cov[$i],'insurance_required_doc'=>$files['insurance_required_doc']['name'][$i]);    
+                            'insdate'=>$insdate,'amount'=>$amount_of_risk_cov[$i],'insurance_required_doc'=>$uploadedFileName);    
                         }
                     } 
                     if(isset($save_insurance_data) && !empty($save_insurance_data)){
