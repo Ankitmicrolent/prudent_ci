@@ -193,5 +193,134 @@ class Compliance_controller extends Base_Controller
 
             
     }
+
+
+
+    public function compliance_list(){
+
+
+		$user_id = $this->session->userData('user_id');
+		if(isset($user_id) && !empty($user_id)){
+		
+		$data = $row = array();
+		$memData = $this->admin_model->compliance_data($_POST);
+		$allCount = $this->admin_model->countcompliance_data();
+		$countFiltered = $this->admin_model->compliance_dataListFiltered($_POST);
+
+        $i = $_POST['start'];
+		foreach($memData as $member){
+            
+            $i++;
+            if(isset($member->month) && !empty($member->month)) { $month = $member->month; }else { $month = '-'; }
+            if(isset($member->gstr_1a_confirmation_date) && !empty($member->gstr_1a_confirmation_date)) { $gstr_1a = $member->gstr_1a_confirmation_date; }else { $gstr_1a = '-'; }
+			if(isset($member->gstr_3b_confirmation_date) && !empty($member->gstr_3b_confirmation_date)) { $gstr_3b = $member->gstr_3b_confirmation_date; }else { $gstr_3b = '-'; }
+			if(isset($member->tds_confirmation_date) && !empty($member->tds_confirmation_date)) { $tds_date = $member->tds_confirmation_date; }else { $tds_date = '-'; }
+			if(isset($member->proof_tax_confirmation_date) && !empty($member->proof_tax_confirmation_date)) { $proof_tax_date = $member->proof_tax_confirmation_date; }else { $proof_tax_date = '-'; }
+			if(isset($member->pro_fund_confirmation_date) && !empty($member->pro_fund_confirmation_date)) { $pf_fund_date = $member->pro_fund_confirmation_date; }else { $pf_fund_date = '-'; }
+			if(isset($member->esic_confirmation_date) && !empty($member->esic_confirmation_date)) { $esic_date = $member->esic_confirmation_date; }else { $esic_date = '-'; }
+
+
+			if(isset($member->gstr_1a_doc) && !empty($member->gstr_1a_doc)) { 
+                $gstr_1a_doc = '<a href="'.base_url().'uploads/compliance_upload/'.$member->gstr_1a_doc.'" download="">Download</a>';
+                 //$member->gstr_1a_doc; }else { 
+            }else{
+                $gstr_1a_doc = '-'; 
+            }
+			if(isset($member->gstr_3b_doc) && !empty($member->gstr_3b_doc)) { 
+                $gstr_3b_doc = '<a href="'.base_url().'uploads/compliance_upload/'.$member->gstr_3b_doc.'" download="">Download</a>';
+                 //$member->gstr_3b_doc; }else { 
+            }else{
+                $gstr_3b_doc = '-'; 
+            }
+			if(isset($member->tds_doc) && !empty($member->tds_doc)) { 
+                $tds_doc = '<a href="'.base_url().'uploads/compliance_upload/'.$member->tds_doc.'" download="">Download</a>';
+                 //$member->tds_doc; }else { 
+            }else{
+                $tds_doc = '-'; 
+            }
+			if(isset($member->proof_tax_doc) && !empty($member->proof_tax_doc)) { 
+                $proof_tax_doc = '<a href="'.base_url().'uploads/compliance_upload/'.$member->proof_tax_doc.'" download="">Download</a>';
+                 //$member->proof_tax_doc; }else { 
+            }else{
+                $proof_tax_doc = '-'; 
+            }
+			if(isset($member->pro_fund_doc) && !empty($member->pro_fund_doc)) { 
+                $pro_fund_doc = '<a href="'.base_url().'uploads/compliance_upload/'.$member->pro_fund_doc.'" download="">Download</a>';
+                 //$member->pro_fund_doc; }else { 
+            }else{
+                $pro_fund_doc = '-'; 
+            }
+			if(isset($member->esic_doc) && !empty($member->esic_doc)) { 
+                $esic_doc = '<a href="'.base_url().'uploads/compliance_upload/'.$member->esic_doc.'" download="">Download</a>';
+                 //$member->esic_doc; }else { 
+            }else{
+                $esic_doc = '-'; 
+            }
+
+
+
+
+			// if(isset($member->gstr_3b_doc) && !empty($member->gstr_3b_doc)) { $gstr_3b_doc = $member->gstr_3b_doc; }else { $gstr_3b_doc = '-'; }
+			// if(isset($member->tds_doc) && !empty($member->tds_doc)) { $tds_doc = $member->gstr_3b_doc; }else { $tds_doc = '-'; }
+			// if(isset($member->proof_tax_doc) && !empty($member->proof_tax_doc)) { $proof_tax_doc = $member->proof_tax_doc; }else { $proof_tax_doc = '-'; }
+			// if(isset($member->pro_fund_doc) && !empty($member->pro_fund_doc)) { $pro_fund_doc = $member->pro_fund_doc; }else { $pro_fund_doc = '-'; }
+			// if(isset($member->esic_doc) && !empty($member->esic_doc)) { $esic_doc = $member->esic_doc; }else { $esic_doc = '-'; }
+            // <a href="https://trackigo.in/prudent/uploads/native_addr_proof/142556437.png" download=""> Native address </a>
+			// if(isset($member->status) && !empty($member->status) && $member->status !='Under Approval') { $status = $member->status; }else { $status = 'Under Approval'; }
+			if(isset($member->created_at) && !empty($member->created_at)) { $created_on = $member->created_at; }else { $created_on = '-'; }
+			
+			$html = '-';
+			// $html .= '<a href="javascript:;" class="edit tooltips" rel="'.$member->id.'" title="Edit Provisional WIP" rev="edit_provisional_wip" data-original-title="Edit Installed WIP"><i class="fa fa-edit" style="color:#3598dc; font-size:15px;"></i></a>';
+			// $html .= '&nbsp;&nbsp;&nbsp;<a href="javascript:;" class="edit tooltips" rel="'.$member->id.'" title="Delete Provisional WIP" rev="delete_provisional_wip" data-original-title="Delete Installed WIP"><i class="fa fa-trash" style="color:#a94442; font-size: 15px;"></i></a>';
+			// $html .= '&nbsp;&nbsp;&nbsp;<a class="btn btn-success btn-xs active_link_cmn" href="javascript:void(0);" rev="approved_provisional_wip" rel="'.$member->id.'" title="Click here to Approved Record" data-status="Y">Approve</a>';
+			
+			$htmlp = '<a class="popup_save" href="javascript:void(0);" rev="view_dcpwip_items" rel="'.$member->id.'" data-title="(#'.$member->id.') Provisional WIP Item List" data-status="allow" style="margin-top:10px;"><span class="md-click-circle md-click-animate" style="height: 97px; width: 97px; top: -38.5312px; left: 29.4896px;"></span> '.$member->id.'</a>';
+			$data[] = array(
+			$i,
+            $month,
+            $gstr_1a,
+            $gstr_3b,
+            $tds_date,
+            $proof_tax_date,
+            $pf_fund_date,
+            $esic_date,
+            $gstr_1a_doc,
+            $gstr_3b_doc,
+            $tds_doc,
+            $proof_tax_doc,
+            $pro_fund_doc,
+            $esic_doc,
+			$created_on,
+			$html
+			);
+        }
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $allCount,
+            "recordsFiltered" => $countFiltered,
+            "data" => $data,
+        );
+        echo json_encode($output);
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+    }
     
 }

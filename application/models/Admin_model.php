@@ -52,7 +52,9 @@ class Admin_model extends CI_Model {
 		
         $this->column_dcvs_item_order = array(null,'vs_itemid','vs_id','boq_code','hsn_sac_code','item_description','unit','avl_qty','stock_qty');
 		$this->column_dcvs_item_search = array('vs_itemid','vs_id','boq_code','hsn_sac_code','item_description','unit','avl_qty','stock_qty');
+		$this->compliance_item = array('id','month','gstr_1a_confirmation_date','gstr_3b_confirmation_date','tds_confirmation_date','proof_tax_confirmation_date','pro_fund_confirmation_date','esic_confirmation_date');
 		$this->dcvs_item_order = array('vs_itemid' => 'desc');
+		$this->comp_item_order = array('id' => 'desc');
 		
 		$this->column_dciwip_item_order = array(null,'i_wip_itemid','i_wip_id','boq_code','hsn_sac_code','item_description','unit','avl_qty','installed_qty');
 		$this->column_dciwip_item_search = array('i_wip_itemid','i_wip_id','boq_code','hsn_sac_code','item_description','unit','avl_qty','installed_qty');
@@ -428,12 +430,74 @@ class Admin_model extends CI_Model {
         $query = $this->db->get();
         return $query->num_rows();
     }
+    public function compliance_dataListFiltered($postData){
+        $this->_get_compliance_item_list_datatables_query($postData);
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
     public function countDCVSItemListAll($vs_id){
         $this->db->select('*');
 		$this->db->from('tbl_virtual_stock_items');
 		$this->db->where('vs_id',$vs_id);
 		return $this->db->count_all_results();
     }
+    public function countcompliance_data(){
+        $this->db->select('*');
+		$this->db->from('table_compliance');
+		
+		return $this->db->count_all_results();
+    }
+
+    public function compliance_data($postData){
+	    $this->compliance_list_datatables_query($postData);
+        if($postData['length'] != -1){
+            $this->db->limit($postData['length'], $postData['start']);
+        }
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+
+
+    
+    private function compliance_list_datatables_query($postData){
+	    $this->db->select('*');
+		$this->db->from('table_compliance');
+        // print_r($this->column_dcvs_item_search);
+        //      exit ;
+		
+		$i = 0;
+        if(isset($postData['search']['value'])){
+        foreach($this->compliance_item as $item){
+            if($postData['search']['value']){
+                if($i===0){
+                    $this->db->group_start();
+					$this->db->like($item, trim($postData['search']['value']));
+                }else{
+                    $this->db->or_like($item, trim($postData['search']['value']));
+                }
+                
+                if(count($this->compliance_item) - 1 == $i){
+                    $this->db->group_end();
+                }
+            }
+            $i++;
+        }
+		}
+         
+        if(isset($postData['order'])){
+            $this->db->order_by($this->comp_item_order[$postData['order']['0']['column']], $postData['order']['0']['dir']);
+        }else if(isset($this->comp_item_order)){
+            $order = $this->comp_item_order;
+            $this->db->order_by(key($order), $order[key($order)]);
+        }
+    }
+
+
+
+
+
+
     private function _get_dcvs_item_list_datatables_query($postData,$vs_id){
 	    $this->db->select('*');
 		$this->db->from('tbl_virtual_stock_items');
@@ -461,6 +525,37 @@ class Admin_model extends CI_Model {
             $this->db->order_by($this->column_dcvs_item_order[$postData['order']['0']['column']], $postData['order']['0']['dir']);
         }else if(isset($this->dcvs_item_order)){
             $order = $this->dcvs_item_order;
+            $this->db->order_by(key($order), $order[key($order)]);
+        }
+    }
+    private function _get_compliance_item_list_datatables_query($postData){
+	    $this->db->select('*');
+		$this->db->from('table_compliance');
+		    //  print_r($this->column_dcvs_item_search);
+            //  exit ;
+		$i = 0;
+        if(isset($postData['search']['value'])){
+        foreach($this->compliance_item as $item){
+            if($postData['search']['value']){
+                if($i===0){
+                    $this->db->group_start();
+					$this->db->like($item, trim($postData['search']['value']));
+                }else{
+                    $this->db->or_like($item, trim($postData['search']['value']));
+                }
+                
+                if(count($this->compliance_item) - 1 == $i){
+                    $this->db->group_end();
+                }
+            }
+            $i++;
+        }
+		}
+         
+        if(isset($postData['order'])){
+            $this->db->order_by($this->comp_item_order[$postData['order']['0']['column']], $postData['order']['0']['dir']);
+        }else if(isset($this->comp_item_order)){
+            $order = $this->comp_item_order;
             $this->db->order_by(key($order), $order[key($order)]);
         }
     }

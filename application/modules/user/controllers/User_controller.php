@@ -57,12 +57,19 @@ class User_controller extends Base_Controller
             // print_r($this->input->post());
 		    //      exit;
 			$id = $this->input->post('id');
-			$userdatas = $this->user_model->edit_user_details($id);
+			  if($id){
+
+				  $userdatas = $this->user_model->edit_user_details($id);
+			  }
              
 		   if (!empty($_FILES['home_addr_proof']) && $_FILES['home_addr_proof']['name'] !='') {
-			         if(file_exists($userdatas->home_addr_proof)){
-						unlink($userdatas->home_addr_proof);
-					 }
+			          if(isset($userdatas) && !empty($userdatas)){
+
+
+						  if(file_exists($userdatas->home_addr_proof)){
+							 unlink($userdatas->home_addr_proof);
+						  }
+					  }
 
 			$home_ad_proof = explode(".",$_FILES['home_addr_proof']['name']);
 			$extension = end($home_ad_proof);
@@ -77,10 +84,12 @@ class User_controller extends Base_Controller
 		   }
 
 		   if(!empty($_FILES['native_addr_proof']) && $_FILES['native_addr_proof']['name'] !=''){
+              if(isset($userdatas) && !empty($userdatas)){
 
-			if(file_exists($userdatas->native_addr_proof)){
-				unlink($userdatas->native_addr_proof);
-			 }
+				  if(file_exists($userdatas->native_addr_proof)){
+					  unlink($userdatas->native_addr_proof);
+				   }
+			  }
 
 			$native_addr_proof = explode(".",$_FILES['native_addr_proof']['name']);
 
@@ -97,10 +106,12 @@ class User_controller extends Base_Controller
 
 
 		   if(!empty($_FILES['local_addr_proof']) && $_FILES['local_addr_proof']['name'] !=''){
-
-			if(file_exists($userdatas->local_addr_proof)){
-				unlink($userdatas->local_addr_proof);
-			 }
+               if(isset($userdatas) && !empty($userdatas)){
+				
+				   if(file_exists($userdatas->local_addr_proof)){
+					   unlink($userdatas->local_addr_proof);
+					}
+			   }
 
 			$local_addr_proof = explode(".",$_FILES['local_addr_proof']['name']);
 
@@ -112,10 +123,14 @@ class User_controller extends Base_Controller
 
 		   }
 		   if(!empty($_FILES['perm_addr_proof']) && $_FILES['perm_addr_proof']['name'] !='' ){
-			if(file_exists($userdatas->perm_addr_proof)){
-				unlink($userdatas->perm_addr_proof);
-			 }
-			
+			if(isset($userdatas) && !empty($userdatas)){
+
+				if(file_exists($userdatas->perm_addr_proof)){
+					unlink($userdatas->perm_addr_proof);
+				 }
+				
+			}
+
 			$perm_addr_proof = explode(".",$_FILES['perm_addr_proof']['name']);
 
 			$extension = end($perm_addr_proof);
@@ -127,9 +142,12 @@ class User_controller extends Base_Controller
 		   }
 		
 		   if(!empty($_FILES['drive_lic_proof']) && $_FILES['drive_lic_proof']['name'] !=''){
-        if(file_exists($userdatas->drive_lic_proof)){
-	 unlink($userdatas->drive_lic_proof);
-      }
+			if(isset($userdatas) && !empty($userdatas)){
+
+				if(file_exists($userdatas->drive_lic_proof)){
+			 unlink($userdatas->drive_lic_proof);
+			  }
+			}
 			
 
 			$drive_lic_proof = explode(".",$_FILES['drive_lic_proof']['name']);
@@ -142,9 +160,13 @@ class User_controller extends Base_Controller
 
 		   }
 		   if(!empty($_FILES['passport_proof'])&& $_FILES['passport_proof']['name'] !='' ){
-			if(file_exists($userdatas->passport_proof)){
-				unlink($userdatas->passport_proof);
-			 }
+			if(isset($userdatas) && !empty($userdatas)){
+
+
+				if(file_exists($userdatas->passport_proof)){
+					unlink($userdatas->passport_proof);
+				 }
+			}
 			
 			$passport_proof = explode(".",$_FILES['passport_proof']['name']);
 
@@ -156,11 +178,14 @@ class User_controller extends Base_Controller
 
 		   }
 		   if(!empty($_FILES['pan_proof']) && $_FILES['pan_proof']['name'] !=''){
+                 if(isset($userdatas) && !empty($userdatas)){
 
+
+					 if(file_exists($userdatas->pan_proof)){
+						 unlink($userdatas->pan_proof);
+					  }
+				 }
 			
-			if(file_exists($userdatas->pan_proof)){
-				unlink($userdatas->pan_proof);
-			 }
 			
 			$pan_proof = explode(".",$_FILES['pan_proof']['name']);
 
@@ -552,11 +577,11 @@ class User_controller extends Base_Controller
 					$edu_id = $this->common_model->addData('tbl_user_education', $ed);
 				}
 				}
-
+                    // print_r($empdetail);
 				foreach ($empdetail as $empde) {
 
 
-                           if($edu['position'] != "" && $edu['employer_details'] != ""){
+                           if($empde['position'] != "" && $empde['employer_details'] != ""){
 
 
 

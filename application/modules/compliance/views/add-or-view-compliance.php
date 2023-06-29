@@ -181,6 +181,52 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="portlet light">
+                                <div class="portlet-title">
+                                    <div class="caption font-blue">
+                                        <i class="fa fa-bars font-blue"></i>
+                                        <span class="caption-subject bold uppercase">COMPLIANCE LIST</span>
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+                                      <table width="100%" id="pwiplist" class="table table-striped table-bordered table-hover" style="font-size:12px;">
+            							<thead>
+            								<tr>
+            									<th scope="col">Sr.no</th>
+            									<th scope="col">Month</th>
+            									<th scope="col">GSTR-1A Date</th>
+            									<th scope="col">GSTR-3B Date</th>
+            									<th scope="col">TDS Date</th>
+            								    <th scope="col">PT Date</th>
+            								    <th scope="col">PF Date</th>
+            								    <th scope="col">ESIC Date</th>
+            								    <th scope="col">GSTR-1A Doc</th>
+            								    <th scope="col">GSTR-3B Doc</th>
+            								    <th scope="col">TDS Doc</th>
+            								    <th scope="col">PT Doc</th>
+            								    <th scope="col">PF Doc</th>
+            								    <th scope="col">ESIC  Doc</th>
+            								    <th scope="col">Created On</th>
+            									<th scope="col">Action</th>
+            								</tr>
+            							</thead>
+            							<tbody> 
+            					    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
                 </div>
             </div>
         </div>
@@ -214,6 +260,33 @@
             ComponentsPickers.init();
             TableAdvanced.init();
         });
+
+
+
+
+        $('#pwiplist').dataTable({
+	// Processing indicator
+		"paging": true,
+		 "iDisplayLength": 10,
+         "deferRender": true,
+         "responsive": true,
+        "processing": true,
+		"serverSide": true,
+        // Initial no order.
+        "order": [],
+		
+        // Load data from an Ajax source
+        "ajax": {
+            "url": "<?php echo base_url('compliance_list'); ?>",
+            "type": "POST"
+        },
+		
+        //Set column definition initialisation properties
+        "columnDefs": [{ 
+            "targets": [0],
+            "orderable": false
+        }]
+    } );
     </script>
 </body>
 
