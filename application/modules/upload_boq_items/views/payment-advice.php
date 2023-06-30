@@ -32,6 +32,117 @@
             cursor: pointer;
             margin: 25px auto;
         }
+       .txdd{
+            padding: 2px 6px;
+            background: #26a69a;
+            color: #fff;
+            border-radius: 50%;
+            width: 20px;
+            font-size: 7px;
+            height: 20px;
+            cursor: pointer;
+            margin: 25px auto;
+        }
+       .desadd{
+            padding: 2px 6px;
+            background: #26a69a;
+            color: #fff;
+            border-radius: 50%;
+            width: 20px;
+            font-size: 7px;
+            height: 20px;
+            cursor: pointer;
+            margin: 25px auto;
+        }
+       .withhdadbtn{
+            padding: 2px 6px;
+            background: #26a69a;
+            color: #fff;
+            border-radius: 50%;
+            width: 20px;
+            font-size: 7px;
+            height: 20px;
+            cursor: pointer;
+            margin: 25px auto;
+        }
+       .cdadbtn{
+            padding: 2px 6px;
+            background: #26a69a;
+            color: #fff;
+            border-radius: 50%;
+            width: 20px;
+            font-size: 7px;
+            height: 20px;
+            cursor: pointer;
+            margin: 25px auto;
+        }
+       .dedescadbtn{
+            padding: 2px 6px;
+            background: #26a69a;
+            color: #fff;
+            border-radius: 50%;
+            width: 20px;
+            font-size: 7px;
+            height: 20px;
+            cursor: pointer;
+            margin: 25px auto;
+        }
+
+        .ddrmbtn{
+            padding: 2px 6px;
+            background: #a94442;
+            color: #fff;
+            border-radius: 50%;
+            width: 20px;
+            font-size: 7px;
+            height: 20px;
+            cursor: pointer;
+            margin: 5px auto;
+        }
+        .wdrmbtn{
+            padding: 2px 6px;
+            background: #a94442;
+            color: #fff;
+            border-radius: 50%;
+            width: 20px;
+            font-size: 7px;
+            height: 20px;
+            cursor: pointer;
+            margin: 5px auto;
+        }
+        .cesrmbtn{
+            padding: 2px 6px;
+            background: #a94442;
+            color: #fff;
+            border-radius: 50%;
+            width: 20px;
+            font-size: 7px;
+            height: 20px;
+            cursor: pointer;
+            margin: 5px auto;
+        }
+        .desdecrmbtn{
+            padding: 2px 6px;
+            background: #a94442;
+            color: #fff;
+            border-radius: 50%;
+            width: 20px;
+            font-size: 7px;
+            height: 20px;
+            cursor: pointer;
+            margin: 5px auto;
+        }
+        .rmbtnss{
+            padding: 2px 6px;
+            background: #a94442;
+            color: #fff;
+            border-radius: 50%;
+            width: 20px;
+            font-size: 7px;
+            height: 20px;
+            cursor: pointer;
+            margin: 5px auto;
+        }
     </style>
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo "> 
@@ -137,7 +248,7 @@
                                                         <label>Client Name <span class="require" aria-required="true" style="color:#a94442">*</span></label>
                                                         <div class="input-icon right">
                                                              <i class="fa"></i>
-                                                             <input type="text" class="form-control " id="client_name" name="client_name" value="Client Name" readonly>
+                                                             <input type="text" class="form-control " id="client_name" name="client_name" value="<?php if(isset($customer_name) && !empty($customer_name)){ echo $customer_name; } ?>" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -206,6 +317,7 @@
                                                         <label style="font-weight: 600;font-size: 14px;margin-bottom:10px;">Any Other Tax Deduction</label>
                                                     </div>
                                                 </div>
+                                                <div id="#tax_ded_des"></div>
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
@@ -225,8 +337,9 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-1"><div class="adbtn"><i class="fa fa-plus" aria-hidden="true" style="font-size:10px;"></i></div></div>
+                                                    <div class="col-md-1"><div class="txdd"><i class="fa fa-plus" aria-hidden="true" style="font-size:10px;"></i></div></div>
                                                 </div>
+                                                <div id="addtxdd"></div>
                                             </div>
                                             </div>
                                             <div class="panel panel-default">
@@ -251,6 +364,7 @@
                                                         <label style="font-weight: 600;font-size: 14px;margin-bottom:10px;">Any Other Deposit</label>
                                                     </div>
                                                 </div>
+                                                <div id="#depo_des_error"></div>
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
@@ -270,14 +384,16 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-1"><div class="adbtn"><i class="fa fa-plus" aria-hidden="true" style="font-size:10px;"></i></div></div>
+                                                    <div class="col-md-1"><div class="desadd"><i class="fa fa-plus" aria-hidden="true" style="font-size:10px;"></i></div></div>
                                                 </div>
+                                                <div id="deposesc"></div>
                                                 <hr style="margin: 10px 0;">
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <label style="font-weight: 600;font-size: 14px;margin-bottom:10px;">Withheld</label>
                                                     </div>
                                                 </div>
+                                                <div id="with_held_error"></div>
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
@@ -297,8 +413,11 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-1"><div class="adbtn"><i class="fa fa-plus" aria-hidden="true" style="font-size:10px;"></i></div></div>
+                                                    <div class="col-md-1"><div class="withhdadbtn"><i class="fa fa-plus" aria-hidden="true" style="font-size:10px;"></i></div></div>
                                                 </div>
+
+                                                <div id="rowwithheld"></div>
+                                                
                                             </div>
                                             </div>
                                             <div class="panel panel-default">
@@ -332,6 +451,7 @@
                                                         <label style="font-weight: 600;font-size: 14px;margin-bottom:10px;">Any Other Cess</label>
                                                     </div>
                                                 </div>
+                                                <div id="cess_desc_error"></div>
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
@@ -351,14 +471,16 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-1"><div class="adbtn"><i class="fa fa-plus" aria-hidden="true" style="font-size:10px;"></i></div></div>
+                                                    <div class="col-md-1"><div class="cdadbtn"><i class="fa fa-plus" aria-hidden="true" style="font-size:10px;"></i></div></div>
                                                 </div>
+                                                <div id="rowcess"></div>
                                                 <hr style="margin: 10px 0;">
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <label style="font-weight: 600;font-size: 14px;margin-bottom:10px;">Any Other Deductions</label>
                                                     </div>
                                                 </div>
+                                                <div id="ded_descp_error"></div>
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
@@ -378,8 +500,9 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-1"><div class="adbtn"><i class="fa fa-plus" aria-hidden="true" style="font-size:10px;"></i></div></div>
+                                                    <div class="col-md-1"><div class="dedescadbtn"><i class="fa fa-plus" aria-hidden="true" style="font-size:10px;"></i></div></div>
                                                 </div>
+                                                <div id="newaddded"></div>
                                             </div>
                                             </div>
                                             <div class="panel panel-default">

@@ -119,9 +119,13 @@ class Role_controller extends Base_Controller
 	}
 	public function save_role_config()
     {
-        $role_id=$this->input->post('name_of_role');
-        $submenu=$this->input->post('submenu');
+		
+
+        $role_id=$this->input->get('name_of_role');
+        $submenu=$this->input->get('submenu');
+		
         $result = $this->role_model->save_role_config($role_id,$submenu);
+
         
         if($result)
         {

@@ -38,6 +38,17 @@
             cursor: pointer;
             margin: 25px auto;
         }
+        .txdd{
+            padding: 2px 6px;
+            background: #26a69a;
+            color: #fff;
+            border-radius: 50%;
+            width: 20px;
+            font-size: 7px;
+            height: 20px;
+            cursor: pointer;
+            margin: 25px auto;
+        }
         .rmbtn{
             padding: 2px 6px;
             background: #a94442;

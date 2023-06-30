@@ -1448,6 +1448,27 @@ class Admin_model extends CI_Model {
             return 0;
         }
     }
+    public function get_project_detail($id)
+    {
+        $query=$this->db->query("SELECT `project_id` FROM `tbl_tax_invc` WHERE tax_invc_id='".$id."'");
+        if($query->num_rows() > 0){
+          $ids = $query->row()->project_id;
+          $projectName=$this->db->query("SELECT `customer_name` FROM `tbl_projects` WHERE project_id='".$ids."'");
+          if($projectName->num_rows() > 0){
+
+               return $projectName->row()->customer_name;
+
+          }else{
+           
+            return 0;
+
+
+          }
+
+        }else{
+            return 0;
+        }
+    }
     
     public function get_design_qty($project_id,$boq_code)
     {

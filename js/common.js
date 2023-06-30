@@ -3035,6 +3035,237 @@ $(document).ready(function(){
             Metronic.init();  
         }
     });
+
+
+txccnt = 1;
+    $(document).on('click', '.txdd', function() {
+
+
+        console.log("ankit")
+        var tax_deduction_desc = $("#tax_deduction_desc").val();
+        var tax_deduction_amt = $("#tax_deduction_amt").val();
+       
+        
+        if(tax_deduction_desc !=='' && typeof tax_deduction_desc != 'undefined' && 
+        tax_deduction_amt !=='' && typeof tax_deduction_amt != 'undefined'
+        
+        ){
+            $("#tax_ded_des").html('');
+        var html = '<div class="row consinee_detail">'
+        +'<div class="input-icon right col-md-6">'
+        +'<i class="fa"></i> <i class="fa"></i>'
+        +'<i class="fa"></i><input type="text" class="form-control " name="tax_deduction_desc[]" id="tax_deduction_desc'+txccnt+'" value="'+tax_deduction_desc+'" placeholder="Tax Deduction Description" readonly>'
+        +'</div>'
+        +'<div class="col-md-5">'
+        +'<div class="form-group">'
+        +'<div class="input-icon right">'
+        +'<i class="fa"></i>'
+        +'<input type="text" class="form-control " name="tax_deduction_amt[]" id="tax_deduction_amt'+txccnt+'" placeholder="Tax Deduction Amount" value="'+tax_deduction_amt+'" readonly>'
+        +'</div></div></div>'
+        +'<div class="col-md-1">'
+        +'<div class="rmbtnss"><i class="fa fa-minus" aria-hidden="true" style="font-size:10px;"></i></div>'
+        +'</div></div>';
+        $("#addtxdd").append(html);
+        $("#tax_ded_des").html('');
+        $("#tax_deduction_desc").val('');
+        $("#tax_deduction_amt").val('');
+      
+        txccnt++;
+        }else{
+        $("#tax_ded_des").html('Please enter Tax Deduction details!');
+        }
+    });
+    ddcount =1 ;
+    $(document).on('click', '.desadd', function() {
+
+
+        console.log("ankit")
+        var deposit_desc = $("#deposit_desc").val();
+        var deposit_amount = $("#deposit_amount").val();
+       
+        
+        if(deposit_desc !=='' && typeof deposit_desc != 'undefined' && 
+        deposit_amount !=='' && typeof deposit_amount != 'undefined'
+        
+        ){
+            $("#depo_des_error").html('');
+        var html = '<div class="row consinee_detail">'
+        +'<div class="input-icon right col-md-6">'
+        +'<i class="fa"></i> <i class="fa"></i>'
+        +'<i class="fa"></i><input type="text" class="form-control " name="deposit_amount[]" id="deposit_amount'+ddcount+'" value="'+deposit_amount+'" placeholder="Tax Deduction Description" readonly>'
+        +'</div>'
+        +'<div class="col-md-5">'
+        +'<div class="form-group">'
+        +'<div class="input-icon right">'
+        +'<i class="fa"></i>'
+        +'<input type="text" class="form-control " name="deposit_amount[]" id="deposit_amount'+ddcount+'" placeholder="Tax Deduction Amount" value="'+deposit_amount+'" readonly>'
+        +'</div></div></div>'
+        +'<div class="col-md-1">'
+        +'<div class="ddrmbtn"><i class="fa fa-minus" aria-hidden="true" style="font-size:10px;"></i></div>'
+        +'</div></div>';
+        $("#deposesc").append(html);
+        $("#depo_des_error").html('');
+        $("#deposit_desc").val('');
+        $("#deposit_amount").val('');
+      
+        ddcount++;
+        }else{
+        $("#depo_des_error").html('Please Deposite Description details!');
+        }
+    });
+    hdcnt =1 ;
+    $(document).on('click', '.withhdadbtn', function() {
+
+
+       
+        var withheld_desc = $("#withheld_desc").val();
+        var withheld_amt = $("#withheld_amt").val();
+       
+        
+        if(withheld_desc !=='' && typeof withheld_desc != 'undefined' && 
+        withheld_amt !=='' && typeof withheld_amt != 'undefined'
+        
+        ){
+            $("#with_held_error").html('');
+        var html = '<div class="row newhd detail">'
+        +'<div class="input-icon right col-md-6">'
+        +'<i class="fa"></i> <i class="fa"></i>'
+        +'<i class="fa"></i><input type="text" class="form-control " name="withheld_desc[]" id="withheld_desc'+hdcnt+'" value="'+withheld_desc+'" placeholder="Tax Deduction Description" readonly>'
+        +'</div>'
+        +'<div class="col-md-5">'
+        +'<div class="form-group">'
+        +'<div class="input-icon right">'
+        +'<i class="fa"></i>'
+        +'<input type="text" class="form-control " name="withheld_amt[]" id="withheld_amt'+hdcnt+'" placeholder="Tax Deduction Amount" value="'+withheld_amt+'" readonly>'
+        +'</div></div></div>'
+        +'<div class="col-md-1">'
+        +'<div class="wdrmbtn"><i class="fa fa-minus" aria-hidden="true" style="font-size:10px;"></i></div>'
+        +'</div></div>';
+        $("#rowwithheld").append(html);
+        $("#with_held_error").html('');
+        $("#withheld_desc").val('');
+        $("#withheld_amt").val('');
+      
+        hdcnt++;
+        }else{
+        $("#with_held_error").html('Please enter Withheld details!');
+        }
+    });
+   var cdadn =1 ;
+    $(document).on('click', '.cdadbtn', function() {
+
+
+       
+        var other_cess_desc = $("#other_cess_desc").val();
+        var other_cess_amt = $("#other_cess_amt").val();
+       
+        
+        if(other_cess_desc !=='' && typeof other_cess_desc != 'undefined' && 
+        other_cess_amt !=='' && typeof other_cess_amt != 'undefined'
+        
+        ){
+            $("#cess_desc_error").html('');
+        var html = '<div class="row newhd detail">'
+        +'<div class="input-icon right col-md-6">'
+        +'<i class="fa"></i> <i class="fa"></i>'
+        +'<i class="fa"></i><input type="text" class="form-control " name="other_cess_desc[]" id="other_cess_desc'+hdcnt+'" value="'+other_cess_desc+'" placeholder="Tax Deduction Description" readonly>'
+        +'</div>'
+        +'<div class="col-md-5">'
+        +'<div class="form-group">'
+        +'<div class="input-icon right">'
+        +'<i class="fa"></i>'
+        +'<input type="text" class="form-control " name="other_cess_amt[]" id="other_cess_amt'+hdcnt+'" placeholder="Tax Deduction Amount" value="'+other_cess_amt+'" readonly>'
+        +'</div></div></div>'
+        +'<div class="col-md-1">'
+        +'<div class="cesrmbtn"><i class="fa fa-minus" aria-hidden="true" style="font-size:10px;"></i></div>'
+        +'</div></div>';
+        $("#rowcess").append(html);
+        $("#cess_desc_error").html('');
+        $("#other_cess_desc").val('');
+        $("#other_cess_amt").val('');
+      
+        cdadn++;
+        }else{
+        $("#cess_desc_error").html('Please enter Any other cess details!');
+        }
+    });
+    var newadd = 1;
+    $(document).on('click', '.dedescadbtn', function() {
+
+
+       
+        var deduction_desc = $("#deduction_desc").val();
+        var deduction_amt = $("#deduction_amt").val();
+       
+        
+        if(deduction_desc !=='' && typeof deduction_desc != 'undefined' && 
+        deduction_amt !=='' && typeof deduction_amt != 'undefined'
+        
+        ){
+            $("#ded_descp_error").html('');
+        var html = '<div class="row newhd detail">'
+        +'<div class="input-icon right col-md-6">'
+        +'<i class="fa"></i> <i class="fa"></i>'
+        +'<i class="fa"></i><input type="text" class="form-control " name="deduction_desc[]" id="deduction_desc'+newadd+'" value="'+deduction_desc+'" placeholder="Tax Deduction Description" readonly>'
+        +'</div>'
+        +'<div class="col-md-5">'
+        +'<div class="form-group">'
+        +'<div class="input-icon right">'
+        +'<i class="fa"></i>'
+        +'<input type="text" class="form-control " name="deduction_amt[]" id="deduction_amt'+newadd+'" placeholder="Tax Deduction Amount" value="'+deduction_amt+'" readonly>'
+        +'</div></div></div>'
+        +'<div class="col-md-1">'
+        +'<div class="desdecrmbtn"><i class="fa fa-minus" aria-hidden="true" style="font-size:10px;"></i></div>'
+        +'</div></div>';
+        $("#newaddded").append(html);
+        $("#ded_descp_error").html('');
+        $("#deduction_desc").val('');
+        $("#deduction_amt").val('');
+      
+        newadd++;
+        }else{
+        $("#ded_descp_error").html('Please enter Any other cess details!');
+        }
+    });
+
+    $(document).on('click','.rmbtnss',function(){
+        $(this).parent().parent().remove();
+    });
+    $(document).on('click','.desdecrmbtn',function(){
+        $(this).parent().parent().remove();
+    });
+    $(document).on('click','.cesrmbtn',function(){
+        $(this).parent().parent().remove();
+    });
+    $(document).on('click','.ddrmbtn',function(){
+        $(this).parent().parent().remove();
+    });
+    $(document).on('click','.wdrmbtn',function(){
+        $(this).parent().parent().remove();
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     $(document).on('click','.addPerfomaInvcRow',function()
     {        
@@ -3507,6 +3738,15 @@ $(document).ready(function(){
         } 
         Metronic.init();
     });
+
+
+
+
+
+
+
+
+
     
     $(document).on('click','.addDCVSRow',function()
     {        

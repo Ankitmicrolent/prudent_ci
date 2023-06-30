@@ -38,7 +38,10 @@ class Upload_boq_items_controller extends Base_Controller
         $id = base64_decode($id);
         }
         $tax_invc_no = $this->admin_model->get_invoice_no($id);
+        $customer_name = $this->admin_model->get_project_detail($id);
+
         $data['tax_invc_no'] = $tax_invc_no;
+        $data['customer_name'] = $customer_name;
         $this->load->view('payment-advice',$data);
     }
     public function boq_exceptional_approval() 

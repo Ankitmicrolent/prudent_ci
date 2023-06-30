@@ -123,7 +123,7 @@
 
                                                     <div class="form-group"> 
 
-                                                        <label class="control-label">Designation <span class="require" aria-required="true" style="color:#a94442">*</span></label>
+                                                        <label class="control-label">Role <span class="require" aria-required="true" style="color:#a94442">*</span></label>
 
                                                         <div class="input-icon"> 
 

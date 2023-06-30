@@ -344,6 +344,8 @@
                 $("#insurance_req_err").html('Please enter insurance required details!');
         		}
         	});
+
+            
             $("#nsuranceRequiredApp").on('click','.rmbtn',function(){
                 $(this).parent().parent().remove();
             });
@@ -692,6 +694,7 @@
                 $("#consignee_error").html('Please enter consignee required details!');
         		}
         	});
+           
             $(document).on('click','.rmbtnss',function(){
                
                 $(this).parent().parent().remove();
